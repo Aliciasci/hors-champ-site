@@ -78,3 +78,23 @@
     display: none;
   }
 }
+
+/* Citation mise en avant, au fil du texte : l'extrait exact d'une source. */
+.quote {
+  display: grid;
+  gap: var(--space-sm);
+  margin: var(--space-lg) 0;
+  padding: var(--space-xl) 0;
+  border-top: var(--border-bold) solid var(--text);
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-accent-style);
+  font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
+  line-height: 1.2;
+  color: var(--primary);
+}

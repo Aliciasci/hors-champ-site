@@ -14,20 +14,26 @@ import { CoverArt } from './CoverArt';
 export function ArticleFigure({
   artwork,
   priority = false,
+  hero = false,
 }: {
   artwork: Artwork;
   priority?: boolean;
+  /** En tête de fiche : bandeau sombre pleine largeur, image en très grand. */
+  hero?: boolean;
 }) {
   const ratio =
     typeof artwork.image === 'string' ? 4 / 3 : artwork.image.width / artwork.image.height;
   return (
-    <figure className={styles.figure} style={{ '--ratio': ratio } as CSSProperties}>
+    <figure
+      className={`${styles.figure} ${hero ? styles.hero : ''}`}
+      style={{ '--ratio': ratio } as CSSProperties}
+    >
       <div className={styles.media}>
         <CoverArt
           artwork={artwork}
           decorative={false}
           priority={priority}
-          sizes="(min-width: 760px) 680px, 100vw"
+          sizes={hero ? '(min-width: 1280px) 1280px, 100vw' : '(min-width: 760px) 680px, 100vw'}
           className={styles.frame}
         />
       </div>

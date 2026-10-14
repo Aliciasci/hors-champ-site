@@ -75,6 +75,10 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
   const practice = relatedExperiences(all, entity.id, experiences);
   const kind = KIND_LABELS[entity.kind].singular;
   const minutes = readingMinutes(entity, all);
+  // La citation mise en avant : l'extrait de source le plus long, recopié mot pour mot.
+  const quote = [...entity.sources]
+    .filter((s) => s.relevantExcerpt && s.relevantExcerpt.length > 60)
+    .sort((a, b) => b.relevantExcerpt!.length - a.relevantExcerpt!.length)[0];
 
   return (
     <Container width="reading">
@@ -84,6 +88,7 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
       <PageTop crumbs={crumbs} path={path} fallback={parent} />
 
       <article id="article" className={styles.article}>
+        {entity.image ? <ArticleFigure artwork={entity.image} priority hero /> : null}
         <header className={styles.header}>
           <p className="t-overline c-accent">
             {kind}
@@ -112,10 +117,18 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
 
         <ArticleActions entityId={entity.id} title={entity.title} />
 
-        {entity.image ? <ArticleFigure artwork={entity.image} priority /> : null}
-
         <div className={styles.prose}>
           <p className="t-reading">{entity.summary}</p>
+          {quote ? (
+            <figure className={styles.quote} data-testid="culture-quote">
+              <blockquote cite={quote.url}>
+                <p>« {quote.relevantExcerpt} »</p>
+              </blockquote>
+              <figcaption className="t-caption c-2">
+                {quote.publisher}, « {quote.title} »
+              </figcaption>
+            </figure>
+          ) : null}
         </div>
 
         <ArticleBody entity={entity} />

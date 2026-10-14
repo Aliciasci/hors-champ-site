@@ -26,3 +26,47 @@
   vertical-align: -1px;
   margin-left: 2px;
 }
+
+/*
+ * En tête de fiche : l'image sort de la colonne de lecture et occupe toute la largeur, sur un
+ * bandeau sombre ; elle apparaît doucement à l'arrivée (sauf animations réduites).
+ */
+.hero {
+  --max-h: min(78vh, 900px);
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+.hero .media {
+  width: 100%;
+  padding: var(--space-xl) var(--gutter);
+  background: #0f0e0c;
+  box-sizing: border-box;
+}
+
+.hero .frame {
+  width: min(100%, calc(var(--max-h) * var(--ratio)));
+  margin: 0 auto;
+  animation: heroIn 900ms ease-out both;
+}
+
+.hero .caption {
+  padding: 0 var(--gutter);
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .frame {
+    animation: none;
+  }
+}
