@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 
-import { CultureCard } from '@/components/content/CultureCard';
+import { CultureCard, cultureHref } from '@/components/content/CultureCard';
 import { ArrowRight } from '@/components/icons';
 import { PageMasthead } from '@/components/layout/PageMasthead';
 import { PageTop } from '@/components/layout/PageTop';
@@ -10,6 +10,7 @@ import { getCatalog } from '@/content/catalog';
 import { contributorsOf } from '@/features/culture/cultureGraph';
 import { PortraitStrip } from '@/features/culture/web/PortraitStrip';
 import { RightsBrowser } from '@/features/culture/web/RightsBrowser';
+import { BirthYear, type ConquestYear } from '@/features/rights/BirthYear';
 import { pageMetadata } from '@/lib/seo';
 import type { CultureEntity } from '@/types';
 
@@ -41,6 +42,24 @@ function slim(entity: CultureEntity): CultureEntity {
 export default function Page() {
   const { culture } = getCatalog();
   const rights = culture.filter((e) => e.kind === 'right');
+  // Libellés courts des conquêtes, pour les lignes de vie de « Et vous ? ».
+  const SHORT: Record<string, string> = {
+    'right-droit-de-vote': 'vote',
+    'right-regimes-matrimoniaux': 'autonomie',
+    'right-contraception': 'contraception',
+    'right-ivg': 'IVG',
+    'right-viol-crime': 'viol = crime',
+    'right-egalite-professionnelle': 'égalité au travail',
+  };
+  const conquests: ConquestYear[] = rights
+    .filter((r) => r.period)
+    .map((r) => ({
+      id: r.id,
+      title: r.title,
+      short: SHORT[r.id] ?? r.title,
+      year: r.period!.sortYear,
+      href: cultureHref(r.id),
+    }));
   const contributions = rights.flatMap((r) => contributorsOf(culture, r.id));
   // Personnalités proposées : les femmes reliées à au moins une conquête, par ordre alphabétique.
   const peopleIds = new Set(
@@ -90,6 +109,7 @@ export default function Page() {
         accent="Elles l’ont arraché."
         dek="Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a demandé des années de combat. Voici qui les a portés, et ce que les sources disent de leur rôle."
       />
+      <BirthYear conquests={conquests} />
       <Link href="/droits/monde" className={styles.world} data-testid="rights-world">
         <span className="t-overline c-accent">Et ailleurs ?</span>
         <span className={styles.worldRow}>

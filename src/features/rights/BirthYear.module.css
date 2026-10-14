@@ -1,0 +1,185 @@
+.block {
+  display: grid;
+  gap: var(--space-lg);
+  margin: var(--space-xl) 0 var(--space-xxl);
+  padding: var(--space-xl);
+  background: var(--surface);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 900px) {
+  .block {
+    padding: var(--space-xxl) var(--space-huge);
+  }
+}
+
+.title {
+  max-width: 26ch;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.75rem);
+  line-height: 1.08;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-xs);
+  max-width: 320px;
+}
+
+.input {
+  min-height: 56px;
+  padding: 0 var(--space-md);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-variant-numeric: lining-nums;
+}
+
+.input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.result {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.sentences {
+  display: grid;
+  gap: var(--space-xs);
+  max-width: var(--measure);
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.sentenceLink {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.sentenceLink:hover {
+  color: var(--primary);
+}
+
+.year {
+  color: var(--text-muted);
+}
+
+/* Lignes de vie : 0 à 90 ans, un point par conquête. */
+.life {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.lifeLabel {
+  font-size: var(--fs-body-sm);
+  color: var(--text-2);
+}
+
+.lifeYear {
+  font-family: var(--font-display);
+  font-weight: var(--display-strong-weight);
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.track {
+  position: relative;
+  height: 160px;
+  margin-right: 90px;
+}
+
+/* Rien à placer sur la ligne : une simple barre. */
+.track.empty {
+  height: 12px;
+}
+
+.empty .line {
+  top: 4px;
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  top: 79px;
+  height: 3px;
+  max-width: 100%;
+  background: var(--text);
+}
+
+.mark {
+  position: absolute;
+  top: 80px;
+  width: 0;
+  height: 0;
+}
+
+.dot {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid var(--surface);
+  box-sizing: border-box;
+}
+
+.markText {
+  position: absolute;
+  left: -1px;
+  padding-left: 6px;
+  border-left: 1px solid var(--border-strong);
+  white-space: nowrap;
+  font-size: var(--fs-caption);
+  line-height: 1.2;
+}
+
+.up .markText {
+  bottom: 12px;
+}
+
+.down .markText {
+  top: 12px;
+}
+
+.upFar .markText {
+  bottom: 44px;
+}
+
+.downFar .markText {
+  top: 44px;
+}
+
+/* Petit écran : les points seuls ; les âges sont dans les phrases au-dessus. */
+@media (max-width: 599px) {
+  .track {
+    height: 40px;
+    margin-right: 0;
+  }
+
+  .line {
+    top: 19px;
+  }
+
+  .mark {
+    top: 20px;
+  }
+
+  .markText {
+    display: none;
+  }
+}
+
+.before {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}

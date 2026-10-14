@@ -111,3 +111,12 @@ test('activités : « Pour qui ? » filtre les blocs et se reflète dans l’URL
   await expect(page.getByTestId('activities-kids')).toHaveCount(0);
   await expect(page.locator('#contrechamps-title')).toBeVisible();
 });
+
+test('« Et vous ? » : l’année de naissance donne l’âge à chaque conquête', async ({ page }) => {
+  await seedState(page);
+  await open(page, '/droits/');
+  await page.getByTestId('birth-year-input').fill('1960');
+  const result = page.getByTestId('birth-year-result');
+  await expect(result).toContainText('vous aviez 15 ans');
+  await expect(result).toContainText('16 ans avant votre naissance');
+});
