@@ -16,6 +16,7 @@ import { computeProgressSummary } from '@/features/progress/progressLogic';
 import { AGE_BANDS } from '@/features/youth/youthCatalog';
 import { pickPersisted, useAppStore } from '@/store/useAppStore';
 import type { AgeBand, Category, Difficulty } from '@/types';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 import { buildExport, exportFileName, parseImport } from './dataTransfer';
 import styles from './Profile.module.css';
@@ -67,10 +68,7 @@ export function ProfileView({
 
   return (
     <Container width="reading">
-      <div className={styles.header}>
-        <p className="t-overline c-accent">Profil</p>
-        <h1 className="t-title1">Votre exploration</h1>
-      </div>
+      <PageMasthead kicker="Profil" title="Votre exploration." accent="Et vos réglages." />
 
       <Link href="/bibliotheque" className={styles.library} data-testid="profile-library">
         <Library size={28} aria-hidden="true" className="c-primary" />

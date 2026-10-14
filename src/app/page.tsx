@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import { ContentCard } from '@/components/content/ContentCard';
 import { WelcomeBanner } from '@/components/layout/WelcomeBanner';
 import { Container } from '@/components/ui/Container';
-import { HandUnderline } from '@/components/ui/HandDrawn';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { getCatalog } from '@/content/catalog';
 import { slimEntity, slimExperience } from '@/content/slim';
@@ -15,8 +14,7 @@ import { HomeFeed, type HomeData } from '@/features/home/web/HomeFeed';
 import { readingMinutes } from '@/lib/readingTime';
 import { pageMetadata } from '@/lib/seo';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
-
-import styles from './page.module.css';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 export const metadata = pageMetadata({
   title: 'Celles que l’histoire a laissées hors champ',
@@ -92,18 +90,12 @@ export default function Home() {
           description: SITE_DESCRIPTION,
         }}
       />
-      <header className={styles.masthead}>
-        <p className="t-overline c-accent">Hors-Champ</p>
-        <h1 className="t-hero">
-          L’histoire les a laissées hors champ.{' '}
-          <span className={styles.accentLine}>
-            <span className={styles.accent}>
-              On les remet dans le cadre.
-              <HandUnderline />
-            </span>
-          </span>
-        </h1>
-      </header>
+      <PageMasthead
+        kicker="Hors-Champ"
+        title="L’histoire les a laissées hors champ."
+        accent="On les remet dans le cadre."
+        centered
+      />
       <Suspense fallback={<HomeFeed data={data} />}>
         <HomeFeed data={data} withUrl />
       </Suspense>

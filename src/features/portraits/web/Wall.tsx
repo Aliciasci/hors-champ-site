@@ -1,0 +1,80 @@
+import Link from 'next/link';
+
+import { cultureHref } from '@/components/content/CultureCard';
+import { CoverArt } from '@/components/content/CoverArt';
+import type { CultureEntity, PortraitThemeId } from '@/types';
+
+import styles from './Wall.module.css';
+
+/** Libellés courts des thématiques, pour les filtres et les tuiles du mur. */
+export const THEME_SHORT_LABELS: Record<PortraitThemeId, string> = {
+  revolutionne: 'Révolutionné le monde',
+  culture: 'Changé la culture',
+  droits: 'Conquis des droits',
+  idees: 'Changé nos idées',
+  oubliees: 'Oubliées',
+  pionnieres: 'Pionnières',
+  quotidien: 'Fait tourner le monde',
+  histoire: 'Le cours de l’histoire',
+  limites: 'Repoussé les limites',
+};
+
+/** Initiales du prénom et du nom (« Simone de Beauvoir » → « SB »), pour un portrait absent. */
+export function initials(name: string): string {
+  const words = name.split(/\s+/).filter((word) => /^\p{Lu}/u.test(word));
+  const first = words[0]?.[0] ?? '';
+  const last = words.length > 1 ? (words[words.length - 1]?.[0] ?? '') : '';
+  return `${first}${last}`;
+}
+
+function Face({
+  person,
+  sizes,
+  priority,
+}: {
+  person: CultureEntity;
+  sizes: string;
+  priority?: boolean;
+}) {
+  return person.image ? (
+    <CoverArt artwork={person.image} sizes={sizes} priority={priority} className={styles.face} />
+  ) : (
+    <span className={`${styles.face} ${styles.monogram}`} aria-hidden="true">
+      {initials(person.title)}
+    </span>
+  );
+}
+
+/** Une femme sur le mur : visage, nom, dates, thématique. */
+export function WallTile({ person, theme }: { person: CultureEntity; theme?: PortraitThemeId }) {
+  return (
+    <Link href={cultureHref(person.id)} className={styles.tile} data-testid={`wall-${person.id}`}>
+      <Face person={person} sizes="(min-width: 1200px) 180px, (min-width: 600px) 25vw, 50vw" />
+      <span className={`t-title3 ${styles.name}`}>{person.title}</span>
+      {person.period ? <span className="t-caption c-muted">{person.period.label}</span> : null}
+      {theme ? (
+        <span className={`t-overline c-accent ${styles.theme}`}>{THEME_SHORT_LABELS[theme]}</span>
+      ) : null}
+    </Link>
+  );
+}
+
+/** Portrait à la une du mur : grand visage, accroche, signature. */
+export function WallFeature({ person, theme }: { person: CultureEntity; theme: PortraitThemeId }) {
+  return (
+    <Link
+      href={cultureHref(person.id)}
+      className={`${styles.tile} ${styles.feature}`}
+      data-testid={`wall-feature-${person.id}`}
+    >
+      <Face person={person} sizes="(min-width: 600px) 400px, 100vw" priority />
+      <span className="t-overline c-accent">À la une · {THEME_SHORT_LABELS[theme]}</span>
+      <span className={`t-title2 ${styles.name}`}>{person.hook ?? person.title}</span>
+      <span className="t-caption c-2">
+        {person.hook ? <strong className={styles.strong}>{person.title}</strong> : null}
+        {person.hook && person.period ? ' · ' : null}
+        {person.period?.label}
+      </span>
+    </Link>
+  );
+}

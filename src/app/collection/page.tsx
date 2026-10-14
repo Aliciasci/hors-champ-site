@@ -11,6 +11,7 @@ import { RecentExplorations } from '@/features/culture/web/RecentExplorations';
 import { TimelineEntry } from '@/features/culture/web/TimelineEntry';
 import { readingMinutes } from '@/lib/readingTime';
 import { pageMetadata } from '@/lib/seo';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 export const metadata = pageMetadata({
   title: 'Toute la collection',
@@ -52,15 +53,14 @@ export default function Page() {
         path="/collection"
         fallback="/"
       />
-      <header style={{ display: 'grid', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
-        <p className="t-overline c-accent">La collection</p>
-        <h1 className="t-title1">Toutes les fiches</h1>
-        <p className="t-body-lg c-2 measure">
-          Portraits, œuvres, inventions, lois, mouvements. Commencez où vous voulez, chaque fiche
-          mène aux autres.
-        </p>
+      <PageMasthead
+        kicker="La collection"
+        title="Toutes les fiches."
+        accent="Tirez un fil."
+        dek="Portraits, œuvres, inventions, lois, mouvements. Commencez où vous voulez, chaque fiche mène aux autres."
+      >
         <ExploredCount ids={culture.map((e) => e.id)} total={culture.length} />
-      </header>
+      </PageMasthead>
       <div style={{ display: 'grid', gap: 'var(--space-xl)' }}>
         <RecentExplorations tiles={tiles} />
         <Suspense fallback={<CollectionBrowser items={items} cards={cards} timeline={timeline} />}>

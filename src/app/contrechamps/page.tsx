@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { CoverArt } from '@/components/content/CoverArt';
 import { Container } from '@/components/ui/Container';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { HandUnderline } from '@/components/ui/HandDrawn';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { getCatalog } from '@/content/catalog';
 import styles from '@/features/experiences/web/Home.module.css';
@@ -16,6 +15,7 @@ import {
 } from '@/features/experiences/web/HomeIslands';
 import { catalogueHref } from '@/features/experiences/web/routes';
 import { pageMetadata } from '@/lib/seo';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 export const metadata = pageMetadata({
   title: 'Contrechamps',
@@ -28,16 +28,11 @@ export default function ContrechampsPage() {
   const { experiences, categories } = getCatalog();
   return (
     <Container>
-      <header className={styles.masthead}>
-        <p className="t-overline c-accent">Contrechamps</p>
-        <h1 className="t-hero">
-          Le sexisme ne se voit pas toujours.{' '}
-          <span className={`t-accent ${styles.accentLine}`} style={{ display: 'inline-block' }}>
-            Regardez mieux.
-            <HandUnderline />
-          </span>
-        </h1>
-      </header>
+      <PageMasthead
+        kicker="Contrechamps"
+        title="Le sexisme ne se voit pas toujours."
+        accent="Regardez mieux."
+      />
 
       {experiences.length === 0 ? (
         <EmptyState

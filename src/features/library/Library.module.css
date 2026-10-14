@@ -1,9 +1,3 @@
-.header {
-  display: grid;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-lg);
-}
-
 .shelf {
   max-width: 440px;
   margin-bottom: var(--space-xl);

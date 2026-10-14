@@ -9,6 +9,7 @@ import { PortraitStrip } from '@/features/culture/web/PortraitStrip';
 import { RightsBrowser } from '@/features/culture/web/RightsBrowser';
 import { pageMetadata } from '@/lib/seo';
 import type { CultureEntity } from '@/types';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 export const metadata = pageMetadata({
   title: 'Derrière chaque droit',
@@ -79,21 +80,20 @@ export default function Page() {
         path="/droits"
         fallback="/"
       />
-      <header style={{ display: 'grid', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
-        <p className="t-overline c-accent">Derrière chaque droit</p>
-        <h1 className="t-title1">Rien ne leur a été donné</h1>
-        <p className="t-body-lg c-2 measure">
-          Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a été
-          arraché, souvent au prix de longues années de combat. Voici qui les a portés, et ce que
-          les sources disent de leur rôle.
-        </p>
+      <PageMasthead
+        kicker="Derrière chaque droit"
+        title="Rien ne leur a été donné."
+        accent="Elles l’ont arraché."
+        dek="Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a demandé des années de combat. Voici qui les a portés, et ce que les sources disent de leur rôle."
+      />
+      <div style={{ marginBottom: 'var(--space-lg)' }}>
         <PortraitStrip
           people={people}
           size={88}
           label="Les contributrices"
           testIdPrefix="rights-portrait"
         />
-      </header>
+      </div>
       <Suspense
         fallback={<RightsBrowser entities={searchable} people={peopleOptions} cards={cards} />}
       >

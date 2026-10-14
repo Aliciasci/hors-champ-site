@@ -2,8 +2,12 @@
   display: grid;
   gap: var(--space-md);
   max-width: var(--reading);
-  margin: 0 auto var(--space-xl);
+  margin: 0 0 var(--space-xl);
   padding-top: var(--space-sm);
+}
+
+.centered {
+  margin-inline: auto;
 }
 
 @media (min-width: 1200px) {
@@ -38,4 +42,8 @@
 
 :global([data-theme='revue']) .accent::after {
   display: none;
+}
+
+.dek {
+  max-width: var(--measure);
 }

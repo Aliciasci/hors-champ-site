@@ -1,0 +1,112 @@
+/* Le mur : 2 → 3 → 4 → 6 colonnes ; le portrait à la une occupe deux colonnes. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xl) var(--space-lg);
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.featureCell {
+  grid-column: span 2;
+}
+
+@media (min-width: 600px) {
+  .featureCell {
+    grid-row: span 2;
+  }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  color: var(--text);
+  min-width: 0;
+}
+
+.face {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: var(--space-xs);
+}
+
+.monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-display);
+  font-weight: var(--display-strong-weight);
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+  border-radius: var(--radius-cover);
+}
+
+.name {
+  overflow-wrap: anywhere;
+}
+
+.tile:hover .name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.theme {
+  margin-top: var(--space-xxs);
+}
+
+.feature .face {
+  margin-bottom: var(--space-sm);
+}
+
+.strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Filtres et présentation du thème choisi. */
+.filters {
+  padding: var(--space-lg) 0;
+  margin-bottom: var(--space-xl);
+  border-top: var(--border-hairline) solid var(--border);
+  border-bottom: var(--border-hairline) solid var(--border);
+  display: grid;
+  gap: var(--space-md);
+}
+
+.about {
+  display: grid;
+  gap: var(--space-xs);
+  max-width: var(--measure);
+}
+
+.aboutLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.aboutLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

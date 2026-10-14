@@ -1,9 +1,3 @@
-.header {
-  display: grid;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
-}
-
 .section {
   display: grid;
   gap: var(--space-lg);

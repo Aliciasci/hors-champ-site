@@ -1,9 +1,3 @@
-.header {
-  display: grid;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-xl);
-}
-
 .flex {
   flex: 1;
   min-width: 0;

@@ -1,8 +1,8 @@
 import { Container } from '@/components/ui/Container';
 import { getCatalog } from '@/content/catalog';
 import { PossibleBrowser, type TileData } from '@/features/youth/web/PossibleBrowser';
-import styles from '@/features/youth/web/youth.module.css';
 import { pageMetadata } from '@/lib/seo';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 export const metadata = pageMetadata({
   title: 'Tout est possible',
@@ -55,16 +55,12 @@ export default function PossiblePage() {
 
   return (
     <Container>
-      <header className={styles.header}>
-        <p className="t-overline c-accent">Tout est possible · 6 – 14 ans</p>
-        <h1 className="t-hero">
-          Astronaute, ingénieure, cheffe d’orchestre. Et pourquoi pas toi ?
-        </h1>
-        <p className="t-body-lg c-2">
-          Des métiers, des femmes qui les font pour de vrai, et des activités pour essayer. Ici, il
-          n’y a rien à réussir.
-        </p>
-      </header>
+      <PageMasthead
+        kicker="Tout est possible · 6 – 14 ans"
+        title="Astronaute, ingénieure, cheffe d’orchestre."
+        accent="Et pourquoi pas toi ?"
+        dek="Des métiers, des femmes qui les font pour de vrai, et des activités pour essayer. Ici, il n’y a rien à réussir."
+      />
       <PossibleBrowser tiles={tiles} lives={lives} />
       <p className="t-caption c-muted measure">
         Les portraits et les métiers s’appuient sur des sources, citées sur chaque fiche. Dans les

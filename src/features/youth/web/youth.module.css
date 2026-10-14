@@ -64,17 +64,6 @@
 
 /* ---------- Page « Tout est possible » ---------- */
 
-.header {
-  display: grid;
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
-  max-width: 24ch;
-}
-
-.header p:last-child {
-  max-width: var(--measure);
-}
-
 .panels {
   display: grid;
   gap: var(--space-sm);

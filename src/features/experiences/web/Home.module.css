@@ -1,15 +1,3 @@
-.masthead {
-  display: grid;
-  gap: var(--space-md);
-  padding-top: var(--space-md);
-  margin-bottom: var(--space-xl);
-  max-width: 22ch;
-}
-
-.accentLine {
-  position: relative;
-}
-
 .columns {
   display: grid;
   gap: var(--space-xxl);

@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { getCatalog } from '@/content/catalog';
 import { pageMetadata } from '@/lib/seo';
 import type { Artwork } from '@/types';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 import styles from './credits.module.css';
 
@@ -73,14 +74,12 @@ export default function CreditsPage() {
 
   return (
     <Container width="wide">
-      <header className={styles.header}>
-        <p className="t-overline c-accent">Qui sommes-nous</p>
-        <h1 className="t-title1">D’où viennent nos images</h1>
-        <p className="t-body c-2 measure">
-          {total} illustrations, toutes dans le domaine public ou sous licence libre. Chaque crédit
-          renvoie à la page qui le prouve.
-        </p>
-      </header>
+      <PageMasthead
+        kicker="Qui sommes-nous"
+        title="D’où viennent nos images."
+        accent="Preuves à l’appui."
+        dek={`${total} illustrations, toutes dans le domaine public ou sous licence libre. Chaque crédit renvoie à la page qui le prouve.`}
+      />
       {groups.map((group) =>
         group.credits.length > 0 ? (
           <section

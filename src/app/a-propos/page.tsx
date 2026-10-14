@@ -6,6 +6,7 @@ import { EDITORIAL_STATUSES } from '@/constants/enums';
 import { EDITORIAL_STATUS_LABELS } from '@/constants/labels';
 import { getCatalog } from '@/content/catalog';
 import { pageMetadata } from '@/lib/seo';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 import styles from './a-propos.module.css';
 
@@ -49,16 +50,12 @@ export default function AboutPage() {
 
   return (
     <Container width="reading">
-      <header className={styles.header}>
-        <p className="t-overline c-accent">Qui sommes-nous</p>
-        <h1 className="t-title1">Notre charte, noir sur blanc.</h1>
-        <p className="t-body-lg c-2">
-          Hors-Champ raconte des femmes que les manuels ont oubliées. Des peintres, des
-          mathématiciennes, des militantes, et les droits qu’elles ont fini par obtenir. À côté, des
-          contrechamps vous mettent face à des situations ordinaires pour apprendre à y repérer le
-          sexisme. Sans caricature, et en disant aussi ce qu’on ne peut pas conclure.
-        </p>
-      </header>
+      <PageMasthead
+        kicker="Qui sommes-nous"
+        title="Notre charte."
+        accent="Noir sur blanc."
+        dek="Hors-Champ raconte des femmes que les manuels ont oubliées. Des peintres, des mathématiciennes, des militantes, et les droits qu’elles ont fini par obtenir. À côté, des contrechamps vous mettent face à des situations ordinaires pour apprendre à y repérer le sexisme. Sans caricature, et en disant aussi ce qu’on ne peut pas conclure."
+      />
 
       <section className={styles.section} aria-labelledby="principes">
         <h2 id="principes" className="t-title2">

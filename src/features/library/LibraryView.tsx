@@ -16,6 +16,7 @@ import { KIND_LABELS, KIND_ORDER } from '@/features/culture/cultureGraph';
 import { readOne, useQueryState, type QueryPatch } from '@/lib/useQueryState';
 import { useAppStore } from '@/store/useAppStore';
 import type { Category, CategoryId, CultureKind } from '@/types';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 
 import styles from './Library.module.css';
 import { YouthRow } from './YouthRow';
@@ -326,12 +327,11 @@ function LibraryContent({
 
   return (
     <Container width="wide">
-      <div className={styles.header}>
-        <p className="t-overline c-accent">Bibliothèque</p>
-        <h1 className="t-title1">
-          {shelf === 'decouvertes' ? 'Vos découvertes' : 'Vos contrechamps'}
-        </h1>
-      </div>
+      <PageMasthead
+        kicker="Bibliothèque"
+        title={shelf === 'decouvertes' ? 'Vos découvertes.' : 'Vos contrechamps.'}
+        accent="Mis de côté pour plus tard."
+      />
       {shelfSwitch}
       <div className={styles.body}>{body}</div>
     </Container>
