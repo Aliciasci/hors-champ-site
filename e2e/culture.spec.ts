@@ -83,6 +83,13 @@ test('droits dans le monde : années clés et curseur font évoluer la carte', a
   await open(page, '/droits/');
   await page.getByTestId('rights-world').click();
   await expect(page).toHaveURL(/\/droits\/monde\/$/);
+  // Par défaut, le récit ; la carte à explorer est un mode choisi en haut de page.
+  await expect(page.getByTestId('chapter-vote')).toBeVisible();
+  await expect(page.locator('[data-testid^="explore-"]')).toHaveCount(0);
+  await page.getByTestId('world-mode-explorer').click({ force: true });
+  await expect(page).toHaveURL(/mode=explorer/);
+  await expect(page.getByTestId('explore-vote')).toBeVisible();
+  await expect(page.locator('[data-testid^="chapter-"]')).toHaveCount(0);
   await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'full');
   await page.getByTestId('suffrage-key-1918').click();
   await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'none');
@@ -93,13 +100,19 @@ test('droits dans le monde : années clés et curseur font évoluer la carte', a
   // Autre droit : l'avortement, avec le recul soviétique de 1936.
   await page.getByTestId('world-right-avortement').click({ force: true });
   await expect(page).toHaveURL(/droit=avortement/);
-  // Un seul chapitre à la fois : celui du droit choisi.
-  await expect(page.locator('[data-testid^="chapter-"]')).toHaveCount(1);
-  await expect(page.getByTestId('chapter-avortement')).toBeVisible();
+  await expect(page).toHaveURL(/mode=explorer/);
+  await expect(page.getByTestId('explore-avortement')).toBeVisible();
   await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'full');
   await page.getByTestId('suffrage-key-1936').click();
   await expect(page.getByTestId('suffrage-tile-RUS')).toHaveAttribute('data-state', 'partial');
   await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'none');
+
+  // Retour au récit : un seul chapitre, celui du droit choisi.
+  await page.getByTestId('world-mode-recit').click({ force: true });
+  await expect(page).not.toHaveURL(/mode=/);
+  await expect(page.locator('[data-testid^="chapter-"]')).toHaveCount(1);
+  await expect(page.getByTestId('chapter-avortement')).toBeVisible();
+  await expect(page.locator('[data-testid^="explore-"]')).toHaveCount(0);
 });
 
 test('activités : « Pour qui ? » filtre les blocs et se reflète dans l’URL', async ({ page }) => {

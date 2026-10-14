@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 
+import { Segmented } from '@/components/ui/Chip';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import type { GapRow, WorldCountry, WorldRight, WorldRightId } from '@/content/world';
 import { readOne, useQueryState } from '@/lib/useQueryState';
@@ -29,12 +30,19 @@ interface Props {
   withUrl?: boolean;
 }
 
+type Mode = 'recit' | 'explorer';
+
+const MODES: { id: Mode; label: string }[] = [
+  { id: 'recit', label: 'Le récit' },
+  { id: 'explorer', label: 'À vous d’explorer' },
+];
+
 /**
- * La page du monde, droit par droit : on choisit un droit, puis on en vit le chapitre (ouverture,
- * carte qui avance au défilement, affiche des années), et enfin la carte à explorer.
+ * La page du monde, droit par droit. Deux modes, choisis en haut : le récit (ouverture, carte qui
+ * avance au défilement, affiche des années) ou la carte à explorer soi-même, année par année.
  */
 export function WorldChapters(props: Props) {
-  return props.withUrl ? <WithUrl {...props} /> : <View {...props} rightId="vote" />;
+  return props.withUrl ? <WithUrl {...props} /> : <View {...props} rightId="vote" mode="recit" />;
 }
 
 function WithUrl(props: Props) {
@@ -44,11 +52,14 @@ function WithUrl(props: Props) {
     props.rights.map((r) => r.id),
     'vote',
   );
+  const mode = readOne<Mode>(params.get('mode'), ['recit', 'explorer'], 'recit');
   return (
     <View
       {...props}
       rightId={rightId}
+      mode={mode}
       onRight={(id) => set({ droit: id === 'vote' ? null : id })}
+      onMode={(m) => set({ mode: m === 'recit' ? null : m })}
     />
   );
 }
@@ -98,8 +109,15 @@ function View({
   countries,
   gaps,
   rightId,
+  mode,
   onRight,
-}: Props & { rightId: WorldRightId; onRight?: (id: WorldRightId) => void }) {
+  onMode,
+}: Props & {
+  rightId: WorldRightId;
+  mode: Mode;
+  onRight?: (id: WorldRightId) => void;
+  onMode?: (mode: Mode) => void;
+}) {
   const top = useRef<HTMLDivElement>(null);
   const index = Math.max(
     0,
@@ -116,6 +134,19 @@ function View({
   return (
     <>
       <div ref={top} className={styles.picker}>
+        <div className={styles.modes}>
+          <span className="t-overline c-2" aria-hidden="true">
+            Mode
+          </span>
+          <Segmented
+            legend="Mode"
+            name="mode"
+            options={MODES}
+            value={mode}
+            onChange={(m) => onMode?.(m)}
+            testIdPrefix="world-mode"
+          />
+        </div>
         <p className="t-overline c-2">Choisissez un droit</p>
         <RightPills
           rights={rights}
@@ -127,6 +158,53 @@ function View({
         />
       </div>
 
+      {mode === 'explorer' ? (
+        <section
+          key={right.id}
+          className={styles.explore}
+          data-tone={RIGHT_TONES[right.id]}
+          aria-labelledby="explorer-title"
+          data-testid={`explore-${right.id}`}
+        >
+          <SectionHeader
+            id="explorer-title"
+            kicker="À vous d’explorer"
+            title={`${right.label}, toutes les années`}
+          />
+          <RightMap right={right} countries={countries} />
+        </section>
+      ) : (
+        <Story
+          rights={rights}
+          right={right}
+          index={index}
+          countries={countries}
+          gaps={gaps}
+          onPick={pick}
+        />
+      )}
+    </>
+  );
+}
+
+/** Le récit d'un droit : ouverture, carte au défilement, affiche, puis le choix d'un autre droit. */
+function Story({
+  rights,
+  right,
+  index,
+  countries,
+  gaps,
+  onPick,
+}: {
+  rights: WorldRight[];
+  right: WorldRight;
+  index: number;
+  countries: WorldCountry[];
+  gaps: Record<WorldRightId, GapRow[]>;
+  onPick: (id: WorldRightId, scrollUp: boolean) => void;
+}) {
+  return (
+    <>
       {/* La clé remet le récit au début à chaque changement de droit. */}
       <section
         key={right.id}
@@ -145,15 +223,6 @@ function View({
         </header>
         <RightStory right={right} countries={countries} />
         <GapPoster copy={right.gap} rows={gaps[right.id]} />
-
-        <div className={styles.explore}>
-          <SectionHeader
-            id="explorer-title"
-            kicker="À vous d’explorer"
-            title={`${right.label}, toutes les années`}
-          />
-          <RightMap right={right} countries={countries} />
-        </div>
       </section>
 
       <div className={styles.next}>
@@ -161,7 +230,7 @@ function View({
         <RightPills
           rights={rights}
           current={right.id}
-          onPick={(id) => pick(id, true)}
+          onPick={(id) => onPick(id, true)}
           name="droit-bas"
           testIdPrefix="world-right-bottom"
           legend="Un autre droit"

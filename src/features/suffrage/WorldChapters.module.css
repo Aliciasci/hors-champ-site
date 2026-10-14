@@ -4,6 +4,23 @@
   scroll-margin-top: var(--space-lg);
 }
 
+/* Le récit ou la carte à explorer, au-dessus du choix du droit. */
+.modes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-lg);
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-sm);
+  border-top: var(--border-hairline) solid var(--border);
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.modes > :last-child {
+  flex: 1 1 320px;
+  max-width: 480px;
+}
+
 /* Le chapitre du droit choisi : ouverture en très grand, entre deux filets. */
 .chapter {
   display: grid;
@@ -48,7 +65,7 @@
 .explore {
   display: grid;
   gap: var(--space-lg);
-  margin-top: var(--space-huge);
+  margin-top: var(--space-xl);
 }
 
 .next {
