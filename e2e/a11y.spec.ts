@@ -10,6 +10,7 @@ const PAGES = [
   '/bienvenue/',
   '/elles/',
   '/elles/oubliees/',
+  '/activites/',
   '/possible/',
   '/possible/metier-astronome/',
   '/possible/portrait-mary-anning/',

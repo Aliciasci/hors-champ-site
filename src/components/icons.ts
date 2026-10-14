@@ -23,6 +23,7 @@ export {
   ExternalLink,
   Eye,
   FlaskConical,
+  Globe,
   Frame,
   Info,
   Landmark,

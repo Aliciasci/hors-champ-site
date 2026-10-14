@@ -98,3 +98,16 @@ test('droits dans le monde : années clés et curseur font évoluer la carte', a
   await expect(page.getByTestId('suffrage-tile-RUS')).toHaveAttribute('data-state', 'partial');
   await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'none');
 });
+
+test('activités : « Pour qui ? » filtre les blocs et se reflète dans l’URL', async ({ page }) => {
+  await seedState(page);
+  await open(page, '/activites/');
+  await expect(page.getByTestId('activities-kids')).toBeVisible();
+  await page.getByTestId('activities-for-jeunes').click({ force: true });
+  await expect(page).toHaveURL(/pour=jeunes/);
+  await expect(page.getByTestId('activities-kids')).toBeVisible();
+  await expect(page.locator('#contrechamps-title')).toHaveCount(0);
+  await page.getByTestId('activities-for-adultes').click({ force: true });
+  await expect(page.getByTestId('activities-kids')).toHaveCount(0);
+  await expect(page.locator('#contrechamps-title')).toBeVisible();
+});

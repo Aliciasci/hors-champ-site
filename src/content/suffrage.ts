@@ -17,6 +17,29 @@ export const SUFFRAGE_SOURCE: Source = {
   note: 'Section « Chronologie ». Article collaboratif : à compléter par les sources primaires qu’il cite.',
 };
 
+/**
+ * La situation aujourd'hui, quand la source la décrit sans date : droit perdu ou jamais accordé.
+ * Affichée à la position « Aujourd'hui » de la carte.
+ */
+export const SUFFRAGE_TODAY: { code: string; excerpt: string; note: string }[] = [
+  {
+    code: 'AFG',
+    excerpt: 'en Afghanistan et au Yémen, les femmes ont perdu le droit de vote',
+    note: 'Les femmes y ont perdu le droit de vote ; la source ne date pas ce recul.',
+  },
+  {
+    code: 'YEM',
+    excerpt: 'en Afghanistan et au Yémen, les femmes ont perdu le droit de vote',
+    note: 'Les femmes y ont perdu le droit de vote ; la source ne date pas ce recul.',
+  },
+  {
+    code: 'VAT',
+    excerpt:
+      'au Vatican, monarchie élective absolue, l’accès au collège électoral (conclave) est réservé aux cardinaux et comme l’Église catholique romaine n’ordonne pas de femme, elles sont de facto privées du droit de vote.',
+    note: 'Les femmes sont privées de fait du droit de vote.',
+  },
+];
+
 export interface SuffrageCountry {
   /** Code à trois lettres, affiché sur la tuile. */
   code: string;

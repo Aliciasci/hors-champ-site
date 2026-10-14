@@ -278,3 +278,10 @@
 .step + .step {
   margin-top: var(--space-xs);
 }
+
+.today {
+  display: grid;
+  gap: var(--space-xs);
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--accent);
+}

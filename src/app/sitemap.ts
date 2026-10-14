@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     '/',
     '/elles',
+    '/activites',
     '/possible',
     '/droits',
     '/droits/monde',

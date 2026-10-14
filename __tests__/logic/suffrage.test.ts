@@ -1,5 +1,5 @@
 import { SUFFRAGE } from '@/content/suffrage';
-import { levelAt, rightCount, WORLD_COUNTRIES, WORLD_RIGHTS } from '@/content/world';
+import { levelAt, rightCount, TODAY, WORLD_COUNTRIES, WORLD_RIGHTS } from '@/content/world';
 
 const right = (id: string) => WORLD_RIGHTS.find((r) => r.id === id)!;
 
@@ -63,6 +63,15 @@ describe('levelAt et rightCount', () => {
     expect(levelAt(majority, 1935)).toBe('full');
     expect(levelAt(majority, 1950)).toBe('none');
     expect(levelAt(majority, 1980)).toBe('full');
+  });
+
+  it('montre « aujourd’hui » les pays où les femmes ne votent pas', () => {
+    const vote = right('vote').countries;
+    expect(levelAt(vote.AFG, 2000)).toBe('full');
+    expect(levelAt(vote.AFG, TODAY)).toBe('none');
+    expect(levelAt(vote.YEM, TODAY)).toBe('none');
+    expect(levelAt(vote.VAT, TODAY)).toBe('none');
+    expect(vote.AFG!.at(-1)).toMatchObject({ undated: true });
   });
 
   it('compte un seul pays votant en 1893', () => {

@@ -1,6 +1,6 @@
 import type { Source } from '@/types';
 
-import { SUFFRAGE, SUFFRAGE_SOURCE } from '../suffrage';
+import { SUFFRAGE, SUFFRAGE_SOURCE, SUFFRAGE_TODAY } from '../suffrage';
 import avortement from './avortement.json';
 import majorite from './majorite.json';
 import universite from './universite.json';
@@ -20,7 +20,12 @@ export interface RightStep {
   /** Passage exact de la source qui établit l'étape. */
   excerpt?: string;
   note?: string;
+  /** Situation actuelle, décrite sans date par la source : placée à « Aujourd'hui ». */
+  undated?: boolean;
 }
+
+/** Position « Aujourd'hui » des frises : la situation actuelle, quand la source la décrit. */
+export const TODAY = 2026;
 
 export type WorldRightId = 'vote' | 'universite' | 'majorite' | 'avortement';
 
@@ -36,8 +41,11 @@ export interface WorldRight {
   /** « …, dont 7 {partialPhrase} ». */
   partialPhrase: string;
   range: [number, number];
+  /** Années clés ; `TODAY` s'affiche « Aujourd'hui ». */
   keyYears: number[];
   defaultYear: number;
+  /** Précision affichée à la position « Aujourd'hui ». */
+  todayNote?: string;
   source: Source;
   /** Étapes par code de pays, dans l'ordre chronologique. */
   countries: Record<string, RightStep[]>;
@@ -69,6 +77,8 @@ const EXTRA_COUNTRIES: WorldCountry[] = [
   { code: 'NAM', name: 'Namibie', col: 12, row: 12 },
   { code: 'BWA', name: 'Botswana', col: 14, row: 12 },
   { code: 'LSO', name: 'Lesotho', col: 13, row: 13 },
+  { code: 'YEM', name: 'Yémen', col: 16, row: 9 },
+  { code: 'VAT', name: 'Vatican', col: 11, row: 6 },
 ];
 
 export const WORLD_COUNTRIES: WorldCountry[] = [
@@ -100,6 +110,28 @@ const EN_REPRODUCTIVE: Source = {
   note: 'Article collaboratif : à compléter par les sources primaires qu’il cite.',
 };
 
+/** Étapes du vote : première reconnaissance, droit plein, puis la situation actuelle. */
+function voteSteps(): Record<string, RightStep[]> {
+  const steps: Record<string, RightStep[]> = Object.fromEntries(
+    SUFFRAGE.map((c) => [
+      c.code,
+      c.first === c.full
+        ? [{ year: c.first, level: 'full' as const, note: c.note }]
+        : [
+            { year: c.first, level: 'partial' as const, note: c.note },
+            { year: c.full, level: 'full' as const },
+          ],
+    ]),
+  );
+  for (const today of SUFFRAGE_TODAY) {
+    steps[today.code] = [
+      ...(steps[today.code] ?? []),
+      { year: TODAY, level: 'none', excerpt: today.excerpt, note: today.note, undated: true },
+    ];
+  }
+  return steps;
+}
+
 type Extracted = { countries: Record<string, { steps: RightStep[] }> };
 const stepsOf = (data: Extracted) =>
   Object.fromEntries(Object.entries(data.countries).map(([code, c]) => [code, c.steps]));
@@ -113,21 +145,13 @@ export const WORLD_RIGHTS: WorldRight[] = [
     fullLabel: 'droit de vote',
     partialLabel: 'sous conditions',
     partialPhrase: 'sous conditions',
-    range: [1890, 2015],
-    keyYears: [1893, 1918, 1944, 1971, 2011],
+    range: [1890, TODAY],
+    keyYears: [1893, 1918, 1944, 1971, 2011, TODAY],
     defaultYear: 1944,
+    todayNote:
+      'En Arabie saoudite et à Brunei, seules des élections locales existent, pour les femmes comme pour les hommes.',
     source: SUFFRAGE_SOURCE,
-    countries: Object.fromEntries(
-      SUFFRAGE.map((c) => [
-        c.code,
-        c.first === c.full
-          ? [{ year: c.first, level: 'full' as const, note: c.note }]
-          : [
-              { year: c.first, level: 'partial' as const, note: c.note },
-              { year: c.full, level: 'full' as const },
-            ],
-      ]),
-    ),
+    countries: voteSteps(),
   },
   {
     id: 'universite',

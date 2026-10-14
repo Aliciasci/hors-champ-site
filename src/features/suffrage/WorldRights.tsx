@@ -9,6 +9,7 @@ import {
   fullYear,
   levelAt,
   rightCount,
+  TODAY,
   type Level,
   type RightStep,
   type WorldCountry,
@@ -76,12 +77,20 @@ function WorldMap({
   );
 }
 
-const describe = (right: WorldRight, step: RightStep) =>
-  step.level === 'full'
-    ? right.fullLabel
-    : step.level === 'partial'
-      ? right.partialLabel
-      : 'retiré';
+const yearLabel = (year: number) => (year === TODAY ? 'Aujourd’hui' : String(year));
+
+/** « 1918 · sous conditions », ou « Aujourd'hui · <précision> » pour une situation non datée. */
+const describe = (right: WorldRight, step: RightStep) => {
+  const what =
+    step.undated && step.note
+      ? step.note
+      : step.level === 'full'
+        ? right.fullLabel
+        : step.level === 'partial'
+          ? right.partialLabel
+          : 'retiré';
+  return `${step.undated ? 'Aujourd’hui' : step.year} · ${what}`;
+};
 
 function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
   const [year, setYear] = useState(right.defaultYear);
@@ -118,8 +127,13 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
   const rows = countries
     .filter((c) => right.countries[c.code])
     .map((c) => ({ country: c, steps: right.countries[c.code]! }))
-    .sort((a, b) => (firstYear(a.steps) ?? 0) - (firstYear(b.steps) ?? 0));
-  const firsts = rows.slice(0, 4);
+    .sort((a, b) => (firstYear(a.steps) ?? 9999) - (firstYear(b.steps) ?? 9999));
+  const firsts = rows.filter((r) => firstYear(r.steps) !== null).slice(0, 4);
+  // Pays où, selon la source, le droit n'existe pas aujourd'hui (perdu ou jamais accordé).
+  const withoutToday = rows.filter((r) => {
+    const last = r.steps.at(-1);
+    return last?.undated && last.level === 'none';
+  });
   const lasts = rows
     .filter((r) => fullYear(r.steps) !== null)
     .sort((a, b) => fullYear(b.steps)! - fullYear(a.steps)!)
@@ -161,6 +175,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
             max={last}
             step={1}
             value={year}
+            aria-valuetext={yearLabel(year)}
             onChange={(event) => pick(Number(event.target.value))}
             data-testid="suffrage-year"
           />
@@ -175,7 +190,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
               onClick={() => pick(value)}
               data-testid={`suffrage-key-${value}`}
             >
-              {value}
+              {yearLabel(value)}
             </button>
           ))}
         </div>
@@ -186,7 +201,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
         aria-live={playing ? 'off' : 'polite'}
         data-testid="suffrage-count"
       >
-        <span className={styles.year}>{year}</span>
+        <span className={styles.year}>{yearLabel(year)}</span>
         <span className="t-deck">
           <strong className={styles.number}>{total}</strong> des {known} pays renseignés{' '}
           {right.verb}
@@ -202,6 +217,18 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
         </span>
       </p>
 
+      {year === TODAY && (withoutToday.length > 0 || right.todayNote) ? (
+        <div className={`measure ${styles.today}`} data-testid="world-today-note">
+          {withoutToday.length > 0 ? (
+            <p className="t-body">
+              <strong>Toujours pas, ou plus :</strong>{' '}
+              {withoutToday.map((r) => r.country.name).join(', ')}.
+            </p>
+          ) : null}
+          {right.todayNote ? <p className="t-body c-2">{right.todayNote}</p> : null}
+        </div>
+      ) : null}
+
       <div className={styles.layout}>
         <div className={styles.mapColumn}>
           <div
@@ -214,7 +241,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
               const level = levelAt(right.countries[country.code], year) ?? 'unknown';
               const steps = right.countries[country.code];
               const title = steps
-                ? `${country.name} : ${steps.map((s) => `${s.year}, ${describe(right, s)}`).join(' ; ')}`
+                ? `${country.name} : ${steps.map((s) => describe(right, s)).join(' ; ')}`
                 : `${country.name} : non renseigné`;
               return (
                 <span
@@ -272,7 +299,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
                 <td>
                   {steps.map((s) => (
                     <span key={`${s.year}-${s.level}`} className={styles.step}>
-                      {s.year} · {describe(right, s)}
+                      {describe(right, s)}
                     </span>
                   ))}
                 </td>
