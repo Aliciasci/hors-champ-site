@@ -13,77 +13,12 @@ import {
   type RightStep,
   type WorldCountry,
   type WorldRight,
-  type WorldRightId,
 } from '@/content/world';
-import { readOne, useQueryState } from '@/lib/useQueryState';
 
 import styles from './WorldRights.module.css';
 
 /** Durée d'une année pendant la lecture, en millisecondes. */
 const STEP_MS = 90;
-
-interface Props {
-  rights: WorldRight[];
-  countries: WorldCountry[];
-  withUrl?: boolean;
-}
-
-/**
- * « Le monde s'allume » : une carte en tuiles (un pays par case) qui s'allume au fil des années,
- * pour le droit choisi (voter, étudier, être majeure, avorter). Curseur, années clés, lecture
- * automatique ; un tableau donne les mêmes informations aux lecteurs d'écran.
- */
-export function WorldRights(props: Props) {
-  return props.withUrl ? <WithUrl {...props} /> : <WorldMap {...props} rightId="vote" />;
-}
-
-function WithUrl(props: Props) {
-  const { params, set } = useQueryState();
-  const rightId = readOne<WorldRightId>(
-    params.get('droit'),
-    props.rights.map((r) => r.id),
-    'vote',
-  );
-  return (
-    <WorldMap
-      {...props}
-      rightId={rightId}
-      onRight={(id) => set({ droit: id === 'vote' ? null : id })}
-    />
-  );
-}
-
-function WorldMap({
-  rights,
-  countries,
-  rightId,
-  onRight,
-}: Props & { rightId: WorldRightId; onRight?: (id: WorldRightId) => void }) {
-  const right = rights.find((r) => r.id === rightId) ?? rights[0]!;
-  // L'année et la lecture repartent de zéro à chaque changement de droit (voir la clé).
-  return (
-    <div className={styles.root}>
-      <fieldset className={styles.rights}>
-        <legend className="sr-only">Droit</legend>
-        {rights.map((r) => (
-          <label key={r.id} className={`${styles.pill} ${r.id === right.id ? styles.pillOn : ''}`}>
-            <input
-              type="radio"
-              name="droit"
-              value={r.id}
-              checked={r.id === right.id}
-              onChange={() => onRight?.(r.id)}
-              className="sr-only"
-              data-testid={`world-right-${r.id}`}
-            />
-            {r.label}
-          </label>
-        ))}
-      </fieldset>
-      <RightMap key={right.id} right={right} countries={countries} />
-    </div>
-  );
-}
 
 const yearLabel = (year: number) => (year === TODAY ? 'Aujourd’hui' : String(year));
 
@@ -199,7 +134,8 @@ export function TileMap({
   );
 }
 
-function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
+/** La carte à explorer d'un droit : curseur, années clés, lecture, repères et tableau. */
+export function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
   const [year, setYear] = useState(right.defaultYear);
   const [playing, setPlaying] = useState(false);
   const sliderId = useId();

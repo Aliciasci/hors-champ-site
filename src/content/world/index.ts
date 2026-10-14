@@ -258,7 +258,7 @@ export const WORLD_RIGHTS: WorldRight[] = [
     keyYears: [1857, 1900, 1938, 1975, 2006],
     defaultYear: 1938,
     source: FR_CHRONOLOGY,
-    chapter: { title: 'Être majeure.', accent: 'Sans tuteur ni mari.' },
+    chapter: { title: 'Être majeure.', accent: 'Décider seule.' },
     story: [
       { year: 1857, text: 'Au Danemark, les femmes non mariées deviennent majeures.' },
       {

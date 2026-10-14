@@ -5,11 +5,16 @@ import { PageMasthead } from '@/components/layout/PageMasthead';
 import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { rightGaps, WORLD_COUNTRIES, WORLD_RIGHTS, type WorldRight } from '@/content/world';
+import {
+  rightGaps,
+  WORLD_COUNTRIES,
+  WORLD_RIGHTS,
+  type GapRow,
+  type WorldRight,
+  type WorldRightId,
+} from '@/content/world';
 import { sortedVoteGaps, VOTE_GAP_SOURCE } from '@/content/world/vote-gap';
-import { GapPoster } from '@/features/suffrage/GapPoster';
-import { RightStory } from '@/features/suffrage/RightStory';
-import { WorldRights } from '@/features/suffrage/WorldRights';
+import { WorldChapters } from '@/features/suffrage/WorldChapters';
 import { pageMetadata } from '@/lib/seo';
 
 import styles from './monde.module.css';
@@ -33,26 +38,11 @@ const gapsOf = (right: WorldRight) =>
     ? sortedVoteGaps().map((g) => ({ name: g.name, from: g.men, to: g.women }))
     : rightGaps(right);
 
-/** Un chapitre : son ouverture, le récit défilant de la carte, puis l'affiche des années. */
-function Chapter({ right, index }: { right: WorldRight; index: number }) {
-  return (
-    <section
-      className={styles.chapter}
-      aria-labelledby={`chapitre-${right.id}`}
-      data-testid={`chapter-${right.id}`}
-    >
-      <header className={styles.opener}>
-        <p className={styles.number}>{String(index + 1).padStart(2, '0')}</p>
-        <h2 id={`chapitre-${right.id}`} className={styles.chapterTitle}>
-          {right.chapter.title} <span className={styles.chapterAccent}>{right.chapter.accent}</span>
-        </h2>
-        {right.intro ? <p className={`t-deck ${styles.chapterIntro}`}>{right.intro}</p> : null}
-      </header>
-      <RightStory right={right} countries={WORLD_COUNTRIES} />
-      <GapPoster copy={right.gap} rows={gapsOf(right)} />
-    </section>
-  );
-}
+/** Les années d'attente de chaque droit. */
+const GAPS = Object.fromEntries(WORLD_RIGHTS.map((r) => [r.id, gapsOf(r)])) as Record<
+  WorldRightId,
+  GapRow[]
+>;
 
 export default function WorldPage() {
   return (
@@ -68,17 +58,10 @@ export default function WorldPage() {
       />
       <PageMasthead kicker="Dans le monde" title="Les droits de la femme à travers l’histoire" />
 
-      {WORLD_RIGHTS.map((right, index) => (
-        <Chapter key={right.id} right={right} index={index} />
-      ))}
-
-      <SectionHeader
-        id="explorer-title"
-        kicker="À vous d’explorer"
-        title="Quatre droits, toutes les années"
-      />
-      <Suspense fallback={<WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} />}>
-        <WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} withUrl />
+      <Suspense
+        fallback={<WorldChapters rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} gaps={GAPS} />}
+      >
+        <WorldChapters rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} gaps={GAPS} withUrl />
       </Suspense>
 
       <p className={`t-caption c-muted ${styles.method}`}>
