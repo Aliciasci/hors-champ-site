@@ -95,6 +95,10 @@ e2e/                    Parcours Playwright et tests axe
 Définir `NEXT_PUBLIC_SITE_URL` (ex. `https://hors-champ.fr`) pour les URL canoniques, le sitemap et
 Open Graph. Activer la compression gzip/brotli côté hébergeur.
 
+Sur Railway, `railway.json` construit le site puis le sert avec `npm start` (`serve`, sur le port
+`PORT` fourni par Railway, compression incluse). `NEXT_PUBLIC_SITE_URL` est lue au build : la
+définir dans les variables du service avant de déployer.
+
 Sans exemple de développement publié, les routes de contrechamps génèrent une seule page
 `/contrechamps/aucun/` (introuvable, `noindex`) : Next refuse un export statique dont
 `generateStaticParams` est vide.
