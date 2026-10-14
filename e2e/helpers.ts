@@ -1,18 +1,29 @@
 import { expect, type Page } from '@playwright/test';
 
-/** Visite déjà accueillie : pas de bandeau de bienvenue. */
-export async function seedState(page: Page, preferences: Record<string, unknown> = {}) {
-  await page.addInitScript((prefs) => {
-    if (sessionStorage.getItem('seeded')) return;
-    sessionStorage.setItem('seeded', '1');
-    localStorage.setItem(
-      'hors-champ:state',
-      JSON.stringify({
-        version: 4,
-        state: { preferences: { onboardingCompleted: true, ...prefs } },
-      }),
-    );
-  }, preferences);
+/**
+ * Visite déjà accueillie : pas de bandeau de bienvenue, et ouverture de la une déjà vue (sauf
+ * `showIntro`, pour les tests qui portent sur elle).
+ */
+export async function seedState(
+  page: Page,
+  preferences: Record<string, unknown> = {},
+  { showIntro = false }: { showIntro?: boolean } = {},
+) {
+  await page.addInitScript(
+    ({ prefs, showIntro }) => {
+      if (sessionStorage.getItem('seeded')) return;
+      sessionStorage.setItem('seeded', '1');
+      if (!showIntro) localStorage.setItem('hors-champ:intro-vue', '1');
+      localStorage.setItem(
+        'hors-champ:state',
+        JSON.stringify({
+          version: 4,
+          state: { preferences: { onboardingCompleted: true, ...prefs } },
+        }),
+      );
+    },
+    { prefs: preferences, showIntro },
+  );
 }
 
 export const isDesktop = (page: Page) => (page.viewportSize()?.width ?? 0) >= 900;

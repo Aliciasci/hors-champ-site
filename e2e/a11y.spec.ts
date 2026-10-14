@@ -38,7 +38,8 @@ for (const theme of ['cartel', 'revue'] as const) {
   for (const path of PAGES) {
     test(`axe ${theme} ${path}`, async ({ page, browserName }) => {
       test.skip(browserName !== 'chromium', 'axe : un seul moteur suffit');
-      await seedState(page, { themeId: theme });
+      // La une est contrôlée avec son ouverture, telle qu'à la première visite.
+      await seedState(page, { themeId: theme }, { showIntro: path === '/' });
       await open(page, path);
       const results = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])

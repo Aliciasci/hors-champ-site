@@ -2,11 +2,37 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useRef, useSyncExternalStore, type CSSProperties } from 'react';
+
+import { INTRO_KEY } from '@/components/layout/ThemeSync';
 
 import type { Artwork } from '@/types';
 
 import styles from './HorsChampIntro.module.css';
+
+/** L'ouverture déjà vue : <html data-intro="vue">, posé avant le premier rendu ou à la fin. */
+const subscribe = (onChange: () => void) => {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-intro'] });
+  return () => observer.disconnect();
+};
+const isSeen = () => document.documentElement.dataset.intro === 'vue';
+
+/**
+ * Retire l'ouverture et la marque comme vue. `keepPlace` : la page remonte d'autant, pour que
+ * le contenu affiché ne bouge pas (la lectrice a déjà dépassé l'ouverture).
+ */
+function dismiss(section: HTMLElement | null, keepPlace: boolean) {
+  const height = section?.offsetHeight ?? 0;
+  document.documentElement.dataset.intro = 'vue';
+  try {
+    localStorage.setItem(INTRO_KEY, '1');
+  } catch {
+    // Stockage indisponible : l'ouverture ne se rejouera pas sur cette page.
+  }
+  if (keepPlace) window.scrollBy(0, -height);
+  else window.scrollTo(0, 0);
+}
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 /** Avancement de `p` entre `from` et `to`, de 0 à 1. */
@@ -34,20 +60,26 @@ export function HorsChampIntro({
   caption: React.ReactNode;
 }) {
   const root = useRef<HTMLElement>(null);
+  const seen = useSyncExternalStore(subscribe, isSeen, () => false);
 
   useEffect(() => {
     const element = root.current;
-    if (!element) return;
+    if (!element || seen) return;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)');
     let frame = 0;
     const update = () => {
       frame = 0;
+      const rect = element.getBoundingClientRect();
+      // Entièrement dépassée : l'ouverture s'efface pour de bon.
+      if (rect.bottom <= 0) {
+        dismiss(element, true);
+        return;
+      }
       if (still.matches) {
         element.dataset.still = 'true';
         return;
       }
       delete element.dataset.still;
-      const rect = element.getBoundingClientRect();
       const p = clamp01(-rect.top / Math.max(1, rect.height - window.innerHeight));
       const values: Record<string, number> = {
         '--zoom': span(p, 0.12, 0.5),
@@ -73,7 +105,9 @@ export function HorsChampIntro({
       still.removeEventListener('change', schedule);
       window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [seen]);
+
+  if (seen) return null;
 
   const ratio =
     typeof photo.image === 'string' ? 3000 / 2171 : photo.image.width / photo.image.height;
@@ -125,6 +159,14 @@ export function HorsChampIntro({
         <p className={styles.hint} aria-hidden="true">
           Faites défiler
         </p>
+        <button
+          type="button"
+          className={styles.skip}
+          onClick={() => dismiss(root.current, false)}
+          data-testid="intro-skip"
+        >
+          Passer
+        </button>
       </div>
       <p className={`t-caption ${styles.caption}`}>{caption}</p>
     </section>

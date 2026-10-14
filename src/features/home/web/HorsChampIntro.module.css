@@ -162,3 +162,28 @@
     transition: none;
   }
 }
+
+/* Déjà vue (visite précédente) : masquée avant même le premier rendu. */
+:global([data-intro='vue']) .intro {
+  display: none;
+}
+
+.skip {
+  position: absolute;
+  right: var(--gutter);
+  top: calc(var(--header-h) + var(--space-sm));
+  z-index: 1;
+  min-height: var(--touch);
+  padding: 0 var(--space-lg);
+  border: 1px solid rgb(243 238 229 / 0.6);
+  border-radius: 999px;
+  background: rgb(15 14 12 / 0.6);
+  color: #f3eee5;
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.skip:hover {
+  background: #0f0e0c;
+}

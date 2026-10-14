@@ -120,3 +120,31 @@ test('« Et vous ? » : l’année de naissance donne l’âge à chaque conquê
   await expect(result).toContainText('vous aviez 15 ans');
   await expect(result).toContainText('16 ans avant votre naissance');
 });
+
+test('ouverture : jouée une seule fois, « Passer » ou la dépasser la retire', async ({ page }) => {
+  await seedState(page, {}, { showIntro: true });
+  await open(page, '/');
+  const intro = page.getByTestId('intro');
+  await expect(intro).toBeVisible();
+  await page.getByTestId('intro-skip').click();
+  await expect(intro).toHaveCount(0);
+  await page.reload();
+  await page.waitForLoadState('networkidle');
+  await expect(page.getByTestId('intro')).toHaveCount(0);
+  await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
+});
+
+test('ouverture : la dépasser en faisant défiler la retire sans déplacer le contenu', async ({
+  page,
+}) => {
+  await seedState(page, {}, { showIntro: true });
+  await open(page, '/');
+  const bottom = await page
+    .getByTestId('intro')
+    .evaluate((e) => e.getBoundingClientRect().bottom + window.scrollY);
+  await page.evaluate((y) => window.scrollTo(0, y), bottom + 50);
+  await expect(page.getByTestId('intro')).toHaveCount(0);
+  await expect(page.locator('html')).toHaveAttribute('data-intro', 'vue');
+  const scroll = await page.evaluate(() => window.scrollY);
+  expect(scroll).toBeLessThan(200);
+});
