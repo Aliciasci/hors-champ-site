@@ -1,5 +1,6 @@
 import { localCultureEntities } from '@/data/culture';
 import { WORLD_COUNTRIES } from '@/content/world';
+import { worldShapes } from '@/content/world/geo';
 import { WOMEN_COUNTRIES, womenByCountry } from '@/content/world/womenCountries';
 
 const people = localCultureEntities.filter((e) => e.kind === 'person');
@@ -33,5 +34,22 @@ describe('Elles, pays par pays', () => {
     expect(byCountry.POL).toEqual(['person-marie-curie']);
     expect(byCountry.FRA).toEqual(['person-marie-curie', 'person-simone-veil']);
     expect(WOMEN_COUNTRIES['person-marie-curie']?.historical).toMatch(/Empire russe/);
+  });
+
+  it('place chaque pays des femmes sur la vraie carte, avec sa pastille', () => {
+    const shapes = worldShapes();
+    const onMap = new Map(shapes.countries.filter((c) => c.code).map((c) => [c.code!, c]));
+    const used = new Set(Object.values(WOMEN_COUNTRIES).flatMap((w) => w.countries));
+    for (const code of used) {
+      const country = onMap.get(code);
+      expect({ code, onMap: Boolean(country?.d) }).toEqual({ code, onMap: true });
+      expect(country!.x).toBeGreaterThan(0);
+      expect(country!.x).toBeLessThan(shapes.width);
+      expect(country!.y).toBeGreaterThan(0);
+      expect(country!.y).toBeLessThan(shapes.height);
+    }
+    // La pastille de la France est en métropole, pas en Guyane.
+    const france = onMap.get('FRA')!;
+    expect(france.x).toBeGreaterThan(onMap.get('GBR')!.x! - 30);
   });
 });

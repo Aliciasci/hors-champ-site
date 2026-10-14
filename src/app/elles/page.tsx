@@ -4,6 +4,7 @@ import { PageMasthead } from '@/components/layout/PageMasthead';
 import { Container } from '@/components/ui/Container';
 import { getCatalog } from '@/content/catalog';
 import { WORLD_COUNTRIES } from '@/content/world';
+import { worldShapes } from '@/content/world/geo';
 import { relatedEntities } from '@/features/culture/cultureGraph';
 import {
   MapPersonRow,
@@ -111,6 +112,7 @@ export default function EllesPage() {
     features,
     masthead,
     countries: WORLD_COUNTRIES,
+    shapes: worldShapes(),
     mapRows,
   };
 

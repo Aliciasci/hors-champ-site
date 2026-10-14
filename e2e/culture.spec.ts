@@ -178,12 +178,17 @@ test('Elles sur la carte : un pays, ses femmes, et la thématique qui filtre', a
   await expect(page).toHaveURL(/pays=POL/);
   await expect(page.getByTestId('women-country-title')).toHaveText('Pologne');
   await expect(page.getByTestId('women-row-person-marie-curie')).toBeVisible();
+  // Un pays européen : la carte zoome sur l'Europe.
+  await expect(page.getByTestId('women-zoom-europe')).toBeChecked();
 
-  // La case du pays sur la carte.
-  await page.getByTestId('women-tile-PAK').click();
+  // Le pays sur la carte (sur un petit écran, où les pastilles se touchent : dans la liste).
+  await page.getByTestId('women-zoom-monde').click({ force: true });
+  if ((page.viewportSize()?.width ?? 0) >= 900) await page.getByTestId('women-bubble-PAK').click();
+  else await page.getByTestId('women-country-PAK').click({ force: true });
   await expect(page.getByTestId('women-country-title')).toHaveText('Pakistan');
   await expect(page.getByTestId('women-row-person-malala-yousafzai')).toBeVisible();
   await expect(page.getByTestId('women-row-person-benazir-bhutto')).toBeVisible();
+  await expect(page.getByTestId('women-zoom-monde')).toBeChecked();
 
   // La thématique filtre aussi la carte.
   await page.getByTestId('women-country-back').click();

@@ -7,6 +7,7 @@ import { ArrowRight } from '@/components/icons';
 import { MastheadRow } from '@/components/layout/MastheadRow';
 import { Chip, ChipGroup, Segmented } from '@/components/ui/Chip';
 import type { WorldCountry } from '@/content/world';
+import type { WorldShapes } from '@/content/world/geo';
 import { readOne, useQueryState } from '@/lib/useQueryState';
 import type { PortraitThemeId } from '@/types';
 
@@ -43,6 +44,7 @@ interface Props {
   masthead: ReactNode;
   /** Carte des pays : la grille, et la ligne de chaque femme, pré-rendue. */
   countries: WorldCountry[];
+  shapes: WorldShapes;
   mapRows: Record<string, ReactNode>;
   withUrl?: boolean;
 }
@@ -82,6 +84,7 @@ function WallView({
   features,
   masthead,
   countries,
+  shapes,
   mapRows,
   theme,
   onTheme,
@@ -168,6 +171,7 @@ function WallView({
         <WomenMap
           personIds={shownIds}
           countries={countries}
+          shapes={shapes}
           rows={mapRows}
           selected={country}
           onSelect={(code) => onCountry?.(code)}

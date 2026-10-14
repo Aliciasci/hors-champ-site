@@ -24,69 +24,117 @@
   min-width: 0;
 }
 
-/* Même grille que les cartes des droits : 26 colonnes, une case par pays. */
+/* La carte du monde : océan pâle, terres neutres, pays des femmes à la couleur d'Elles. */
 .map {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(26, minmax(0, 1fr));
-  gap: 2px;
+  touch-action: manipulation;
+  border: var(--border-hairline) solid var(--border);
+  background: var(--surface);
 }
 
-@media (min-width: 900px) {
-  .map {
-    gap: 4px;
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.zoom {
+  width: 220px;
+  max-width: 100%;
+  justify-self: end;
+}
+
+.map {
+  overflow: hidden;
+}
+
+/* Zoom fluide : le monde entier se déplace et s'agrandit. */
+.world,
+.unscale {
+  transition: transform 650ms cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world,
+  .unscale {
+    transition: none;
   }
 }
 
-.tile {
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  transition:
-    background-color var(--duration-base),
-    transform var(--duration-fast);
+.svg path {
+  vector-effect: non-scaling-stroke;
 }
 
-.empty {
-  border: 1px dotted var(--border);
+.ocean {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.land,
+.one,
+.many {
+  stroke: var(--bg);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+  transition: fill var(--duration-base);
+}
+
+.land {
+  fill: var(--surface-alt);
 }
 
 .one {
-  background: var(--dom-soft);
-  color: var(--dom);
-  border: 1px solid var(--dom);
+  fill: var(--dom-soft);
+  stroke: var(--dom);
   cursor: pointer;
 }
 
 .many {
-  background: var(--dom);
-  color: var(--on-primary);
+  fill: var(--dom);
   cursor: pointer;
 }
 
 .one:hover,
 .many:hover {
-  transform: scale(1.12);
+  fill: var(--dom);
+  filter: brightness(1.15);
 }
 
 .on {
-  outline: 3px solid var(--text);
-  outline-offset: 1px;
+  stroke: var(--text);
+  stroke-width: 2;
 }
 
-.n {
-  display: none;
+/* Pastille : le nombre de femmes, cliquable même sur un petit pays. */
+.bubble {
+  cursor: pointer;
 }
 
-@media (min-width: 900px) {
-  .n {
-    display: inline;
-  }
+.bubble circle {
+  fill: var(--bg);
+  stroke: var(--dom);
+  stroke-width: 2;
+  transition: transform var(--duration-fast);
+}
+
+.bubble text {
+  fill: var(--dom);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.bubble:hover circle,
+.bubbleOn circle {
+  fill: var(--dom);
+  stroke: var(--text);
+}
+
+.bubble:hover text,
+.bubbleOn text {
+  fill: var(--on-primary);
 }
 
 .hover {

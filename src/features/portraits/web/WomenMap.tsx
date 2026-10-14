@@ -2,8 +2,9 @@
 
 import { useMemo, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
-import { Chip, ChipGroup } from '@/components/ui/Chip';
+import { Chip, ChipGroup, Segmented } from '@/components/ui/Chip';
 import type { WorldCountry } from '@/content/world';
+import type { WorldShapes } from '@/content/world/geo';
 import { womenByCountry } from '@/content/world/womenCountries';
 
 import styles from './WomenMap.module.css';
@@ -11,20 +12,24 @@ import styles from './WomenMap.module.css';
 const women = (n: number) => `${n} femme${n > 1 ? 's' : ''}`;
 
 /**
- * Elles, pays par pays : la carte en tuiles du site, où chaque pays s'allume selon le nombre de
- * femmes du catalogue. On choisit un pays sur la carte (souris, doigt) ou dans la liste des pays
- * (clavier, lecteur d'écran) ; ses femmes s'affichent à côté, avec leurs œuvres et découvertes.
+ * Elles, pays par pays, sur une vraie carte du monde : chaque pays se colore selon le nombre de
+ * femmes du catalogue, une pastille en donne le nombre. On choisit un pays sur la carte (souris,
+ * doigt) ou dans la liste des pays (clavier, lecteur d'écran) ; ses femmes s'affichent à côté.
  */
 export function WomenMap({
   personIds,
   countries,
+  shapes,
   rows,
   selected,
   onSelect,
 }: {
   /** Les femmes affichées (selon la thématique choisie), dans l'ordre du mur. */
   personIds: string[];
+  /** Noms des pays, par code. */
   countries: WorldCountry[];
+  /** Tracés de la carte, préparés au build. */
+  shapes: WorldShapes;
   /** Ligne de chaque femme, pré-rendue côté serveur. */
   rows: Record<string, ReactNode>;
   selected: string | null;
@@ -44,38 +49,69 @@ export function WomenMap({
   const current = selected && byCountry[selected] ? selected : null;
   const list = current ? byCountry[current]! : [];
 
+  const [zoom, setZoom] = useState<'monde' | 'europe'>(() =>
+    current && shapes.countries.find((c) => c.code === current)?.europe ? 'europe' : 'monde',
+  );
+  const inEurope = useMemo(
+    () => new Set(shapes.countries.filter((c) => c.europe).map((c) => c.code!)),
+    [shapes],
+  );
+  // Zoom : on agrandit le cadre de l'Europe à la largeur de la carte ; les pastilles et les
+  // traits gardent leur taille à l'écran.
+  const box = zoom === 'europe' ? shapes.europe : null;
+  const k = box ? Math.min(shapes.width / box.width, shapes.height / box.height) : 1;
+  const tx = box ? -box.x * k + (shapes.width - box.width * k) / 2 : 0;
+  const ty = box ? -box.y * k + (shapes.height - box.height * k) / 2 : 0;
+
   const [hover, setHover] = useState<{ code: string; x: number; y: number } | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const tileAt = (event: PointerEvent<HTMLDivElement>) =>
-    (event.target as HTMLElement).closest<HTMLElement>('[data-code]');
+  const codeAt = (event: PointerEvent<HTMLDivElement>) =>
+    (event.target as Element).closest<SVGElement>('[data-code]')?.dataset.code;
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    const tile = tileAt(event);
+    const code = codeAt(event);
     const box = mapRef.current?.getBoundingClientRect();
-    if (!tile || !box || !byCountry[tile.dataset.code!]) return setHover(null);
-    const rect = tile.getBoundingClientRect();
+    if (!code || !box || !byCountry[code]) return setHover(null);
     setHover({
-      code: tile.dataset.code!,
-      x: Math.min(Math.max(rect.left + rect.width / 2 - box.left, 90), box.width - 90),
-      y: rect.top - box.top,
+      code,
+      x: Math.min(Math.max(event.clientX - box.left, 90), box.width - 90),
+      y: event.clientY - box.top - 12,
     });
   };
   const choose = (code: string) => {
     onSelect(code);
+    setZoom(inEurope.has(code) ? 'europe' : 'monde');
     // Sur petit écran, la liste est sous la carte : on l'amène à l'écran.
     if (window.matchMedia('(max-width: 899px)').matches)
       panelRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
   };
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
-    const code = tileAt(event)?.dataset.code;
+    const code = codeAt(event);
     if (code && byCountry[code]) choose(code);
   };
 
   const countriesCount = ranked.length;
+  // Pastilles : les plus grandes d'abord, pour que les petites restent au-dessus.
+  const bubbles = shapes.countries
+    .filter((c) => c.code && byCountry[c.code])
+    .sort((a, b) => byCountry[b.code!]!.length - byCountry[a.code!]!.length);
 
   return (
     <div className={styles.layout} data-tone="arts" data-testid="women-map">
       <div className={styles.mapCol}>
+        <div className={styles.zoom}>
+          <Segmented
+            legend="Zoom de la carte"
+            name="zoom"
+            options={[
+              { id: 'monde', label: 'Monde' },
+              { id: 'europe', label: 'Europe' },
+            ]}
+            value={zoom}
+            onChange={setZoom}
+            testIdPrefix="women-zoom"
+          />
+        </div>
         <div
           ref={mapRef}
           className={styles.map}
@@ -83,24 +119,55 @@ export function WomenMap({
           onPointerUp={onPointerUp}
           onPointerLeave={() => setHover(null)}
           role="img"
-          aria-label={`Carte : ${women(personIds.length)} dans ${countriesCount} pays. Choisissez un pays dans la liste.`}
+          aria-label={`Carte du monde : ${women(personIds.length)} dans ${countriesCount} pays. Choisissez un pays dans la liste.`}
         >
-          {countries.map((country) => {
-            const n = byCountry[country.code]?.length ?? 0;
-            const level = n === 0 ? 'empty' : n > 1 ? 'many' : 'one';
-            return (
-              <span
-                key={country.code}
-                className={`${styles.tile} ${styles[level]} ${country.code === current ? styles.on : ''}`}
-                style={{ gridColumn: country.col + 1, gridRow: country.row + 1 }}
-                data-code={country.code}
-                data-count={n}
-                data-testid={`women-tile-${country.code}`}
-              >
-                {n > 0 ? <span className={styles.n}>{n}</span> : null}
-              </span>
-            );
-          })}
+          <svg
+            viewBox={`0 0 ${shapes.width} ${shapes.height}`}
+            className={styles.svg}
+            aria-hidden="true"
+            focusable="false"
+          >
+            <g
+              className={styles.world}
+              style={{ transform: `translate(${tx}px, ${ty}px) scale(${k})` }}
+            >
+              <path d={shapes.sphere} className={styles.ocean} />
+              {shapes.countries.map((country) => {
+                const n = country.code ? (byCountry[country.code]?.length ?? 0) : 0;
+                const level = n === 0 ? 'land' : n > 1 ? 'many' : 'one';
+                return (
+                  <path
+                    key={country.id}
+                    d={country.d}
+                    className={`${styles[level]} ${country.code && country.code === current ? styles.on : ''}`}
+                    data-code={country.code}
+                    data-count={country.code ? n : undefined}
+                    data-testid={country.code ? `women-tile-${country.code}` : undefined}
+                  />
+                );
+              })}
+              {bubbles.map((country) => {
+                const n = byCountry[country.code!]!.length;
+                const r = 7 + 3.2 * Math.sqrt(n);
+                return (
+                  <g
+                    key={country.code}
+                    className={`${styles.bubble} ${country.code === current ? styles.bubbleOn : ''}`}
+                    data-code={country.code}
+                    data-testid={`women-bubble-${country.code}`}
+                    transform={`translate(${country.x} ${country.y})`}
+                  >
+                    <g className={styles.unscale} style={{ transform: `scale(${1 / k})` }}>
+                      <circle r={r} />
+                      <text dy="0.35em" fontSize={r > 12 ? 13 : 10}>
+                        {n}
+                      </text>
+                    </g>
+                  </g>
+                );
+              })}
+            </g>
+          </svg>
           {hover ? (
             <span
               className={styles.hover}
@@ -113,8 +180,9 @@ export function WomenMap({
           ) : null}
         </div>
         <p className={`t-caption c-muted ${styles.note}`}>
-          Case claire : une femme ; case pleine : plusieurs. Une femme compte pour chaque pays dont
-          elle a eu la nationalité, d’après Wikidata.
+          Le nombre de chaque pastille : les femmes du catalogue liées au pays. Une femme compte
+          pour chaque pays dont elle a eu la nationalité, d’après Wikidata. Fond de carte : Natural
+          Earth.
         </p>
       </div>
 
