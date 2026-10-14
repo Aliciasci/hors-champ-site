@@ -265,20 +265,20 @@ export function CatalogueView({
           </ul>
         ) : experiences.length === 0 ? (
           <EmptyState
-            kicker="Catalogue vide"
-            title="Aucun contrechamp publié"
-            description="Les contenus sont en cours de rédaction et de vérification. Revenez bientôt."
+            kicker="En préparation"
+            title="Pas encore de contrechamp publié"
+            description="Les premiers sont en cours d’écriture et de vérification. Revenez bientôt."
             testId="catalogue-empty"
           />
         ) : (
           <EmptyState
             icon={SearchX}
-            kicker="Aucun résultat"
-            title="Rien ne correspond… pour l’instant"
+            kicker="Recherche"
+            title="Aucun résultat"
             description={
               query.trim()
-                ? `Aucun contrechamp ne contient « ${query.trim()} » avec ces filtres. Essayez un autre mot ou élargissez les filtres.`
-                : 'Aucun contrechamp ne combine tous ces filtres. Retirez-en un pour élargir la recherche.'
+                ? `Rien sur « ${query.trim()} » avec ces filtres. Essayez un autre mot, ou retirez un filtre.`
+                : 'Aucun contrechamp ne correspond à tous ces filtres. Retirez-en un.'
             }
             actions={<Button onClick={reset}>Tout réinitialiser</Button>}
             testId="catalogue-no-results"

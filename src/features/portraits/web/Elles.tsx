@@ -9,8 +9,7 @@ import styles from './Elles.module.css';
 
 export const themeHref = (id: string) => `/elles/${id}`;
 
-const EMPTY_LIST =
-  'À documenter : aucun portrait n’est encore rédigé et sourcé pour cette thématique.';
+const EMPTY_LIST = 'Pas encore de portrait publié dans ce thème.';
 
 /** Liste des neuf thématiques : numéro, domaines, titre, rangée de portraits. */
 export function ThemeList({ themes }: { themes: ResolvedTheme[] }) {
@@ -65,8 +64,8 @@ export function ThemeMembers({ theme }: { theme: ResolvedTheme }) {
   if (theme.people.length === 0) {
     return (
       <p className="t-body c-muted" data-testid="theme-empty">
-        À documenter : aucun portrait n’est encore rédigé et sourcé pour cette thématique. Les
-        fiches sont publiées une fois leurs faits vérifiés.
+        Pas encore de portrait publié dans ce thème. On ne publie une fiche qu’une fois tous ses
+        faits vérifiés.
       </p>
     );
   }

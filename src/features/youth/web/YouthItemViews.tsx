@@ -193,8 +193,8 @@ export function LifeView({ life }: { life: YouthLife }) {
       <Lv as="p" text={life.intro} className="t-body-lg" />
       <ItemRefs ids={life.itemIds} kicker="Dans cette collection" title="À découvrir" />
       <p className="t-caption c-muted">
-        Ces parcours montrent des possibles, pas un modèle à suivre : il n’est pas nécessaire
-        d’exercer un métier exceptionnel pour compter.
+        Ces parcours montrent ce qui est possible, pas un modèle à suivre. Pas besoin d’un métier
+        extraordinaire pour compter.
       </p>
     </>
   );

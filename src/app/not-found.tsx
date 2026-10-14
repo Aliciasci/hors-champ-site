@@ -13,8 +13,8 @@ export default function NotFound() {
         testId="not-found"
         icon={MapPinOff}
         kicker="Page introuvable"
-        title="Ce chemin ne mène nulle part"
-        description="Le lien suivi ne correspond à aucune page du site : il est peut-être incomplet, ou la fiche a été retirée."
+        title="Cette page n’existe pas"
+        description="Le lien est peut-être incomplet, ou la fiche a été retirée. Repartez de la une, il y a de quoi lire."
         headingLevel={1}
         actions={
           <>

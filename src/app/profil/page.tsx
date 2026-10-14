@@ -5,7 +5,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Profil',
-  description: 'Votre exploration, l’apparence du site, vos préférences et vos données locales.',
+  description: 'Ce que vous avez lu, l’apparence du site et vos données.',
   path: '/profil',
   noindex: true,
 });

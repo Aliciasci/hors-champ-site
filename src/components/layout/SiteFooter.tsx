@@ -10,14 +10,14 @@ export function SiteFooter() {
         <div className={styles.brand}>
           <p className={styles.logo}>Hors-Champ</p>
           <p className="t-body-sm c-2">
-            Aucun compte, aucun traceur, aucun cookie : vos données restent dans ce navigateur.
+            Pas de compte, pas de cookie. Ce que vous faites ici reste dans votre navigateur.
           </p>
         </div>
         <nav aria-label="Pied de page">
           <ul className={styles.links}>
             <li>
               <Link href="/a-propos" className="link">
-                À propos et principes éditoriaux
+                Qui sommes-nous
               </Link>
             </li>
             <li>

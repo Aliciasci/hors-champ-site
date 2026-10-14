@@ -37,10 +37,10 @@ export const marker = (index: number) => MARKERS[index] ?? String(index + 1);
 
 /** Déroulé présenté sur la page de détail. */
 export const OUTLINE = [
-  { title: 'La situation', text: 'Lisez la mise en situation, à votre rythme.' },
+  { title: 'La situation', text: 'Une scène courte, à lire à votre rythme.' },
   {
     title: 'Votre lecture',
-    text: 'Répondez à une question. Parfois, plusieurs réponses sont défendables.',
+    text: 'Une question. Souvent, plusieurs réponses se défendent.',
   },
-  { title: 'L’analyse', text: 'Explication, limites, contre-arguments et sources.' },
+  { title: 'L’analyse', text: 'Ce qu’on peut en dire, ce qu’on ne peut pas, et nos sources.' },
 ];

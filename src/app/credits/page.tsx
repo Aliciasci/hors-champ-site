@@ -12,7 +12,7 @@ import styles from './credits.module.css';
 export const metadata = pageMetadata({
   title: 'Crédits des illustrations',
   description:
-    'Toutes les œuvres, photographies et documents qui illustrent Hors-Champ : domaine public ou licence libre, avec la page qui atteste chaque licence.',
+    'D’où viennent les images de Hors-Champ. Toutes sont dans le domaine public ou sous licence libre, avec la preuve.',
   path: '/credits',
 });
 
@@ -74,11 +74,11 @@ export default function CreditsPage() {
   return (
     <Container width="wide">
       <header className={styles.header}>
-        <p className="t-overline c-accent">À propos</p>
-        <h1 className="t-title1">Crédits des illustrations</h1>
+        <p className="t-overline c-accent">Qui sommes-nous</p>
+        <h1 className="t-title1">D’où viennent nos images</h1>
         <p className="t-body c-2 measure">
-          {total} illustrations, toutes du domaine public ou sous licence libre. Chaque crédit
-          renvoie à la page qui atteste la licence.
+          {total} illustrations, toutes dans le domaine public ou sous licence libre. Chaque crédit
+          renvoie à la page qui le prouve.
         </p>
       </header>
       {groups.map((group) =>

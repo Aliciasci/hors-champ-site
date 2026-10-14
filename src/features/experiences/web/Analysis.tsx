@@ -107,8 +107,8 @@ export function Analysis({
         icon={MessageCircleQuestionMark}
         kicker="Analyse"
         headingLevel={1}
-        title="Pas encore de réponse à analyser"
-        description="L’analyse s’affiche une fois que vous avez répondu à la question de ce contrechamp."
+        title="Vous n’avez pas encore répondu"
+        description="L’analyse arrive une fois que vous avez répondu à la question."
         actions={<ButtonLink href={playHref(experience.id)}>Commencer le contrechamp</ButtonLink>}
       />
     );
@@ -225,8 +225,8 @@ export function Analysis({
 
       {culture.length > 0 ? (
         <Section
-          kicker="Dans la culture"
-          title="Le thème en œuvres et en idées"
+          kicker="Pour aller plus loin"
+          title="Le sujet, côté histoire"
           testId="result-culture"
         >
           <ul>

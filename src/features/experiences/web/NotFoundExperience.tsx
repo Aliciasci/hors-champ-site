@@ -12,8 +12,8 @@ export function NotFoundExperience() {
         icon={SearchX}
         kicker="Introuvable"
         headingLevel={1}
-        title="Ce contrechamp n’existe pas (ou plus)"
-        description="Le lien est peut-être incomplet, ou le contenu a été retiré du catalogue. Vos autres données sont intactes."
+        title="Ce contrechamp n’existe pas, ou plus"
+        description="Le lien est peut-être incomplet, ou le contrechamp a été retiré. Le reste de vos données n’a pas bougé."
         actions={<ButtonLink href="/contrechamps/catalogue">Explorer les contrechamps</ButtonLink>}
       />
     </Container>

@@ -6,9 +6,9 @@ import { pageMetadata } from '@/lib/seo';
 import styles from './elles.module.css';
 
 export const metadata = pageMetadata({
-  title: 'Elles — neuf thématiques',
+  title: 'Elles',
   description:
-    'Des femmes qui ont révolutionné le monde, changé la culture, conquis des droits, changé nos idées : neuf thématiques, chaque portrait avec la raison de sa présence.',
+    'Elles ont fait avancer la science, bousculé l’art, arraché des droits. Neuf thèmes, et pour chaque portrait, la raison de sa présence ici.',
   path: '/elles',
 });
 
@@ -17,7 +17,7 @@ export default function EllesPage() {
   return (
     <Container>
       <header className={styles.header}>
-        <p className="t-overline c-accent">Elles · neuf thématiques</p>
+        <p className="t-overline c-accent">Elles</p>
         <h1 className="t-hero">Ce qu’elles ont changé</h1>
       </header>
       <ThemeList themes={themes} />

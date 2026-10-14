@@ -13,7 +13,7 @@ import type { CultureEntity } from '@/types';
 export const metadata = pageMetadata({
   title: 'Derrière chaque droit',
   description:
-    'Les conquêtes de droits des femmes en France, rangées par famille, avec celles qui ont fait avancer chaque combat — leur rôle tel que le décrivent les sources.',
+    'Le droit de vote, de travailler, d’ouvrir un compte, d’avorter. Comment les femmes les ont obtenus en France, et qui s’est battue pour ça.',
   path: '/droits',
 });
 
@@ -81,7 +81,12 @@ export default function Page() {
       />
       <header style={{ display: 'grid', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
         <p className="t-overline c-accent">Derrière chaque droit</p>
-        <h1 className="t-title1">Les femmes derrière les conquêtes de droits</h1>
+        <h1 className="t-title1">Rien ne leur a été donné</h1>
+        <p className="t-body-lg c-2 measure">
+          Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a été
+          arraché, souvent au prix de longues années de combat. Voici qui les a portés, et ce que
+          les sources disent de leur rôle.
+        </p>
         <PortraitStrip
           people={people}
           size={88}

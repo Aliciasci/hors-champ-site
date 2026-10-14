@@ -20,7 +20,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Contrechamps',
   description:
-    'Le sexisme a ses ficelles. Apprenons à les voir : des situations courtes, une question, un raisonnement à démêler — et toujours la nuance.',
+    'Une réunion, une pub, un rayon de jouets. De courtes scènes du quotidien pour apprendre à repérer le sexisme ordinaire, sans forcer le trait.',
   path: '/contrechamps',
 });
 
@@ -29,11 +29,11 @@ export default function ContrechampsPage() {
   return (
     <Container>
       <header className={styles.masthead}>
-        <p className="t-overline c-accent">Contrechamps · changer d’angle</p>
+        <p className="t-overline c-accent">Contrechamps</p>
         <h1 className="t-hero">
-          Le sexisme a ses ficelles.{' '}
+          Le sexisme ne se voit pas toujours.{' '}
           <span className={`t-accent ${styles.accentLine}`} style={{ display: 'inline-block' }}>
-            Apprenons à les voir.
+            Regardez mieux.
             <HandUnderline />
           </span>
         </h1>
@@ -41,9 +41,9 @@ export default function ContrechampsPage() {
 
       {experiences.length === 0 ? (
         <EmptyState
-          kicker="Le catalogue se prépare"
-          title="Les premiers contrechamps arrivent"
-          description="L’équipe éditoriale vérifie chaque situation et chaque source avant publication. Rien n’est mis en ligne sans avoir été relu."
+          kicker="En préparation"
+          title="Les premiers contrechamps arrivent bientôt"
+          description="Chaque scène et chaque source passent en relecture avant d’être publiées. On préfère prendre le temps."
           testId="experiences-empty"
         />
       ) : (
@@ -61,7 +61,7 @@ export default function ContrechampsPage() {
           >
             <SectionHeader
               kicker="Par thème"
-              title="Choisir un angle"
+              title="Choisissez votre sujet"
               id="angles-title"
               action={{
                 label: 'Tout voir',

@@ -18,7 +18,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import styles from './page.module.css';
 
 export const metadata = pageMetadata({
-  title: 'Elles ont peint, calculé, découvert',
+  title: 'Celles que l’histoire a laissées hors champ',
   description: SITE_DESCRIPTION,
   path: '/',
 });
@@ -81,10 +81,10 @@ export default function Home() {
       <header className={styles.masthead}>
         <p className="t-overline c-accent">Hors-Champ</p>
         <h1 className="t-hero">
-          Elles ont peint, calculé, découvert.{' '}
+          L’histoire les a laissées hors champ.{' '}
           <span className={styles.accentLine}>
             <span className={styles.accent}>
-              Découvrons-les.
+              On les remet dans le cadre.
               <HandUnderline />
             </span>
           </span>

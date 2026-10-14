@@ -28,7 +28,7 @@ export interface TileData {
 }
 
 const DOOR_IDS = EXPLORE_DOORS.map((d) => d.id);
-const NONE_HERE = 'Rien ici pour cette porte… pour l’instant. Essaie une autre porte !';
+const NONE_HERE = 'Pas encore de carte derrière cette porte. Essaie une autre !';
 
 function Panel({
   icon,
@@ -202,7 +202,7 @@ function Browser({
         kicker="E · Collections"
         title="Les vies qu’on n’imagine pas"
         testId="possible-lives"
-        empty="Les collections arrivent."
+        empty="Les premières collections arrivent bientôt."
       >
         {lives.map(tile)}
       </Row>

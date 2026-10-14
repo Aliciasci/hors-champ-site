@@ -26,7 +26,7 @@ export function WelcomeBanner() {
         <p id="welcome-title" className="t-label">
           Première visite ?
         </p>
-        <p className="t-body-sm c-2">Quatre étapes pour découvrir l’approche de Hors-Champ.</p>
+        <p className="t-body-sm c-2">Deux minutes pour comprendre ce qu’on fait ici.</p>
       </div>
       <ButtonLink href="/bienvenue" variant="primary" className={styles.start}>
         Commencer

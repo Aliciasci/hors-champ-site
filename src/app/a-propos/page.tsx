@@ -10,32 +10,32 @@ import { pageMetadata } from '@/lib/seo';
 import styles from './a-propos.module.css';
 
 export const metadata = pageMetadata({
-  title: 'À propos et principes éditoriaux',
+  title: 'Qui sommes-nous',
   description:
-    'Aucun fait inventé, aucun jugement moral, transparence éditoriale, images libres de droits, aucune collecte : les principes de Hors-Champ.',
+    'Comment Hors-Champ choisit ses portraits, vérifie ses sources et traite vos données. Notre charte, sans détour.',
   path: '/a-propos',
 });
 
 const PRINCIPLES = [
   {
-    title: 'Aucun fait inventé',
-    text: 'Chaque affirmation factuelle d’une fiche est appuyée par une source citée mot pour mot. Pas de fausse statistique, de fausse citation ni de fausse étude.',
+    title: 'On n’invente rien',
+    text: 'Chaque fait avancé dans une fiche renvoie à une source, citée mot pour mot. Si on ne peut pas le prouver, on ne l’écrit pas.',
   },
   {
-    title: 'Aucun jugement moral',
-    text: 'On évalue un raisonnement, jamais la personne. Aucune note, aucun score, jamais de « mauvaise réponse ».',
+    title: 'On ne vous note pas',
+    text: 'Dans les contrechamps, on discute un raisonnement, pas la personne qui le tient. Il n’y a ni score ni « mauvaise réponse ».',
   },
   {
-    title: 'Transparence éditoriale',
-    text: 'Chaque contenu affiche son statut. Un exemple ne passe jamais pour une analyse documentée.',
+    title: 'On dit où on en est',
+    text: 'Chaque contenu affiche son statut éditorial. Un texte encore en relecture le dit clairement.',
   },
   {
-    title: 'Images libres de droits uniquement',
-    text: 'Œuvres et photographies du domaine public ou sous licence libre, créditées, avec un lien vers la page qui atteste la licence.',
+    title: 'Des images qu’on a le droit de montrer',
+    text: 'Toutes les œuvres et photos sont dans le domaine public ou sous licence libre. Chacune est créditée, avec un lien vers la page qui le prouve.',
   },
   {
-    title: 'Aucune collecte',
-    text: 'Pas de compte, pas de serveur, pas de mesure d’audience, pas de cookie, pas de traceur. Vos découvertes et votre progression restent dans ce navigateur.',
+    title: 'On ne sait rien de vous',
+    text: 'Le site n’a ni compte, ni cookie, ni outil de mesure d’audience. Ce que vous lisez et enregistrez reste dans votre navigateur.',
   },
 ];
 
@@ -50,19 +50,19 @@ export default function AboutPage() {
   return (
     <Container width="reading">
       <header className={styles.header}>
-        <p className="t-overline c-accent">À propos</p>
-        <h1 className="t-title1">Ce que l’on s’engage à faire, et à ne pas faire.</h1>
+        <p className="t-overline c-accent">Qui sommes-nous</p>
+        <h1 className="t-title1">Notre charte, noir sur blanc.</h1>
         <p className="t-body-lg c-2">
-          Hors-Champ fait découvrir des femmes artistes et scientifiques, leurs œuvres, leurs
-          inventions, les événements, les droits conquis et les idées qui les relient. Puis des
-          contrechamps mettent à l’épreuve l’esprit critique face aux mécanismes du sexisme, avec la
-          nuance : ce que l’on peut conclure, et ce que l’on ne peut pas.
+          Hors-Champ raconte des femmes que les manuels ont oubliées. Des peintres, des
+          mathématiciennes, des militantes, et les droits qu’elles ont fini par obtenir. À côté, des
+          contrechamps vous mettent face à des situations ordinaires pour apprendre à y repérer le
+          sexisme. Sans caricature, et en disant aussi ce qu’on ne peut pas conclure.
         </p>
       </header>
 
       <section className={styles.section} aria-labelledby="principes">
         <h2 id="principes" className="t-title2">
-          Principes non négociables
+          Cinq engagements
         </h2>
         <ol className={styles.principles}>
           {PRINCIPLES.map((principle, index) => (
@@ -81,7 +81,7 @@ export default function AboutPage() {
 
       <section className={styles.section} aria-labelledby="statuts">
         <h2 id="statuts" className="t-title2">
-          Les statuts éditoriaux
+          Où en est chaque texte
         </h2>
         <dl className={styles.statuses}>
           {EDITORIAL_STATUSES.map((status) => (
@@ -92,42 +92,41 @@ export default function AboutPage() {
           ))}
         </dl>
         <p className="t-body-sm c-2">
-          Un contenu « Vérifié » porte la date de sa relecture. Les exemples de développement ne
-          sont pas publiés sur le site en production, et ne sont jamais indexés par les moteurs de
-          recherche.
+          Un contenu « Vérifié » porte la date de sa dernière relecture. Les exemples de
+          développement ne sont jamais publiés en ligne, ni indexés par les moteurs de recherche.
         </p>
       </section>
 
       <section className={styles.section} aria-labelledby="methode">
         <h2 id="methode" className="t-title2">
-          Méthode de sourçage
+          Comment on vérifie
         </h2>
         <ul className={styles.list}>
           <li>
-            Chaque fiche factuelle cite au moins une source ; chaque source a une adresse https, une
-            date de consultation et un extrait cité mot pour mot ou une note.
+            Chaque fiche cite au moins une source. Pour chacune, on garde l’adresse, la date de
+            consultation et l’extrait exact sur lequel on s’appuie.
           </li>
           <li>
-            Les résumés reprennent des faits présents dans les extraits cités ; les dates sont
-            recoupées avec Wikidata.
+            Les résumés ne disent rien que les extraits ne disent déjà. Les dates sont recoupées
+            avec Wikidata.
           </li>
           <li>
-            Une femme n’est reliée à une conquête de droit que si une source décrit son rôle ;
-            aucune conquête collective n’est présentée comme l’œuvre d’une seule personne.
+            Une femme n’est associée à un droit que si une source décrit son rôle. Une victoire
+            collective n’est jamais attribuée à une seule personne.
           </li>
           <li>
-            Pour les plus jeunes, difficultés et aides ne sont mentionnées que si elles sont
-            documentées ; les situations des activités sont des exemples pédagogiques, signalés
-            comme tels.
+            Dans les pages pour les plus jeunes, on ne parle des obstacles et des soutiens d’une
+            femme que s’ils sont documentés. Les activités mettent en scène des situations
+            inventées, et le disent.
           </li>
           <li>
-            Le site refuse de se construire si un contenu enfreint ces règles (source manquante,
-            lien cassé, doublon).
+            Ces règles sont vérifiées automatiquement. S’il manque une source, si un lien est cassé
+            ou si une fiche est en double, le site ne se publie pas.
           </li>
         </ul>
         <p className="t-body-sm c-2">
-          {culture.length} fiches, {youthItems.length} éléments jeunesse et {sourceCount} extraits
-          ou notes de sources à ce jour. Les illustrations sont détaillées dans les{' '}
+          À ce jour, {culture.length} fiches, {youthItems.length} contenus jeunesse et {sourceCount}{' '}
+          extraits de sources. L’origine de chaque image est indiquée dans les{' '}
           <Link href="/credits" className="link">
             crédits
           </Link>
@@ -140,9 +139,9 @@ export default function AboutPage() {
           Vos données
         </h2>
         <p className="t-body c-2">
-          Le site n’envoie rien : pas de compte, pas de cookie, pas de mesure d’audience.
-          Préférences, signets et progression sont enregistrés dans le stockage local de votre
-          navigateur. Vous pouvez les exporter, les importer ou les effacer depuis le{' '}
+          Rien ne quitte votre ordinateur. Vos préférences, vos signets et votre progression sont
+          enregistrés dans votre navigateur, et nulle part ailleurs. Vous pouvez les exporter, les
+          importer ou les effacer depuis votre{' '}
           <Link href="/profil#donnees" className="link">
             profil
           </Link>

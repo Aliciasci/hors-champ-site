@@ -42,19 +42,19 @@ const EMPTY_COPY: Record<
   { title: string; description: string; icon: typeof Bookmark }
 > = {
   saved: {
-    title: 'Votre bibliothèque attend ses premiers titres',
-    description: 'Utilisez le signet d’un contrechamp pour le retrouver ici.',
+    title: 'Rien de côté pour l’instant',
+    description: 'Touchez le signet d’un contrechamp pour le retrouver ici.',
     icon: Bookmark,
   },
   'in-progress': {
     title: 'Aucun contrechamp en cours',
     description:
-      'Quand vous quittez un contrechamp en route, il vous attend ici, à l’étape où vous l’avez laissé.',
+      'Si vous quittez un contrechamp en cours de route, vous le reprendrez ici, là où vous l’avez laissé.',
     icon: CircleDot,
   },
   completed: {
     title: 'Rien de terminé pour le moment',
-    description: 'Les contrechamps terminés restent consultables ici, avec leur analyse.',
+    description: 'Les contrechamps que vous terminez restent ici, avec leur analyse.',
     icon: CircleCheck,
   },
 };
@@ -168,9 +168,9 @@ function LibraryContent({
         <EmptyState
           testId="library-empty-discoveries"
           icon={Bookmark}
-          title="Votre bibliothèque culturelle est vide"
-          description="Enregistrez une fiche — une artiste, une œuvre, un événement — pour la retrouver ici et construire votre propre collection."
-          actions={<ButtonLink href="/">Explorer la culture</ButtonLink>}
+          title="Aucune fiche de côté"
+          description="Une artiste, une œuvre, une date vous a marqué ? Enregistrez la fiche, elle vous attendra ici."
+          actions={<ButtonLink href="/">Retour à la une</ButtonLink>}
         />
       ) : (
         <>

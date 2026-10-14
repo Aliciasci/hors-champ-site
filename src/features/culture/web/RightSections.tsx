@@ -138,8 +138,8 @@ export function RightDetails({ entity, all }: { entity: CultureEntity; all: Cult
               testIdPrefix="right-portrait"
             />
             <p className="t-caption c-2 measure">
-              Chacune a agi à un moment précis, aux côtés d’autres actrices et acteurs nommés dans
-              les étapes. Leur rôle est décrit tel que le rapportent les sources.
+              Aucune n’a gagné seule. Chacune a pesé à un moment précis, avec d’autres, nommés dans
+              les étapes ci-dessus. Leur rôle est décrit tel que les sources le rapportent.
             </p>
             <ul>
               {women.map(({ entity: contributor, links }) => (
@@ -149,9 +149,8 @@ export function RightDetails({ entity, all }: { entity: CultureEntity; all: Cult
           </>
         ) : (
           <p className="t-body c-2 measure" data-testid="right-no-women">
-            Aucune contribution individuelle de femme n’est encore documentée pour ce droit dans nos
-            sources. Les personnes et institutions qu’elles nomment figurent dans les étapes
-            ci-dessus.
+            Nos sources ne décrivent pas encore le rôle d’une femme en particulier dans ce combat.
+            Les personnes et les institutions qu’elles citent figurent dans les étapes ci-dessus.
           </p>
         )}
       </section>

@@ -15,7 +15,7 @@ import { fontVariables } from './fonts';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Elles ont peint, calculé, découvert`,
+    default: `${SITE_NAME} — Celles que l’histoire a laissées hors champ`,
     template: `%s — ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,

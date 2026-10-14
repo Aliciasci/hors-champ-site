@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Bibliothèque',
-  description: 'Vos découvertes et vos contrechamps enregistrés, gardés dans ce navigateur.',
+  description: 'Les fiches et les contrechamps que vous avez mis de côté.',
   path: '/bibliotheque',
   noindex: true,
 });

@@ -14,7 +14,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Toute la collection',
   description:
-    'Toutes les fiches de Hors-Champ : femmes, conquêtes, œuvres, inventions, mouvements, événements et idées, reliées entre elles et sourcées.',
+    'Les femmes, les œuvres, les inventions, les droits et les idées de Hors-Champ. Chaque fiche est sourcée et renvoie aux autres.',
   path: '/collection',
 });
 
@@ -49,6 +49,10 @@ export default function Page() {
       <header style={{ display: 'grid', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
         <p className="t-overline c-accent">La collection</p>
         <h1 className="t-title1">Toutes les fiches</h1>
+        <p className="t-body-lg c-2 measure">
+          Portraits, œuvres, inventions, lois, mouvements. Commencez où vous voulez, chaque fiche
+          mène aux autres.
+        </p>
         <ExploredCount ids={culture.map((e) => e.id)} total={culture.length} />
       </header>
       <div style={{ display: 'grid', gap: 'var(--space-xl)' }}>

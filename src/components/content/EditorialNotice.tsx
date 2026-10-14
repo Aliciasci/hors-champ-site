@@ -7,10 +7,10 @@ import styles from './EditorialNotice.module.css';
 
 export const STATUS_DESCRIPTIONS: Record<EditorialStatus, string> = {
   'dev-example':
-    'Situation fictive rédigée pour le développement de l’application. Ce contenu n’a pas été relu par l’équipe éditoriale et ne constitue pas une analyse documentée.',
-  draft: 'Contenu en cours de rédaction, susceptible d’évoluer.',
-  'in-review': 'Contenu en cours de relecture éditoriale.',
-  verified: 'Contenu relu par l’équipe éditoriale, sources vérifiées.',
+    'Situation inventée pour tester le site. La rédaction ne l’a pas relue, ce n’est pas une analyse documentée.',
+  draft: 'En cours d’écriture. Ce texte peut encore changer.',
+  'in-review': 'En relecture à la rédaction.',
+  verified: 'Relu par la rédaction, sources vérifiées.',
 };
 
 export function statusTitle(status: EditorialStatus, reviewedAt: string | null) {

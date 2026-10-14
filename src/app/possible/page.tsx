@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Tout est possible',
   description:
-    'Métiers, portraits de femmes réelles et activités pour les 6–14 ans : le monde est plus grand que tu ne l’imagines.',
+    'Pour les 6-14 ans. Des métiers, des femmes qui les exercent pour de vrai, et des activités pour essayer.',
   path: '/possible',
 });
 
@@ -57,13 +57,18 @@ export default function PossiblePage() {
     <Container>
       <header className={styles.header}>
         <p className="t-overline c-accent">Tout est possible · 6 – 14 ans</p>
-        <h1 className="t-hero">Le monde est plus grand que tu ne l’imagines.</h1>
-        <p className="t-body-lg c-2">Rien à réussir, tout à découvrir.</p>
+        <h1 className="t-hero">
+          Astronaute, ingénieure, cheffe d’orchestre. Et pourquoi pas toi ?
+        </h1>
+        <p className="t-body-lg c-2">
+          Des métiers, des femmes qui les font pour de vrai, et des activités pour essayer. Ici, il
+          n’y a rien à réussir.
+        </p>
       </header>
       <PossibleBrowser tiles={tiles} lives={lives} />
       <p className="t-caption c-muted measure">
-        Les portraits et les métiers s’appuient sur des sources citées sur chaque fiche. Les
-        activités sont des exemples pédagogiques : les prénoms et les situations y sont inventés.
+        Les portraits et les métiers s’appuient sur des sources, citées sur chaque fiche. Dans les
+        activités, les prénoms et les situations sont inventés.
       </p>
     </Container>
   );

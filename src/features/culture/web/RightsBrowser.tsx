@@ -186,9 +186,9 @@ function RightsView({
         <EmptyState
           testId="rights-no-results"
           icon={SearchX}
-          kicker="Aucun résultat"
-          title="Rien ne correspond… pour l’instant"
-          description="Aucune conquête documentée ne combine ces critères. Retirez un filtre ou essayez un autre mot."
+          kicker="Recherche"
+          title="Aucun résultat"
+          description="Aucun droit ne correspond à ces critères. Retirez un filtre ou essayez un autre mot."
           actions={<Button onClick={reset}>Tout réinitialiser</Button>}
         />
       ) : (
@@ -211,7 +211,7 @@ function RightsView({
                 </ul>
               ) : (
                 <p className="t-body c-muted" data-testid={`rights-empty-${category}`}>
-                  À documenter : aucune conquête n’est encore rédigée et sourcée dans cette famille.
+                  Pas encore de fiche dans cette famille. Elle est en cours d’écriture.
                 </p>
               )}
             </section>

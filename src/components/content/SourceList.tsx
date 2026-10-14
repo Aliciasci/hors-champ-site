@@ -8,7 +8,7 @@ import styles from './SourceList.module.css';
 /** Sources vérifiables : titre, éditeur, extrait cité mot pour mot, note, date de consultation. */
 export function SourceList({
   sources,
-  emptyMessage = 'Aucune source n’est encore associée à ce contenu. Il ne doit pas être considéré comme une analyse documentée.',
+  emptyMessage = 'Ce contenu n’a pas encore de source. Ne le lisez pas comme une analyse documentée.',
 }: {
   sources: Source[];
   emptyMessage?: string;

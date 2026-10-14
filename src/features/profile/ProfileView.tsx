@@ -126,8 +126,8 @@ export function ProfileView({
         <p className={styles.note}>
           <Info size={18} aria-hidden="true" />
           <span className="t-body-sm c-2">
-            La progression mesure ce que vous avez exploré. Vos réponses ne sont ni notées, ni
-            comparées, et restent dans ce navigateur.
+            La progression compte ce que vous avez lu. Vos réponses ne sont ni notées ni comparées,
+            et elles ne quittent pas ce navigateur.
           </span>
         </p>
       </section>
@@ -302,8 +302,8 @@ function LocalData() {
         Données locales
       </h2>
       <p className="t-body-sm c-2">
-        Hors-Champ fonctionne sans compte. Tout est stocké dans ce navigateur uniquement : vous
-        pouvez l’effacer à tout moment, ou l’exporter pour le reprendre ailleurs.
+        Hors-Champ n’a pas de compte. Tout est enregistré dans ce navigateur, et seulement là. Vous
+        pouvez l’effacer quand vous voulez, ou l’exporter pour le retrouver ailleurs.
       </p>
       <div className={styles.dataActions}>
         <Button

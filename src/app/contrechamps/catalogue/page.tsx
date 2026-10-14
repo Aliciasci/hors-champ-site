@@ -6,8 +6,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Catalogue des contrechamps',
-  description:
-    'Tous les contrechamps : rechercher un sujet, filtrer par thème, par format ou par durée.',
+  description: 'Tous les contrechamps publiés, à trier par thème, par format ou par durée.',
   path: '/contrechamps/catalogue',
 });
 
@@ -22,7 +21,7 @@ export default function CataloguePage() {
       />
       <header style={{ display: 'grid', gap: 'var(--space-sm)', marginBottom: 'var(--space-xl)' }}>
         <p className="t-overline c-accent">Contrechamps</p>
-        <h1 className="t-title1">Tout le catalogue</h1>
+        <h1 className="t-title1">Tous les contrechamps</h1>
       </header>
       <CatalogueIsland experiences={experiences} categories={categories} />
     </Container>

@@ -36,7 +36,7 @@ export function ResumeBanner({ experiences }: { experiences: Experience[] }) {
         <Play size={20} fill="currentColor" />
       </span>
       <span className={styles.resumeText}>
-        <span className="t-overline">Reprendre là où vous en étiez</span>
+        <span className="t-overline">Reprendre où vous en étiez</span>
         <span className="t-title3">{experience.title}</span>
       </span>
       <ArrowRight size={22} aria-hidden="true" />
@@ -52,7 +52,7 @@ export function FeaturedExperience({ experiences, categories }: Props) {
   if (!featured) return null;
   return (
     <section className={styles.section} aria-labelledby="featured-title">
-      <SectionHeader kicker="À découvrir" title="Le contrechamp du moment" id="featured-title" />
+      <SectionHeader kicker="À la une" title="Le contrechamp du moment" id="featured-title" />
       <div className={styles.featured}>
         <ContentCard
           variant="feature"
@@ -88,7 +88,7 @@ export function RecentExperiences({ experiences, categories }: Props) {
           icon={Compass}
           headingLevel={3}
           title="Rien de commencé pour l’instant"
-          description="Les contrechamps que vous ouvrez apparaîtront ici, prêts à être repris."
+          description="Les contrechamps que vous ouvrez s’afficheront ici, pour les reprendre plus tard."
           actions={
             featured ? (
               <ButtonLink href={detailHref(featured.id)} variant="secondary">

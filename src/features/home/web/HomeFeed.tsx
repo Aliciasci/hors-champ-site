@@ -117,8 +117,8 @@ function Feed({ data, section }: { data: HomeData; section: FeedSection }) {
       <div className={styles.practice} data-testid="discover-practice">
         <div className={styles.practiceHead}>
           <div>
-            <p className="t-overline c-accent">Mettre à l’épreuve</p>
-            <h2 className="t-title2">Exercer son esprit critique</h2>
+            <p className="t-overline c-accent">Contrechamps</p>
+            <h2 className="t-title2">Et vous, vous l’auriez vu ?</h2>
           </div>
           <Link href="/contrechamps" className={styles.more}>
             Tout voir
@@ -145,7 +145,9 @@ function Feed({ data, section }: { data: HomeData; section: FeedSection }) {
   const possible = (
     <Link href="/possible" className={styles.possible} data-testid="discover-possible">
       <span className="t-overline c-accent">Tout est possible · 6 – 14 ans</span>
-      <span className="t-title2">Le monde est plus grand que tu ne l’imagines.</span>
+      <span className="t-title2">
+        Astronaute, ingénieure, cheffe d’orchestre. Et pourquoi pas toi ?
+      </span>
       <span className={styles.moreRow}>
         Explorer
         <ArrowRight size={18} aria-hidden="true" />
@@ -218,7 +220,7 @@ function FeedList({
           <span className="t-overline c-accent">Derrière chaque droit</span>
           <span className={styles.moreRow}>
             <span className="t-title3">
-              Toutes les conquêtes, par famille, avec recherche et filtres
+              Voter, travailler, disposer de son corps. Qui s’est battue pour quoi
             </span>
             <ArrowRight size={20} aria-hidden="true" className="c-primary" />
           </span>

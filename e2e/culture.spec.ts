@@ -7,7 +7,7 @@ test('accueil → fiche → lien relié → enregistrer → bibliothèque', asyn
   await seedState(page);
   await open(page, '/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'Elles ont peint, calculé, découvert.',
+    'L’histoire les a laissées hors champ.',
   );
 
   await page.getByTestId('discover-feed').getByRole('link').first().click();

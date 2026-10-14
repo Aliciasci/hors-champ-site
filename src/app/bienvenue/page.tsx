@@ -4,8 +4,7 @@ import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Bienvenue',
-  description:
-    'Découvrir, suivre les liens, mettre à l’épreuve : l’approche de Hors-Champ en quatre étapes.',
+  description: 'Ce que Hors-Champ raconte, et comment s’y retrouver, en deux minutes.',
   path: '/bienvenue',
   noindex: true,
 });

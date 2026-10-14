@@ -20,16 +20,16 @@ const STEPS = ['promesse', 'approche', 'themes', 'niveau'] as const;
 
 const PRINCIPLES = [
   {
-    title: 'Découvrir',
-    text: 'Des femmes artistes et scientifiques, leurs œuvres, leurs inventions, les événements et les idées qui les relient.',
+    title: 'Lire',
+    text: 'Des portraits de peintres, de chercheuses, de militantes. Leurs œuvres, leurs découvertes, les combats qu’elles ont menés.',
   },
   {
-    title: 'Suivre les liens',
-    text: 'Chaque fiche mène à d’autres : d’une peintre à son tableau, d’une invention à l’effet Matilda. Enregistrez vos découvertes.',
+    title: 'Tirer le fil',
+    text: 'Une fiche en appelle une autre. On passe d’une peintre à son tableau, d’une invention à l’effet Matilda. Gardez ce qui vous plaît.',
   },
   {
-    title: 'Mettre à l’épreuve',
-    text: 'Des contrechamps : de courtes situations à regarder sous un autre angle, pour exercer votre esprit critique, avec toujours la nuance : ce que l’on peut conclure, et ce que l’on ne peut pas.',
+    title: 'Changer d’angle',
+    text: 'Les contrechamps sont de courtes scènes du quotidien. Vous dites ce que vous y voyez, on en discute, y compris ce qu’on ne peut pas en conclure.',
   },
 ];
 
@@ -122,12 +122,11 @@ export function Onboarding({ categories }: { categories: Category[] }) {
             <>
               <p className="t-overline c-accent">Hors-Champ</p>
               <h1 ref={heading} tabIndex={-1} className="t-hero">
-                Elles ont peint, calculé, découvert.
+                L’histoire les a laissées hors champ.
               </h1>
               <p className="t-body-lg c-2 measure">
-                Partez à la rencontre de femmes artistes et scientifiques, de leurs œuvres et de
-                leurs inventions, puis aiguisez votre esprit critique face aux mécanismes du
-                sexisme.
+                Elles ont peint, calculé, découvert, et on a souvent oublié leur nom. Hors-Champ les
+                remet dans le cadre, et vous apprend à repérer ce qui les en avait sorties.
               </p>
             </>
           ) : null}
@@ -136,7 +135,7 @@ export function Onboarding({ categories }: { categories: Category[] }) {
             <>
               <p className="t-overline c-accent">L’approche</p>
               <h1 ref={heading} tabIndex={-1} className="t-title1">
-                Ici, pas de bonne élève ni de mauvaise réponse.
+                Ici, personne ne vous fait passer d’examen.
               </h1>
               <ol className={styles.principles}>
                 {PRINCIPLES.map((principle, index) => (
@@ -152,8 +151,8 @@ export function Onboarding({ categories }: { categories: Category[] }) {
                 ))}
               </ol>
               <p className="t-body-sm c-muted">
-                Aucune note n’est attribuée à vos opinions : la progression mesure seulement ce que
-                vous avez exploré.
+                Vos opinions ne sont jamais notées. La progression compte seulement ce que vous avez
+                lu.
               </p>
             </>
           ) : null}
@@ -165,8 +164,8 @@ export function Onboarding({ categories }: { categories: Category[] }) {
                 Quels thèmes vous intéressent ?
               </h1>
               <p className="t-body c-2">
-                Ils orienteront les contrechamps proposés. Vous pourrez changer d’avis dans votre
-                profil.
+                On vous proposera d’abord des contrechamps sur ces sujets. Vous pourrez changer
+                d’avis dans votre profil.
               </p>
               <ChipGroup legend="Thèmes favoris" hideLegend>
                 {categories.map((category) => (
@@ -205,9 +204,7 @@ export function Onboarding({ categories }: { categories: Category[] }) {
                   </label>
                 ))}
               </fieldset>
-              <p className="t-body-sm c-muted">
-                Sans choix, tous les contrechamps vous seront proposés.
-              </p>
+              <p className="t-body-sm c-muted">Pas de préférence ? On vous propose de tout.</p>
             </>
           ) : null}
         </div>
