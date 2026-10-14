@@ -1,0 +1,164 @@
+/*
+ * Trois hauteurs d'écran pour le récit ; la scène reste fixée pendant le défilement.
+ * Variables pilotées par le script : --zoom (élargissement du cadre), --light (la lumière sur
+ * la femme), --t0 / --t1 / --t2 (les trois textes).
+ */
+.intro {
+  --zoom: 0;
+  --light: 0;
+  --t0: 1;
+  --t1: 0;
+  --t2: 0;
+  position: relative;
+  height: 320vh;
+  background: #0f0e0c;
+  color: #f3eee5;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* La photo entière tient dans l'écran (proportions conservées, pas de recadrage). */
+.frame {
+  position: relative;
+  width: min(100vw, calc(100svh * var(--ratio)));
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+}
+
+.zoom {
+  position: absolute;
+  inset: 0;
+  transform-origin: var(--men-x) var(--men-y);
+  transform: scale(calc(2.6 - 1.6 * var(--zoom)));
+  will-change: transform;
+}
+
+.photo {
+  object-fit: cover;
+  filter: contrast(1.05);
+}
+
+/* Tout s'assombrit, sauf elle. */
+.shade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--woman-x) var(--woman-y),
+    transparent 0 6%,
+    rgb(15 14 12 / 0.82) 10%
+  );
+  opacity: var(--light);
+}
+
+.ring {
+  position: absolute;
+  left: var(--woman-x);
+  top: var(--woman-y);
+  width: 11%;
+  aspect-ratio: 1;
+  border: 3px solid #ff5a3c;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(calc(1.6 - 0.6 * var(--light)));
+  opacity: var(--light);
+}
+
+.texts {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 0 var(--gutter) max(var(--space-xxxl), 6vh);
+  display: grid;
+}
+
+.text {
+  grid-area: 1 / 1;
+  max-width: 26ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3.25rem);
+  line-height: 1.1;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.7);
+}
+
+.t0 {
+  opacity: var(--t0);
+}
+
+.t1 {
+  opacity: var(--t1);
+}
+
+.t2 {
+  opacity: var(--t2);
+}
+
+.big {
+  display: block;
+  font-size: 1.3em;
+}
+
+.name {
+  color: #ff7a5f;
+  font-style: var(--display-accent-style);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.hint {
+  position: absolute;
+  top: calc(var(--header-h) + var(--space-lg));
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--fs-overline);
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  opacity: calc(var(--t0) * 0.8);
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: var(--space-md) var(--gutter);
+  text-align: center;
+  color: #c9bfae;
+}
+
+.caption a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Sans animation : l'état final, d'emblée, sur une seule hauteur d'écran. */
+.intro[data-still='true'] {
+  --zoom: 1;
+  --light: 1;
+  --t0: 0;
+  --t1: 0;
+  --t2: 1;
+  height: auto;
+  padding-bottom: var(--space-xxxl);
+}
+
+.intro[data-still='true'] .stage {
+  position: relative;
+  height: auto;
+  min-height: 80svh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom,
+  .ring {
+    transition: none;
+  }
+}

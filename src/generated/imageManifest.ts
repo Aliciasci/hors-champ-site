@@ -48,6 +48,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 614,
     "height": 900
   },
+  "people/solvay-1927.jpg": {
+    "width": 3000,
+    "height": 2171
+  },
   "inventions/cliche-51.jpg": {
     "width": 900,
     "height": 677

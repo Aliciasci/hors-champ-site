@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { ContentCard } from '@/components/content/ContentCard';
+import { cultureHref } from '@/components/content/CultureCard';
 import { WelcomeBanner } from '@/components/layout/WelcomeBanner';
 import { Container } from '@/components/ui/Container';
 import { JsonLd } from '@/components/ui/JsonLd';
@@ -12,6 +13,13 @@ import { buildFeed, type FeedSection } from '@/features/home/homeSelectors';
 import { FeedLead, FeedRow } from '@/features/home/web/FeedItems';
 import { HomeFeed, type HomeData } from '@/features/home/web/HomeFeed';
 import { readingMinutes } from '@/lib/readingTime';
+import {
+  OPENING_FOCUS,
+  OPENING_PERSON_ID,
+  OPENING_PHOTO,
+  OPENING_SOURCES,
+} from '@/content/opening';
+import { HorsChampIntro } from '@/features/home/web/HorsChampIntro';
 import { pageMetadata } from '@/lib/seo';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import { PageMasthead } from '@/components/layout/PageMasthead';
@@ -78,28 +86,53 @@ export default function Home() {
     total: culture.length,
   };
 
+  const woman = culture.find((e) => e.id === OPENING_PERSON_ID);
+
   return (
-    <Container>
-      <JsonLd
-        data={{
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: SITE_NAME,
-          url: `${SITE_URL}/`,
-          inLanguage: 'fr',
-          description: SITE_DESCRIPTION,
-        }}
+    <>
+      <HorsChampIntro
+        photo={OPENING_PHOTO}
+        men={OPENING_FOCUS.men}
+        woman={OPENING_FOCUS.curie}
+        womanName={woman?.title ?? 'Marie Curie'}
+        womanHref={cultureHref(OPENING_PERSON_ID)}
+        caption={
+          <>
+            Photo : {OPENING_PHOTO.artist}, « {OPENING_PHOTO.title} », Bruxelles,{' '}
+            {OPENING_PHOTO.date}, {OPENING_PHOTO.license.toLowerCase()} (
+            <a href={OPENING_PHOTO.sourceUrl} target="_blank" rel="noopener noreferrer">
+              Wikimedia Commons
+            </a>
+            ). Faits :{' '}
+            <a href={OPENING_SOURCES[0]!.url} target="_blank" rel="noopener noreferrer">
+              Wikipédia, « Congrès Solvay »
+            </a>
+            .
+          </>
+        }
       />
-      <PageMasthead
-        kicker="Hors-Champ"
-        title="L’histoire les a laissées hors champ."
-        accent="On les remet dans le cadre."
-        centered
-      />
-      <Suspense fallback={<HomeFeed data={data} />}>
-        <HomeFeed data={data} withUrl />
-      </Suspense>
-      <WelcomeBanner />
-    </Container>
+      <Container>
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: SITE_NAME,
+            url: `${SITE_URL}/`,
+            inLanguage: 'fr',
+            description: SITE_DESCRIPTION,
+          }}
+        />
+        <PageMasthead
+          kicker="Hors-Champ"
+          title="L’histoire les a laissées hors champ."
+          accent="On les remet dans le cadre."
+          centered
+        />
+        <Suspense fallback={<HomeFeed data={data} />}>
+          <HomeFeed data={data} withUrl />
+        </Suspense>
+        <WelcomeBanner />
+      </Container>
+    </>
   );
 }
