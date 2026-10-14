@@ -50,3 +50,8 @@
   display: block;
   min-width: 0;
 }
+
+.lead[data-domain] .leadMedia {
+  padding: var(--space-sm);
+  background: var(--dom-soft);
+}

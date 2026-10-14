@@ -40,6 +40,16 @@
   --fb-open-soft: #232a4c;
   --fb-weak: #ff8b70;
   --fb-weak-soft: #3a1f17;
+
+  --dom-arts: #f08bb4;
+  --dom-arts-soft: #3a1d2a;
+  --dom-sciences: #9db0ff;
+  --dom-sciences-soft: #232a4c;
+  --dom-droits: #6fcf9b;
+  --dom-droits-soft: #15301f;
+  --day-ink: #e0b450;
+  --day-soft: #33280f;
+  --possible-soft: #3a2416;
 }
 
 [data-scheme='dark'][data-theme='revue'] {
@@ -76,6 +86,16 @@
   --fb-open-soft: #262b4d;
   --fb-weak: #ff9076;
   --fb-weak-soft: #3d2018;
+
+  --dom-arts: #f28fb8;
+  --dom-arts-soft: #3b1e2b;
+  --dom-sciences: #a3b2ff;
+  --dom-sciences-soft: #252a4a;
+  --dom-droits: #74cf9c;
+  --dom-droits-soft: #172f1e;
+  --day-ink: #e6b955;
+  --day-soft: #33290f;
+  --possible-soft: #3d2018;
 }
 
 /* Grain de papier, très léger : sombre le jour, clair la nuit. */

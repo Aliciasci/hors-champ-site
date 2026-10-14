@@ -45,6 +45,7 @@ export function FeedLead({
     <Link
       href={cultureHref(entity.id)}
       className={styles.lead}
+      data-domain={entity.domain}
       data-testid={`feed-lead-${entity.id}`}
     >
       <span className={styles.leadMedia}>
@@ -61,7 +62,7 @@ export function FeedLead({
         )}
       </span>
       <span className={styles.leadText}>
-        <span className="t-overline c-accent">{kicker(entity)}</span>
+        <span className="t-overline c-domain">{kicker(entity)}</span>
         <span className={`t-title1 ${styles.title}`}>{entity.hook ?? entity.title}</span>
         <span className={`t-deck ${styles.clamp3}`}>{entity.summary}</span>
         <span className="t-caption c-muted">

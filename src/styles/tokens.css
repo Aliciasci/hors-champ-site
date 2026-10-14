@@ -43,6 +43,17 @@
   --fb-weak: #a12f16;
   --fb-weak-soft: #f2ddd5;
 
+  /* Touches de couleur : une encre par rubrique, des fonds pâles pour les encarts (web). */
+  --dom-arts: #9b2c5a;
+  --dom-arts-soft: #f3dde6;
+  --dom-sciences: #1e3aa8;
+  --dom-sciences-soft: #dfe3f3;
+  --dom-droits: #1f6a4a;
+  --dom-droits-soft: #d9eadf;
+  --day-ink: #7a5200;
+  --day-soft: #f6e8c5;
+  --possible-soft: #fbe3c8;
+
   /* Polices (variables posées par next/font sur <html>). */
   --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   --font-body: var(--font-plex-sans), 'IBM Plex Sans', system-ui, sans-serif;
@@ -151,6 +162,16 @@
   --fb-open-soft: #dcddeb;
   --fb-weak: #b3311a;
   --fb-weak-soft: #fcd3c3;
+
+  --dom-arts: #952a59;
+  --dom-arts-soft: #f6d6df;
+  --dom-sciences: #2b45c9;
+  --dom-sciences-soft: #dcddeb;
+  --dom-droits: #1c6440;
+  --dom-droits-soft: #dce6c8;
+  --day-ink: #7e5200;
+  --day-soft: #f3dfa6;
+  --possible-soft: #fbe3c2;
 
   --font-display: var(--font-young-serif), 'Young Serif', Georgia, serif;
   --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;

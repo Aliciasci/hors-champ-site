@@ -28,9 +28,14 @@ export function StoryRow({
   const dek = entity.hook ? entity.summary : (entity.subtitle ?? entity.summary);
   const meta = [entity.period?.label, minutes ? `${minutes} min` : null].filter(Boolean);
   return (
-    <Link href={cultureHref(entity.id)} className={styles.row} data-testid={testId}>
+    <Link
+      href={cultureHref(entity.id)}
+      className={styles.row}
+      data-domain={entity.domain}
+      data-testid={testId}
+    >
       <span className={styles.text}>
-        {kicker ? <span className="t-overline c-accent">{kicker}</span> : null}
+        {kicker ? <span className="t-overline c-domain">{kicker}</span> : null}
         <span className={`t-title3 ${styles.title}`}>{title}</span>
         <span className={`t-body-sm c-2 ${styles.dek}`}>{dek}</span>
         <span className={styles.metaRow}>
@@ -43,7 +48,9 @@ export function StoryRow({
           <SavedMark entityId={entity.id} size={14} />
         </span>
       </span>
-      <CultureThumb entity={entity} size={96} />
+      <span className={styles.thumbFrame}>
+        <CultureThumb entity={entity} size={96} />
+      </span>
     </Link>
   );
 }

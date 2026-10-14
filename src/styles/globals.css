@@ -212,6 +212,36 @@ a {
   color: var(--accent-ink);
 }
 
+/* Rubrique d'un élément (data-domain) : son encre et son fond pâle. */
+[data-domain='arts'] {
+  --dom: var(--dom-arts);
+  --dom-soft: var(--dom-arts-soft);
+}
+[data-domain='sciences'] {
+  --dom: var(--dom-sciences);
+  --dom-soft: var(--dom-sciences-soft);
+}
+[data-domain='droits'] {
+  --dom: var(--dom-droits);
+  --dom-soft: var(--dom-droits-soft);
+}
+
+/* Surtitre à la couleur de la rubrique, précédé d'un point. Sans rubrique : l'accent habituel. */
+.c-domain {
+  color: var(--dom, var(--accent-ink));
+}
+[data-domain] .c-domain::before,
+.dot-domain[data-domain]::before {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: var(--dom);
+  vertical-align: 0.05em;
+}
+
 .measure {
   max-width: var(--measure);
 }

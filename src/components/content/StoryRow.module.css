@@ -58,3 +58,14 @@
   align-items: center;
   gap: var(--space-sm);
 }
+
+/* Vignette posée sur le fond pâle de sa rubrique. */
+.thumbFrame {
+  display: block;
+  flex-shrink: 0;
+  padding: 6px;
+}
+
+.row[data-domain] .thumbFrame {
+  background: var(--dom-soft);
+}

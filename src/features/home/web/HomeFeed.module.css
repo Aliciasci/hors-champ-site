@@ -52,6 +52,11 @@
   border-bottom-color: var(--primary);
 }
 
+/* Onglet de rubrique actif : souligné à sa couleur. */
+.tabOn[data-domain] {
+  border-bottom-color: var(--dom);
+}
+
 .tabOn:hover {
   text-decoration: none;
 }
@@ -127,7 +132,7 @@
   gap: var(--space-sm);
   padding: var(--space-lg);
   margin-bottom: var(--space-lg);
-  background: var(--surface-accent-soft);
+  background: var(--possible-soft);
   border: var(--border-regular) solid var(--border-strong);
   border-radius: var(--radius-card);
 }

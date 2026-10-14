@@ -12,7 +12,7 @@ export function WomanOfTheDayCard({ person }: { person: CultureEntity }) {
     <Link href={cultureHref(person.id)} className={styles.card}>
       <CultureThumb entity={person} size={88} />
       <span className={styles.text}>
-        <span className="t-overline c-accent">Elle du jour</span>
+        <span className={`t-overline ${styles.kicker}`}>Elle du jour</span>
         <span className={`t-title3 ${styles.hook}`}>{person.hook ?? person.title}</span>
         <span className="t-caption c-2">
           <strong className={styles.name}>{person.title}</strong>

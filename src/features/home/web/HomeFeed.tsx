@@ -70,7 +70,8 @@ function SectionTabs({ value }: { value: FeedSection }) {
                 href={section.param ? `/?rubrique=${section.param}` : '/'}
                 scroll={false}
                 aria-current={selected ? 'page' : undefined}
-                className={`${styles.tab} ${selected ? styles.tabOn : ''}`}
+                className={`${styles.tab} ${selected ? styles.tabOn : ''} dot-domain`}
+                data-domain={section.param ?? undefined}
                 data-testid={`discover-tab-${section.id}`}
               >
                 {section.label}
