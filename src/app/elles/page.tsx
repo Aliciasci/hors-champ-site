@@ -3,7 +3,14 @@ import { Suspense } from 'react';
 import { PageMasthead } from '@/components/layout/PageMasthead';
 import { Container } from '@/components/ui/Container';
 import { getCatalog } from '@/content/catalog';
-import { THEME_SHORT_LABELS, WallFeature, WallTile } from '@/features/portraits/web/Wall';
+import { WORLD_COUNTRIES } from '@/content/world';
+import { relatedEntities } from '@/features/culture/cultureGraph';
+import {
+  MapPersonRow,
+  THEME_SHORT_LABELS,
+  WallFeature,
+  WallTile,
+} from '@/features/portraits/web/Wall';
 import { WallBrowser, type WallTheme } from '@/features/portraits/web/WallBrowser';
 import { pageMetadata } from '@/lib/seo';
 import type { CultureEntity, PortraitThemeId } from '@/types';
@@ -19,7 +26,7 @@ export const metadata = pageMetadata({
 const pickFeatured = (people: CultureEntity[]) => people.find((p) => p.image) ?? people[0];
 
 export default function EllesPage() {
-  const { themes } = getCatalog();
+  const { themes, culture } = getCatalog();
   const withPeople = themes.filter((t) => t.people.length > 0);
   const upcoming = themes.filter((t) => t.people.length === 0);
 
@@ -70,23 +77,45 @@ export default function EllesPage() {
     features[`${theme.id}:${person.id}`] = <WallFeature person={person} theme={theme.id} />;
   }
 
+  // Ses œuvres, découvertes et combats présents dans le catalogue, pour la carte.
+  const RELATED_KINDS = new Set(['work', 'science', 'right', 'law']);
+  const mapRows = Object.fromEntries(
+    ordered.map((p) => [
+      p.id,
+      <MapPersonRow
+        key={p.id}
+        person={p}
+        related={relatedEntities(culture, p.id)
+          .filter((r) => RELATED_KINDS.has(r.entity.kind))
+          .slice(0, 3)
+          .map((r) => ({ id: r.entity.id, title: r.entity.hook ?? r.entity.title }))}
+      />,
+    ]),
+  );
+
+  const masthead = (
+    <PageMasthead
+      kicker="Elles"
+      tone="arts"
+      title="Ce qu’elles ont changé."
+      accent="Et ce qu’on a oublié."
+      dek={`${ordered.length} visages, du XVIᵉ siècle à aujourd’hui. Retenez-en un, la suite vient toute seule.`}
+    />
+  );
+
   const props = {
     personIds: ordered.map((p) => p.id),
     themes: wallThemes,
     featuredId: featuredAll?.id ?? '',
     tiles,
     features,
+    masthead,
+    countries: WORLD_COUNTRIES,
+    mapRows,
   };
 
   return (
     <Container>
-      <PageMasthead
-        kicker="Elles"
-        tone="arts"
-        title="Ce qu’elles ont changé."
-        accent="Et ce qu’on a oublié."
-        dek={`${ordered.length} visages, du XVIᵉ siècle à aujourd’hui. Retenez-en un, la suite vient toute seule.`}
-      />
       <Suspense fallback={<WallBrowser {...props} />}>
         <WallBrowser {...props} withUrl />
       </Suspense>

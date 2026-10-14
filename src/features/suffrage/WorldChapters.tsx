@@ -2,6 +2,8 @@
 
 import { useRef, type ReactNode } from 'react';
 
+import { ArrowRight } from '@/components/icons';
+import { MastheadRow } from '@/components/layout/MastheadRow';
 import { Segmented } from '@/components/ui/Chip';
 import type { GapRow, WorldCountry, WorldRight, WorldRightId } from '@/content/world';
 import { readOne, useQueryState } from '@/lib/useQueryState';
@@ -135,10 +137,9 @@ function View({
 
   return (
     <>
-      {/* Titre à gauche, mode à droite : le haut de page tient en peu de hauteur. */}
-      <div className={styles.head}>
-        {masthead}
-        <div className={styles.modes}>
+      <MastheadRow
+        masthead={masthead}
+        modes={
           <Segmented
             legend="Mode"
             name="mode"
@@ -147,8 +148,8 @@ function View({
             onChange={(m) => onMode?.(m)}
             testIdPrefix="world-mode"
           />
-        </div>
-      </div>
+        }
+      />
       <div ref={top} className={styles.picker}>
         <p className="t-overline c-2" aria-hidden="true">
           Choisissez un droit
@@ -229,17 +230,57 @@ function Story({
         <GapPoster copy={right.gap} rows={gaps[right.id]} />
       </section>
 
-      <div className={styles.next}>
-        <p className="t-overline c-2">Un autre droit</p>
+      <NextChapter rights={rights} index={index} onPick={(id) => onPick(id, true)} />
+    </>
+  );
+}
+
+/**
+ * Fin de chapitre : le suivant s'annonce en grand, à sa couleur (après le dernier, le premier).
+ * Un clic remonte au début du nouveau chapitre, dont l'ouverture se révèle.
+ */
+function NextChapter({
+  rights,
+  index,
+  onPick,
+}: {
+  rights: WorldRight[];
+  index: number;
+  onPick: (id: WorldRightId) => void;
+}) {
+  const nextIndex = (index + 1) % rights.length;
+  const next = rights[nextIndex]!;
+  const current = rights[index]!;
+  return (
+    <nav className={styles.next} aria-label="Chapitres">
+      <button
+        type="button"
+        className={styles.nextChapter}
+        data-tone={RIGHT_TONES[next.id]}
+        onClick={() => onPick(next.id)}
+        data-testid="world-next-chapter"
+      >
+        <span className={styles.nextKicker}>
+          Chapitre suivant · {String(nextIndex + 1).padStart(2, '0')}
+        </span>
+        <span className={styles.nextTitle}>
+          {next.chapter.title} <span className={styles.nextAccent}>{next.chapter.accent}</span>
+        </span>
+        <ArrowRight className={styles.nextArrow} size={40} strokeWidth={1.5} aria-hidden="true" />
+      </button>
+      <div className={styles.others}>
+        <p className="t-overline c-2" aria-hidden="true">
+          Ou bien
+        </p>
         <RightPills
-          rights={rights}
-          current={right.id}
-          onPick={(id) => onPick(id, true)}
+          rights={rights.filter((r) => r.id !== next.id && r.id !== current.id)}
+          current={current.id}
+          onPick={onPick}
           name="droit-bas"
           testIdPrefix="world-right-bottom"
           legend="Un autre droit"
         />
       </div>
-    </>
+    </nav>
   );
 }

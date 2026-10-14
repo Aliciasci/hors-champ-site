@@ -93,3 +93,41 @@ export function WallFeature({ person, theme }: { person: CultureEntity; theme: P
     </Link>
   );
 }
+
+/** Une femme dans la liste d'un pays : visage, nom, accroche, et ses fiches liées. */
+export function MapPersonRow({
+  person,
+  related,
+}: {
+  person: CultureEntity;
+  /** Œuvres, découvertes et combats liés, dans le catalogue. */
+  related: { id: string; title: string }[];
+}) {
+  return (
+    <div className={styles.mapRow} data-domain={person.domain}>
+      <Link href={cultureHref(person.id)} className={styles.mapMain}>
+        <span className={styles.mapFace}>
+          <Face person={person} sizes="64px" />
+        </span>
+        <span className={styles.mapText}>
+          <span className={`t-title3 ${styles.name}`}>{person.title}</span>
+          {person.period ? <span className="t-caption c-muted">{person.period.label}</span> : null}
+          {person.hook ? <span className="t-body-sm c-2">{person.hook}</span> : null}
+        </span>
+      </Link>
+      {related.length > 0 ? (
+        <p className={`t-caption ${styles.mapRelated}`}>
+          <span className="c-muted">Voir aussi : </span>
+          {related.map((item, index) => (
+            <span key={item.id}>
+              {index > 0 ? ', ' : null}
+              <Link href={cultureHref(item.id)} className="link">
+                {item.title}
+              </Link>
+            </span>
+          ))}
+        </p>
+      ) : null}
+    </div>
+  );
+}

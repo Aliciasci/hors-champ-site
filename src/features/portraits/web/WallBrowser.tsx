@@ -4,11 +4,21 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { ArrowRight } from '@/components/icons';
-import { Chip, ChipGroup } from '@/components/ui/Chip';
+import { MastheadRow } from '@/components/layout/MastheadRow';
+import { Chip, ChipGroup, Segmented } from '@/components/ui/Chip';
+import type { WorldCountry } from '@/content/world';
 import { readOne, useQueryState } from '@/lib/useQueryState';
 import type { PortraitThemeId } from '@/types';
 
 import styles from './Wall.module.css';
+import { WomenMap } from './WomenMap';
+
+type View = 'mur' | 'carte';
+
+const VIEWS: { id: View; label: string }[] = [
+  { id: 'mur', label: 'Le mur' },
+  { id: 'carte', label: 'Sur la carte' },
+];
 
 export interface WallTheme {
   id: PortraitThemeId;
@@ -29,22 +39,37 @@ interface Props {
   /** Tuiles et portraits à la une, pré-rendus côté serveur. */
   tiles: Record<string, ReactNode>;
   features: Record<string, ReactNode>;
+  /** En-tête de la page, rendu côté serveur : le choix de la vue se place à sa droite. */
+  masthead: ReactNode;
+  /** Carte des pays : la grille, et la ligne de chaque femme, pré-rendue. */
+  countries: WorldCountry[];
+  mapRows: Record<string, ReactNode>;
   withUrl?: boolean;
 }
 
 export function WallBrowser(props: Props) {
-  return props.withUrl ? <WithUrl {...props} /> : <WallView {...props} theme={null} />;
+  return props.withUrl ? (
+    <WithUrl {...props} />
+  ) : (
+    <WallView {...props} theme={null} view="mur" country={null} />
+  );
 }
 
 function WithUrl(props: Props) {
   const { params, set } = useQueryState();
   const ids = props.themes.map((t) => t.id);
   const value = readOne<PortraitThemeId | 'all'>(params.get('theme'), [...ids, 'all'], 'all');
+  const view = readOne<View>(params.get('vue'), ['mur', 'carte'], 'mur');
+  const country = params.get('pays');
   return (
     <WallView
       {...props}
       theme={value === 'all' ? null : value}
       onTheme={(id) => set({ theme: id })}
+      view={view}
+      onView={(v) => set({ vue: v === 'mur' ? null : v, pays: null })}
+      country={country && /^[A-Z]{3}$/.test(country) ? country : null}
+      onCountry={(code) => set({ pays: code })}
     />
   );
 }
@@ -55,9 +80,23 @@ function WallView({
   featuredId,
   tiles,
   features,
+  masthead,
+  countries,
+  mapRows,
   theme,
   onTheme,
-}: Props & { theme: PortraitThemeId | null; onTheme?: (id: PortraitThemeId | null) => void }) {
+  view,
+  onView,
+  country,
+  onCountry,
+}: Props & {
+  theme: PortraitThemeId | null;
+  onTheme?: (id: PortraitThemeId | null) => void;
+  view: View;
+  onView?: (view: View) => void;
+  country: string | null;
+  onCountry?: (code: string | null) => void;
+}) {
   const active = themes.find((t) => t.id === theme) ?? null;
   const shownIds = active ? active.personIds : personIds;
   const featured = active ? active.featuredId : featuredId;
@@ -65,6 +104,19 @@ function WallView({
 
   return (
     <>
+      <MastheadRow
+        masthead={masthead}
+        modes={
+          <Segmented
+            legend="Vue"
+            name="vue"
+            options={VIEWS}
+            value={view}
+            onChange={(v) => onView?.(v)}
+            testIdPrefix="elles-view"
+          />
+        }
+      />
       <div className={styles.filters}>
         <ChipGroup legend="Thématique" hideLegend>
           <Chip
@@ -112,14 +164,24 @@ function WallView({
         </p>
       </div>
 
-      <ul className={styles.grid} data-testid="wall">
-        <li className={styles.featureCell}>{features[featureKey]}</li>
-        {shownIds
-          .filter((id) => id !== featured)
-          .map((id) => (
-            <li key={id}>{tiles[id]}</li>
-          ))}
-      </ul>
+      {view === 'carte' ? (
+        <WomenMap
+          personIds={shownIds}
+          countries={countries}
+          rows={mapRows}
+          selected={country}
+          onSelect={(code) => onCountry?.(code)}
+        />
+      ) : (
+        <ul className={styles.grid} data-testid="wall">
+          <li className={styles.featureCell}>{features[featureKey]}</li>
+          {shownIds
+            .filter((id) => id !== featured)
+            .map((id) => (
+              <li key={id}>{tiles[id]}</li>
+            ))}
+        </ul>
+      )}
     </>
   );
 }

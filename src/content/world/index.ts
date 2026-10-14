@@ -103,6 +103,8 @@ const EXTRA_COUNTRIES: WorldCountry[] = [
   { code: 'LSO', name: 'Lesotho', col: 13, row: 13 },
   { code: 'YEM', name: 'Yémen', col: 16, row: 9 },
   { code: 'VAT', name: 'Vatican', col: 11, row: 6 },
+  { code: 'LBR', name: 'Liberia', col: 9, row: 10 },
+  { code: 'KEN', name: 'Kenya', col: 14, row: 10 },
 ];
 
 export const WORLD_COUNTRIES: WorldCountry[] = [

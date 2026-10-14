@@ -164,3 +164,52 @@ test('ouverture : la dépasser en faisant défiler la retire sans déplacer le c
   const scroll = await page.evaluate(() => window.scrollY);
   expect(scroll).toBeLessThan(200);
 });
+
+test('Elles sur la carte : un pays, ses femmes, et la thématique qui filtre', async ({ page }) => {
+  await seedState(page);
+  await open(page, '/elles/');
+  await page.getByTestId('elles-view-carte').click({ force: true });
+  await expect(page).toHaveURL(/vue=carte/);
+  await expect(page.getByTestId('women-map')).toBeVisible();
+  await expect(page.getByTestId('wall')).toHaveCount(0);
+
+  // Au clavier comme à la souris : la liste des pays.
+  await page.getByTestId('women-country-POL').click({ force: true });
+  await expect(page).toHaveURL(/pays=POL/);
+  await expect(page.getByTestId('women-country-title')).toHaveText('Pologne');
+  await expect(page.getByTestId('women-row-person-marie-curie')).toBeVisible();
+
+  // La case du pays sur la carte.
+  await page.getByTestId('women-tile-PAK').click();
+  await expect(page.getByTestId('women-country-title')).toHaveText('Pakistan');
+  await expect(page.getByTestId('women-row-person-malala-yousafzai')).toBeVisible();
+  await expect(page.getByTestId('women-row-person-benazir-bhutto')).toBeVisible();
+
+  // La thématique filtre aussi la carte.
+  await page.getByTestId('women-country-back').click();
+  await page.getByTestId('elles-theme-oubliees').click({ force: true });
+  await expect(page.getByTestId('women-tile-PAK')).toHaveAttribute('data-count', '0');
+  await expect(page.getByTestId('women-tile-AUT')).not.toHaveAttribute('data-count', '0');
+
+  // Retour au mur.
+  await page.getByTestId('elles-view-mur').click({ force: true });
+  await expect(page.getByTestId('wall')).toBeVisible();
+  await expect(page).not.toHaveURL(/vue=/);
+});
+
+test('page du monde : le chapitre suivant enchaîne les droits, du dernier au premier', async ({
+  page,
+}) => {
+  await seedState(page);
+  await open(page, '/droits/monde/?droit=majorite');
+  await expect(page.getByTestId('chapter-majorite')).toBeVisible();
+  await expect(page.getByTestId('world-next-chapter')).toContainText('Avorter.');
+  await page.getByTestId('world-next-chapter').click();
+  await expect(page).toHaveURL(/droit=avortement/);
+  await expect(page.getByTestId('chapter-avortement')).toBeVisible();
+  // Après le dernier droit, on revient au premier.
+  await expect(page.getByTestId('world-next-chapter')).toContainText('Voter.');
+  await page.getByTestId('world-next-chapter').click();
+  await expect(page).not.toHaveURL(/droit=/);
+  await expect(page.getByTestId('chapter-vote')).toBeVisible();
+});

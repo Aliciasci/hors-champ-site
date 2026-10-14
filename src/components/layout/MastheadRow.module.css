@@ -1,0 +1,26 @@
+.head {
+  display: grid;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.head > :first-child {
+  margin-bottom: 0;
+}
+
+.modes {
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (min-width: 900px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--space-xl);
+  }
+
+  .modes {
+    width: 380px;
+  }
+}

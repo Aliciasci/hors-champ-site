@@ -1,0 +1,157 @@
+/* Carte à gauche, pays choisi à droite ; l'un sous l'autre sur petit écran. */
+.layout {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+    align-items: start;
+  }
+
+  .panel {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-lg));
+    max-height: calc(100vh - var(--header-h) - var(--space-xxl));
+    overflow-y: auto;
+  }
+}
+
+.mapCol {
+  display: grid;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+/* Même grille que les cartes des droits : 26 colonnes, une case par pays. */
+.map {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(26, minmax(0, 1fr));
+  gap: 2px;
+}
+
+@media (min-width: 900px) {
+  .map {
+    gap: 4px;
+  }
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  transition:
+    background-color var(--duration-base),
+    transform var(--duration-fast);
+}
+
+.empty {
+  border: 1px dotted var(--border);
+}
+
+.one {
+  background: var(--dom-soft);
+  color: var(--dom);
+  border: 1px solid var(--dom);
+  cursor: pointer;
+}
+
+.many {
+  background: var(--dom);
+  color: var(--on-primary);
+  cursor: pointer;
+}
+
+.one:hover,
+.many:hover {
+  transform: scale(1.12);
+}
+
+.on {
+  outline: 3px solid var(--text);
+  outline-offset: 1px;
+}
+
+.n {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .n {
+    display: inline;
+  }
+}
+
+.hover {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  width: max-content;
+  max-width: 180px;
+  padding: var(--space-sm) var(--space-md);
+  transform: translate(-50%, calc(-100% - 8px));
+  background: var(--action);
+  color: var(--on-action);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-caption);
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.note {
+  max-width: var(--measure);
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-md);
+  align-content: start;
+  scroll-margin-top: calc(var(--header-h) + var(--space-md));
+}
+
+.panelHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: var(--border-bold) solid var(--dom);
+}
+
+.panelHead > p {
+  grid-column: 1;
+}
+
+.back {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  min-height: var(--touch);
+  padding: 0 var(--space-md);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back:hover {
+  background: var(--surface-alt);
+}
+
+.rows {
+  display: grid;
+}
+
+.countries {
+  padding-top: var(--space-sm);
+}

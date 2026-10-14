@@ -10,6 +10,8 @@ const PAGES = [
   '/bienvenue/',
   '/elles/',
   '/elles/oubliees/',
+  '/elles/?vue=carte',
+  '/elles/?vue=carte&pays=FRA',
   '/activites/',
   '/possible/',
   '/possible/metier-astronome/',
@@ -64,6 +66,7 @@ const NIGHT_PAGES = [
   '/droits/monde/',
   '/droits/monde/?mode=explorer',
   '/elles/',
+  '/elles/?vue=carte&pays=USA',
   '/culture/person-lise-meitner/',
   '/activites/',
 ];
