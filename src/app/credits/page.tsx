@@ -7,6 +7,7 @@ import { getCatalog } from '@/content/catalog';
 import { pageMetadata } from '@/lib/seo';
 import type { Artwork } from '@/types';
 import { PageMasthead } from '@/components/layout/PageMasthead';
+import { ATLAS_WORLD_PHOTO } from '@/content/atlas';
 import { OPENING_PHOTO } from '@/content/opening';
 
 import styles from './credits.module.css';
@@ -40,6 +41,12 @@ export default function CreditsPage() {
     {
       title: 'Ouverture de la une',
       credits: collect([{ artwork: OPENING_PHOTO, label: 'Ouverture de la une', href: '/' }]),
+    },
+    {
+      title: 'Thème Atlas',
+      credits: collect([
+        { artwork: ATLAS_WORLD_PHOTO, label: 'Le monde, en-tête', href: '/droits/monde' },
+      ]),
     },
     {
       title: 'Thèmes des contrechamps',

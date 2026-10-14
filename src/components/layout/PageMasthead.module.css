@@ -47,3 +47,12 @@
 .dek {
   max-width: var(--measure);
 }
+
+/* Atlas : surtitre sobre, sans point de couleur. */
+:global([data-theme='atlas']) .masthead > :first-child {
+  color: var(--text);
+}
+
+:global([data-theme='atlas']) .masthead > :first-child::before {
+  display: none;
+}

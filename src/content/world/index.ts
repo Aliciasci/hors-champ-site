@@ -32,6 +32,8 @@ export type WorldRightId = 'vote' | 'universite' | 'majorite' | 'avortement';
 export interface StoryStep {
   year: number;
   text: string;
+  /** Pays dont parle l'étape (étiquette sur la carte, frise d'Atlas). */
+  code: string;
 }
 
 /** Le bloc sombre d'un droit : combien d'années entre le premier pas et le droit plein. */
@@ -47,8 +49,18 @@ export interface WorldRight {
   id: WorldRightId;
   /** Libellé court, pour le sélecteur. */
   label: string;
+  /** Nom du droit, en surtitre (« Droit de vote »). */
+  name: string;
+  /** Fiche du catalogue sur ce droit en France, s'il y en a une. */
+  ficheId?: string;
+  /** Une femme du catalogue liée à ce droit, mise en avant (thème Atlas). */
+  figureId?: string;
   /** « … pays de cette carte {verb} ». */
   verb: string;
+  /** Le même verbe au singulier, pour un seul pays. */
+  verbOne: string;
+  /** Ce que signifie, pour un pays, d'avoir le droit plein puis partiel (cartes d'Atlas). */
+  facts: { full: string; partial: string };
   /** Phrase d'introduction, facultative. */
   intro?: string;
   fullLabel: string;
@@ -166,7 +178,15 @@ export const WORLD_RIGHTS: WorldRight[] = [
   {
     id: 'vote',
     label: 'Voter',
+    name: 'Droit de vote',
+    ficheId: 'right-droit-de-vote',
+    figureId: 'person-hubertine-auclert',
     verb: 'accordent le vote aux femmes',
+    verbOne: 'accorde le vote aux femmes',
+    facts: {
+      full: 'Les femmes obtiennent le droit de vote.',
+      partial: 'Les femmes obtiennent le droit de vote, sous conditions.',
+    },
     intro: 'Du premier pays, la Nouvelle-Zélande en 1893, aux derniers, au début du XXIᵉ siècle.',
     fullLabel: 'droit de vote',
     partialLabel: 'sous conditions',
@@ -181,23 +201,35 @@ export const WORLD_RIGHTS: WorldRight[] = [
     source: SUFFRAGE_SOURCE,
     chapter: { title: 'Voter.', accent: 'De 1893 à aujourd’hui.' },
     story: [
-      { year: 1893, text: 'La Nouvelle-Zélande est le premier pays où les femmes votent.' },
+      {
+        year: 1893,
+        text: 'La Nouvelle-Zélande est le premier pays où les femmes votent.',
+        code: 'NZL',
+      },
       {
         year: 1918,
         text: 'Après la guerre, une vague. Le Royaume-Uni l’accorde, mais à partir de 30 ans seulement.',
+        code: 'GBR',
       },
-      { year: 1944, text: 'Le 21 avril, les Françaises obtiennent enfin le droit de vote.' },
+      {
+        year: 1944,
+        text: 'Le 21 avril, les Françaises obtiennent enfin le droit de vote.',
+        code: 'FRA',
+      },
       {
         year: 1971,
         text: 'La Suisse l’accorde au niveau fédéral. Le dernier canton suivra en 1990.',
+        code: 'CHE',
       },
       {
         year: 2011,
         text: 'L’Arabie saoudite, où seules les élections municipales donnent lieu à un vote.',
+        code: 'SAU',
       },
       {
         year: TODAY,
         text: 'Les femmes ne votent toujours pas, ou plus, en Afghanistan, au Yémen et au Vatican.',
+        code: 'AFG',
       },
     ],
     gap: {
@@ -211,7 +243,15 @@ export const WORLD_RIGHTS: WorldRight[] = [
   {
     id: 'universite',
     label: 'Étudier',
+    name: 'Droit d’étudier',
+    ficheId: 'event-1861-daubie-baccalaureat',
+    figureId: 'person-julie-victoire-daubie',
     verb: 'ouvrent l’université aux femmes',
+    verbOne: 'ouvre l’université aux femmes',
+    facts: {
+      full: 'Les universités s’ouvrent aux femmes.',
+      partial: 'Une première ouverture de l’université aux femmes.',
+    },
     intro: 'D’abord comme auditrices ou dans une seule université, puis partout, comme les hommes.',
     fullLabel: 'universités ouvertes',
     partialLabel: 'ouverture partielle',
@@ -227,14 +267,24 @@ export const WORLD_RIGHTS: WorldRight[] = [
       {
         year: 1833,
         text: 'Aux États-Unis, l’Oberlin College devient la première université mixte du pays.',
+        code: 'USA',
       },
-      { year: 1861, text: 'En France, Julie-Victoire Daubié est la première femme étudiante.' },
+      {
+        year: 1861,
+        text: 'En France, Julie-Victoire Daubié est la première femme étudiante.',
+        code: 'FRA',
+      },
       {
         year: 1880,
         text: 'La France, le Canada et l’Australie ouvrent leurs universités aux femmes.',
+        code: 'FRA',
       },
-      { year: 1905, text: 'En Russie, les universités s’ouvrent enfin aux femmes.' },
-      { year: 1935, text: 'En Iran, les femmes sont admises à l’université de Téhéran.' },
+      { year: 1905, text: 'En Russie, les universités s’ouvrent enfin aux femmes.', code: 'RUS' },
+      {
+        year: 1935,
+        text: 'En Iran, les femmes sont admises à l’université de Téhéran.',
+        code: 'IRN',
+      },
     ],
     gap: {
       kicker: 'Étudier · l’attente des femmes',
@@ -248,7 +298,14 @@ export const WORLD_RIGHTS: WorldRight[] = [
   {
     id: 'majorite',
     label: 'Être majeure',
+    name: 'Majorité légale',
+    ficheId: 'right-regimes-matrimoniaux',
     verb: 'reconnaissent la majorité légale des femmes',
+    verbOne: 'reconnaît la majorité légale des femmes',
+    facts: {
+      full: 'Toutes les femmes deviennent majeures.',
+      partial: 'Les femmes non mariées deviennent majeures.',
+    },
     intro:
       'Signer, gérer ses biens, agir en justice sans tuteur ni mari. Les femmes mariées l’obtiennent souvent bien après les autres.',
     fullLabel: 'toutes les femmes',
@@ -262,23 +319,27 @@ export const WORLD_RIGHTS: WorldRight[] = [
     source: FR_CHRONOLOGY,
     chapter: { title: 'Être majeure.', accent: 'Décider seule.' },
     story: [
-      { year: 1857, text: 'Au Danemark, les femmes non mariées deviennent majeures.' },
+      { year: 1857, text: 'Au Danemark, les femmes non mariées deviennent majeures.', code: 'DNK' },
       {
         year: 1893,
         text: 'En France, la majorité légale est accordée aux femmes non mariées et séparées.',
+        code: 'FRA',
       },
-      { year: 1938, text: 'En France, les femmes mariées deviennent enfin majeures.' },
+      { year: 1938, text: 'En France, les femmes mariées deviennent enfin majeures.', code: 'FRA' },
       {
         year: 1939,
         text: 'En Espagne, la majorité des femmes mariées, accordée en 1931, est annulée.',
+        code: 'ESP',
       },
       {
         year: 1984,
         text: 'En Suisse, une femme mariée n’a plus besoin de l’accord de son mari pour agir en justice.',
+        code: 'CHE',
       },
       {
         year: 2006,
         text: 'Au Lesotho, la loi abolit la suprématie du mari sur son épouse.',
+        code: 'LSO',
       },
     ],
     gap: {
@@ -293,7 +354,15 @@ export const WORLD_RIGHTS: WorldRight[] = [
   {
     id: 'avortement',
     label: 'Avorter',
+    name: 'Droit à l’avortement',
+    ficheId: 'right-ivg',
+    figureId: 'person-simone-veil',
     verb: 'autorisent l’avortement',
+    verbOne: 'autorise l’avortement',
+    facts: {
+      full: 'L’avortement est autorisé à la demande.',
+      partial: 'L’avortement est autorisé pour certains motifs.',
+    },
     fullLabel: 'à la demande',
     partialLabel: 'pour certains motifs',
     partialPhrase: 'pour certains motifs',
@@ -308,23 +377,28 @@ export const WORLD_RIGHTS: WorldRight[] = [
       {
         year: 1920,
         text: 'L’Union soviétique est le premier pays à autoriser l’avortement à la demande.',
+        code: 'RUS',
       },
-      { year: 1936, text: 'Staline revient sur l’essentiel de cette légalisation.' },
+      { year: 1936, text: 'Staline revient sur l’essentiel de cette légalisation.', code: 'RUS' },
       {
         year: 1939,
         text: 'En France, l’avortement est permis pour sauver la vie de la femme enceinte.',
+        code: 'FRA',
       },
       {
         year: 1975,
         text: 'La France l’autorise à la demande, au premier trimestre. L’Allemagne de l’Ouest suit en 1976.',
+        code: 'FRA',
       },
       {
         year: 2019,
         text: 'En Irlande, l’interruption de grossesse devient possible jusqu’à 12 semaines.',
+        code: 'IRL',
       },
       {
         year: 2022,
         text: 'Aux États-Unis, l’arrêt Dobbs supprime la protection fédérale. La Colombie, elle, dépénalise.',
+        code: 'USA',
       },
     ],
     gap: {

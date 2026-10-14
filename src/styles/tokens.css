@@ -211,3 +211,95 @@
   --border-regular: 1.5px;
   --border-bold: 2.5px;
 }
+
+/* Atlas : propre au site (src/theme/themes/atlas.ts). */
+[data-theme='atlas'] {
+  --bg: #f3ede1;
+  --surface: #fbf8f1;
+  --surface-alt: #e6dcc9;
+  --surface-accent: #e4572e;
+  --on-surface-accent: #14161f;
+  --surface-accent-soft: #f7dfd2;
+  --primary: #2343b8;
+  --primary-deep: #172c82;
+  --primary-soft: #dce1f3;
+  --on-primary: #fbf8f1;
+  --action: #151a2e;
+  --on-action: #f3ede1;
+  --accent: #e4572e;
+  --accent-fill: #e4572e;
+  --on-accent: #14161f;
+  --accent-ink: #b13913;
+  --accent-soft: #f7dfd2;
+  --text: #14161f;
+  --text-2: #3a3c45;
+  --text-muted: #5c5952;
+  --text-inverse: #f3ede1;
+  --border: #d6cab3;
+  --border-strong: #14161f;
+  --overlay: rgba(20, 22, 31, 0.5);
+
+  --fb-solid: #1d6a45;
+  --fb-solid-soft: #dae8dd;
+  --fb-partial: #845300;
+  --fb-partial-soft: #f2e4c6;
+  --fb-open: #2343b8;
+  --fb-open-soft: #dce1f3;
+  --fb-weak: #b13913;
+  --fb-weak-soft: #f7dfd2;
+
+  --dom-arts: #9b2c5a;
+  --dom-arts-soft: #f3dde6;
+  --dom-sciences: #2343b8;
+  --dom-sciences-soft: #dce1f3;
+  --dom-droits: #1d6a45;
+  --dom-droits-soft: #dae8dd;
+  --day-ink: #7a5200;
+  --day-soft: #f2e4c6;
+  --possible-soft: #f7dfd2;
+
+  /* Couleurs des cartes : droit accordé, partiel, absent. */
+  --map-full: #2343b8;
+  --map-partial: #e4572e;
+  --map-none: #ddd1bb;
+  --map-ocean: #fbf8f1;
+
+  --font-display: var(--font-noto-serif-display), 'Noto Serif Display', Georgia, serif;
+  --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-hand: var(--font-caveat), 'Caveat', cursive;
+  --display-weight: 700;
+  --display-strong-weight: 800;
+  --display-stretch: 72%;
+  --hero-weight: 800;
+  --display-accent-style: normal;
+
+  --fs-hero: clamp(2.75rem, 1.6rem + 4.6vw, 4.75rem); /* 44 → 76 */
+  --lh-hero: 0.98;
+  --ls-hero: -0.035em;
+  --fs-title1: clamp(2.125rem, 1.7rem + 1.8vw, 3rem); /* 34 → 48 */
+  --lh-title1: 1;
+  --ls-title1: -0.02em;
+  --fs-title2: clamp(1.625rem, 1.45rem + 0.7vw, 2rem); /* 26 → 32 */
+  --lh-title2: 1.08;
+  --fs-title3: 1.25rem; /* 20 */
+  --lh-title3: 1.2;
+  --fs-quote: 1.375rem;
+  --lh-quote: 1.28;
+  --fs-overline: 0.6875rem; /* 11 */
+  --lh-overline: 1.45;
+  --ls-overline: 0.24em;
+  --tt-overline: uppercase;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-card: 4px;
+  --radius-button: 999px;
+  --radius-chip: 999px;
+  --radius-cover: 2px;
+  --border-hairline: 1px;
+  --border-regular: 1px;
+  --border-bold: 2px;
+}

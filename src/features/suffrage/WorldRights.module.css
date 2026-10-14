@@ -366,3 +366,25 @@
 .hover strong {
   font-size: var(--fs-body-sm);
 }
+
+/* Atlas : pastilles pleines, beiges ; la choisie en bleu nuit, sans point de couleur. */
+:global([data-theme='atlas']) .pill {
+  border-color: transparent;
+  background: var(--surface-alt);
+  font-weight: 500;
+}
+
+:global([data-theme='atlas']) .pill:global(.dot-domain)::before {
+  display: none;
+}
+
+:global([data-theme='atlas']) .pill:hover {
+  background: var(--border);
+}
+
+:global([data-theme='atlas']) .pill.pillOn,
+:global([data-theme='atlas']) .pill.pillOn:hover {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}

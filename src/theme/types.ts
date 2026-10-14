@@ -1,6 +1,7 @@
-export type ThemeId = 'cartel' | 'revue';
+/** `atlas` est propre au site ; `cartel` et `revue` reprennent l'application mobile. */
+export type ThemeId = 'cartel' | 'revue' | 'atlas';
 
-export const THEME_IDS: readonly ThemeId[] = ['cartel', 'revue'];
+export const THEME_IDS: readonly ThemeId[] = ['cartel', 'revue', 'atlas'];
 
 export const DEFAULT_THEME_ID: ThemeId = 'cartel';
 

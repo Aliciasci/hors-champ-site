@@ -120,6 +120,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 960,
     "height": 1200
   },
+  "people/suffragettes-1910.jpg": {
+    "width": 1200,
+    "height": 884
+  },
   "people/toni-morrison.jpg": {
     "width": 960,
     "height": 1205

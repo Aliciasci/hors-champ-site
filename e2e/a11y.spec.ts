@@ -37,7 +37,7 @@ const PAGES = [
   '/page-inexistante/',
 ];
 
-for (const theme of ['cartel', 'revue'] as const) {
+for (const theme of ['cartel', 'revue', 'atlas'] as const) {
   for (const path of PAGES) {
     test(`axe ${theme} ${path}`, async ({ page, browserName }) => {
       test.skip(browserName !== 'chromium', 'axe : un seul moteur suffit');
@@ -70,7 +70,7 @@ const NIGHT_PAGES = [
   '/culture/person-lise-meitner/',
   '/activites/',
 ];
-for (const theme of ['cartel', 'revue'] as const) {
+for (const theme of ['cartel', 'revue', 'atlas'] as const) {
   for (const path of NIGHT_PAGES) {
     test(`axe nuit ${theme} ${path}`, async ({ page, browserName }) => {
       test.skip(browserName !== 'chromium', 'axe : un seul moteur suffit');

@@ -10,6 +10,7 @@ import styles from './ThemeSwitch.module.css';
 const OPTIONS: { id: ThemeId; label: string }[] = [
   { id: 'cartel', label: 'Cartel' },
   { id: 'revue', label: 'Revue' },
+  { id: 'atlas', label: 'Atlas' },
 ];
 
 /** Choix compact du thème visuel (pied de page). Le Profil propose la version avec aperçus. */

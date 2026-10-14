@@ -101,10 +101,12 @@ a {
 .t-quote {
   font-family: var(--font-display);
   font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch, normal);
   text-wrap: balance;
 }
 
 .t-hero {
+  font-weight: var(--hero-weight, var(--display-weight));
   font-size: var(--fs-hero);
   line-height: var(--lh-hero);
   letter-spacing: var(--ls-hero);
@@ -287,6 +289,17 @@ a {
   display: revert !important;
 }
 [data-theme='revue'] .only-cartel {
+  display: none !important;
+}
+
+/* Atlas a ses propres mises en page : un bloc ne s'affiche que dans ce thème, ou dans les autres. */
+.only-atlas {
+  display: none !important;
+}
+[data-theme='atlas'] .only-atlas {
+  display: revert !important;
+}
+[data-theme='atlas'] .not-atlas {
   display: none !important;
 }
 

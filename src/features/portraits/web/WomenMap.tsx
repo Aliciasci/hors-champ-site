@@ -4,7 +4,7 @@ import { useMemo, useRef, useState, type PointerEvent, type ReactNode } from 're
 
 import { Chip, ChipGroup, Segmented } from '@/components/ui/Chip';
 import type { WorldCountry } from '@/content/world';
-import type { WorldShapes } from '@/content/world/geo';
+import type { WorldShapes } from '@/content/world/geoShared';
 import { womenByCountry } from '@/content/world/womenCountries';
 
 import styles from './WomenMap.module.css';

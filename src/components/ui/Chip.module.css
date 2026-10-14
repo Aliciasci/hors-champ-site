@@ -114,3 +114,42 @@
     min-height: var(--touch);
   }
 }
+
+/* Atlas : le contrôle segmenté devient une rangée d'onglets, soulignés d'orange. */
+:global([data-theme='atlas']) .segmented {
+  justify-content: flex-start;
+  gap: var(--space-xxl);
+  border: 0;
+  border-bottom: var(--border-hairline) solid var(--border);
+  border-radius: 0;
+  overflow: visible;
+}
+
+:global([data-theme='atlas']) .segment {
+  flex: none;
+  min-height: var(--touch);
+  padding: 0 var(--space-sm);
+  margin-bottom: -1px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  font-size: var(--fs-body-lg);
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+:global([data-theme='atlas']) .segment + .segment {
+  border-left: 0;
+}
+
+:global([data-theme='atlas']) .segment:hover {
+  background: transparent;
+  color: var(--text);
+}
+
+:global([data-theme='atlas']) .segmentOn,
+:global([data-theme='atlas']) .segmentOn:hover {
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  border-bottom-color: var(--accent);
+}

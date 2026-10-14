@@ -1,15 +1,18 @@
 'use client';
 
-import { useRef, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 
 import { ArrowRight } from '@/components/icons';
 import { MastheadRow } from '@/components/layout/MastheadRow';
 import { Segmented } from '@/components/ui/Chip';
 import type { GapRow, WorldCountry, WorldRight, WorldRightId } from '@/content/world';
+import type { WorldShapes } from '@/content/world/geoShared';
 import { readOne, useQueryState } from '@/lib/useQueryState';
 import type { Tone } from '@/types';
 
+import { AtlasDates, AtlasStory } from './AtlasStory';
 import { GapPoster } from './GapPoster';
+import { GeoLegend, GeoRightMap } from './GeoRightMap';
 import { RightStory } from './RightStory';
 import styles from './WorldChapters.module.css';
 import { RightMap } from './WorldRights';
@@ -30,6 +33,10 @@ interface Props {
   gaps: Record<WorldRightId, GapRow[]>;
   /** En-tête de la page, rendu côté serveur : le choix du mode se place à sa droite. */
   masthead?: ReactNode;
+  /** Thème Atlas : la vraie carte, une femme et la fiche liées à chaque droit. */
+  shapes?: WorldShapes;
+  figures?: Partial<Record<WorldRightId, ReactNode>>;
+  fiches?: Partial<Record<WorldRightId, { href: string; title: string }>>;
   withUrl?: boolean;
 }
 
@@ -112,6 +119,9 @@ function View({
   countries,
   gaps,
   masthead,
+  shapes,
+  figures,
+  fiches,
   rightId,
   mode,
   onRight,
@@ -128,6 +138,9 @@ function View({
     rights.findIndex((r) => r.id === rightId),
   );
   const right = rights[index]!;
+  // Thème Atlas : un pays choisi dans la liste, mis en évidence sur la carte.
+  const [focus, setFocus] = useState<string | null>(null);
+  const byName = [...countries].sort((a, b) => a.name.localeCompare(b.name, 'fr'));
 
   /** Change de droit ; depuis le bas de page, on remonte au début du chapitre. */
   const pick = (id: WorldRightId, scrollUp: boolean) => {
@@ -162,6 +175,25 @@ function View({
           testIdPrefix="world-right"
           legend="Droit"
         />
+        {shapes ? (
+          <div className={`${styles.countryWrap} only-atlas`}>
+            <label className={styles.country}>
+              <span className="sr-only">Pays</span>
+              <select
+                value={focus ?? ''}
+                onChange={(event) => setFocus(event.target.value || null)}
+                data-testid="atlas-country"
+              >
+                <option value="">Tous les pays</option>
+                {byName.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+        ) : null}
       </div>
 
       {mode === 'explorer' ? (
@@ -176,17 +208,64 @@ function View({
           <h2 id="explorer-title" className="sr-only">
             À vous d’explorer : {right.label.toLowerCase()}, toutes les années
           </h2>
-          <RightMap right={right} countries={countries} />
+          <RightMap
+            right={right}
+            countries={countries}
+            geo={
+              shapes
+                ? (year, label) => (
+                    <div className={styles.geoExplore}>
+                      <GeoRightMap
+                        right={right}
+                        year={year}
+                        shapes={shapes}
+                        countries={countries}
+                        label={label}
+                        focus={focus}
+                        callout={
+                          focus
+                            ? {
+                                code: focus,
+                                title: String(year),
+                                subtitle: byName.find((c) => c.code === focus)?.name ?? focus,
+                              }
+                            : null
+                        }
+                      />
+                      <GeoLegend right={right} />
+                    </div>
+                  )
+                : undefined
+            }
+          />
         </section>
       ) : (
-        <Story
-          rights={rights}
-          right={right}
-          index={index}
-          countries={countries}
-          gaps={gaps}
-          onPick={pick}
-        />
+        <>
+          <div className={shapes ? 'not-atlas' : undefined}>
+            <Story
+              rights={rights}
+              right={right}
+              index={index}
+              countries={countries}
+              gaps={gaps}
+              onPick={pick}
+            />
+          </div>
+          {shapes ? (
+            <div className="only-atlas" data-tone={RIGHT_TONES[right.id]}>
+              <AtlasStory
+                key={right.id}
+                right={right}
+                countries={countries}
+                shapes={shapes}
+                figure={figures?.[right.id]}
+                fiche={fiches?.[right.id]}
+                focus={focus}
+              />
+              <AtlasDates right={right} countries={countries} shapes={shapes} />
+            </div>
+          ) : null}
+        </>
       )}
     </>
   );

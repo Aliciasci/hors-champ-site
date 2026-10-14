@@ -1,10 +1,12 @@
 import { Suspense } from 'react';
 
+import { cultureHref } from '@/components/content/CultureCard';
 import { SourceList } from '@/components/content/SourceList';
 import { PageMasthead } from '@/components/layout/PageMasthead';
 import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { getCatalog } from '@/content/catalog';
 import {
   rightGaps,
   WORLD_COUNTRIES,
@@ -13,7 +15,9 @@ import {
   type WorldRight,
   type WorldRightId,
 } from '@/content/world';
+import { worldShapes } from '@/content/world/geo';
 import { sortedVoteGaps, VOTE_GAP_SOURCE } from '@/content/world/vote-gap';
+import { AtlasCollage, AtlasFigure } from '@/features/suffrage/AtlasCollage';
 import { WorldChapters } from '@/features/suffrage/WorldChapters';
 import { pageMetadata } from '@/lib/seo';
 
@@ -45,13 +49,39 @@ const GAPS = Object.fromEntries(WORLD_RIGHTS.map((r) => [r.id, gapsOf(r)])) as R
 >;
 
 export default function WorldPage() {
+  const { culture } = getCatalog();
+  const byId = new Map(culture.map((e) => [e.id, e]));
+  // Thème Atlas : en-tête en collage, une femme et la fiche liées à chaque droit.
   const masthead = (
-    <PageMasthead
-      kicker="Dans le monde"
-      title="Les droits de la femme à travers l’histoire"
-      tone="droits"
-    />
+    <div className={styles.hero}>
+      <div className={styles.heroText}>
+        <PageMasthead
+          kicker="Dans le monde"
+          title="Les droits des femmes à travers l’histoire"
+          tone="droits"
+        />
+        <p className={`t-deck only-atlas ${styles.heroDeck}`}>
+          Des droits conquis à des rythmes différents. Une histoire qui continue de s’écrire.
+        </p>
+      </div>
+      <div className="only-atlas">
+        <AtlasCollage />
+      </div>
+    </div>
   );
+  const figures = Object.fromEntries(
+    WORLD_RIGHTS.flatMap((r) => {
+      const person = r.figureId ? byId.get(r.figureId) : undefined;
+      return person ? [[r.id, <AtlasFigure key={r.id} person={person} />]] : [];
+    }),
+  );
+  const fiches = Object.fromEntries(
+    WORLD_RIGHTS.flatMap((r) => {
+      const fiche = r.ficheId ? byId.get(r.ficheId) : undefined;
+      return fiche ? [[r.id, { href: cultureHref(fiche.id), title: fiche.title }]] : [];
+    }),
+  );
+  const atlas = { shapes: worldShapes(), figures, fiches };
 
   return (
     <Container>
@@ -71,6 +101,7 @@ export default function WorldPage() {
             countries={WORLD_COUNTRIES}
             gaps={GAPS}
             masthead={masthead}
+            {...atlas}
           />
         }
       >
@@ -79,11 +110,19 @@ export default function WorldPage() {
           countries={WORLD_COUNTRIES}
           gaps={GAPS}
           masthead={masthead}
+          {...atlas}
           withUrl
         />
       </Suspense>
 
-      <p className={`t-caption c-muted ${styles.method}`}>
+      <p className={`t-caption c-muted only-atlas ${styles.method}`}>
+        Fond de carte : Natural Earth (domaine public). Un pays hachuré : la source ne dit rien pour
+        ce droit ; les pays issus de la Tchécoslovaquie et de la Yougoslavie reprennent, faute de
+        données propres, celles de l’État d’origine. Pour étudier, être majeure et avorter, les
+        années ont été relevées dans les chronologies avec l’aide d’une IA, puis vérifiées une à une
+        contre un extrait exact de la source.
+      </p>
+      <p className={`t-caption c-muted not-atlas ${styles.method}`}>
         Une case par pays, à une position approximative ; une case pointillée signale un pays dont
         la source ne dit rien pour ce droit. Pour étudier, être majeure et avorter, les années ont
         été relevées dans les chronologies avec l’aide d’une IA, puis vérifiées une à une contre un

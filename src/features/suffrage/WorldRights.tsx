@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState, type PointerEvent } from 'react';
+import { useEffect, useId, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
 import { Pause, Play } from '@/components/icons';
 import {
@@ -134,8 +134,19 @@ export function TileMap({
   );
 }
 
-/** La carte à explorer d'un droit : curseur, années clés, lecture, repères et tableau. */
-export function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
+/**
+ * La carte à explorer d'un droit : curseur, années clés, lecture, repères et tableau.
+ * `geo` dessine la vraie carte du thème Atlas à l'année choisie, à la place des tuiles.
+ */
+export function RightMap({
+  right,
+  countries,
+  geo,
+}: {
+  right: WorldRight;
+  countries: WorldCountry[];
+  geo?: (year: number, label: string) => ReactNode;
+}) {
   const [year, setYear] = useState(right.defaultYear);
   const [playing, setPlaying] = useState(false);
   const sliderId = useId();
@@ -274,23 +285,30 @@ export function RightMap({ right, countries }: { right: WorldRight; countries: W
 
       <div className={styles.layout}>
         <div className={styles.mapColumn}>
-          <TileMap
-            right={right}
-            countries={countries}
-            year={year}
-            label={`Carte en tuiles : en ${year}, ${total} pays ${right.verb}. Le détail est dans le tableau ci-dessous.`}
-          />
+          {geo ? (
+            <div className="only-atlas">
+              {geo(year, `Carte : en ${yearLabel(year)}, ${total} pays ${right.verb}.`)}
+            </div>
+          ) : null}
+          <div className={geo ? 'not-atlas' : undefined}>
+            <TileMap
+              right={right}
+              countries={countries}
+              year={year}
+              label={`Carte en tuiles : en ${year}, ${total} pays ${right.verb}. Le détail est dans le tableau ci-dessous.`}
+            />
 
-          <ul className={styles.legend} aria-hidden="true">
-            {legend.map(([level, label]) => (
-              <li key={level}>
-                <span className={`${styles.swatch} ${styles[level]}`} /> {label}
+            <ul className={styles.legend} aria-hidden="true">
+              {legend.map(([level, label]) => (
+                <li key={level}>
+                  <span className={`${styles.swatch} ${styles[level]}`} /> {label}
+                </li>
+              ))}
+              <li>
+                <span className={`${styles.swatch} ${styles.france}`} /> France
               </li>
-            ))}
-            <li>
-              <span className={`${styles.swatch} ${styles.france}`} /> France
-            </li>
-          </ul>
+            </ul>
+          </div>
         </div>
 
         <aside className={styles.aside} aria-label="Repères">

@@ -1,9 +1,11 @@
 import {
+  Caveat,
   Cormorant_Garamond,
   DM_Mono,
   IBM_Plex_Mono,
   IBM_Plex_Sans,
   Instrument_Sans,
+  Noto_Serif_Display,
   Source_Serif_4,
   Young_Serif,
 } from 'next/font/google';
@@ -11,7 +13,8 @@ import {
 /*
  * Polices auto-hébergées par next/font (téléchargées au build, aucune requête vers Google
  * côté visiteur). Sous-ensemble latin, graisses réellement utilisées.
- * Cartel (thème par défaut) est préchargé ; Revue ne l'est pas, ses polices arrivent à la demande.
+ * Cartel (thème par défaut) est préchargé ; Revue et Atlas ne le sont pas, leurs polices arrivent
+ * à la demande.
  */
 export const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -64,6 +67,22 @@ export const dmMono = DM_Mono({
   variable: '--font-dm-mono',
 });
 
+/** Atlas : titres en serif condensé très gras (axe de largeur), notes manuscrites. */
+export const notoSerifDisplay = Noto_Serif_Display({
+  subsets: ['latin'],
+  axes: ['wdth'],
+  display: 'swap',
+  preload: false,
+  variable: '--font-noto-serif-display',
+});
+export const caveat = Caveat({
+  subsets: ['latin'],
+  weight: ['500'],
+  display: 'swap',
+  preload: false,
+  variable: '--font-caveat',
+});
+
 export const fontVariables = [
   cormorant,
   plexSans,
@@ -72,6 +91,8 @@ export const fontVariables = [
   youngSerif,
   instrumentSans,
   dmMono,
+  notoSerifDisplay,
+  caveat,
 ]
   .map((font) => font.variable)
   .join(' ');

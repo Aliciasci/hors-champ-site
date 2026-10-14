@@ -1,0 +1,160 @@
+/* Le collage occupe la droite de l'en-tête ; sur mobile, une bande sous le titre. */
+.collage {
+  position: relative;
+  min-height: 260px;
+  isolation: isolate;
+}
+
+@media (min-width: 900px) {
+  .collage {
+    min-height: 360px;
+  }
+}
+
+.paperTall,
+.paperLow {
+  position: absolute;
+  z-index: -1;
+  background: var(--accent);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 0.06);
+}
+
+.paperTall {
+  top: -4%;
+  right: 30%;
+  width: 22%;
+  height: 46%;
+  transform: rotate(2deg);
+}
+
+.paperLow {
+  bottom: 2%;
+  right: -2%;
+  width: 26%;
+  height: 34%;
+  transform: rotate(-3deg);
+}
+
+.globe {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 8%;
+  width: 46%;
+  height: auto;
+}
+
+.sea {
+  fill: var(--primary);
+}
+
+.graticule {
+  fill: none;
+  stroke: var(--on-primary);
+  stroke-opacity: 0.22;
+  stroke-width: 0.6;
+}
+
+.land {
+  fill: none;
+  stroke: var(--on-primary);
+  stroke-opacity: 0.75;
+  stroke-width: 1;
+}
+
+.photo {
+  position: absolute;
+  left: 22%;
+  top: 0;
+  width: 56%;
+  margin: 0;
+  padding: 6px;
+  background: var(--surface);
+  transform: rotate(-1.5deg);
+  box-shadow: 0 12px 28px rgb(20 22 31 / 0.22);
+}
+
+.photoImg {
+  aspect-ratio: 4 / 3;
+  filter: grayscale(1) contrast(1.08);
+}
+
+.note {
+  position: absolute;
+  right: 0;
+  top: 6%;
+  width: 30%;
+  max-width: 190px;
+  padding: var(--space-md);
+  background: var(--surface);
+  box-shadow: 0 6px 16px rgb(20 22 31 / 0.14);
+  transform: rotate(4deg);
+  font-family: var(--font-hand);
+  font-weight: 500;
+  font-size: clamp(1rem, 0.85rem + 0.6vw, 1.35rem);
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.stamp {
+  position: absolute;
+  right: 6%;
+  bottom: 12%;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--text);
+  transform: rotate(-8deg);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 0.7rem + 0.4vw, 1.05rem);
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+@media (max-width: 599px) {
+  .note {
+    display: none;
+  }
+
+  .photo {
+    left: 26%;
+    width: 64%;
+  }
+}
+
+/* Portrait d'une femme liée au droit, à droite de la carte du récit. */
+.figure {
+  display: grid;
+  background: var(--surface);
+  border: var(--border-hairline) solid var(--border);
+  color: var(--text);
+}
+
+.figureImg {
+  aspect-ratio: 4 / 5;
+  filter: grayscale(1);
+}
+
+.figureText {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+}
+
+.figureName {
+  padding-right: var(--space-xl);
+}
+
+.figure:hover .figureName {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.figureArrow {
+  position: absolute;
+  right: var(--space-md);
+  bottom: var(--space-md);
+}

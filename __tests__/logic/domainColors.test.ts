@@ -52,8 +52,10 @@ const PAIRS: [string, string][] = [
 describe.each([
   ['Cartel', 'src/styles/tokens.css', ":root,\n[data-theme='cartel']"],
   ['Revue', 'src/styles/tokens.css', "[data-theme='revue']"],
+  ['Atlas', 'src/styles/tokens.css', "[data-theme='atlas']"],
   ['Cartel nuit', 'src/styles/night.css', "[data-scheme='dark'],"],
   ['Revue nuit', 'src/styles/night.css', "[data-scheme='dark'][data-theme='revue']"],
+  ['Atlas nuit', 'src/styles/night.css', "[data-scheme='dark'][data-theme='atlas']"],
 ])('couleurs de rubrique, %s', (_name, file, selector) => {
   const colors = block(file, selector);
   it.each(PAIRS)('%s sur %s ≥ 4,5:1', (fg, bg) => {

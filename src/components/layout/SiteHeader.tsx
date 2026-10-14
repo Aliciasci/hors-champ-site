@@ -56,8 +56,11 @@ export function SiteHeader() {
     <header data-site-header className={`${styles.header} ${hidden ? styles.hidden : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} aria-label="Hors-Champ, accueil">
-          <span className={styles.disc} aria-hidden="true" />
+          <span className={`${styles.disc} not-atlas`} aria-hidden="true" />
           Hors-Champ
+          <span className={`${styles.star} only-atlas`} aria-hidden="true">
+            *
+          </span>
         </Link>
 
         <nav aria-label="Rubriques" className={styles.nav}>
@@ -96,6 +99,9 @@ export function SiteHeader() {
             data-testid="header-library"
           >
             <Bookmark size={20} strokeWidth={2} aria-hidden="true" />
+            <span className={`${styles.libraryLabel} only-atlas`} aria-hidden="true">
+              Ma bibliothèque
+            </span>
             {saved > 0 ? (
               <span className={styles.badge} aria-hidden="true">
                 {saved > 99 ? '99+' : saved}

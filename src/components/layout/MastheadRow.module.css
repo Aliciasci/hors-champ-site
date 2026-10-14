@@ -24,3 +24,15 @@
     width: 380px;
   }
 }
+
+/* Atlas : l'en-tête occupe toute la largeur, le mode passe dessous, en onglets. */
+:global([data-theme='atlas']) .head {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: var(--space-lg);
+}
+
+:global([data-theme='atlas']) .modes {
+  width: 100%;
+  max-width: none;
+}

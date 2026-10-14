@@ -7,7 +7,7 @@ import { ArrowRight } from '@/components/icons';
 import { MastheadRow } from '@/components/layout/MastheadRow';
 import { Chip, ChipGroup, Segmented } from '@/components/ui/Chip';
 import type { WorldCountry } from '@/content/world';
-import type { WorldShapes } from '@/content/world/geo';
+import type { WorldShapes } from '@/content/world/geoShared';
 import { readOne, useQueryState } from '@/lib/useQueryState';
 import type { PortraitThemeId } from '@/types';
 

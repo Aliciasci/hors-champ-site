@@ -9,3 +9,36 @@
   margin-top: var(--space-huge);
   max-width: var(--reading);
 }
+
+/* En-tête : le titre seul, ou (thème Atlas) le titre et son collage côte à côte. */
+.hero {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.heroText > header {
+  margin-bottom: 0;
+}
+
+.heroDeck {
+  max-width: 34ch;
+  margin-top: var(--space-md);
+}
+
+@media (min-width: 900px) {
+  :global([data-theme='atlas']) .hero {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: var(--space-xl);
+  }
+}
+
+:global([data-theme='atlas']) .heroText > header {
+  max-width: none;
+}
+
+@media (min-width: 900px) {
+  :global([data-theme='atlas']) .heroText :global(.t-hero) {
+    font-size: clamp(3rem, 1.4rem + 3.6vw, 4.5rem);
+  }
+}

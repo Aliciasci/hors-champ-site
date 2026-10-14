@@ -218,3 +218,43 @@ test('page du monde : le chapitre suivant enchaîne les droits, du dernier au pr
   await expect(page).not.toHaveURL(/droit=/);
   await expect(page.getByTestId('chapter-vote')).toBeVisible();
 });
+
+test('thème Atlas : la page du monde en récit illustré, puis la vraie carte à explorer', async ({
+  page,
+}) => {
+  const console = watchConsole(page);
+  await seedState(page, { themeId: 'atlas' });
+  await open(page, '/droits/monde/');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'atlas');
+  // Le récit Atlas remplace le récit défilant, masqué dans ce thème.
+  const story = page.getByTestId('atlas-story-vote');
+  await expect(story).toBeVisible();
+  await expect(page.getByTestId('chapter-vote')).toBeHidden();
+  await expect(story).toContainText('1893');
+  await page.getByTestId('atlas-step-2').click();
+  await expect(story.getByRole('heading', { level: 2 })).toContainText('Françaises');
+  await expect(page.getByTestId('atlas-figure-person-hubertine-auclert')).toBeVisible();
+  await expect(page.getByTestId('atlas-dates-vote').locator('li')).toHaveCount(4);
+
+  // Un pays choisi dans la liste : son étiquette sur la carte.
+  await page.getByTestId('atlas-country').selectOption('CHE');
+  await expect(story).toContainText('Suisse');
+
+  // Autre droit, sans femme associée : pas de portrait.
+  await page.getByTestId('world-right-majorite').click({ force: true });
+  await expect(page.getByTestId('atlas-story-majorite')).toBeVisible();
+  await expect(page.locator('[data-testid^="atlas-figure-"]:visible')).toHaveCount(0);
+
+  // À vous d'explorer : la vraie carte remplace les tuiles.
+  await page.getByTestId('world-mode-explorer').click({ force: true });
+  await expect(page.getByTestId('suffrage-map')).toBeHidden();
+  await page.getByTestId('suffrage-key-1938').click();
+  await expect(page.getByTestId('suffrage-count')).toContainText('1938');
+
+  // Retour au thème Cartel : la page classique revient.
+  await page.getByTestId('world-mode-recit').click({ force: true });
+  await page.getByTestId('footer-theme-cartel').check({ force: true });
+  await expect(page.getByTestId('chapter-majorite')).toBeVisible();
+  await expect(page.getByTestId('atlas-story-majorite')).toBeHidden();
+  console.check();
+});

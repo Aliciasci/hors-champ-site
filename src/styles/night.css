@@ -106,3 +106,54 @@ body {
 [data-scheme='dark'] body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+[data-scheme='dark'][data-theme='atlas'] {
+  --bg: #12141b;
+  --surface: #1a1d26;
+  --surface-alt: #262a35;
+  --surface-accent: #ff7a4d;
+  --on-surface-accent: #12141b;
+  --surface-accent-soft: #2e1f19;
+  --primary: #93a6ff;
+  --primary-deep: #c2cdff;
+  --primary-soft: #232b4f;
+  --on-primary: #12141b;
+  --action: #ede7da;
+  --on-action: #12141b;
+  --accent: #ff7a4d;
+  --accent-fill: #ff7a4d;
+  --on-accent: #12141b;
+  --accent-ink: #ff9a76;
+  --accent-soft: #3a2118;
+  --text: #ede7da;
+  --text-2: #d0c9bb;
+  --text-muted: #a49d90;
+  --text-inverse: #12141b;
+  --border: #353a47;
+  --border-strong: #ede7da;
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  --fb-solid: #6fcf9b;
+  --fb-solid-soft: #15301f;
+  --fb-partial: #e0b450;
+  --fb-partial-soft: #33280f;
+  --fb-open: #93a6ff;
+  --fb-open-soft: #232b4f;
+  --fb-weak: #ff9a76;
+  --fb-weak-soft: #3a2118;
+
+  --dom-arts: #f08bb4;
+  --dom-arts-soft: #3a1d2a;
+  --dom-sciences: #93a6ff;
+  --dom-sciences-soft: #232b4f;
+  --dom-droits: #6fcf9b;
+  --dom-droits-soft: #15301f;
+  --day-ink: #e0b450;
+  --day-soft: #33280f;
+  --possible-soft: #3a2416;
+
+  --map-full: #6f88ff;
+  --map-partial: #ff7a4d;
+  --map-none: #343846;
+  --map-ocean: #1a1d26;
+}

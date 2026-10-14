@@ -52,6 +52,7 @@ const PAIRS: [string, string][] = [
 describe.each([
   ['Cartel', "[data-scheme='dark'],"],
   ['Revue', "[data-scheme='dark'][data-theme='revue']"],
+  ['Atlas', "[data-scheme='dark'][data-theme='atlas']"],
 ])('mode nuit %s', (_name, selector) => {
   const colors = block(selector);
   it.each(PAIRS)('%s sur %s ≥ 4,5:1', (fg, bg) => {
