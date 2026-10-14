@@ -78,3 +78,28 @@ describe('levelAt et rightCount', () => {
     expect(rightCount(right('vote'), 1893)).toMatchObject({ total: 1, partial: 0 });
   });
 });
+
+describe('infobulle de la carte', () => {
+  it('dit depuis combien de temps, ou combien il faudra attendre', async () => {
+    const { hoverText } = await import('@/features/suffrage/WorldRights');
+    const vote = right('vote');
+    expect(hoverText(vote, vote.countries.FRA, 2026)).toBe('Droit de vote depuis 82 ans (1944).');
+    expect(hoverText(vote, vote.countries.FRA, 1918)).toBe(
+      'Pas encore : il faudra attendre 1944, encore 26 ans.',
+    );
+    expect(hoverText(vote, vote.countries.GBR, 1920)).toBe('Sous conditions depuis 2 ans (1918).');
+    expect(hoverText(vote, vote.countries.AFG, TODAY)).toMatch(/perdu le droit de vote/);
+    expect(hoverText(vote, undefined, 1950)).toMatch(/Non renseigné/);
+  });
+});
+
+describe('l’attente des femmes après les hommes', () => {
+  it('ne garde que des attentes d’au moins dix ans, sans doublon, triées', async () => {
+    const { VOTE_GAPS, sortedVoteGaps } = await import('@/content/world/vote-gap');
+    expect(new Set(VOTE_GAPS.map((g) => g.name)).size).toBe(VOTE_GAPS.length);
+    for (const g of VOTE_GAPS) expect(g.women - g.men).toBeGreaterThanOrEqual(10);
+    const sorted = sortedVoteGaps();
+    expect(sorted[0]).toMatchObject({ name: 'Suisse', men: 1848, women: 1971 });
+    expect(sorted.find((g) => g.name === 'France')).toMatchObject({ men: 1848, women: 1944 });
+  });
+});

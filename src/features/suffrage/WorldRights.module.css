@@ -328,3 +328,29 @@
 .pillOn:hover {
   background: var(--primary-deep);
 }
+
+/* Infobulle au survol d'un pays. */
+.map {
+  position: relative;
+}
+
+.hover {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  width: max-content;
+  max-width: 220px;
+  padding: var(--space-sm) var(--space-md);
+  transform: translate(-50%, calc(-100% - 8px));
+  background: var(--action);
+  color: var(--on-action);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-caption);
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.hover strong {
+  font-size: var(--fs-body-sm);
+}

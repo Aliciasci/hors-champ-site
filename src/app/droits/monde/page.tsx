@@ -6,6 +6,8 @@ import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { WORLD_COUNTRIES, WORLD_RIGHTS } from '@/content/world';
+import { VOTE_GAP_SOURCE } from '@/content/world/vote-gap';
+import { VoteGap } from '@/features/suffrage/VoteGap';
 import { WorldRights } from '@/features/suffrage/WorldRights';
 import { pageMetadata } from '@/lib/seo';
 
@@ -19,7 +21,10 @@ export const metadata = pageMetadata({
 });
 
 // Une même source peut servir à plusieurs droits : chacune n'est listée qu'une fois.
-const SOURCES = [...new Map(WORLD_RIGHTS.map((r) => [r.source.id, r.source])).values()];
+const SOURCES = [
+  ...new Map(WORLD_RIGHTS.map((r) => [r.source.id, r.source])).values(),
+  VOTE_GAP_SOURCE,
+];
 
 export default function WorldPage() {
   return (
@@ -38,6 +43,8 @@ export default function WorldPage() {
       <Suspense fallback={<WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} />}>
         <WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} withUrl />
       </Suspense>
+
+      <VoteGap />
 
       <p className={`t-caption c-muted ${styles.method}`}>
         Une case par pays, à une position approximative ; une case pointillée signale un pays dont

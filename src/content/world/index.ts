@@ -41,6 +41,8 @@ export interface WorldRight {
   partialLabel: string;
   /** « …, dont 7 {partialPhrase} ». */
   partialPhrase: string;
+  /** Le droit plein, en tête de l'infobulle (« Droit de vote depuis 82 ans »). */
+  fullTitle: string;
   /** Légende des cases sans le droit (en rouge). */
   noneLabel: string;
   range: [number, number];
@@ -149,6 +151,7 @@ export const WORLD_RIGHTS: WorldRight[] = [
     partialLabel: 'sous conditions',
     partialPhrase: 'sous conditions',
     noneLabel: 'pas de droit de vote',
+    fullTitle: 'Droit de vote',
     range: [1890, TODAY],
     keyYears: [1893, 1918, 1944, 1971, 2011, TODAY],
     defaultYear: 1944,
@@ -166,6 +169,7 @@ export const WORLD_RIGHTS: WorldRight[] = [
     partialLabel: 'ouverture partielle',
     partialPhrase: 'en partie seulement',
     noneLabel: 'universités fermées',
+    fullTitle: 'Universités ouvertes',
     range: [1830, 1940],
     keyYears: [1833, 1861, 1880, 1905, 1935],
     defaultYear: 1880,
@@ -182,6 +186,7 @@ export const WORLD_RIGHTS: WorldRight[] = [
     partialLabel: 'non mariées seulement',
     partialPhrase: 'pour les seules femmes non mariées',
     noneLabel: 'pas de majorité légale',
+    fullTitle: 'Majorité légale pour toutes',
     range: [1850, 2010],
     keyYears: [1857, 1900, 1938, 1975, 2006],
     defaultYear: 1938,
@@ -196,6 +201,7 @@ export const WORLD_RIGHTS: WorldRight[] = [
     partialLabel: 'pour certains motifs',
     partialPhrase: 'pour certains motifs',
     noneLabel: 'interdit',
+    fullTitle: 'Avortement à la demande',
     range: [1915, 2025],
     keyYears: [1920, 1936, 1975, 2000, 2022],
     defaultYear: 1975,

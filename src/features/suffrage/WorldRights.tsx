@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState, type PointerEvent } from 'react';
 
 import { Pause, Play } from '@/components/icons';
 import {
@@ -100,7 +100,48 @@ const describe = (right: WorldRight, step: RightStep) => {
   return `${step.undated ? 'Aujourd’hui' : step.year} · ${what}`;
 };
 
+const years = (n: number) => (n <= 1 ? `${n} an` : `${n} ans`);
+const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+
+/**
+ * Ce que dit l'infobulle d'un pays l'année choisie : depuis combien de temps le droit existe,
+ * ou combien de temps il faudra encore attendre.
+ */
+export function hoverText(
+  right: WorldRight,
+  steps: readonly RightStep[] | undefined,
+  year: number,
+): string {
+  if (!steps) return 'Non renseigné dans la source pour ce droit.';
+  const current = [...steps].reverse().find((s) => s.year <= year);
+  const since = (step: RightStep) =>
+    year - step.year === 0
+      ? `depuis cette année`
+      : `depuis ${years(year - step.year)} (${step.year})`;
+  if (current?.level === 'full') return `${right.fullTitle} ${since(current)}.`;
+  if (current?.level === 'partial') return `${capitalize(right.partialLabel)} ${since(current)}.`;
+  if (current?.undated) return current.note ?? capitalize(right.noneLabel);
+  if (current) return `${capitalize(right.noneLabel)} depuis ${current.year}.`;
+  const next = steps.find((s) => s.level !== 'none' && s.year > year);
+  return next
+    ? `Pas encore : il faudra attendre ${next.year}, encore ${years(next.year - year)}.`
+    : capitalize(right.noneLabel);
+}
+
 function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
+  const [hover, setHover] = useState<{ code: string; x: number; y: number } | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const onPointer = (event: PointerEvent<HTMLDivElement>) => {
+    const tile = (event.target as HTMLElement).closest<HTMLElement>('[data-code]');
+    const box = mapRef.current?.getBoundingClientRect();
+    if (!tile || !box) return setHover(null);
+    const rect = tile.getBoundingClientRect();
+    setHover({
+      code: tile.dataset.code!,
+      x: Math.min(Math.max(rect.left + rect.width / 2 - box.left, 110), box.width - 110),
+      y: rect.top - box.top,
+    });
+  };
   const [year, setYear] = useState(right.defaultYear);
   const [playing, setPlaying] = useState(false);
   const sliderId = useId();
@@ -240,23 +281,23 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
       <div className={styles.layout}>
         <div className={styles.mapColumn}>
           <div
+            ref={mapRef}
             className={styles.map}
+            onPointerMove={onPointer}
+            onPointerDown={onPointer}
+            onPointerLeave={() => setHover(null)}
             role="img"
             aria-label={`Carte en tuiles : en ${year}, ${total} pays ${right.verb}. Le détail est dans le tableau ci-dessous.`}
             data-testid="suffrage-map"
           >
             {countries.map((country) => {
               const level = levelAt(right.countries[country.code], year) ?? 'unknown';
-              const steps = right.countries[country.code];
-              const title = steps
-                ? `${country.name} : ${steps.map((s) => describe(right, s)).join(' ; ')}`
-                : `${country.name} : non renseigné`;
               return (
                 <span
                   key={country.code}
                   className={`${styles.tile} ${styles[level]} ${country.code === 'FRA' ? styles.france : ''}`}
                   style={{ gridColumn: country.col + 1, gridRow: country.row + 1 }}
-                  title={title}
+                  data-code={country.code}
                   data-state={level}
                   data-testid={`suffrage-tile-${country.code}`}
                 >
@@ -264,6 +305,17 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
                 </span>
               );
             })}
+            {hover ? (
+              <span
+                className={styles.hover}
+                style={{ left: hover.x, top: hover.y }}
+                aria-hidden="true"
+                data-testid="suffrage-hover"
+              >
+                <strong>{countries.find((c) => c.code === hover.code)?.name}</strong>
+                <span>{hoverText(right, right.countries[hover.code], year)}</span>
+              </span>
+            ) : null}
           </div>
 
           <ul className={styles.legend} aria-hidden="true">
