@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "person-lise-meitner": {
+      "summary": "Lise Meitner est une physicienne autrichienne naturalisée suédoise, connue pour ses travaux sur la radioactivité et la physique nucléaire. Elle a fourni avec Otto Frisch la première explication théorique de la fission nucléaire, après des recherches sur l’uranium auxquelles elle avait associé Otto Hahn et Fritz Strassmann. En 1938, contrainte de fuir l’Allemagne, elle ne peut pas signer l’article lié aux résultats expérimentaux. Elle n’a jamais reçu le prix Nobel, malgré 49 nominations."
+    },
+    "person-sofonisba-anguissola": {
+      "summary": "Sofonisba Anguissola est une artiste peintre italienne maniériste, née à Crémone vers 1532 et morte à Palerme en 1625. Formée entre 1546 et 1549 auprès de Bernardino Campi, elle fait du portrait son terrain principal. En 1559, elle rejoint la cour d’Espagne de Philippe II, devient dame d’honneur d’Élisabeth de France, lui enseigne le dessin et travaille comme peintre officielle jusqu’en 1573. Ses portraits de la famille royale ont ensuite été en partie oubliés ou attribués à Alonso Sánchez Coello avant des réattributions progressives."
+    },
+    "person-hubertine-auclert": {
+      "summary": "Hubertine Auclert est une journaliste et militante féministe française, engagée pour l’éligibilité des femmes et leur droit de vote. En 1876, elle fonde la société Le Droit des femmes, qui devient Le Suffrage des femmes en 1883. Le 13 février 1881, elle lance La Citoyenne, un journal de combat pour la libération féminine. À partir de 1880, elle mène aussi une grève de l’impôt, au nom de l’idée que sans représentation légale, les femmes ne devraient pas être imposables."
+    },
+    "person-ada-lovelace": {
+      "summary": "Ada Lovelace, née Augusta Ada Byron, est une mathématicienne britannique et une pionnière de la science informatique. Elle est surtout connue pour avoir conçu et décrit le premier programme informatique publié, dans son travail sur la machine analytique de Charles Babbage. Entre 1842 et 1843, elle traduit un mémoire de Louis-Frédéric Ménabréa, puis y ajoute sept notes, de A à G, presque trois fois plus longues que l’article original. La note G présente un algorithme pour calculer les nombres de Bernoulli avec la machine."
+    },
+    "person-artemisia-gentileschi": {
+      "summary": "Artemisia Gentileschi est une peintre italienne de l’école caravagesque, née à Rome en 1593 et morte à Naples vers 1656. Elle s’impose par son art « à une époque où les femmes peintres ne sont pas facilement acceptées » et compte parmi les premières femmes à peindre des sujets historiques et religieux. Sa première œuvre attribuée, Suzanne et les Vieillards, est signée à dix-sept ans. En 1616, à Florence, elle devient la première femme acceptée à l’Académie du dessin."
+    },
+    "person-brigitte-gros": {
+      "summary": "Brigitte Gros est une femme politique et femme de lettres française, née Servan-Schreiber. Résistante pendant la Seconde Guerre mondiale, elle devient agent de liaison dans les maquis de l’Ain à 18 ans, en 1943, puis reçoit la croix de guerre. Élue maire de Meulan puis sénatrice des Yvelines, elle intervient sur les crèches et les modes de garde. En 1978, elle dépose deux propositions de loi, l’une pour mieux protéger les femmes du viol, l’autre pour faciliter leur accès à la vie publique."
+    },
+    "person-cecile-brunschvicg": {
+      "summary": "Cécile Kahn, dite Cécile Brunschvicg, est une femme politique et féministe française, née en 1877 et morte en 1946. Son engagement commence avec le Conseil national des femmes françaises, puis avec l’Union française pour le suffrage des femmes, dont elle devient secrétaire générale en 1910 et présidente en 1924. Elle crée aussi les Réchauds de midi, pour permettre aux travailleuses de disposer d’un repas chaud. En 1936, elle est nommée sous-secrétaire d’État à l’Éducation nationale et participe notamment à la création des cantines scolaires."
+    },
+    "person-emily-mary-osborn": {
+      "summary": "Emily Mary Osborn est une peintre britannique née à Kentish Town et baptisée le 19 mars 1828. Élevée dans l’Essex, elle revient à Londres avec sa famille en 1848, puis fréquente l’Académie de M. Dickinson à Maddox Street. À partir de 1851, elle expose à Londres, notamment à la Royal Academy, et elle est membre de la Society of Lady Artists. Elle meurt le 14 avril 1925 à St John’s Wood."
+    },
+    "person-emmy-noether": {
+      "summary": "Emmy Noether est une mathématicienne allemande, spécialiste d’algèbre abstraite et de physique théorique, née en 1882 et morte en 1935. Elle a transformé les théories des anneaux, des corps et des algèbres, notamment avec son article de 1921 sur la théorie des idéaux dans les anneaux. En physique, le théorème de Noether établit le lien entre symétrie et lois de conservation. À Göttingen, elle a aussi enseigné plusieurs années sans poste officiel ni rémunération."
+    },
+    "person-gisele-halimi": {
+      "summary": "Gisèle Halimi est une avocate, militante féministe et femme politique franco-tunisienne. En 1972, elle défend les accusées du procès de Bobigny, où une mineure ayant avorté après un viol et quatre femmes majeures sont jugées. Elle fait du procès une tribune contre la loi de 1920, obtient la relaxe de Marie-Claire Chevalier puis de deux autres accusées, et le dossier contribue à l’évolution vers la loi Veil. Elle représente aussi Anne Tonglet et Araceli Castellano lors du procès d’Aix-en-Provence en 1978."
+    },
+    "person-grace-hopper": {
+      "summary": "Grace Murray Hopper est une informaticienne américaine, formée aux mathématiques et passée par la marine américaine. En 1951, elle conçoit pour UNIVAC I le premier compilateur, nommé A-0 System. Elle invente aussi FLOW-MATIC pour UNIVAC I, avant de défendre chez IBM un langage proche de l’anglais, d’où naît Cobol en 1959. Elle reste dans la Marine jusqu’en 1986, avec le grade de Rear admiral (lower half)."
+    },
+    "person-hedy-lamarr": {
+      "summary": "Hedwig Kiesler, dite Hedy Lamarr, est une actrice de cinéma et inventrice autrichienne, naturalisée américaine, née à Vienne en 1914 et morte à Casselberry en 2000. Hors plateau, elle invente avec George Antheil un système destiné à coder les transmissions par saut de fréquence. Le brevet, déposé le 10 juin 1941 et enregistré le 11 août 1942, décrit une variation simultanée des fréquences de l’émetteur et du récepteur. La Marine américaine le juge d’abord « irréalisable », mais les principes de cette invention sont ensuite utilisés dans les téléphones portables et les réseaux sans fil."
+    },
+    "person-julie-victoire-daubie": {
+      "summary": "Julie-Victoire Daubié est une journaliste française et militante des droits des femmes, née à Bains-les-Bains et morte à Fontenoy-le-Château. En 1861, elle s’inscrit aux épreuves du baccalauréat à Lyon et l’obtient le 17 août, devenant la première femme française reçue à cet examen. Elle poursuit ses études et devient aussi la première licenciée ès lettres le 28 octobre 1871, alors que les cours de la Sorbonne ne sont pas ouverts aux femmes. Au début de 1871, elle crée l’Association pour le suffrage des femmes."
+    },
+    "person-katherine-johnson": {
+      "summary": "Katherine Johnson est une mathématicienne américaine qui travaille pour le NACA puis la NASA. Réputée pour la fiabilité de ses calculs en navigation astronomique, elle fait partie des « ordinateurs humains », ces mathématiciennes qui calculent et vérifient les trajectoires, les fenêtres de lancement et les plans d’urgence. En 1962, elle vérifie à la main les calculs de trajectoire informatisés de Mercury-Atlas 6. En 1969, pendant Apollo 11, elle aide à préciser les trajectoires de rendez-vous spatial entre le module de commande et le module lunaire."
+    },
+    "person-louise-weiss": {
+      "summary": "Louise Weiss est une journaliste, femme de lettres, féministe et femme politique française, née à Arras et morte à Paris. Après avoir écrit pour L’Europe nouvelle, elle fonde en 1934 l’association « Les femmes nouvelles » pour défendre le droit de voter et d’être élue. Sa campagne passe par des gestes pensés pour attirer la presse, comme sa candidature symbolique à Montmartre, les cartons à chapeaux transformés en urnes et les 18 000 bulletins en sa faveur. En 1979, elle est élue eurodéputée et prononce le discours d’ouverture du Parlement européen comme doyenne."
+    },
+    "person-marie-andree-lagroua-weill-halle": {
+      "summary": "Marie-Andrée Lagroua Weill-Hallé est une gynécologue française engagée pour l’accès à la contraception, alors limité par la loi de 1920. En 1956, après l’affaire Bac, elle dépose avec la sociologue Évelyne Sullerot les statuts de l’association « Maternité Heureuse ». Cette association devient en 1960 le Mouvement français pour le planning familial, qu’elle préside jusqu’en 1966. Elle s’en éloigne ensuite, en désaccord avec sa ligne sur la gratuité de la contraception et la libéralisation de l’avortement."
+    },
+    "person-marie-curie": {
+      "summary": "Marie Curie est une physicienne et chimiste polonaise, naturalisée française. Elle est la première femme à recevoir un prix Nobel et la seule femme à en avoir reçu deux, en physique puis en chimie. En 1898, elle annonce la découverte du polonium, puis celle du radium. En France, elle devient aussi la première femme à enseigner à la Sorbonne."
+    },
+    "person-mary-cassatt": {
+      "summary": "Mary Cassatt est une peintre et graveuse américaine, installée principalement en France à partir des années 1870. Associée à l’impressionnisme, elle participe à plusieurs expositions du groupe, dont la quatrième en 1879 où elle envoie onze peintures. Son travail se concentre notamment sur des portraits de femmes et d’enfants, avec une attention aux relations entre mères et enfants. Elle agit aussi comme conseillère de collectionneurs et contribue à faire connaître l’impressionnisme auprès des collectionneurs américains."
+    },
+    "person-olympe-de-gouges": {
+      "summary": "Olympe de Gouges, née Marie Gouze, est une femme de lettres, dramaturge et femme politique française. En 1791, elle rédige la Déclaration des droits de la femme et de la citoyenne, pensée comme une réponse à la Déclaration des droits de l’homme et du citoyen de 1789. Elle laisse aussi des écrits et pamphlets pour les droits civils et politiques des femmes et pour l’abolition de l’esclavage des Noirs dans les colonies. Arrêtée en 1793, elle meurt guillotinée à Paris."
+    },
+    "person-rosa-bonheur": {
+      "summary": "Rosa Bonheur est une peintre et sculptrice française, née à Bordeaux en 1822 et morte à Thomery en 1899, spécialisée dans la représentation animalière. Elle expose pour la première fois au Salon de 1841 avec deux peintures animalières, puis reçoit une commande de l’État après sa médaille d’or au Salon de 1848. Le Marché aux chevaux, présenté au Salon de 1853, lui donne une grande notoriété et finit au Metropolitan Museum de New-York. En 1865, elle devient la première artiste femme chevalière de la Légion d’honneur, puis la première femme promue officier en 1894."
+    },
+    "person-rosalind-franklin": {
+      "summary": "Rosalind Franklin est une physicochimiste britannique, née à Londres en 1920 et morte à Chelsea en 1958. Au King’s College, elle travaille sur l’ADN avec la diffractométrie de rayons X et réalise en mai 1952 les clichés de la forme B, dont le cliché 51. Ses images et leur analyse sont déterminantes dans la découverte de la double hélice, publiée dans Nature en 1953. Partie au Birkbeck College, elle utilise ensuite la cristallographie sur les virus et permet la découverte de la structure du virus de la mosaïque du tabac."
+    },
+    "person-simone-de-beauvoir": {
+      "summary": "Simone de Beauvoir est une philosophe et essayiste française, aussi connue pour ses romans et ses mémoires. En 1949, Le Deuxième Sexe décrit une société qui maintient les femmes dans une situation d’infériorité. En 1971, elle rédige le manifeste des 343, publié dans Le Nouvel Observateur, qui réclame l’avortement libre et l’accès aux moyens anticonceptionnels. La même année, elle soutient Choisir la cause des femmes et devient la première présidente de l’association."
+    },
+    "person-simone-veil": {
+      "summary": "Simone Veil est une magistrate et femme d’État française, née Jacob en 1927 à Nice et morte en 2017 à Paris. Déportée à Auschwitz à 16 ans pendant la Shoah, elle revient en France, étudie le droit et la science politique, puis entre dans la magistrature. Nommée ministre de la Santé en 1974, elle présente au Parlement le projet de loi qui dépénalise le recours à l’interruption volontaire de grossesse, ensuite appelée « loi Veil ». Elle devient en 1979 la première présidente du Parlement européen élue à ce poste au suffrage universel."
+    },
+    "person-suzanne-valadon": {
+      "summary": "Suzanne Valadon, née Marie-Clémentine Valadon en 1865 à Bessines-sur-Gartempe et morte en 1938 à Paris, est une peintre et graveuse française. Elle entre dans la peinture comme modèle, puis devient artiste-peintre, sans passer par les Beaux-Arts. À 18 ans, au moment de la naissance de son fils Maurice, elle signe sa première œuvre, un autoportrait au pastel. Elle commence la peinture à l’huile en 1892 et expose en 1894 au Salon de la Société nationale des beaux-arts avec cinq dessins."
+    },
+    "person-yvette-roudy": {
+      "summary": "Yvette Roudy est une femme politique française engagée dans la cause féministe. Ministre des Droits de la femme de 1981 à 1986, elle lance une campagne sur la contraception puis met en place le remboursement de l’IVG par la Sécurité sociale. Deux lois portent son nom, l’une sur le remboursement de l’IVG en 1982, l’autre sur l’égalité de l’homme et de la femme qui travaillent en entreprise en 1983. Avant le gouvernement, elle avait traduit The Feminine Mystique de Betty Friedan et créé La Femme du XXe siècle, journal du MDF."
+    }
+  }
+}

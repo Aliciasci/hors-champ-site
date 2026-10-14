@@ -8,6 +8,7 @@ import { discoveries, matildaIdea, scienceEvents, scientists } from '@/data/cult
 import { works } from '@/data/culture/works';
 import { localExperiences } from '@/data/experiences';
 import { localYouthItems, youthLives } from '@/data/youth';
+import { applyRedaction } from '@/content/redaction';
 import { prepareCultureEntities, type CultureIssue } from '@/features/culture/validateCulture';
 import { resolveThemes, type ResolvedTheme } from '@/features/portraits/portraitThemes';
 import { validateYouth } from '@/features/youth/youthCatalog';
@@ -131,12 +132,24 @@ export function buildCatalog(
 
 let cached: Catalog | null = null;
 
+/** Fiches locales, avec les réécritures validées par la rédaction (src/content/redaction.json). */
+function cultureWithRedaction(): [string, readonly unknown[]][] {
+  const problems: string[] = [];
+  const rewritten = applyRedaction(
+    CULTURE_FILES.flatMap(([, items]) => items),
+    problems,
+  );
+  if (problems.length > 0) throw new ContentValidationError(problems);
+  let index = 0;
+  return CULTURE_FILES.map(([file, items]) => [file, items.map(() => rewritten[index++])]);
+}
+
 /** Catalogue local, validé une fois. */
 export function getCatalog(): Catalog {
   cached ??= buildCatalog(
     {
       experiences: localExperiences,
-      culture: CULTURE_FILES,
+      culture: cultureWithRedaction(),
       youthItems: localYouthItems,
       youthLives,
       categories,

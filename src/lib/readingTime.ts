@@ -18,6 +18,7 @@ function ficheTexts(entity: CultureEntity, all: readonly CultureEntity[]): (stri
     right?.outcome,
     ...(right?.limits ?? []),
     ...(right?.later.map((item) => item.text) ?? []),
+    ...(entity.article?.paragraphs.flatMap((p) => [p.heading, p.text]) ?? []),
     // Contributions décrites sur cette fiche (vers une conquête) ou reçues (d'autres fiches).
     ...entity.links.map((link) => link.detail),
     ...(entity.kind === 'right' ? contributorsOf(all, entity.id).map((c) => c.link.detail) : []),

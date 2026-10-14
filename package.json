@@ -14,7 +14,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run typecheck && npm run lint && npm test",
-    "prebuild": "node scripts/build-images.mjs"
+    "prebuild": "node scripts/build-images.mjs",
+    "redaction:proposer": "tsx --tsconfig tsconfig.json scripts/redaction/proposer.ts",
+    "redaction:relire": "tsx --tsconfig tsconfig.json scripts/redaction/relire.ts",
+    "redaction:accepter": "tsx --tsconfig tsconfig.json scripts/redaction/accepter.ts"
   },
   "dependencies": {
     "lucide-react": "^1.57.0",

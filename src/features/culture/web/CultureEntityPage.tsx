@@ -20,6 +20,7 @@ import type { CultureEntity } from '@/types';
 
 import { groupByKind, KIND_LABELS, relatedEntities, relatedExperiences } from '../cultureGraph';
 import styles from './CultureEntityPage.module.css';
+import { ArticleBody } from './ArticleBody';
 import { relationLabel } from './relationLabel';
 import { CombatsSection, RightDetails } from './RightSections';
 
@@ -116,6 +117,8 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
         <div className={styles.prose}>
           <p className="t-reading">{entity.summary}</p>
         </div>
+
+        <ArticleBody entity={entity} />
 
         {entity.kind === 'right' ? <RightDetails entity={entity} all={all} /> : null}
         {entity.kind === 'person' || entity.kind === 'organization' ? (

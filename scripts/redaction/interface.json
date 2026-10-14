@@ -1,0 +1,122 @@
+[
+  {
+    "id": "menu.decouvrir",
+    "ou": "Menu du haut : rubrique d’accueil (le fil des fiches)",
+    "actuel": "Découvrir",
+    "contrainte": "1 ou 2 mots, 14 caractères au plus"
+  },
+  {
+    "id": "menu.elles",
+    "ou": "Menu du haut : le mur des portraits de femmes",
+    "actuel": "Elles",
+    "contrainte": "1 ou 2 mots, 14 caractères au plus"
+  },
+  {
+    "id": "menu.possible",
+    "ou": "Menu du haut : la rubrique jeunesse (6-14 ans), « Tout est possible »",
+    "actuel": "Possible",
+    "contrainte": "1 ou 2 mots, 14 caractères au plus"
+  },
+  {
+    "id": "menu.contrechamps",
+    "ou": "Menu du haut : les mises en situation pour repérer le sexisme ordinaire",
+    "actuel": "Contrechamps",
+    "contrainte": "1 ou 2 mots, 14 caractères au plus ; « Contrechamps » est le nom de la rubrique"
+  },
+  {
+    "id": "une.titre",
+    "ou": "Page d’accueil : grand titre (1re ligne)",
+    "actuel": "L’histoire les a laissées hors champ.",
+    "contrainte": "une phrase courte, 45 caractères au plus"
+  },
+  {
+    "id": "une.accent",
+    "ou": "Page d’accueil : 2e ligne du titre, en couleur",
+    "actuel": "On les remet dans le cadre.",
+    "contrainte": "répond à la 1re ligne, 35 caractères au plus"
+  },
+  {
+    "id": "elles.titre",
+    "ou": "Page Elles (mur de 25 portraits) : grand titre",
+    "actuel": "Ce qu’elles ont changé.",
+    "contrainte": "45 caractères au plus"
+  },
+  {
+    "id": "elles.accent",
+    "ou": "Page Elles : 2e ligne du titre",
+    "actuel": "Et ce qu’on a oublié.",
+    "contrainte": "35 caractères au plus"
+  },
+  {
+    "id": "elles.chapo",
+    "ou": "Page Elles : chapô",
+    "actuel": "25 visages, du XVIᵉ siècle à aujourd’hui. Retenez-en un, la suite vient toute seule.",
+    "contrainte": "une ou deux phrases, 140 caractères au plus"
+  },
+  {
+    "id": "droits.titre",
+    "ou": "Page des conquêtes de droits des femmes en France : grand titre",
+    "actuel": "Rien ne leur a été donné.",
+    "contrainte": "45 caractères au plus"
+  },
+  {
+    "id": "droits.accent",
+    "ou": "Page des droits : 2e ligne du titre",
+    "actuel": "Elles l’ont arraché.",
+    "contrainte": "35 caractères au plus"
+  },
+  {
+    "id": "droits.chapo",
+    "ou": "Page des droits : chapô",
+    "actuel": "Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a demandé des années de combat. Voici qui les a portés, et ce que les sources disent de leur rôle.",
+    "contrainte": "2 ou 3 phrases, 220 caractères au plus"
+  },
+  {
+    "id": "contrechamps.titre",
+    "ou": "Page Contrechamps : grand titre",
+    "actuel": "Le sexisme ne se voit pas toujours.",
+    "contrainte": "45 caractères au plus"
+  },
+  {
+    "id": "contrechamps.accent",
+    "ou": "Page Contrechamps : 2e ligne du titre",
+    "actuel": "Regardez mieux.",
+    "contrainte": "35 caractères au plus"
+  },
+  {
+    "id": "collection.titre",
+    "ou": "Page Collection (toutes les fiches, en archives) : grand titre",
+    "actuel": "Toutes les fiches.",
+    "contrainte": "45 caractères au plus"
+  },
+  {
+    "id": "collection.accent",
+    "ou": "Page Collection : 2e ligne du titre",
+    "actuel": "Tirez un fil.",
+    "contrainte": "35 caractères au plus"
+  },
+  {
+    "id": "possible.titre",
+    "ou": "Rubrique jeunesse (6-14 ans) : grand titre, tutoiement",
+    "actuel": "Astronaute, ingénieure, cheffe d’orchestre.",
+    "contrainte": "45 caractères au plus, s’adresse à des enfants"
+  },
+  {
+    "id": "possible.accent",
+    "ou": "Rubrique jeunesse : 2e ligne du titre, tutoiement",
+    "actuel": "Et pourquoi pas toi ?",
+    "contrainte": "35 caractères au plus"
+  },
+  {
+    "id": "apropos.titre",
+    "ou": "Page Qui sommes-nous (la charte éditoriale) : grand titre",
+    "actuel": "Notre charte.",
+    "contrainte": "45 caractères au plus"
+  },
+  {
+    "id": "apropos.accent",
+    "ou": "Page Qui sommes-nous : 2e ligne du titre",
+    "actuel": "Noir sur blanc.",
+    "contrainte": "35 caractères au plus"
+  }
+]

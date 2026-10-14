@@ -109,6 +109,25 @@ export interface CulturePeriod {
   endYear?: number;
 }
 
+/**
+ * Paragraphe d'un article long (propre au web) : intertitre éventuel, texte, et les sources de
+ * la fiche dont il tire ses faits.
+ */
+export interface ArticleParagraph {
+  heading?: string;
+  text: string;
+  sourceIds: string[];
+}
+
+/** Article long d'une fiche, validé par la rédaction (voir src/content/redaction.json). */
+export interface CultureArticle {
+  paragraphs: ArticleParagraph[];
+  /** Modèle qui a préparé le texte, affiché par transparence. */
+  preparedWith: string;
+  /** Date de validation par la rédaction. */
+  acceptedAt: IsoDate;
+}
+
 export interface CultureEntity {
   /** Préfixé par le type : `person-…`, `work-…`, `movement-…`, `event-…`, `idea-…`. */
   id: string;
@@ -135,6 +154,8 @@ export interface CultureEntity {
   law?: LawDetails;
   links: CultureLink[];
   sources: Source[];
+  /** Article long (web uniquement), superposé par src/content/redaction.json. */
+  article?: CultureArticle;
   editorialStatus: EditorialStatus;
   reviewedAt: IsoDate | null;
 }

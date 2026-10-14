@@ -104,8 +104,12 @@ export default function AboutPage() {
             consultation et l’extrait exact sur lequel on s’appuie.
           </li>
           <li>
-            Les résumés ne disent rien que les extraits ne disent déjà. Les dates sont recoupées
-            avec Wikidata.
+            Les résumés ne disent rien que les sources citées ne disent déjà. Les dates sont
+            recoupées avec Wikidata.
+          </li>
+          <li>
+            Certaines descriptions sont préparées avec l’aide d’une IA, à partir des seules sources
+            citées sur la fiche. Chacune est relue et validée par la rédaction avant d’être publiée.
           </li>
           <li>
             Une femme n’est associée à un droit que si une source décrit son rôle. Une victoire
