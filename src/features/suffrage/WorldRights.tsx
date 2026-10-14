@@ -141,7 +141,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
   const legend: [Level | 'unknown', string][] = [
     ['full', right.fullLabel],
     ['partial', right.partialLabel],
-    ['none', 'pas encore, ou plus'],
+    ['none', right.noneLabel],
     ['unknown', 'non renseigné'],
   ];
 
