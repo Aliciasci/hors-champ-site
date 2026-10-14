@@ -36,12 +36,13 @@
   align-content: center;
   gap: var(--space-sm);
   padding: var(--space-xl) 0;
-  opacity: 0.35;
-  transition: opacity var(--duration-base);
+  color: var(--text-muted);
+  transition: color var(--duration-base);
 }
 
+/* L'étape au centre de l'écran ; les autres restent lisibles, en retrait. */
 .on {
-  opacity: 1;
+  color: var(--text);
 }
 
 .stepYear {
@@ -62,7 +63,6 @@
 
 .stepCount {
   font-size: var(--fs-body-sm);
-  color: var(--text-2);
 }
 
 /* Petit écran : la carte fixée reste au-dessus ; les étapes glissent dessous. */
