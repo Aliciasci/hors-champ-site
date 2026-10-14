@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/elles',
     '/possible',
     '/droits',
+    '/droits/monde',
     '/collection',
     '/contrechamps',
     '/contrechamps/catalogue',

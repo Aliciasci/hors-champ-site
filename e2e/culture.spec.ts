@@ -77,3 +77,16 @@ test('collection : filtre de domaine dans l’URL', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Conquêtes' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Œuvres' })).toHaveCount(0);
 });
+
+test('droits dans le monde : années clés et curseur font évoluer la carte', async ({ page }) => {
+  await seedState(page);
+  await open(page, '/droits/');
+  await page.getByTestId('rights-world').click();
+  await expect(page).toHaveURL(/\/droits\/monde\/$/);
+  await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'full');
+  await page.getByTestId('suffrage-key-1918').click();
+  await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'none');
+  await expect(page.getByTestId('suffrage-tile-GBR')).toHaveAttribute('data-state', 'partial');
+  await page.getByTestId('suffrage-year').fill('1893');
+  await expect(page.getByTestId('suffrage-count')).toContainText('1 pays');
+});

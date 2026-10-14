@@ -1,0 +1,221 @@
+.root {
+  display: grid;
+  gap: var(--space-xl);
+  min-width: 0;
+}
+
+/* Lecture, curseur des années, années clés. */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md) var(--space-xl);
+  padding: var(--space-md) 0;
+  border-top: var(--border-hairline) solid var(--border);
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.play {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--touch);
+  padding: 0 var(--space-lg);
+  border: 0;
+  border-radius: var(--radius-button);
+  background: var(--action);
+  color: var(--on-action);
+  font-weight: 600;
+  font-size: var(--fs-label);
+}
+
+.play:hover {
+  background: var(--primary-deep);
+}
+
+.slider {
+  flex: 1 1 260px;
+  display: grid;
+  gap: var(--space-xxs);
+  min-width: 0;
+}
+
+.slider input {
+  width: 100%;
+  min-height: var(--touch);
+  accent-color: var(--primary);
+}
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.key {
+  min-height: var(--touch);
+  min-width: 64px;
+  padding: 0 var(--space-md);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+}
+
+.key:hover {
+  background: var(--surface-alt);
+}
+
+.keyOn {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}
+
+.keyOn:hover {
+  background: var(--primary-deep);
+}
+
+/* Année en très grand, puis le compte. */
+.count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs) var(--space-lg);
+  max-width: var(--measure);
+}
+
+.year {
+  font-family: var(--font-display);
+  font-weight: var(--display-strong-weight);
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  line-height: 0.9;
+  color: var(--primary);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.number {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Carte en tuiles : 26 colonnes, une case par pays. */
+.map {
+  display: grid;
+  grid-template-columns: repeat(26, minmax(0, 1fr));
+  gap: 2px;
+  max-width: 1040px;
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2px;
+  transition:
+    background-color var(--duration-base),
+    color var(--duration-base);
+}
+
+.code {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .map {
+    gap: 4px;
+  }
+
+  .code {
+    display: inline;
+  }
+}
+
+.full {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.partial {
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  border: 1px dashed var(--primary);
+}
+
+.none {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.france {
+  box-shadow: inset 0 0 0 3px var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    transition: none;
+  }
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-xl);
+  font-size: var(--fs-caption);
+  color: var(--text-2);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  box-sizing: border-box;
+}
+
+.table summary {
+  min-height: var(--touch);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--space-sm) var(--space-md) var(--space-sm) 0;
+  border-bottom: var(--border-hairline) solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table thead th {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-overline);
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.table tbody th {
+  font-weight: 600;
+  white-space: nowrap;
+}

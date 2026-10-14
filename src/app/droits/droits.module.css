@@ -1,0 +1,23 @@
+/* Renvoi vers la carte du monde, sous l'en-tête. */
+.world {
+  display: grid;
+  gap: var(--space-xs);
+  max-width: var(--reading);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.world:hover {
+  background: var(--surface-alt);
+}
+
+.worldRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}

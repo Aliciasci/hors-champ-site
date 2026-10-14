@@ -32,6 +32,7 @@ export {
   Link as LinkIcon,
   Network,
   Palette,
+  Pause,
   Play,
   Printer,
   Puzzle,

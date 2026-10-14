@@ -16,6 +16,7 @@ const PAGES = [
   '/possible/activite-observer/',
   '/possible/vie-oceans/',
   '/droits/',
+  '/droits/monde/',
   '/collection/',
   '/culture/person-lise-meitner/',
   '/culture/right-ivg/',

@@ -1,6 +1,9 @@
+import Link from 'next/link';
 import { Suspense } from 'react';
 
 import { CultureCard } from '@/components/content/CultureCard';
+import { ArrowRight } from '@/components/icons';
+import { PageMasthead } from '@/components/layout/PageMasthead';
 import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { getCatalog } from '@/content/catalog';
@@ -9,7 +12,8 @@ import { PortraitStrip } from '@/features/culture/web/PortraitStrip';
 import { RightsBrowser } from '@/features/culture/web/RightsBrowser';
 import { pageMetadata } from '@/lib/seo';
 import type { CultureEntity } from '@/types';
-import { PageMasthead } from '@/components/layout/PageMasthead';
+
+import styles from './droits.module.css';
 
 export const metadata = pageMetadata({
   title: 'Derrière chaque droit',
@@ -86,6 +90,15 @@ export default function Page() {
         accent="Elles l’ont arraché."
         dek="Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a demandé des années de combat. Voici qui les a portés, et ce que les sources disent de leur rôle."
       />
+      <Link href="/droits/monde" className={styles.world} data-testid="rights-world">
+        <span className="t-overline c-accent">Et ailleurs ?</span>
+        <span className={styles.worldRow}>
+          <span className="t-title3">
+            Le droit de vote des femmes dans le monde, de 1893 à 2011
+          </span>
+          <ArrowRight size={20} aria-hidden="true" className="c-primary" />
+        </span>
+      </Link>
       <div style={{ marginBottom: 'var(--space-lg)' }}>
         <PortraitStrip
           people={people}
