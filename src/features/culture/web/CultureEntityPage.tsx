@@ -56,7 +56,7 @@ export function cultureCrumbs(entity: CultureEntity): Crumb[] {
 /**
  * Une fiche présentée comme un article : une seule colonne de lecture, titre, chapeau,
  * signature (dates, temps de lecture, statut), barre d'actions, image légendée, texte,
- * puis « À lire aussi » et les sources en notes.
+ * puis « À lire aussi » et les sources.
  */
 export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; crumbs: Crumb[] }) {
   const { culture: all, experiences, categories } = getCatalog();
@@ -187,10 +187,8 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
 
       {entity.sources.length > 0 ? (
         <section id="sources" className={styles.section} aria-labelledby="sources-title">
-          <h2 id="sources-title" className="t-overline c-2">
-            Sources
-          </h2>
-          <SourceList sources={entity.sources} variant="notes" />
+          <SectionHeader id="sources-title" kicker="Vérifier" title="Sources" />
+          <SourceList sources={entity.sources} />
         </section>
       ) : null}
     </Container>
