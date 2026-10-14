@@ -28,14 +28,21 @@ const contrast = (a: string, b: string) => {
 
 const DOMAINS = ['arts', 'sciences', 'droits'];
 
-/** Surtitres de rubrique sur le fond, les cartes et leur fond pâle ; textes sur les encarts. */
+/**
+ * Surtitres de rubrique ou de teinte sur le fond, les cartes et leur fond pâle ; pastille pleine
+ * (texte clair sur la teinte) ; textes sur les encarts.
+ */
 const PAIRS: [string, string][] = [
   ...DOMAINS.flatMap((d): [string, string][] => [
     [`dom-${d}`, 'bg'],
     [`dom-${d}`, 'surface'],
     [`dom-${d}`, `dom-${d}-soft`],
     ['text', `dom-${d}-soft`],
+    ['on-primary', `dom-${d}`],
   ]),
+  ['day-ink', 'bg'],
+  ['day-ink', 'surface'],
+  ['on-primary', 'day-ink'],
   ['day-ink', 'day-soft'],
   ['text', 'day-soft'],
   ['accent-ink', 'possible-soft'],

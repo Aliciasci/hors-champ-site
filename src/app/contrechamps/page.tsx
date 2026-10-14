@@ -30,6 +30,7 @@ export default function ContrechampsPage() {
     <Container>
       <PageMasthead
         kicker="Contrechamps"
+        tone="sciences"
         title="Le sexisme ne se voit pas toujours."
         accent="Regardez mieux."
       />

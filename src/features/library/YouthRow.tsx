@@ -22,6 +22,7 @@ export function YouthRow({ item }: { item: SlimYouth }) {
     <Link
       href={`/possible/${item.id}`}
       className={styles.youthRow}
+      data-tone="ocre"
       data-testid={`library-youth-${item.id}`}
     >
       {item.image ? (
@@ -34,7 +35,7 @@ export function YouthRow({ item }: { item: SlimYouth }) {
         </span>
       )}
       <span className={styles.youthText}>
-        <span className="t-overline c-accent">
+        <span className="t-overline c-domain">
           Tout est possible · {YOUTH_KIND_LABELS[item.kind]}
         </span>
         <span className={`t-title3 ${styles.rowTitle}`}>{item.title}</span>

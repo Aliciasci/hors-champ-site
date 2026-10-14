@@ -14,14 +14,14 @@
   display: grid;
   gap: var(--space-md);
   padding: var(--space-xxl) 0 var(--space-xl);
-  border-top: var(--border-bold) solid var(--text);
+  border-top: var(--border-bold) solid var(--dom, var(--text));
 }
 
 .number {
   font-family: var(--font-mono);
   font-size: var(--fs-overline);
   letter-spacing: 0.3em;
-  color: var(--accent-ink);
+  color: var(--dom, var(--accent-ink));
 }
 
 .chapterTitle {
@@ -37,7 +37,7 @@
   margin-top: var(--space-sm);
   font-size: 0.42em;
   font-style: var(--display-accent-style);
-  color: var(--primary);
+  color: var(--dom, var(--primary));
   letter-spacing: 0;
 }
 

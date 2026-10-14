@@ -56,7 +56,11 @@ export default function WorldPage() {
         path="/droits/monde"
         fallback="/droits"
       />
-      <PageMasthead kicker="Dans le monde" title="Les droits de la femme à travers l’histoire" />
+      <PageMasthead
+        kicker="Dans le monde"
+        title="Les droits de la femme à travers l’histoire"
+        tone="droits"
+      />
 
       <Suspense
         fallback={<WorldChapters rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} gaps={GAPS} />}

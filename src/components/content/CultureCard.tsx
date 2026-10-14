@@ -31,11 +31,12 @@ export function CultureCard({
     <Link
       href={cultureHref(entity.id)}
       className={`${styles.card} ${layout === 'tile' ? styles.tile : styles.row}`}
+      data-domain={entity.domain}
       data-testid={testId}
     >
       <CultureThumb entity={entity} size={layout === 'tile' ? 72 : 64} />
       <span className={styles.text}>
-        <span className="t-overline c-accent">
+        <span className="t-overline c-domain">
           {kind}
           {entity.period && !hidePeriod ? ` · ${entity.period.label}` : ''}
         </span>

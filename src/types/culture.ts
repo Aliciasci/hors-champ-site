@@ -10,6 +10,8 @@ export type CultureKind =
 
 /** Domaine d'une fiche, pour filtrer la vue d'ensemble. Les idées n'en ont pas : elles sont transversales. */
 export type CultureDomain = 'arts' | 'sciences' | 'droits';
+/** Teinte d'un espace ou d'un élément : les trois rubriques, plus l'ocre (jeunesse, activités). */
+export type Tone = CultureDomain | 'ocre';
 
 /**
  * Nature d'un lien, déclaré dans un seul sens dans les données.

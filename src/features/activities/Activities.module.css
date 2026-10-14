@@ -45,7 +45,7 @@
 /* Bloc jeunesse : un aplat qui le distingue des contrechamps. */
 .kids {
   padding: var(--space-xl) var(--space-lg);
-  background: var(--surface-accent-soft);
+  background: var(--possible-soft);
   border: var(--border-hairline) solid var(--border);
   border-radius: var(--radius-card);
 }
@@ -76,6 +76,7 @@
   padding: var(--space-lg);
   background: var(--surface);
   border: var(--border-hairline) solid var(--border-strong);
+  border-top: 4px solid var(--dom, var(--border-strong));
   border-radius: var(--radius-card);
   color: var(--text);
 }
@@ -90,7 +91,7 @@
   font-weight: var(--display-strong-weight);
   font-size: clamp(2.25rem, 1.8rem + 1.5vw, 3rem);
   line-height: 1;
-  color: var(--primary);
+  color: var(--dom, var(--primary));
   font-variant-numeric: lining-nums;
 }
 

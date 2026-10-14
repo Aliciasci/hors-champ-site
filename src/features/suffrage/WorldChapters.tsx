@@ -5,12 +5,21 @@ import { useRef } from 'react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import type { GapRow, WorldCountry, WorldRight, WorldRightId } from '@/content/world';
 import { readOne, useQueryState } from '@/lib/useQueryState';
+import type { Tone } from '@/types';
 
 import { GapPoster } from './GapPoster';
 import { RightStory } from './RightStory';
 import styles from './WorldChapters.module.css';
 import { RightMap } from './WorldRights';
 import pills from './WorldRights.module.css';
+
+/** Une teinte par droit : pastille choisie, numéro et accent du chapitre. */
+export const RIGHT_TONES: Record<WorldRightId, Tone> = {
+  vote: 'droits',
+  universite: 'sciences',
+  majorite: 'ocre',
+  avortement: 'arts',
+};
 
 interface Props {
   rights: WorldRight[];
@@ -63,7 +72,11 @@ function RightPills({
     <fieldset className={pills.rights}>
       <legend className="sr-only">{legend}</legend>
       {rights.map((r) => (
-        <label key={r.id} className={`${pills.pill} ${r.id === current ? pills.pillOn : ''}`}>
+        <label
+          key={r.id}
+          className={`${pills.pill} ${r.id === current ? pills.pillOn : ''} dot-domain`}
+          data-tone={RIGHT_TONES[r.id]}
+        >
           <input
             type="radio"
             name={name}
@@ -118,6 +131,7 @@ function View({
       <section
         key={right.id}
         className={styles.chapter}
+        data-tone={RIGHT_TONES[right.id]}
         aria-labelledby={`chapitre-${right.id}`}
         data-testid={`chapter-${right.id}`}
       >

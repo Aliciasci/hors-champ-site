@@ -48,7 +48,12 @@ function Face({
 /** Une femme sur le mur : visage, nom, dates, thématique. */
 export function WallTile({ person, theme }: { person: CultureEntity; theme?: PortraitThemeId }) {
   return (
-    <Link href={cultureHref(person.id)} className={styles.tile} data-testid={`wall-${person.id}`}>
+    <Link
+      href={cultureHref(person.id)}
+      className={styles.tile}
+      data-domain={person.domain}
+      data-testid={`wall-${person.id}`}
+    >
       <span className={styles.faceWrap}>
         <Face person={person} sizes="(min-width: 1200px) 180px, (min-width: 600px) 25vw, 50vw" />
         {person.hook ? <span className={styles.hook}>{person.hook}</span> : null}
@@ -56,7 +61,7 @@ export function WallTile({ person, theme }: { person: CultureEntity; theme?: Por
       <span className={`t-title3 ${styles.name}`}>{person.title}</span>
       {person.period ? <span className="t-caption c-muted">{person.period.label}</span> : null}
       {theme ? (
-        <span className={`t-overline c-accent ${styles.theme}`}>{THEME_SHORT_LABELS[theme]}</span>
+        <span className={`t-overline c-domain ${styles.theme}`}>{THEME_SHORT_LABELS[theme]}</span>
       ) : null}
     </Link>
   );
@@ -68,10 +73,13 @@ export function WallFeature({ person, theme }: { person: CultureEntity; theme: P
     <Link
       href={cultureHref(person.id)}
       className={`${styles.tile} ${styles.feature}`}
+      data-domain={person.domain}
       data-testid={`wall-feature-${person.id}`}
     >
-      <Face person={person} sizes="(min-width: 600px) 400px, 100vw" priority />
-      <span className="t-overline c-accent">À la une · {THEME_SHORT_LABELS[theme]}</span>
+      <span className={styles.faceWrap}>
+        <Face person={person} sizes="(min-width: 600px) 400px, 100vw" priority />
+      </span>
+      <span className="t-overline c-domain">À la une · {THEME_SHORT_LABELS[theme]}</span>
       <span className={`t-title2 ${styles.name}`}>{person.hook ?? person.title}</span>
       <span className="t-caption c-2">
         {person.hook ? <strong className={styles.strong}>{person.title}</strong> : null}

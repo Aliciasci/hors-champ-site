@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary);
+  background: var(--dom, var(--primary));
   color: var(--on-primary);
   font-family: var(--font-display);
   font-weight: var(--display-strong-weight);
@@ -96,6 +96,8 @@
   display: grid;
   gap: var(--space-xs);
   max-width: var(--measure);
+  padding: var(--space-lg);
+  background: var(--dom-soft);
 }
 
 .aboutLink {
@@ -117,6 +119,17 @@
   display: block;
 }
 
+/* Portrait posé sur le fond pâle de sa rubrique, comme les vignettes de la une. */
+.tile[data-domain] .faceWrap {
+  padding: 6px 6px 0;
+  margin-bottom: var(--space-xs);
+  background: var(--dom-soft);
+}
+
+.tile[data-domain] .face {
+  margin-bottom: 6px;
+}
+
 .hook {
   position: absolute;
   inset: auto 0 var(--space-xs);
@@ -130,6 +143,10 @@
   transition:
     opacity var(--duration-base),
     transform var(--duration-base);
+}
+
+.tile[data-domain] .hook {
+  inset: auto 6px 6px;
 }
 
 .tile:hover .hook,

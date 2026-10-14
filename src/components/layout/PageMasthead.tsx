@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import { HandUnderline } from '@/components/ui/HandDrawn';
+import type { Tone } from '@/types';
 
 import styles from './PageMasthead.module.css';
 
@@ -14,6 +15,7 @@ export function PageMasthead({
   accent,
   dek,
   centered = false,
+  tone,
   children,
 }: {
   kicker: string;
@@ -23,11 +25,13 @@ export function PageMasthead({
   dek?: ReactNode;
   /** Centré dans la page (la une, dont le fil est centré). */
   centered?: boolean;
+  /** Teinte de l'espace : surtitre (avec un point) et filet sous l'accent. */
+  tone?: Tone;
   children?: ReactNode;
 }) {
   return (
-    <header className={`${styles.masthead} ${centered ? styles.centered : ''}`}>
-      <p className="t-overline c-accent">{kicker}</p>
+    <header className={`${styles.masthead} ${centered ? styles.centered : ''}`} data-tone={tone}>
+      <p className="t-overline c-domain">{kicker}</p>
       <h1 className="t-hero">
         {title}
         {accent ? (

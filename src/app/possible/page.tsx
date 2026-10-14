@@ -57,6 +57,7 @@ export default function PossiblePage() {
     <Container>
       <PageMasthead
         kicker="Tout est possible · 6 – 14 ans"
+        tone="ocre"
         title="Astronaute, ingénieure, cheffe d’orchestre."
         accent="Et pourquoi pas toi ?"
         dek="Des métiers, des femmes qui les font pour de vrai, et des activités pour essayer. Ici, il n’y a rien à réussir."

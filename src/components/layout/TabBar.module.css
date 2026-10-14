@@ -54,8 +54,8 @@
 }
 
 .active {
-  color: var(--primary);
-  border-top-color: var(--primary);
+  color: var(--dom, var(--primary));
+  border-top-color: var(--dom, var(--primary));
 }
 
 @media (max-width: 359px) {

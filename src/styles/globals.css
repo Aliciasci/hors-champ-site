@@ -212,18 +212,25 @@ a {
   color: var(--accent-ink);
 }
 
-/* Rubrique d'un élément (data-domain) : son encre et son fond pâle. */
-[data-domain='arts'] {
+/* Rubrique (data-domain) ou teinte (data-tone) d'un élément : son encre et son fond pâle. */
+[data-domain='arts'],
+[data-tone='arts'] {
   --dom: var(--dom-arts);
   --dom-soft: var(--dom-arts-soft);
 }
-[data-domain='sciences'] {
+[data-domain='sciences'],
+[data-tone='sciences'] {
   --dom: var(--dom-sciences);
   --dom-soft: var(--dom-sciences-soft);
 }
-[data-domain='droits'] {
+[data-domain='droits'],
+[data-tone='droits'] {
   --dom: var(--dom-droits);
   --dom-soft: var(--dom-droits-soft);
+}
+[data-tone='ocre'] {
+  --dom: var(--day-ink);
+  --dom-soft: var(--day-soft);
 }
 
 /* Surtitre à la couleur de la rubrique, précédé d'un point. Sans rubrique : l'accent habituel. */
@@ -231,7 +238,9 @@ a {
   color: var(--dom, var(--accent-ink));
 }
 [data-domain] .c-domain::before,
-.dot-domain[data-domain]::before {
+[data-tone] .c-domain::before,
+.dot-domain[data-domain]::before,
+.dot-domain[data-tone]::before {
   content: '';
   display: inline-block;
   width: 0.6em;

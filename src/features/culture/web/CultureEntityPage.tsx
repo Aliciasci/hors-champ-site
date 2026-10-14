@@ -87,10 +87,10 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
       <JsonLd data={cultureJsonLd(entity, all)} />
       <PageTop crumbs={crumbs} path={path} fallback={parent} />
 
-      <article id="article" className={styles.article}>
+      <article id="article" className={styles.article} data-domain={entity.domain}>
         {entity.image ? <ArticleFigure artwork={entity.image} priority hero /> : null}
         <header className={styles.header}>
-          <p className="t-overline c-accent">
+          <p className="t-overline c-domain">
             {kind}
             {/* Sur une conquête, catégorie et pays sont repris dans le corps. */}
             {entity.subtitle && entity.kind !== 'right' ? ` · ${entity.subtitle}` : ''}

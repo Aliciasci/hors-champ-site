@@ -105,6 +105,7 @@ export default function Page() {
       />
       <PageMasthead
         kicker="Derrière chaque droit"
+        tone="droits"
         title="Rien ne leur a été donné."
         accent="Elles l’ont arraché."
         dek="Voter, ouvrir un compte en banque, choisir d’avoir un enfant. Chacun de ces droits a demandé des années de combat. Voici qui les a portés, et ce que les sources disent de leur rôle."

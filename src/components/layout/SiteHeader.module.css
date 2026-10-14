@@ -81,7 +81,7 @@
 
 /* Cartel : filet cobalt sous la rubrique active ; Revue : trait à la main (SVG). */
 .active {
-  box-shadow: inset 0 -2px 0 var(--primary);
+  box-shadow: inset 0 -2px 0 var(--dom, var(--primary));
 }
 
 :global([data-theme='revue']) .active {

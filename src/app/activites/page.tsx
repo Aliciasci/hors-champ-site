@@ -106,6 +106,7 @@ export default function ActivitiesPage() {
     <Container>
       <PageMasthead
         kicker="Activités"
+        tone="ocre"
         title="À vous de jouer."
         accent="De 6 à 106 ans."
         dek="Des scènes du quotidien à décrypter, des énigmes et des bricolages pour les plus jeunes. Quelques minutes suffisent."

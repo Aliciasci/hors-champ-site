@@ -1,4 +1,5 @@
 import { Globe, Lightbulb, Sparkles, User, UsersRound, type LucideIcon } from '@/components/icons';
+import type { Tone } from '@/types';
 
 export interface NavItem {
   href: string;
@@ -8,6 +9,8 @@ export interface NavItem {
   icon: LucideIcon;
   /** Préfixes d'URL rattachés à la rubrique (pour le soulignement). */
   match: (path: string) => boolean;
+  /** Teinte de l'espace : soulignement de l'onglet actif, en-têtes de ses pages. */
+  tone?: Tone;
 }
 
 const under = (prefix: string) => (path: string) =>
@@ -28,12 +31,14 @@ export const NAV_ITEMS: NavItem[] = [
     ariaLabel: 'Les droits des femmes dans le monde',
     icon: Globe,
     match: under('/droits/monde'),
+    tone: 'droits',
   },
-  { href: '/elles', label: 'Elles', icon: UsersRound, match: under('/elles') },
+  { href: '/elles', label: 'Elles', icon: UsersRound, match: under('/elles'), tone: 'arts' },
   {
     href: '/activites',
     label: 'Activités',
     icon: Lightbulb,
+    tone: 'ocre',
     // Contrechamps et « Tout est possible » sont rangés sous Activités.
     match: (p) => ['/activites', '/possible', '/contrechamps'].some((prefix) => under(prefix)(p)),
   },

@@ -329,6 +329,18 @@
   background: var(--primary-deep);
 }
 
+/* Pastille d'un droit teinté : la couleur du droit, pleine une fois choisi. */
+.pillOn[data-tone],
+.pillOn[data-tone]:hover {
+  background: var(--dom);
+  border-color: var(--dom);
+  color: var(--on-primary);
+}
+
+.pill.pillOn[data-tone]::before {
+  background: currentColor;
+}
+
 /* Infobulle au survol d'un pays. */
 .map {
   position: relative;

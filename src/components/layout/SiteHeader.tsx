@@ -71,6 +71,7 @@ export function SiteHeader() {
                     aria-label={item.ariaLabel}
                     aria-current={path === item.href ? 'page' : active ? 'true' : undefined}
                     className={`${styles.link} ${active ? styles.active : ''}`}
+                    data-tone={active ? item.tone : undefined}
                   >
                     {item.label}
                     {active ? <HandUnderline /> : null}

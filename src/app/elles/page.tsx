@@ -82,6 +82,7 @@ export default function EllesPage() {
     <Container>
       <PageMasthead
         kicker="Elles"
+        tone="arts"
         title="Ce qu’elles ont changé."
         accent="Et ce qu’on a oublié."
         dek={`${ordered.length} visages, du XVIᵉ siècle à aujourd’hui. Retenez-en un, la suite vient toute seule.`}

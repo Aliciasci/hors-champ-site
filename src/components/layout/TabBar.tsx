@@ -22,6 +22,7 @@ export function TabBar() {
                 aria-label={item.ariaLabel}
                 aria-current={path === item.href ? 'page' : active ? 'true' : undefined}
                 className={`${styles.link} ${active ? styles.active : ''}`}
+                data-tone={active ? item.tone : undefined}
               >
                 <Icon size={22} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
                 <span className={styles.label}>{item.label}</span>

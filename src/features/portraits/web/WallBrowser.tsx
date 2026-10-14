@@ -94,8 +94,8 @@ function WallView({
           ))}
         </ChipGroup>
         {active ? (
-          <div className={styles.about} data-testid="elles-theme-about">
-            <p className="t-overline c-accent">{active.subtitle}</p>
+          <div className={styles.about} data-tone="arts" data-testid="elles-theme-about">
+            <p className="t-overline c-domain">{active.subtitle}</p>
             <p className="t-body c-2">{active.description}</p>
             <Link
               href={`/elles/${active.id}`}

@@ -37,7 +37,7 @@
   right: 0;
   bottom: 0;
   height: 2px;
-  background: var(--accent);
+  background: var(--dom, var(--accent));
 }
 
 :global([data-theme='revue']) .accent::after {

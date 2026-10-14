@@ -37,7 +37,7 @@ export default async function ThemePage({ params }: Props) {
         path={path}
         crumbs={[{ label: 'Elles', href: '/elles' }, { label: theme.title }]}
       />
-      <PageMasthead kicker={theme.subtitle} title={theme.title} dek={theme.description}>
+      <PageMasthead kicker={theme.subtitle} title={theme.title} dek={theme.description} tone="arts">
         {theme.caution ? (
           <p className="t-caption c-2 measure" data-testid="theme-caution">
             {theme.caution}
