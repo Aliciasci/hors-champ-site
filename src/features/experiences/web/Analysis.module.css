@@ -1,0 +1,132 @@
+.article {
+  display: grid;
+  gap: var(--space-xxl);
+}
+
+.hero {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.outcome {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  background: var(--text);
+  color: var(--text-inverse);
+  border-radius: var(--radius-card);
+}
+
+.outcome :global(.t-title2) {
+  font-family: var(--font-display);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.sectionHead {
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.answer,
+.option {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.points {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.point {
+  display: flex;
+  gap: var(--space-md);
+  align-items: baseline;
+}
+
+.pointNumber {
+  flex: none;
+  width: 24px;
+}
+
+.conclusions {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.conclusionBox {
+  display: grid;
+  align-content: start;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  border: var(--border-regular) solid;
+}
+
+.canBox {
+  background: var(--fb-solid-soft);
+  border-color: var(--fb-solid);
+}
+
+.cannotBox {
+  background: var(--accent-soft);
+  border-color: var(--accent-ink);
+}
+
+.conclusionList {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.conclusionItem {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+.conclusionItem svg {
+  flex: none;
+  margin-top: 3px;
+}
+
+.canIcon {
+  color: var(--fb-solid);
+}
+
+.cannotIcon {
+  color: var(--accent-ink);
+}
+
+.counter {
+  display: grid;
+  gap: var(--space-xs);
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--accent);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-top: var(--space-lg);
+  border-top: var(--border-regular) solid var(--border-strong);
+}
+
+@media (min-width: 900px) {
+  .conclusions {
+    grid-template-columns: 1fr 1fr;
+  }
+}

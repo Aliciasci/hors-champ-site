@@ -1,0 +1,100 @@
+.header {
+  display: grid;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.shelf {
+  max-width: 440px;
+  margin-bottom: var(--space-xl);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.placeholder {
+  min-height: 320px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: var(--space-xl);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.youth {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.list {
+  display: grid;
+  max-width: var(--reading);
+}
+
+.experienceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.experienceRow > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.youthRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: 72px;
+  padding: var(--space-sm) 0;
+  border-bottom: var(--border-hairline) solid var(--border);
+  color: var(--text);
+}
+
+.youthRow:hover .rowTitle {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.youthThumb {
+  position: relative;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: var(--radius-cover);
+}
+
+.fill {
+  width: 64px;
+  height: 64px;
+}
+
+.youthGlyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-accent);
+  color: var(--on-surface-accent);
+}
+
+.youthText {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.rowTitle {
+  overflow-wrap: anywhere;
+}

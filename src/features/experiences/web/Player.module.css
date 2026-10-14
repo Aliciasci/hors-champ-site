@@ -1,0 +1,169 @@
+.shell {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.quit {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: var(--touch);
+  padding: 0 var(--space-md);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+}
+
+.quit:hover {
+  background: var(--surface-alt);
+}
+
+.experienceTitle {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spacer {
+  width: 100px;
+  flex: none;
+}
+
+@media (max-width: 599px) {
+  .experienceTitle {
+    display: none;
+  }
+  .topBar {
+    justify-content: space-between;
+  }
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.stepItem {
+  display: grid;
+  gap: var(--space-xs);
+  color: var(--text-muted);
+}
+
+.stepBar {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface-alt);
+}
+
+.stepDone {
+  color: var(--text);
+}
+
+.stepDone .stepBar {
+  background: var(--primary);
+}
+
+.stepItem[aria-current='step'] {
+  font-weight: 700;
+}
+
+.stepItem[aria-current='step'] :global(.t-caption) {
+  font-weight: 700;
+}
+
+.stage {
+  display: grid;
+  gap: var(--space-xl);
+  animation: enter var(--duration-base) ease-out;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.stepTitle:focus {
+  outline: none;
+}
+
+.stepTitle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.blocks {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.question {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.legend {
+  display: grid;
+  gap: var(--space-sm);
+  padding: 0;
+  margin-bottom: var(--space-lg);
+  float: left;
+  width: 100%;
+}
+
+.options {
+  clear: both;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.footer {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+  padding-top: var(--space-md);
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+.outcome {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  background: var(--primary-soft);
+  border-radius: var(--radius-card);
+  color: var(--text);
+}
+
+.missed {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  border: var(--border-hairline) dashed var(--border-strong);
+  border-radius: var(--radius-card);
+}

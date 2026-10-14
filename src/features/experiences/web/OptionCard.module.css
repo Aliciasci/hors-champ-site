@@ -1,0 +1,123 @@
+.card {
+  position: relative;
+  display: grid;
+  gap: var(--space-md);
+  min-height: 60px;
+  padding: var(--space-lg);
+  border: var(--border-regular) solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  border-color: var(--border-strong);
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.card:has(.input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.label {
+  flex: 1;
+  padding-top: 5px;
+}
+
+.marker {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: var(--fs-label);
+}
+
+.square {
+  border-radius: var(--radius-sm);
+}
+
+.kbd {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border: var(--border-hairline) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 6px;
+  margin-top: 6px;
+}
+
+@media (pointer: coarse) {
+  .kbd {
+    display: none;
+  }
+}
+
+.selected {
+  border-width: var(--border-bold);
+  border-color: var(--primary);
+}
+
+.selected .marker {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+/* Cartel : aplat cobalt sur l'option choisie. */
+:global([data-theme='cartel']) .active {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+:global([data-theme='cartel']) .active .marker {
+  background: var(--on-primary);
+  border-color: var(--on-primary);
+  color: var(--primary);
+}
+
+:global([data-theme='cartel']) .active .kbd {
+  color: var(--on-primary);
+  border-color: var(--on-primary);
+}
+
+/* Revue : contour au feutre (cercle SVG) et fond papier. */
+:global([data-theme='revue']) .active {
+  border-color: var(--border-strong);
+}
+
+.dimmed {
+  opacity: 0.7;
+}
+
+.feedback {
+  display: grid;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: var(--border-hairline) solid var(--border);
+}

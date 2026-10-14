@@ -1,0 +1,21 @@
+.skip {
+  position: absolute;
+  left: var(--space-lg);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--action);
+  color: var(--on-action);
+  font-weight: 600;
+  border-radius: var(--radius-button);
+}
+
+.skip:focus {
+  top: var(--space-sm);
+}
+
+.main {
+  display: block;
+  min-height: 60vh;
+  outline: none;
+}

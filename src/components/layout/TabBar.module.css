@@ -1,0 +1,78 @@
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  background: var(--bg);
+  border-top: var(--border-hairline) solid var(--border-strong);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.list {
+  display: flex;
+  height: var(--tabbar-h);
+}
+
+/* Largeurs inégales : « Contrechamps » est le plus long, tout tient dès 320 px. */
+.item {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.item[data-tab='/'] {
+  flex-grow: 1.15;
+}
+.item[data-tab='/elles'] {
+  flex-grow: 0.8;
+}
+.item[data-tab='/possible'] {
+  flex-grow: 1;
+}
+.item[data-tab='/contrechamps'] {
+  flex-grow: 1.45;
+}
+.item[data-tab='/profil'] {
+  flex-grow: 0.8;
+}
+
+.link {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-muted);
+  border-top: 2px solid transparent;
+}
+
+.label {
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.active {
+  color: var(--primary);
+  border-top-color: var(--primary);
+}
+
+@media (max-width: 359px) {
+  .label {
+    font-size: 10px;
+    letter-spacing: -0.1px;
+  }
+}
+
+@media (min-width: 900px) {
+  .bar {
+    display: none;
+  }
+}
+
+@media print {
+  .bar {
+    display: none;
+  }
+}

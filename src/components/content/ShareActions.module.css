@@ -1,0 +1,30 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: var(--touch);
+  padding: 0 var(--space-xs);
+  border: 0;
+  background: none;
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+  color: var(--text);
+}
+
+.action:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.status {
+  color: var(--fb-solid);
+  min-height: 1em;
+}

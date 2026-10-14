@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xxs);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.done {
+  color: var(--fb-solid);
+}
+
+.current {
+  color: var(--primary);
+}

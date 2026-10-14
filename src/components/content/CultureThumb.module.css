@@ -1,0 +1,36 @@
+.thumb {
+  flex: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-cover);
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+.glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emblem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  border-radius: var(--radius-cover);
+  min-height: 112px;
+}
+
+.period {
+  overflow-wrap: anywhere;
+}
+
+/* La couverture remplit la vignette. */
+.thumb > div {
+  height: 100%;
+}

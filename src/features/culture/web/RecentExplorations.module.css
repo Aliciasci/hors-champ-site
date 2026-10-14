@@ -1,0 +1,54 @@
+.section {
+  display: grid;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrows {
+  display: none;
+  gap: var(--space-xs);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+}
+
+.arrow:hover {
+  background: var(--surface-alt);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  padding: 4px 4px var(--space-sm);
+  margin: 0 -4px;
+  scrollbar-width: thin;
+}
+
+.item {
+  flex: none;
+  width: 104px;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 900px) and (pointer: fine) {
+  .arrows {
+    display: flex;
+  }
+}

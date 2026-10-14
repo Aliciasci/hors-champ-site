@@ -1,0 +1,62 @@
+import { Suspense } from 'react';
+
+import { CultureCard } from '@/components/content/CultureCard';
+import { PageTop } from '@/components/layout/PageTop';
+import { Container } from '@/components/ui/Container';
+import { getCatalog } from '@/content/catalog';
+import { sortForBrowsing } from '@/features/culture/cultureGraph';
+import { CollectionBrowser, ExploredCount } from '@/features/culture/web/CollectionBrowser';
+import { CultureTile } from '@/features/culture/web/CultureTile';
+import { RecentExplorations } from '@/features/culture/web/RecentExplorations';
+import { TimelineEntry } from '@/features/culture/web/TimelineEntry';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata({
+  title: 'Toute la collection',
+  description:
+    'Toutes les fiches de Hors-Champ : femmes, conquêtes, œuvres, inventions, mouvements, événements et idées, reliées entre elles et sourcées.',
+  path: '/collection',
+});
+
+export default function Page() {
+  const { culture } = getCatalog();
+  const sorted = sortForBrowsing(culture);
+  const items = sorted.map((e) => ({ id: e.id, kind: e.kind, domain: e.domain }));
+  const cards = Object.fromEntries(
+    sorted
+      .filter((e) => e.kind !== 'event')
+      .map((e) => [
+        e.id,
+        <CultureCard key={e.id} entity={e} layout="tile" testId={`culture-${e.id}`} />,
+      ]),
+  );
+  const timeline = Object.fromEntries(
+    sorted
+      .filter((e) => e.kind === 'event')
+      .map((e) => [e.id, <TimelineEntry key={e.id} entity={e} />]),
+  );
+  const tiles = Object.fromEntries(
+    culture.map((e) => [e.id, <CultureTile key={e.id} entity={e} />]),
+  );
+
+  return (
+    <Container>
+      <PageTop
+        crumbs={[{ label: 'Découvrir', href: '/' }, { label: 'Toute la collection' }]}
+        path="/collection"
+        fallback="/"
+      />
+      <header style={{ display: 'grid', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
+        <p className="t-overline c-accent">La collection</p>
+        <h1 className="t-title1">Toutes les fiches</h1>
+        <ExploredCount ids={culture.map((e) => e.id)} total={culture.length} />
+      </header>
+      <div style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+        <RecentExplorations tiles={tiles} />
+        <Suspense fallback={<CollectionBrowser items={items} cards={cards} timeline={timeline} />}>
+          <CollectionBrowser items={items} cards={cards} timeline={timeline} withUrl />
+        </Suspense>
+      </div>
+    </Container>
+  );
+}

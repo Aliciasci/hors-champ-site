@@ -1,0 +1,192 @@
+/*
+ * Jetons de design. Valeurs reprises de src/theme/themes/cartel.ts et revue.ts (mêmes que
+ * l'application mobile) ; __tests__/logic/theme.test.ts vérifie qu'elles concordent.
+ * Le thème actif est porté par l'attribut data-theme de <html>, posé avant le premier rendu.
+ * Mode sombre : hors périmètre ; il suffira d'ajouter un bloc [data-theme='…'][data-scheme='dark'].
+ */
+
+:root,
+[data-theme='cartel'] {
+  color-scheme: light;
+
+  --bg: #f3eee5;
+  --surface: #fbf8f2;
+  --surface-alt: #e9e2d5;
+  --surface-accent: #e4dccb;
+  --on-surface-accent: #15130f;
+  --surface-accent-soft: #efe9dd;
+  --primary: #1e3aa8;
+  --primary-deep: #15297a;
+  --primary-soft: #dfe3f3;
+  --on-primary: #f3eee5;
+  --action: #15130f;
+  --on-action: #f3eee5;
+  --accent: #b8361a;
+  --accent-fill: #1e3aa8;
+  --on-accent: #f3eee5;
+  --accent-ink: #a12f16;
+  --accent-soft: #f2ddd5;
+  --text: #15130f;
+  --text-2: #3e3a33;
+  --text-muted: #5e584d;
+  --text-inverse: #f3eee5;
+  --border: #cfc6b4;
+  --border-strong: #15130f;
+  --overlay: rgba(21, 19, 15, 0.5);
+
+  --fb-solid: #1e6b45;
+  --fb-solid-soft: #dceadf;
+  --fb-partial: #865700;
+  --fb-partial-soft: #f1e6cc;
+  --fb-open: #1e3aa8;
+  --fb-open-soft: #dfe3f3;
+  --fb-weak: #a12f16;
+  --fb-weak-soft: #f2ddd5;
+
+  /* Polices (variables posées par next/font sur <html>). */
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-body: var(--font-plex-sans), 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  --display-weight: 600;
+  --display-strong-weight: 700;
+  /* Cartel : l'accent des titres est en italique ; Revue n'a pas d'italique. */
+  --display-accent-style: italic;
+
+  /* Typographie : tailles mobiles en bas de fourchette, grandissent sur grand écran. */
+  --fs-hero: clamp(3rem, 2.2rem + 3.2vw, 4.5rem); /* 48 → 72 px */
+  --lh-hero: 1;
+  --ls-hero: -0.5px;
+  --fs-title1: clamp(2.25rem, 1.9rem + 1.4vw, 3rem); /* 36 → 48 */
+  --lh-title1: 1.06;
+  --ls-title1: -0.3px;
+  --fs-title2: clamp(1.6875rem, 1.55rem + 0.6vw, 2.125rem); /* 27 → 34 */
+  --lh-title2: 1.11;
+  --fs-title3: 1.375rem; /* 22 */
+  --lh-title3: 1.18;
+  --fs-quote: 1.4375rem; /* 23 */
+  --lh-quote: 1.26;
+  --fs-body-lg: 1.0625rem; /* 17 */
+  --lh-body-lg: 1.59;
+  --fs-body: 0.9375rem; /* 15 */
+  --lh-body: 1.53;
+  --fs-body-sm: 0.875rem; /* 14 */
+  --lh-body-sm: 1.43;
+  --fs-label: 0.9375rem;
+  --lh-label: 1.33;
+  --fs-overline: 0.6875rem; /* 11 */
+  --lh-overline: 1.45;
+  --ls-overline: 1.6px;
+  --tt-overline: uppercase;
+  --fs-caption: 0.75rem; /* 12 */
+  --lh-caption: 1.42;
+  --fs-mono: 0.75rem;
+
+  /* Rayons et bordures. */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-pill: 999px;
+  --radius-card: 0;
+  --radius-button: 0;
+  --radius-chip: 0;
+  --radius-cover: 0;
+  --border-hairline: 1px;
+  --border-regular: 1px;
+  --border-bold: 2px;
+
+  /* Espacements (base 4) et mise en page. */
+  --space-xxs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+  --space-xxxl: 48px;
+  --space-huge: 64px;
+  --gutter: 16px;
+  --container: 1200px;
+  --reading: 680px;
+  --measure: 68ch;
+  --touch: 44px;
+  --header-h: 56px;
+  --tabbar-h: 64px;
+
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+}
+
+[data-theme='revue'] {
+  --bg: #f6ebc8;
+  --surface: #fbf4dd;
+  --surface-alt: #efe1b4;
+  --surface-accent: #ff5a3c;
+  --on-surface-accent: #1b1a17;
+  --surface-accent-soft: #fbe3c2;
+  --primary: #2b45c9;
+  --primary-deep: #1b2e8f;
+  --primary-soft: #dcddeb;
+  --on-primary: #f6ebc8;
+  --action: #2b45c9;
+  --on-action: #f6ebc8;
+  --accent: #ff5a3c;
+  --accent-fill: #ff5a3c;
+  --on-accent: #1b1a17;
+  --accent-ink: #b3311a;
+  --accent-soft: #fcd3c3;
+  --text: #1b1a17;
+  --text-2: #3d3a33;
+  --text-muted: #5f5847;
+  --text-inverse: #f6ebc8;
+  --border: #d9c88f;
+  --border-strong: #1b1a17;
+  --overlay: rgba(27, 26, 23, 0.5);
+
+  --fb-solid: #1c6440;
+  --fb-solid-soft: #dce6c8;
+  --fb-partial: #7e5200;
+  --fb-partial-soft: #f3dfa6;
+  --fb-open: #2b45c9;
+  --fb-open-soft: #dcddeb;
+  --fb-weak: #b3311a;
+  --fb-weak-soft: #fcd3c3;
+
+  --font-display: var(--font-young-serif), 'Young Serif', Georgia, serif;
+  --font-body: var(--font-instrument-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), 'DM Mono', ui-monospace, monospace;
+  --display-weight: 400;
+  --display-strong-weight: 400;
+  --display-accent-style: normal;
+
+  --fs-hero: clamp(2.5rem, 1.9rem + 2.6vw, 3.75rem); /* 40 → 60 */
+  --lh-hero: 1.1;
+  --ls-hero: 0;
+  --fs-title1: clamp(1.8125rem, 1.55rem + 1.1vw, 2.375rem); /* 29 → 38 */
+  --lh-title1: 1.17;
+  --ls-title1: 0;
+  --fs-title2: clamp(1.375rem, 1.27rem + 0.45vw, 1.6875rem); /* 22 → 27 */
+  --lh-title2: 1.27;
+  --fs-title3: 1.125rem; /* 18 */
+  --lh-title3: 1.33;
+  --fs-quote: 1.1875rem; /* 19 */
+  --lh-quote: 1.42;
+  --fs-body-lg: 1.0625rem;
+  --lh-body-lg: 1.53;
+  --fs-overline: 0.75rem; /* 12 */
+  --lh-overline: 1.33;
+  --ls-overline: 0.2px;
+  --tt-overline: lowercase;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-card: 6px;
+  --radius-button: 999px;
+  --radius-chip: 999px;
+  --radius-cover: 0;
+  --border-hairline: 1px;
+  --border-regular: 1.5px;
+  --border-bold: 2.5px;
+}

@@ -1,0 +1,61 @@
+.button {
+  position: absolute;
+  right: var(--space-sm);
+  bottom: var(--space-sm);
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(15, 14, 12, 0.72);
+  color: #f3eee5;
+}
+
+.button:hover {
+  background: rgba(15, 14, 12, 0.9);
+}
+
+.button:focus-visible {
+  outline-color: #f3eee5;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--primary);
+}
+
+@media (pointer: coarse) {
+  .button {
+    width: var(--touch);
+    height: var(--touch);
+  }
+}
+
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md) calc(36px + var(--space-lg)) var(--space-md) var(--space-md);
+  background: rgba(15, 14, 12, 0.86);
+  color: #f3eee5;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: max-content;
+  min-height: 32px;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link:focus-visible {
+  outline-color: #f3eee5;
+}

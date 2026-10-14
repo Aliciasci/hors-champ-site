@@ -1,0 +1,33 @@
+.person {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.work {
+  background: var(--surface-accent);
+  color: var(--on-surface-accent);
+}
+.science {
+  background: var(--primary-deep);
+  color: var(--on-primary);
+}
+.movement,
+.organization {
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+}
+.event {
+  background: var(--text);
+  color: var(--text-inverse);
+}
+.idea {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+.right {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.law {
+  background: var(--surface-alt);
+  color: var(--text);
+}

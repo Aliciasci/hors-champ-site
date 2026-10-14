@@ -1,0 +1,43 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: max-content;
+  max-width: 100%;
+  padding: 3px var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.solid {
+  color: var(--fb-solid);
+  background: var(--fb-solid-soft);
+}
+.partial {
+  color: var(--fb-partial);
+  background: var(--fb-partial-soft);
+}
+.open {
+  color: var(--fb-open);
+  background: var(--fb-open-soft);
+}
+.weak {
+  color: var(--fb-weak);
+  background: var(--fb-weak-soft);
+}
+
+.solidSoft {
+  background: var(--fb-solid-soft);
+  border-color: var(--fb-solid) !important;
+}
+.partialSoft {
+  background: var(--fb-partial-soft);
+  border-color: var(--fb-partial) !important;
+}
+.openSoft {
+  background: var(--fb-open-soft);
+  border-color: var(--fb-open) !important;
+}
+.weakSoft {
+  background: var(--fb-weak-soft);
+  border-color: var(--fb-weak) !important;
+}

@@ -1,0 +1,210 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  grid-template-areas:
+    'search'
+    'results';
+}
+
+.searchRow {
+  grid-area: search;
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 48px;
+  padding: 0 var(--space-md);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: var(--surface);
+}
+
+.search:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  min-height: 44px;
+  font-size: 1rem;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border: var(--border-hairline) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 6px;
+}
+
+@media (pointer: coarse) {
+  .kbd {
+    display: none;
+  }
+}
+
+.filtersButton {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 48px;
+  padding: 0 var(--space-md);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+  font-weight: 600;
+}
+
+.filtersButton:hover {
+  background: var(--surface-alt);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  margin-left: var(--space-xs);
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--action);
+  color: var(--on-action);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  vertical-align: middle;
+}
+
+.sidebar {
+  display: none;
+}
+
+.sidebarHead {
+  margin-bottom: var(--space-md);
+}
+
+.filterGroups {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.results {
+  grid-area: results;
+  min-width: 0;
+}
+
+.resultsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-height: 48px;
+  margin-bottom: var(--space-md);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.grid > li {
+  min-width: 0;
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 260px minmax(0, 1fr);
+    grid-template-areas:
+      'sidebar search'
+      'sidebar results';
+    column-gap: var(--space-xxl);
+    align-items: start;
+  }
+  .sidebar {
+    grid-area: sidebar;
+    display: block;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-lg));
+    padding-right: var(--space-lg);
+    border-right: var(--border-hairline) solid var(--border);
+  }
+  .filtersButton {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Panneau de filtres (petits écrans). */
+.dialog {
+  width: 100%;
+  max-width: 100%;
+  max-height: 90dvh;
+  margin: auto 0 0;
+  padding: 0;
+  border: 0;
+  border-top: var(--border-regular) solid var(--border-strong);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.dialog::backdrop {
+  background: var(--overlay);
+}
+
+.dialogInner {
+  display: grid;
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--gutter) calc(var(--space-lg) + env(safe-area-inset-bottom));
+}
+
+.dialogHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch);
+  height: var(--touch);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+}
+
+.dialogActions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}

@@ -1,0 +1,116 @@
+.group,
+.segmentedGroup {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: var(--space-sm);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 36px;
+  padding: 4px var(--space-md);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-chip);
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.chip:hover {
+  background: var(--surface-alt);
+}
+
+.checked,
+.checked:hover {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chip:has(.input:focus-visible),
+.segment:has(.input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.check {
+  flex: none;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.segmented {
+  display: flex;
+  width: 100%;
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-chip);
+  overflow: hidden;
+}
+
+.segment {
+  position: relative;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 var(--space-sm);
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.segment + .segment {
+  border-left: var(--border-regular) solid var(--border-strong);
+}
+
+.segment:hover {
+  background: var(--surface-alt);
+}
+
+.segmentOn,
+.segmentOn:hover {
+  background: var(--action);
+  color: var(--on-action);
+}
+
+@media (pointer: coarse) {
+  .chip,
+  .segment {
+    min-height: var(--touch);
+  }
+}

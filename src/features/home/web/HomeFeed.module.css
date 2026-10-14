@@ -1,0 +1,191 @@
+.layout {
+  display: grid;
+  gap: var(--space-xxl);
+  min-width: 0;
+}
+
+.main {
+  min-width: 0;
+  max-width: var(--reading);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.aside {
+  display: none;
+}
+
+/* Rubriques : onglets de texte, soulignement sous la rubrique active. */
+.tabs {
+  margin-bottom: var(--space-lg);
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.tabs ul {
+  display: flex;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch);
+  margin-bottom: calc(-1 * var(--border-hairline));
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  font-size: var(--fs-label);
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.tabOn {
+  color: var(--text);
+  border-bottom-color: var(--primary);
+}
+
+.tabOn:hover {
+  text-decoration: none;
+}
+
+:global([data-theme='revue']) .tabOn {
+  border-bottom-color: transparent;
+}
+
+.feed {
+  display: grid;
+}
+
+.footer {
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+/* Bloc « Mettre à l'épreuve » (fond bleu clair). */
+.practice {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  margin: var(--space-md) 0;
+  background: var(--primary-soft);
+  border-radius: var(--radius-card);
+}
+
+.practiceHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.more {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.more:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.resume {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--text);
+  color: var(--text-inverse);
+  border-radius: var(--radius-card);
+}
+
+.resume > span {
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.resume:hover .resumeTitle {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Bloc « Tout est possible ». */
+.possible {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  background: var(--surface-accent-soft);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-card);
+}
+
+.moreRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.possible:hover .moreRow,
+.inset:hover .moreRow {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.moreRow :global(.t-title3) {
+  color: var(--text);
+  flex: 1;
+}
+
+.inset {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg) 0;
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+/* Grand écran : colonne latérale collante ; les blocs du fil y passent. */
+@media (min-width: 1200px) {
+  .layout {
+    grid-template-columns: minmax(0, var(--reading)) 320px;
+    justify-content: center;
+    align-items: start;
+  }
+
+  .main {
+    margin: 0;
+  }
+
+  .aside {
+    display: block;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-xl));
+  }
+
+  .asideInner {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .asideInner .practice {
+    margin: 0;
+  }
+
+  .inFeed {
+    display: none;
+  }
+}

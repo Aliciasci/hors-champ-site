@@ -1,0 +1,132 @@
+.section {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  min-width: 0;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.steps {
+  display: grid;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  gap: var(--space-xxs);
+  padding: 0 0 var(--space-lg) calc(14px + var(--space-md));
+}
+
+/* Rail vertical de la frise. */
+.step::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 18px;
+  bottom: 0;
+  width: var(--border-regular);
+  background: var(--border);
+}
+
+.step:last-child::before {
+  display: none;
+}
+
+.dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.bullets {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: var(--measure);
+}
+
+.bullets li {
+  position: relative;
+  padding-left: var(--space-lg);
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.contribution {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+.contributionText {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.name:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.part {
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-xxs);
+  max-width: var(--measure);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.combat {
+  display: grid;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.combatDetail {
+  padding-left: calc(64px + var(--space-md));
+  max-width: calc(var(--measure) + 64px);
+}
+
+.legacy {
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+@media (max-width: 599px) {
+  .combatDetail {
+    padding-left: 0;
+  }
+}

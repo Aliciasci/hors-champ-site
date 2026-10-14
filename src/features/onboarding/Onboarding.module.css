@@ -1,0 +1,159 @@
+.page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--gutter) var(--space-xxl);
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.cover {
+  height: 260px;
+}
+
+.artDesktopOnly {
+  display: none;
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-xl);
+  align-content: start;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.steps {
+  display: flex;
+  gap: var(--space-xs);
+  flex: 1;
+  max-width: 200px;
+}
+
+.steps li {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--radius-pill);
+}
+
+.stepOn {
+  background: var(--primary);
+}
+
+.stepOff {
+  background: var(--border);
+}
+
+.skip {
+  margin-left: auto;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-lg);
+  align-content: start;
+  min-height: 300px;
+}
+
+.body h1:focus {
+  outline: none;
+}
+
+.body h1:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.principles {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.principle {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.number {
+  width: 32px;
+  flex: none;
+}
+
+.principleText {
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.levels {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.level {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xxs) var(--space-md);
+  align-items: start;
+  padding: var(--space-md);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.level > input {
+  grid-row: span 2;
+}
+
+.level > span {
+  grid-column: 2;
+}
+
+.level input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  flex: none;
+}
+
+.level:has(input:checked) {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+@media (min-width: 900px) {
+  .page {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-huge);
+    padding-top: var(--space-xxl);
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .artDesktopOnly {
+    display: block;
+  }
+
+  .art {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-xl));
+    align-self: start;
+  }
+
+  .cover {
+    height: min(70vh, 620px);
+  }
+}

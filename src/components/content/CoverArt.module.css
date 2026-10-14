@@ -1,0 +1,36 @@
+.wrap {
+  position: relative;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-cover);
+  /* Couleur papier tant que l'image n'est pas chargée. */
+  background: var(--surface-alt);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.motif {
+  width: 100%;
+  height: 100%;
+}
+
+/* Revue : effet de repérage risographique, l'aplat d'encre déborde de l'image. */
+.ink {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translate(7px, 7px) rotate(1deg);
+}
+
+:global([data-theme='revue']) .offset {
+  margin: 0 6px 6px 0;
+}
+
+:global([data-theme='revue']) .offset .frame {
+  transform: rotate(-0.8deg);
+}

@@ -1,0 +1,282 @@
+@import './tokens.css';
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + var(--space-lg));
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+ul,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+/* Focus visible : contour cobalt 2 px décalé, partout. */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Place réservée pour la barre d'onglets inférieure (petits écrans). */
+@media (max-width: 899px) {
+  body {
+    padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------- Typographie ---------- */
+
+.t-hero,
+.t-title1,
+.t-title2,
+.t-title3,
+.t-quote {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  text-wrap: balance;
+}
+
+.t-hero {
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+}
+
+.t-title1 {
+  font-size: var(--fs-title1);
+  line-height: var(--lh-title1);
+  letter-spacing: var(--ls-title1);
+}
+
+.t-title2 {
+  font-size: var(--fs-title2);
+  line-height: var(--lh-title2);
+}
+
+.t-title3 {
+  font-size: var(--fs-title3);
+  line-height: var(--lh-title3);
+}
+
+.t-quote {
+  font-size: var(--fs-quote);
+  line-height: var(--lh-quote);
+  font-style: var(--display-accent-style);
+}
+
+.t-accent {
+  font-style: var(--display-accent-style);
+  color: var(--primary);
+}
+
+.t-body-lg {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body-lg);
+}
+
+.t-body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.t-body-sm {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+}
+
+.t-label {
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+}
+
+.t-overline {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-overline);
+  line-height: var(--lh-overline);
+  letter-spacing: var(--ls-overline);
+  text-transform: var(--tt-overline);
+}
+
+.t-caption {
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  font-weight: 500;
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+}
+
+.c-muted {
+  color: var(--text-muted);
+}
+.c-2 {
+  color: var(--text-2);
+}
+.c-primary {
+  color: var(--primary);
+}
+.c-accent {
+  color: var(--accent-ink);
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lien de texte : soulignement au survol, jamais d'agrandissement. */
+.link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.link:hover {
+  color: var(--primary-deep);
+  text-decoration-thickness: 2px;
+}
+
+/* Décors propres à un thème : présents dans le DOM, affichés selon data-theme. */
+.only-revue {
+  display: none !important;
+}
+[data-theme='revue'] .only-revue {
+  display: revert !important;
+}
+[data-theme='revue'] .only-cartel {
+  display: none !important;
+}
+
+/* ---------- Mouvement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Impression ---------- */
+
+@media print {
+  :root,
+  [data-theme] {
+    --bg: #fff;
+    --surface: #fff;
+  }
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+  .no-print,
+  header[data-site-header],
+  nav[data-tabbar],
+  footer[data-site-footer],
+  [data-skip-link] {
+    display: none !important;
+  }
+  main a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 9pt;
+    word-break: break-all;
+    color: #333;
+  }
+  details > summary {
+    list-style: none;
+  }
+  details:not([open]) > :not(summary) {
+    display: block;
+  }
+  article,
+  section,
+  blockquote,
+  li {
+    break-inside: avoid-page;
+  }
+}

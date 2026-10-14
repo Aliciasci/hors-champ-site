@@ -1,0 +1,52 @@
+.header {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-xxl);
+}
+
+.principles {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.principle {
+  display: flex;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+.number {
+  flex: none;
+  width: 48px;
+  padding-top: 4px;
+}
+
+.principleText {
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.statuses {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.status {
+  display: grid;
+  gap: var(--space-xxs);
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--accent);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-sm);
+  list-style: disc;
+  padding-left: 1.25em;
+}

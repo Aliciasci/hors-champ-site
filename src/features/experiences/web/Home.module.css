@@ -1,0 +1,163 @@
+.masthead {
+  display: grid;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  margin-bottom: var(--space-xl);
+  max-width: 22ch;
+}
+
+.accentLine {
+  position: relative;
+}
+
+.columns {
+  display: grid;
+  gap: var(--space-xxl);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.resume {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  background: var(--text);
+  color: var(--text-inverse);
+  border-radius: var(--radius-card);
+}
+
+.resume:hover .resumeText > :last-child {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.resumeIcon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.resumeText {
+  flex: 1;
+  display: grid;
+  gap: var(--space-xxs);
+  min-width: 0;
+}
+
+.featured {
+  position: relative;
+}
+
+.featuredBookmark {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: var(--bg);
+  border-radius: var(--radius-button);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.tileCover {
+  aspect-ratio: 4 / 3;
+}
+
+.tileText {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: var(--space-xxs);
+  padding: var(--space-md);
+}
+
+.tile:hover .tileTitle {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.progressCard {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  background: var(--surface-accent-soft);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  color: var(--text);
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  overflow: hidden;
+}
+
+.progress::-webkit-progress-bar {
+  background: var(--surface-alt);
+}
+
+.progress::-webkit-progress-value {
+  background: var(--primary);
+}
+
+.progress::-moz-progress-bar {
+  background: var(--primary);
+}
+
+.progressFooter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.progressCard:hover .more {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (min-width: 900px) {
+  .tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .columns {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+  }
+}

@@ -1,0 +1,18 @@
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: var(--touch);
+  padding: 0 var(--space-md) 0 var(--space-sm);
+  margin-left: calc(-1 * var(--space-sm));
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+  color: var(--text);
+  flex: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

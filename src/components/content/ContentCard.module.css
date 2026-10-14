@@ -1,0 +1,87 @@
+.card {
+  display: flex;
+  color: var(--text);
+  min-width: 0;
+}
+
+.card:hover .title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: var(--space-xs);
+  align-content: start;
+}
+
+/* Compacte */
+.compact {
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.compact > :first-child {
+  flex: none;
+  width: 80px;
+}
+
+.compactCover {
+  width: 80px;
+  height: 80px;
+}
+
+/* Standard */
+.standard {
+  flex-direction: column;
+  height: 100%;
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.standardCover {
+  height: 128px;
+}
+
+.standardBody {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+}
+
+/* Mise en avant */
+.feature {
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.featureCover {
+  height: 230px;
+}
+
+.featureBody {
+  display: flex;
+  gap: var(--space-md);
+  padding-top: var(--space-xs);
+}
+
+.number {
+  width: 40px;
+  flex: none;
+  padding-top: var(--space-xs);
+}
+
+@media (min-width: 900px) {
+  .featureCover {
+    height: 300px;
+  }
+}

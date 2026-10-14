@@ -1,0 +1,26 @@
+.container {
+  margin: 0 auto;
+  padding: var(--space-lg) var(--gutter) var(--space-xxl);
+  width: 100%;
+}
+
+.wide {
+  max-width: var(--container);
+}
+
+.reading {
+  max-width: calc(var(--reading) + 2 * var(--gutter));
+}
+
+@media (min-width: 600px) {
+  .container {
+    --gutter: 24px;
+    padding-top: var(--space-xl);
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    --gutter: 32px;
+  }
+}

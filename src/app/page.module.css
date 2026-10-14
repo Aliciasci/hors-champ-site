@@ -1,0 +1,41 @@
+.masthead {
+  display: grid;
+  gap: var(--space-md);
+  max-width: var(--reading);
+  margin: 0 auto var(--space-xl);
+  padding-top: var(--space-sm);
+}
+
+@media (min-width: 1200px) {
+  .masthead {
+    max-width: calc(var(--reading) + 320px + var(--space-xxl));
+  }
+}
+
+.accentLine {
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+.accent {
+  position: relative;
+  display: inline-block;
+  color: var(--primary);
+  font-style: var(--display-accent-style);
+  padding-bottom: 10px;
+}
+
+/* Cartel : filet à la largeur du texte ; Revue : soulignement tracé (SVG). */
+.accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--border-strong);
+}
+
+:global([data-theme='revue']) .accent::after {
+  display: none;
+}

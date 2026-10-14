@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.text {
+  display: grid;
+  gap: var(--space-xxs);
+  min-width: 0;
+}
+
+.action {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch);
+  padding: 0 var(--space-xs);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.action:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

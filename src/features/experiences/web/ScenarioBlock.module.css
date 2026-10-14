@@ -1,0 +1,97 @@
+.dialogue {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+}
+
+.quoteIcon {
+  flex: none;
+  color: var(--accent);
+}
+
+.dialogueText {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.comparison {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.side {
+  display: grid;
+  gap: var(--space-xs);
+  align-content: start;
+  padding: var(--space-lg);
+  border: var(--border-regular) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.sideA {
+  border-top: 4px solid var(--primary);
+}
+
+.sideB {
+  border-top: 4px solid var(--accent);
+}
+
+@media (min-width: 900px) {
+  .comparison {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.visual {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.visualImage {
+  aspect-ratio: 3 / 2;
+}
+
+.visualHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.argument {
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.argumentRow {
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.argumentRow dd {
+  margin: 0;
+}
+
+.conclusion {
+  padding-top: var(--space-md);
+  border-top: var(--border-regular) solid var(--border-strong);
+}
+
+.context {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  background: var(--primary-soft);
+  border-radius: var(--radius-card);
+}

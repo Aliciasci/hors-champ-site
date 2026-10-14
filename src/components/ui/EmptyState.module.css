@@ -1,0 +1,28 @@
+.empty {
+  display: grid;
+  gap: var(--space-md);
+  justify-items: start;
+  padding: var(--space-xxl) var(--space-xl);
+  border: var(--border-regular) dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--surface-accent);
+  color: var(--on-surface-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
