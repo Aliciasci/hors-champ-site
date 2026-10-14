@@ -28,6 +28,22 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 567,
     "height": 900
   },
+  "people/angela-davis.jpg": {
+    "width": 960,
+    "height": 1348
+  },
+  "people/aretha-franklin.jpg": {
+    "width": 960,
+    "height": 1341
+  },
+  "people/benazir-bhutto.jpg": {
+    "width": 513,
+    "height": 513
+  },
+  "people/billie-jean-king.jpg": {
+    "width": 960,
+    "height": 1113
+  },
   "people/ellen-johnson-sirleaf.jpg": {
     "width": 949,
     "height": 1101
@@ -39,6 +55,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
   "people/grace-hopper.jpg": {
     "width": 720,
     "height": 900
+  },
+  "people/jacinda-ardern.jpg": {
+    "width": 678,
+    "height": 960
   },
   "people/jane-goodall.jpg": {
     "width": 617,
@@ -52,6 +72,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 665,
     "height": 900
   },
+  "people/louise-bourgeois.jpg": {
+    "width": 527,
+    "height": 653
+  },
   "people/mae-jemison.jpg": {
     "width": 960,
     "height": 1200
@@ -64,6 +88,26 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 614,
     "height": 900
   },
+  "people/maya-angelou.jpg": {
+    "width": 960,
+    "height": 1445
+  },
+  "people/michelle-bachelet.jpg": {
+    "width": 960,
+    "height": 1407
+  },
+  "people/miriam-makeba.jpg": {
+    "width": 768,
+    "height": 1163
+  },
+  "people/nadia-murad.jpg": {
+    "width": 900,
+    "height": 1125
+  },
+  "people/nina-simone.jpg": {
+    "width": 960,
+    "height": 989
+  },
   "people/ruth-bader-ginsburg.jpg": {
     "width": 960,
     "height": 1270
@@ -71,6 +115,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
   "people/solvay-1927.jpg": {
     "width": 3000,
     "height": 2171
+  },
+  "people/sonia-sotomayor.jpg": {
+    "width": 960,
+    "height": 1200
   },
   "people/toni-morrison.jpg": {
     "width": 960,

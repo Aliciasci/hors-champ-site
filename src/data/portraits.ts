@@ -7,9 +7,12 @@ import type { Artwork } from '@/types';
  * (domaine public aux États-Unis seulement) ni pour Rosalind Franklin (CC BY-SA).
  * Fichiers redimensionnés à 900 px.
  *
- * Contemporaines (licence vérifiée le 2026-10-14) : photographies officielles d'agences fédérales
- * américaines, dans le domaine public. Pas de portrait libre et utilisable pour Wangari Maathai,
- * Tu Youyou, Zaha Hadid, Katalin Karikó, Emmanuelle Charpentier ni Agnès Varda.
+ * Contemporaines (licence vérifiée le 2026-10-14) : photographies d'agences fédérales américaines
+ * (domaine public) ou des archives nationales néerlandaises et de leurs auteurs (CC0). Pas de
+ * portrait libre et utilisable pour Wangari Maathai, Tu Youyou, Zaha Hadid, Katalin Karikó,
+ * Emmanuelle Charpentier, Agnès Varda, Yayoi Kusama, Niki de Saint Phalle, Annie Ernaux,
+ * Shirin Ebadi, Christiane Taubira, Rigoberta Menchú, bell hooks ; celui de Narges Mohammadi
+ * (archives de VOA) est écarté, son auteur n'étant pas établi.
  */
 export const portraits = {
   'ada-lovelace': {
@@ -137,5 +140,132 @@ export const portraits = {
     license: 'Domaine public',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Jane_Goodall_2015.jpg',
     focus: { top: '25%' },
+  },
+  'nina-simone': {
+    image: img('people/nina-simone.jpg'),
+    alt: 'Photographie en noir et blanc : Nina Simone, cheveux courts, pull ajouré sombre, devant un mur de briques et une plante.',
+    title: 'Portrait de Nina Simone à Amsterdam',
+    artist: 'Ron Kroon (Anefo, Nationaal Archief)',
+    date: '1965',
+    license: 'CC0',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Portret_van_de_Amerikaanse_zangeres_Nina_Simone_die_met_kerst_op_televisie_zal_v,_Bestanddeelnr_918-5601.jpg',
+    focus: { top: '20%' },
+  },
+  'miriam-makeba': {
+    image: img('people/miriam-makeba.jpg'),
+    alt: 'Photographie en noir et blanc : Miriam Makeba en coiffe haute et robe à motifs, se retournant vers l’objectif dans une loge.',
+    title: 'Miriam Makeba au Grand Gala du Disque, Amsterdam (recadrage)',
+    artist: 'Anefo (Nationaal Archief)',
+    date: '1969',
+    license: 'CC0',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Miriam_Makeba,_Bestanddeelnr_922-1835_(cropped).jpg',
+    focus: { top: '15%' },
+  },
+  'aretha-franklin': {
+    image: img('people/aretha-franklin.jpg'),
+    alt: 'Photographie en couleurs : Aretha Franklin chante au micro, chapeau gris orné d’un grand nœud, manteau et gants gris.',
+    title: 'Aretha Franklin à l’investiture présidentielle au Capitole',
+    artist: 'Cecilio Ricardo (US Air Force)',
+    date: '2009',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Aretha_Franklin_on_January_20,_2009_(cropped).jpg',
+    focus: { top: '20%' },
+  },
+  'louise-bourgeois': {
+    image: img('people/louise-bourgeois.jpg'),
+    alt: 'Photographie en couleurs : Louise Bourgeois âgée, chemisier blanc, assise à sa table de travail encombrée, la main levée.',
+    title: 'Louise Bourgeois à New York (recadrage)',
+    artist: 'Tetsuo Harada',
+    date: '1994',
+    license: 'CC0',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Louise_Bourgeois,_c._2000.jpg',
+    focus: { top: '15%' },
+  },
+  'maya-angelou': {
+    image: img('people/maya-angelou.jpg'),
+    alt: 'Photographie en couleurs : Maya Angelou, cheveux gris, robe brune et collier de perles, parle derrière un pupitre.',
+    title: 'Maya Angelou à l’inauguration du mémorial de l’African Burial Ground, New York',
+    artist: 'Tami Heilemann (département de l’Intérieur des États-Unis)',
+    date: '2007',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Maya_Angelou_2007_48-DPA-10-05-07.jpg',
+    focus: { top: '12%' },
+  },
+  'benazir-bhutto': {
+    image: img('people/benazir-bhutto.jpg'),
+    alt: 'Photographie en couleurs : gros plan de Benazir Bhutto, voile blanc et lunettes de soleil, parlant à la presse.',
+    title: 'Benazir Bhutto à son arrivée en visite d’État à la base d’Andrews',
+    artist: 'Gerald B. Johnson (département de la Défense des États-Unis)',
+    date: '1989',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Benazir_bhutto_1989_(square).jpg',
+    focus: { top: '30%' },
+  },
+  'michelle-bachelet': {
+    image: img('people/michelle-bachelet.jpg'),
+    alt: 'Photographie en couleurs : Michelle Bachelet marche en tailleur sombre, cheveux blonds courts, devant des officiels.',
+    title: 'Portrait de Michelle Bachelet',
+    artist: 'Département de la Défense des États-Unis',
+    date: '2002',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Michelle_Bachelet_(October_2002).jpg',
+    focus: { top: '10%' },
+  },
+  'jacinda-ardern': {
+    image: img('people/jacinda-ardern.jpg'),
+    alt: 'Photographie en couleurs : Jacinda Ardern souriante, robe rouge, devant un drapeau néo-zélandais.',
+    title: 'Jacinda Ardern dans son bureau de Première ministre (recadrage)',
+    artist: 'Bureau de l’ambassadeur des États-Unis en Nouvelle-Zélande',
+    date: '2020',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Scott_Brown_met_with_Jacinda_Ardern_at_the_Prime_Minister%27s_Office_20200219_(cropped).jpg',
+    focus: { top: '20%' },
+  },
+  'sonia-sotomayor': {
+    image: img('people/sonia-sotomayor.jpg'),
+    alt: 'Photographie officielle en couleurs : Sonia Sotomayor souriante en robe de juge noire, devant des boiseries.',
+    title: 'Portrait officiel de Sonia Sotomayor',
+    artist: 'Steve Petteway (Cour suprême des États-Unis)',
+    date: '2009',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Sonia_Sotomayor_in_SCOTUS_robe.jpg',
+    focus: { top: '15%' },
+  },
+  'nadia-murad': {
+    image: img('people/nadia-murad.jpg'),
+    alt: 'Photographie en couleurs : Nadia Murad, longs cheveux auburn et veste de cuir noir, parle à un pupitre.',
+    title:
+      'Nadia Murad honorée par la Coalition internationale contre l’État islamique (recadrage)',
+    artist: 'Département d’État des États-Unis',
+    date: '2019',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Nadia_Murad_Delivers_Remarks_at_a_Working_Lunch_After_Being_Honor_by_the_Global_Coalition_to_Defeat_ISIS.jpg',
+    focus: { top: '15%' },
+  },
+  'angela-davis': {
+    image: img('people/angela-davis.jpg'),
+    alt: 'Photographie en noir et blanc : Angela Davis, coiffure afro, col roulé sombre et long pendentif, assise dans un fauteuil.',
+    title: 'Angela Davis, portrait à mi-corps',
+    artist: 'Bernard Gotfryd',
+    date: '1974',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Angela_Davis_in_a_half-length_portrait_by_Bernard_Gotfryd_-_crop.jpg',
+    focus: { top: '15%' },
+  },
+  'billie-jean-king': {
+    image: img('people/billie-jean-king.jpg'),
+    alt: 'Photographie en couleurs : Billie Jean King souriante, lunettes et tailleur bleu marine, bras croisés.',
+    title: 'Portrait de Billie Jean King',
+    artist: 'King Enterprises',
+    date: '2009',
+    license: 'CC0',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Billie_Jean_King_Cover_Photo.jpg',
+    focus: { top: '15%' },
   },
 } satisfies Record<string, Artwork>;

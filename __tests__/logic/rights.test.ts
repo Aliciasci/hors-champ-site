@@ -83,7 +83,7 @@ describe('Derrière chaque droit — corpus', () => {
 
   it('crédite les portraits sous une licence libre et compatible', () => {
     for (const entity of catalog.filter((e) => e.domain === 'droits' && e.image)) {
-      expect(['Domaine public', 'CC BY 3.0']).toContain(entity.image?.license);
+      expect(['Domaine public', 'CC0', 'CC BY 3.0']).toContain(entity.image?.license);
       expect(entity.image?.alt.length).toBeGreaterThan(30);
     }
   });

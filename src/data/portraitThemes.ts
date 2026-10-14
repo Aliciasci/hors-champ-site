@@ -16,9 +16,9 @@ export const portraitThemes: PortraitTheme[] = [
   {
     id: 'epoque',
     title: 'Elles changent notre époque',
-    subtitle: 'Sciences, droits, arts : nos contemporaines',
+    subtitle: 'Musique, arts, politique, droit, sciences : nos contemporaines',
     description:
-      'Prix Nobel, présidente, juge, architecte, astronaute : des femmes de notre temps, dont les combats et les découvertes transforment encore le monde.',
+      'Chanteuses, artistes, écrivaines, présidentes, juges, scientifiques, sportives et militantes : des femmes de notre temps, dont les combats et les œuvres transforment encore le monde.',
     members: [
       {
         personId: 'person-malala-yousafzai',
@@ -71,6 +71,90 @@ export const portraitThemes: PortraitTheme[] = [
       {
         personId: 'person-agnes-varda',
         reason: 'Cinéaste de Cléo de 5 à 7, signataire du manifeste des 343.',
+      },
+      {
+        personId: 'person-nina-simone',
+        reason: 'Pianiste et chanteuse, sa chanson Mississippi Goddam dénonce l’inégalité raciale.',
+      },
+      {
+        personId: 'person-miriam-makeba',
+        reason: '« Mama Africa », une des voix contre l’apartheid.',
+      },
+      {
+        personId: 'person-aretha-franklin',
+        reason: 'Reine de la soul : Respect devient en 1967 un hymne féministe.',
+      },
+      {
+        personId: 'person-yayoi-kusama',
+        reason: 'Artiste avant-gardiste japonaise, ses pois couvrent ses œuvres.',
+      },
+      {
+        personId: 'person-louise-bourgeois',
+        reason:
+          'Sculptrice d’installations monumentales, influente sur les artistes qui l’ont suivie.',
+      },
+      {
+        personId: 'person-niki-de-saint-phalle',
+        reason: 'Ses Nanas explorent les représentations artistiques de la femme.',
+      },
+      {
+        personId: 'person-maya-angelou',
+        reason: 'Écrivaine et personnalité importante du mouvement des droits civiques.',
+      },
+      {
+        personId: 'person-annie-ernaux',
+        reason:
+          'Œuvre autobiographique proche de la sociologie, prix Nobel de littérature en 2022.',
+      },
+      {
+        personId: 'person-benazir-bhutto',
+        reason: 'Première femme élue démocratiquement à la tête d’un pays musulman, en 1988.',
+      },
+      {
+        personId: 'person-michelle-bachelet',
+        reason:
+          'Première femme présidente du Chili, puis Haut-Commissaire de l’ONU aux droits de l’homme.',
+      },
+      {
+        personId: 'person-jacinda-ardern',
+        reason: 'Première ministre de Nouvelle-Zélande de 2017 à 2023.',
+      },
+      {
+        personId: 'person-shirin-ebadi',
+        reason: 'Avocate iranienne, prix Nobel de la paix en 2003.',
+      },
+      {
+        personId: 'person-sonia-sotomayor',
+        reason:
+          'Première personnalité d’origine hispanique à siéger à la Cour suprême des États-Unis.',
+      },
+      {
+        personId: 'person-christiane-taubira',
+        reason: 'À l’origine de la loi qui reconnaît l’esclavage comme un crime contre l’humanité.',
+      },
+      {
+        personId: 'person-rigoberta-menchu',
+        reason: 'Prix Nobel de la paix en 1992 pour les droits des peuples autochtones.',
+      },
+      {
+        personId: 'person-nadia-murad',
+        reason: 'Rescapée de l’État islamique, prix Nobel de la paix en 2018.',
+      },
+      {
+        personId: 'person-narges-mohammadi',
+        reason: 'Prix Nobel de la paix 2023, reçu en détention.',
+      },
+      {
+        personId: 'person-angela-davis',
+        reason: 'Philosophe, militante antiraciste et féministe.',
+      },
+      {
+        personId: 'person-bell-hooks',
+        reason: 'Théoricienne du black feminism.',
+      },
+      {
+        personId: 'person-billie-jean-king',
+        reason: 'Championne de tennis, fondatrice de la WTA, engagée pour l’égalité dans le sport.',
       },
     ],
   },
@@ -172,6 +256,39 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-agnes-varda',
         reason: 'Cinéaste de La Pointe courte, de Cléo de 5 à 7 et de L’une chante, l’autre pas.',
       },
+      {
+        personId: 'person-nina-simone',
+        reason: 'L’une des plus grandes chanteuses de jazz de l’histoire.',
+      },
+      {
+        personId: 'person-miriam-makeba',
+        reason: 'Chanteuse d’ethno-jazz, son succès Pata Pata fait le tour du monde.',
+      },
+      {
+        personId: 'person-aretha-franklin',
+        reason: 'Ses albums redéfinissent la musique en popularisant la soul.',
+      },
+      {
+        personId: 'person-yayoi-kusama',
+        reason: 'Peintre, sculptrice et écrivaine avant-gardiste.',
+      },
+      {
+        personId: 'person-louise-bourgeois',
+        reason:
+          'Considérée comme particulièrement influente sur les générations d’artistes ultérieures.',
+      },
+      {
+        personId: 'person-niki-de-saint-phalle',
+        reason: 'Membre des Nouveaux Réalistes, autrice des Tirs et des Nanas.',
+      },
+      {
+        personId: 'person-maya-angelou',
+        reason: 'Romancière et poète, autrice de Je sais pourquoi chante l’oiseau en cage.',
+      },
+      {
+        personId: 'person-annie-ernaux',
+        reason: 'Prix Renaudot pour La Place, prix Nobel de littérature en 2022.',
+      },
     ],
   },
   {
@@ -231,6 +348,31 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-malala-yousafzai',
         reason: 'Défend la scolarisation des filles face aux talibans pakistanais.',
       },
+      {
+        personId: 'person-christiane-taubira',
+        reason: 'Défend au Parlement l’ouverture du mariage aux couples de même sexe.',
+      },
+      {
+        personId: 'person-shirin-ebadi',
+        reason: 'Défend la démocratie et les droits des femmes et des enfants en Iran.',
+      },
+      {
+        personId: 'person-rigoberta-menchu',
+        reason: 'Lutte pour les droits humains et ceux des peuples autochtones.',
+      },
+      {
+        personId: 'person-nadia-murad',
+        reason:
+          'Ambassadrice de l’ONU pour la dignité des victimes de la traite des êtres humains.',
+      },
+      {
+        personId: 'person-narges-mohammadi',
+        reason: 'Milite, au prix de sa liberté, pour les droits humains en Iran.',
+      },
+      {
+        personId: 'person-billie-jean-king',
+        reason: 'Engagée pour l’égalité des sexes et la reconnaissance du sport féminin.',
+      },
     ],
   },
   {
@@ -241,6 +383,14 @@ export const portraitThemes: PortraitTheme[] = [
       'Les penseuses qui ont transformé notre compréhension du genre, du pouvoir, du travail et des rapports sociaux.',
     members: [
       { personId: 'person-simone-de-beauvoir', reason: 'Philosophe, romancière et essayiste.' },
+      {
+        personId: 'person-angela-davis',
+        reason: 'Travaille sur la philosophie féministe, le Black feminism et le système carcéral.',
+      },
+      {
+        personId: 'person-bell-hooks',
+        reason: 'Étudie les relations entre race, classe et genre.',
+      },
     ],
   },
   {
@@ -298,6 +448,22 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-wangari-maathai',
         reason: 'Première femme africaine à recevoir le prix Nobel de la paix.',
       },
+      {
+        personId: 'person-benazir-bhutto',
+        reason: 'Première femme élue démocratiquement à la tête d’un pays musulman.',
+      },
+      {
+        personId: 'person-michelle-bachelet',
+        reason: 'Première femme présidente de la république du Chili.',
+      },
+      {
+        personId: 'person-sonia-sotomayor',
+        reason: 'Première personnalité d’origine hispanique à la Cour suprême des États-Unis.',
+      },
+      {
+        personId: 'person-shirin-ebadi',
+        reason: 'Première femme à présider un tribunal en Iran, en 1975.',
+      },
     ],
   },
   {
@@ -332,6 +498,30 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-ellen-johnson-sirleaf',
         reason: 'Présidente du Liberia de 2006 à 2018, prix Nobel de la paix en 2011.',
       },
+      {
+        personId: 'person-nina-simone',
+        reason: 'Militante pour les droits civiques.',
+      },
+      {
+        personId: 'person-maya-angelou',
+        reason: 'Personnalité importante du mouvement américain des droits civiques.',
+      },
+      {
+        personId: 'person-miriam-makeba',
+        reason: 'Appelle au boycott de l’Afrique du Sud de l’apartheid devant les Nations unies.',
+      },
+      {
+        personId: 'person-benazir-bhutto',
+        reason: 'Première ministre du Pakistan, assassinée en 2007.',
+      },
+      {
+        personId: 'person-michelle-bachelet',
+        reason: 'Deux fois présidente de la république du Chili.',
+      },
+      {
+        personId: 'person-jacinda-ardern',
+        reason: 'Fait interdire les armes semi-automatiques après le massacre de Christchurch.',
+      },
     ],
   },
   {
@@ -345,6 +535,11 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-mae-jemison',
         reason:
           'Première femme afro-américaine à aller dans l’espace, à bord de la navette Endeavour.',
+      },
+      {
+        personId: 'person-billie-jean-king',
+        reason:
+          'Douze titres du Grand Chelem en simple, l’une des plus grandes joueuses de tous les temps.',
       },
     ],
   },

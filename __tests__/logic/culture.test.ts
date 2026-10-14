@@ -122,7 +122,7 @@ describe('catalogue culturel', () => {
 
   it('documente chaque contemporaine : citations, Wikidata, « Notre époque » et une autre thématique', () => {
     const epoque = portraitThemes.find((t) => t.id === 'epoque')!;
-    expect(contemporaries).toHaveLength(12);
+    expect(contemporaries).toHaveLength(32);
     for (const person of contemporaries) {
       expect(person.kind).toBe('person');
       const quotes = person.sources.filter((s) => s.publisher === 'Wikipédia');
@@ -134,7 +134,7 @@ describe('catalogue culturel', () => {
         (t) => t.id !== 'epoque' && t.members.some((m) => m.personId === person.id),
       );
       expect({ id: person.id, n: others.length > 0 }).toEqual({ id: person.id, n: true });
-      if (person.image) expect(person.image.license).toBe('Domaine public');
+      if (person.image) expect(['Domaine public', 'CC0']).toContain(person.image.license);
     }
   });
 
