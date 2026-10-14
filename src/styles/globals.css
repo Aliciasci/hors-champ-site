@@ -136,6 +136,27 @@ a {
   color: var(--primary);
 }
 
+/*
+ * Lecture longue (corps des fiches) : serif de texte, corps 19 → 20 px, interligne aéré.
+ * Commun aux deux thèmes ; propre au web (le mobile garde sa typographie).
+ */
+.t-reading {
+  font-family: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.1875rem, 1.13rem + 0.25vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+/* Chapeau sous le titre d'un article. */
+.t-deck {
+  font-family: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.25rem, 1.15rem + 0.45vw, 1.4375rem);
+  line-height: 1.4;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
 .t-body-lg {
   font-size: var(--fs-body-lg);
   line-height: var(--lh-body-lg);

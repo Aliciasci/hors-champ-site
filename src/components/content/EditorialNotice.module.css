@@ -52,3 +52,28 @@
 .box > p {
   padding: 0 0 var(--space-md) calc(18px + var(--space-md));
 }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 2px var(--space-sm);
+  border: var(--border-hairline) dashed var(--border-strong);
+  border-radius: var(--radius-chip);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  font-weight: 600;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.badge:hover {
+  color: var(--text);
+  border-style: solid;
+}
+
+.badgeVerified {
+  border-style: solid;
+  border-color: var(--fb-solid);
+  color: var(--fb-solid);
+}

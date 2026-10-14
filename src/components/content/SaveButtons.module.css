@@ -28,3 +28,32 @@
 .savedFull {
   border-width: var(--border-bold);
 }
+
+/* Barre d'actions d'un article : même allure que « Partager » et « Imprimer ». */
+.bar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: var(--touch);
+  padding: 0 var(--space-md);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+  color: var(--text);
+}
+
+.bar:hover {
+  background: var(--surface-alt);
+}
+
+.barOn {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}
+
+.barOn:hover {
+  background: var(--primary-deep);
+}

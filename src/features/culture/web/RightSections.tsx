@@ -23,7 +23,7 @@ function Bullets({ items }: { items: string[] }) {
   return (
     <ul className={styles.bullets}>
       {items.map((item) => (
-        <li key={item} className="t-body">
+        <li key={item} className="t-reading">
           {item}
         </li>
       ))}
@@ -91,7 +91,7 @@ export function RightDetails({ entity, all }: { entity: CultureEntity; all: Cult
 
       <section className={styles.section} aria-labelledby="avant">
         <SectionHeader id="avant" kicker="Le point de départ" title="Avant" />
-        <p className="t-body measure">{details.before}</p>
+        <p className="t-reading">{details.before}</p>
       </section>
 
       <section className={styles.section} aria-labelledby="etapes" data-testid="right-steps">
@@ -109,7 +109,7 @@ export function RightDetails({ entity, all }: { entity: CultureEntity; all: Cult
 
       <section className={styles.section} aria-labelledby="loi">
         <SectionHeader id="loi" kicker="Ce qui a changé" title="La loi obtenue" />
-        <p className="t-body measure">{details.outcome}</p>
+        <p className="t-reading">{details.outcome}</p>
         {laws.length > 0 ? (
           <div>
             {laws.map((law) => (

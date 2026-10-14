@@ -9,11 +9,39 @@ import styles from './SaveButtons.module.css';
 
 /**
  * Signet d'une découverte (fiche culturelle, métier, portrait, activité) : `aria-pressed`.
- * `full` : grand bouton « Enregistrer la découverte » ; sinon bouton icône.
+ * `full` : grand bouton « Enregistrer la découverte » ; `bar` : bouton discret de la barre
+ * d'actions d'un article ; sinon bouton icône.
  */
-export function DiscoveryButton({ entityId, full = false }: { entityId: string; full?: boolean }) {
+export function DiscoveryButton({
+  entityId,
+  full = false,
+  bar = false,
+}: {
+  entityId: string;
+  full?: boolean;
+  bar?: boolean;
+}) {
   const saved = useAppStore((s) => isDiscoverySaved(s, entityId));
   const toggle = useAppStore((s) => s.toggleDiscovery);
+  if (bar) {
+    return (
+      <button
+        type="button"
+        className={`${styles.bar} ${saved ? styles.barOn : ''}`}
+        aria-pressed={saved}
+        onClick={() => toggle(entityId)}
+        data-testid="discovery-save"
+      >
+        <Bookmark
+          size={18}
+          strokeWidth={2.25}
+          fill={saved ? 'currentColor' : 'none'}
+          aria-hidden="true"
+        />
+        <span>{saved ? 'Enregistrée' : 'Enregistrer'}</span>
+      </button>
+    );
+  }
   if (full) {
     return (
       <Button

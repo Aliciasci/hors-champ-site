@@ -12,6 +12,7 @@ import { CultureTile } from '@/features/culture/web/CultureTile';
 import { buildFeed, type FeedSection } from '@/features/home/homeSelectors';
 import { FeedLead, FeedRow } from '@/features/home/web/FeedItems';
 import { HomeFeed, type HomeData } from '@/features/home/web/HomeFeed';
+import { readingMinutes } from '@/lib/readingTime';
 import { pageMetadata } from '@/lib/seo';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
@@ -38,11 +39,24 @@ export default function Home() {
 
   const data: HomeData = {
     entities: culture.map(slimEntity),
-    rows: Object.fromEntries(culture.map((e) => [e.id, <FeedRow key={e.id} entity={e} />])),
+    rows: Object.fromEntries(
+      culture.map((e) => [
+        e.id,
+        <FeedRow key={e.id} entity={e} minutes={readingMinutes(e, culture)} />,
+      ]),
+    ),
     leads: Object.fromEntries(
       culture
         .filter((e) => leadIds.has(e.id))
-        .map((e) => [e.id, <FeedLead key={e.id} entity={e} priority={e.id === firstLead} />]),
+        .map((e) => [
+          e.id,
+          <FeedLead
+            key={e.id}
+            entity={e}
+            minutes={readingMinutes(e, culture)}
+            priority={e.id === firstLead}
+          />,
+        ]),
     ),
     experiences: experiences.map(slimExperience),
     experienceCards: Object.fromEntries(

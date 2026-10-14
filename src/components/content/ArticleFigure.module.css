@@ -1,0 +1,28 @@
+.figure {
+  /* Hauteur maximale de l'image : un portrait vertical ne mange pas tout l'écran. */
+  --max-h: min(72vh, 640px);
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+}
+
+.media {
+  width: min(100%, calc(var(--max-h) * var(--ratio)));
+  margin: 0 auto;
+}
+
+.frame {
+  width: 100%;
+  aspect-ratio: var(--ratio);
+}
+
+.caption {
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ext {
+  display: inline-block;
+  vertical-align: -1px;
+  margin-left: 2px;
+}

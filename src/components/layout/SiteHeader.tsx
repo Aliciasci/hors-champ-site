@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { Bookmark, User } from '@/components/icons';
 import { HandUnderline } from '@/components/ui/HandDrawn';
@@ -10,14 +11,48 @@ import { useAppStore } from '@/store/useAppStore';
 import { NAV_ITEMS, normalizePath } from './nav';
 import styles from './SiteHeader.module.css';
 
+/** Défilement au-delà duquel l'en-tête peut s'effacer, et seuil de sens du défilement. */
+const HIDE_AFTER = 160;
+const DELTA = 6;
+
+/**
+ * L'en-tête s'efface quand on descend dans la page (place au texte) et revient dès qu'on
+ * remonte. Il reste visible tant que le focus clavier est dedans (voir le CSS).
+ */
+function useHideOnScroll() {
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    let last = window.scrollY;
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const y = window.scrollY;
+        if (y < HIDE_AFTER) setHidden(false);
+        else if (y - last > DELTA) setHidden(true);
+        else if (last - y > DELTA) setHidden(false);
+        if (Math.abs(y - last) > DELTA || y < HIDE_AFTER) last = y;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+  return hidden;
+}
+
 /** En-tête : logo, rubriques (grand écran), Bibliothèque avec compteur, Profil. */
 export function SiteHeader() {
   const path = normalizePath(usePathname());
+  const hidden = useHideOnScroll();
   const saved = useAppStore((s) => s.savedDiscoveries.length + s.bookmarks.length);
   const libraryActive = path === '/bibliotheque';
 
   return (
-    <header data-site-header className={styles.header}>
+    <header data-site-header className={`${styles.header} ${hidden ? styles.hidden : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} aria-label="Hors-Champ, accueil">
           <span className={styles.disc} aria-hidden="true" />

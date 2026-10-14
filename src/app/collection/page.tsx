@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { CultureCard } from '@/components/content/CultureCard';
+import { StoryRow } from '@/components/content/StoryRow';
 import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { getCatalog } from '@/content/catalog';
@@ -9,6 +9,7 @@ import { CollectionBrowser, ExploredCount } from '@/features/culture/web/Collect
 import { CultureTile } from '@/features/culture/web/CultureTile';
 import { RecentExplorations } from '@/features/culture/web/RecentExplorations';
 import { TimelineEntry } from '@/features/culture/web/TimelineEntry';
+import { readingMinutes } from '@/lib/readingTime';
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
@@ -27,7 +28,12 @@ export default function Page() {
       .filter((e) => e.kind !== 'event')
       .map((e) => [
         e.id,
-        <CultureCard key={e.id} entity={e} layout="tile" testId={`culture-${e.id}`} />,
+        <StoryRow
+          key={e.id}
+          entity={e}
+          minutes={readingMinutes(e, culture)}
+          testId={`culture-${e.id}`}
+        />,
       ]),
   );
   const timeline = Object.fromEntries(

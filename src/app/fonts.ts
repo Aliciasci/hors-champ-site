@@ -4,6 +4,7 @@ import {
   IBM_Plex_Mono,
   IBM_Plex_Sans,
   Instrument_Sans,
+  Source_Serif_4,
   Young_Serif,
 } from 'next/font/google';
 
@@ -33,6 +34,14 @@ export const plexMono = IBM_Plex_Mono({
   preload: false,
   variable: '--font-plex-mono',
 });
+/** Texte courant des articles (fiches), commun aux deux thèmes : un serif de lecture longue. */
+export const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-source-serif',
+});
 export const youngSerif = Young_Serif({
   subsets: ['latin'],
   weight: '400',
@@ -55,6 +64,14 @@ export const dmMono = DM_Mono({
   variable: '--font-dm-mono',
 });
 
-export const fontVariables = [cormorant, plexSans, plexMono, youngSerif, instrumentSans, dmMono]
+export const fontVariables = [
+  cormorant,
+  plexSans,
+  plexMono,
+  sourceSerif,
+  youngSerif,
+  instrumentSans,
+  dmMono,
+]
   .map((font) => font.variable)
   .join(' ');

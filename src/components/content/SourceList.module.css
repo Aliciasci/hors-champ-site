@@ -43,3 +43,39 @@
   border: var(--border-hairline) dashed var(--border-strong);
   border-radius: var(--radius-md);
 }
+
+/* Notes de fin d'article. */
+.notes {
+  display: grid;
+  gap: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+.note {
+  display: grid;
+  grid-template-columns: 2ch minmax(0, 1fr);
+  gap: var(--space-sm);
+}
+
+.number {
+  padding-top: 2px;
+}
+
+.noteText {
+  display: grid;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.noteTitle {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.noteExcerpt {
+  margin: 0;
+  font-style: italic;
+}

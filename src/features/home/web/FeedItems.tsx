@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { cultureHref } from '@/components/content/CultureCard';
 import { CoverArt } from '@/components/content/CoverArt';
-import { CultureThumb, Emblem } from '@/components/content/CultureThumb';
-import { SavedMark } from '@/components/content/SavedMark';
+import { Emblem } from '@/components/content/CultureThumb';
+import { StoryRow } from '@/components/content/StoryRow';
 import { KIND_LABELS } from '@/features/culture/cultureGraph';
 import type { CultureDomain, CultureEntity } from '@/types';
 
@@ -34,9 +34,11 @@ function byline(entity: CultureEntity) {
  */
 export function FeedLead({
   entity,
+  minutes,
   priority = false,
 }: {
   entity: CultureEntity;
+  minutes: number;
   priority?: boolean;
 }) {
   return (
@@ -61,37 +63,23 @@ export function FeedLead({
       <span className={styles.leadText}>
         <span className="t-overline c-accent">{kicker(entity)}</span>
         <span className={`t-title1 ${styles.title}`}>{entity.hook ?? entity.title}</span>
-        {entity.hook ? <span className="t-label c-primary">{byline(entity)}</span> : null}
-        <span className={`t-body c-2 ${styles.clamp3}`}>{entity.summary}</span>
-        {!entity.hook && entity.period ? (
-          <span className="t-caption c-muted">{entity.period.label}</span>
-        ) : null}
+        <span className={`t-deck ${styles.clamp3}`}>{entity.summary}</span>
+        <span className="t-caption c-muted">
+          {[byline(entity), `${minutes} min de lecture`].filter(Boolean).join(' · ')}
+        </span>
       </span>
     </Link>
   );
 }
 
 /** Article du fil : texte à gauche, vignette à droite. */
-export function FeedRow({ entity }: { entity: CultureEntity }) {
-  const by = byline(entity);
+export function FeedRow({ entity, minutes }: { entity: CultureEntity; minutes: number }) {
   return (
-    <Link href={cultureHref(entity.id)} className={styles.row} data-testid={`feed-${entity.id}`}>
-      <span className={styles.rowText}>
-        <span className="t-overline c-accent">{kicker(entity)}</span>
-        <span className={`t-title3 ${styles.title} ${styles.clamp3}`}>
-          {entity.hook ?? entity.title}
-        </span>
-        {entity.hook ? null : (
-          <span className={`t-caption c-2 ${styles.clamp2}`}>{entity.summary}</span>
-        )}
-        <span className={styles.meta}>
-          {by ? (
-            <span className={`t-caption ${entity.hook ? 'c-primary' : 'c-muted'}`}>{by}</span>
-          ) : null}
-          <SavedMark entityId={entity.id} size={14} />
-        </span>
-      </span>
-      <CultureThumb entity={entity} size={96} />
-    </Link>
+    <StoryRow
+      entity={entity}
+      kicker={kicker(entity)}
+      minutes={minutes}
+      testId={`feed-${entity.id}`}
+    />
   );
 }

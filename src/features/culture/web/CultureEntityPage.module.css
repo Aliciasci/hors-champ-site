@@ -4,62 +4,67 @@
   min-width: 0;
 }
 
-.media {
-  min-width: 0;
-}
-
-.cover {
-  height: clamp(260px, 62vw, 420px);
-}
-
-.emblem {
-  min-height: 200px;
-}
-
-.emblemCompact {
-  min-height: 112px;
-}
-
-.body {
-  display: grid;
-  gap: var(--space-lg);
-  align-content: start;
-  min-width: 0;
-}
-
 .header {
   display: grid;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  padding-top: var(--space-md);
 }
 
-.themes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+.title {
+  font-size: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
 }
 
-.actions {
+/* Dates · temps de lecture · sources · statut. */
+.byline {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm) var(--space-md);
+}
+
+.bylineItems {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-sm);
+}
+
+.bylineItems > :not(:last-child)::after {
+  content: '·';
+  margin-left: var(--space-sm);
+  color: var(--text-muted);
+}
+
+.notesLink {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.notesLink:hover {
+  color: var(--primary);
+}
+
+.prose {
+  display: grid;
+  gap: 1.1em;
+}
+
+.themes {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.themes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
 .section {
   display: grid;
   gap: var(--space-md);
-  margin-top: var(--space-xxl);
-  min-width: 0;
-}
-
-.groups {
-  display: grid;
-  gap: var(--space-xl);
-}
-
-.group {
-  display: grid;
-  gap: var(--space-xs);
+  margin-top: var(--space-huge);
   min-width: 0;
 }
 
@@ -68,46 +73,8 @@
   gap: 0 var(--space-xl);
 }
 
-/* Grand écran : image collante à gauche, texte à droite. */
-@media (min-width: 900px) {
-  .article {
-    grid-template-columns: minmax(280px, 5fr) 7fr;
-    gap: var(--space-xxl);
-    align-items: start;
-  }
-
-  .media {
-    position: sticky;
-    top: calc(var(--header-h) + var(--space-xl));
-  }
-
-  .cover {
-    height: auto;
-    aspect-ratio: 4 / 5;
-    max-height: calc(100vh - var(--header-h) - 96px);
-  }
-
-  .groups,
-  .practice {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1200px) {
-  .groups {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
 @media print {
-  .article {
-    grid-template-columns: 1fr;
-  }
-  .media {
-    position: static;
-    max-width: 50%;
-  }
-  .actions {
+  .section:not(#sources) {
     display: none;
   }
 }

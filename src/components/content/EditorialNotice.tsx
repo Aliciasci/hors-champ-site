@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { ChevronDown, FlaskConical, ShieldCheck } from '@/components/icons';
 import { EDITORIAL_STATUS_LABELS } from '@/constants/labels';
 import type { EditorialStatus } from '@/types';
@@ -50,5 +52,32 @@ export function EditorialNotice({
       </summary>
       <p className="t-body-sm c-2">{STATUS_DESCRIPTIONS[status]}</p>
     </details>
+  );
+}
+
+/**
+ * Statut en une pastille, dans la ligne de signature d'un article. Le détail des statuts est
+ * expliqué sur la page « Qui sommes-nous », vers laquelle elle renvoie.
+ */
+export function StatusBadge({
+  status,
+  reviewedAt,
+}: {
+  status: EditorialStatus;
+  reviewedAt: string | null;
+}) {
+  const verified = status === 'verified';
+  const Icon = verified ? ShieldCheck : FlaskConical;
+  return (
+    <Link
+      href="/a-propos#statuts"
+      className={`${styles.badge} ${verified ? styles.badgeVerified : ''}`}
+      title={STATUS_DESCRIPTIONS[status]}
+      data-testid="status-badge"
+    >
+      <Icon size={14} strokeWidth={2.25} aria-hidden="true" />
+      <span className="sr-only">Statut éditorial : </span>
+      {statusTitle(status, reviewedAt)}
+    </Link>
   );
 }

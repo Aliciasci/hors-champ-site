@@ -28,3 +28,9 @@
   color: var(--fb-solid);
   min-height: 1em;
 }
+
+@media (max-width: 599px) {
+  .printWide {
+    display: none;
+  }
+}

@@ -8,7 +8,14 @@ import { useMounted } from '@/lib/useMounted';
 import styles from './ShareActions.module.css';
 
 /** Partage natif si disponible, sinon copie du lien ; impression. Le résultat est annoncé. */
-export function ShareActions({ title }: { title: string }) {
+export function ShareActions({
+  title,
+  printOnMobile = true,
+}: {
+  title: string;
+  /** `false` : « Imprimer » n'apparaît qu'en grand écran (barre d'actions compacte). */
+  printOnMobile?: boolean;
+}) {
   const [message, setMessage] = useState('');
 
   const share = async () => {
@@ -44,7 +51,11 @@ export function ShareActions({ title }: { title: string }) {
         )}
         <span>{canShare ? 'Partager' : 'Copier le lien'}</span>
       </button>
-      <button type="button" className={styles.action} onClick={() => window.print()}>
+      <button
+        type="button"
+        className={`${styles.action} ${printOnMobile ? '' : styles.printWide}`}
+        onClick={() => window.print()}
+      >
         <Printer size={18} strokeWidth={2.25} aria-hidden="true" />
         <span>Imprimer</span>
       </button>
