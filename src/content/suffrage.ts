@@ -361,21 +361,3 @@ export const SUFFRAGE: SuffrageCountry[] = [
     note: 'Premier pays ; les femmes y deviennent éligibles en 1919.',
   },
 ];
-
-export type SuffrageState = 'full' | 'partial' | 'none';
-
-/** Situation d'un pays une année donnée. */
-export function suffrageState(country: SuffrageCountry, year: number): SuffrageState {
-  if (year >= country.full) return 'full';
-  if (year >= country.first) return 'partial';
-  return 'none';
-}
-
-/** Nombre de pays où les femmes votent (pleinement ou sous conditions) une année donnée. */
-export function suffrageCount(countries: readonly SuffrageCountry[], year: number) {
-  const states = countries.map((c) => suffrageState(c, year));
-  return {
-    total: states.filter((s) => s !== 'none').length,
-    partial: states.filter((s) => s === 'partial').length,
-  };
-}

@@ -1,0 +1,429 @@
+{
+  "id": "majorite",
+  "source": "https://fr.wikipedia.org/wiki/Chronologie_des_droits_des_femmes_autres_que_le_suffrage",
+  "countries": {
+    "SWE": {
+      "steps": [
+        {
+          "year": 1858,
+          "level": "partial",
+          "excerpt": "Suède : majorité légale pour les femmes non mariées (il est nécessaire d'y appliquer ; majorité légale automatique en 1863).",
+          "note": "Concerne seulement les femmes non mariées ; demande nécessaire jusqu'en 1863."
+        },
+        {
+          "year": 1920,
+          "level": "full",
+          "excerpt": "Suède : majorité légale pour les femmes mariées et droits de mariage égaux.",
+          "note": "Inclut des droits égaux dans le mariage."
+        }
+      ]
+    },
+    "DNK": {
+      "steps": [
+        {
+          "year": 1857,
+          "level": "partial",
+          "excerpt": "Danemark : majorité légale pour les femmes non mariées.",
+          "note": "Concerne seulement les femmes non mariées."
+        },
+        {
+          "year": 1899,
+          "level": "full",
+          "excerpt": "Danemark : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ISL": {
+      "steps": [
+        {
+          "year": 1861,
+          "level": "partial",
+          "excerpt": "Islande : majorité légale pour les femmes non mariées.",
+          "note": "Concerne seulement les femmes non mariées."
+        },
+        {
+          "year": 1899,
+          "level": "full",
+          "excerpt": "Islande : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "NOR": {
+      "steps": [
+        {
+          "year": 1863,
+          "level": "partial",
+          "excerpt": "Norvège : majorité légale pour les femmes non mariées (aux mêmes âges que les hommes, en 1869).",
+          "note": "Concerne seulement les femmes non mariées ; mêmes âges que les hommes en 1869."
+        },
+        {
+          "year": 1888,
+          "level": "full",
+          "excerpt": "Norvège : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ITA": {
+      "steps": [
+        {
+          "year": 1865,
+          "level": "partial",
+          "excerpt": "Italie : majorité légale pour les femmes non mariées.",
+          "note": "Concerne seulement les femmes non mariées."
+        }
+      ]
+    },
+    "MEX": {
+      "steps": [
+        {
+          "year": 1884,
+          "level": "partial",
+          "excerpt": "Mexique : majorité légale pour les femmes non mariées et on accorde aux femmes mariées le droit de gérer leurs avoirs.",
+          "note": "Majorité légale pour les non mariées et gestion des avoirs pour les mariées."
+        },
+        {
+          "year": 1917,
+          "level": "full",
+          "excerpt": "Mexique : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "FRA": {
+      "steps": [
+        {
+          "year": 1893,
+          "level": "partial",
+          "excerpt": "France : majorité légale pour les femmes non mariées et séparées.",
+          "note": "Concerne les femmes non mariées et séparées, pas toutes les femmes mariées."
+        },
+        {
+          "year": 1938,
+          "level": "full",
+          "excerpt": "France : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "CHE": {
+      "steps": [
+        {
+          "year": 1884,
+          "level": "partial",
+          "excerpt": "Suisse : majorité légale pour les femmes non mariées, incluant les veuves.",
+          "note": "Concerne les femmes non mariées, incluant les veuves."
+        },
+        {
+          "year": 1984,
+          "level": "full",
+          "excerpt": "Suisse : les femmes mariées n'ont plus besoin du consentement de leur conjoint pour initier des procédures légales"
+        }
+      ]
+    },
+    "DEU": {
+      "steps": [
+        {
+          "year": 1884,
+          "level": "partial",
+          "excerpt": "Allemagne : majorité légale pour les femmes non mariées.",
+          "note": "Concerne seulement les femmes non mariées."
+        }
+      ]
+    },
+    "GTM": {
+      "steps": [
+        {
+          "year": 1963,
+          "level": "full",
+          "excerpt": "Guatemala : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "CRI": {
+      "steps": [
+        {
+          "year": 1887,
+          "level": "full",
+          "excerpt": "Costa Rica : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "MNE": {
+      "steps": [
+        {
+          "year": 1888,
+          "level": "partial",
+          "excerpt": "Monténégro : majorité légale pour les femmes non mariées.",
+          "note": "Concerne seulement les femmes non mariées."
+        }
+      ]
+    },
+    "BEL": {
+      "steps": [
+        {
+          "year": 1900,
+          "level": "partial",
+          "excerpt": "Belgique : majorité légale pour les femmes non mariées.",
+          "note": "Concerne seulement les femmes non mariées."
+        }
+      ]
+    },
+    "SLV": {
+      "steps": [
+        {
+          "year": 1902,
+          "level": "full",
+          "excerpt": "El Salvador : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "NIC": {
+      "steps": [
+        {
+          "year": 1904,
+          "level": "full",
+          "excerpt": "Nicaragua : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "HND": {
+      "steps": [
+        {
+          "year": 1906,
+          "level": "full",
+          "excerpt": "Honduras : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "PRT": {
+      "steps": [
+        {
+          "year": 1911,
+          "level": "full",
+          "excerpt": "Portugal : majorité légale pour les femmes mariées (modifiée in 1933).",
+          "note": "Le texte signale une modification en 1933."
+        }
+      ]
+    },
+    "CUB": {
+      "steps": [
+        {
+          "year": 1917,
+          "level": "full",
+          "excerpt": "Cuba : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "CHL": {
+      "steps": [
+        {
+          "year": 1979,
+          "level": "full",
+          "excerpt": "Chili : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ARG": {
+      "steps": [
+        {
+          "year": 1968,
+          "level": "full",
+          "excerpt": "Argentine : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ZWE": {
+      "steps": [
+        {
+          "year": 1928,
+          "level": "full",
+          "excerpt": "Rhodésie du Sud : le potestas maritalis est aboli en 1928 par le Married Persons' Property Act, qui abolit aussi la community of property (en).",
+          "note": "Abolition de la puissance maritale ; pays actuel : Zimbabwe."
+        }
+      ]
+    },
+    "ESP": {
+      "steps": [
+        {
+          "year": 1931,
+          "level": "full",
+          "excerpt": "Espagne : majorité légale pour les femmes mariées (rescinded in 1939).",
+          "note": "Mesure annulée en 1939."
+        },
+        {
+          "year": 1939,
+          "level": "none",
+          "excerpt": "Espagne : majorité légale pour les femmes mariées (rescinded in 1939).",
+          "note": "La majorité légale des femmes mariées est annulée en 1939."
+        },
+        {
+          "year": 1975,
+          "level": "full",
+          "excerpt": "Espagne : abolition du permiso marital (qui exigeait des femmes mariées qu'elles aient le consentement de leur conjoint pour presque toutes les activités économiques, dont l'emploi, la propriété et voyager sur de longues distances).",
+          "note": "Fin du « permiso marital »."
+        }
+      ]
+    },
+    "COL": {
+      "steps": [
+        {
+          "year": 1932,
+          "level": "full",
+          "excerpt": "Colombie : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ROU": {
+      "steps": [
+        {
+          "year": 1932,
+          "level": "full",
+          "excerpt": "Roumanie : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "PER": {
+      "steps": [
+        {
+          "year": 1984,
+          "level": "full",
+          "excerpt": "Pérou : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "VEN": {
+      "steps": [
+        {
+          "year": 1942,
+          "level": "full",
+          "excerpt": "Venezuela : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "URY": {
+      "steps": [
+        {
+          "year": 1946,
+          "level": "full",
+          "excerpt": "Uruguay : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ECU": {
+      "steps": [
+        {
+          "year": 1949,
+          "level": "full",
+          "excerpt": "Équateur : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "ZAF": {
+      "steps": [
+        {
+          "year": 1953,
+          "level": "partial",
+          "excerpt": "Afrique du Sud : le Matrimonial Affairs Act restreint, mais n'abolit pas le potestas maritalis.",
+          "note": "La puissance maritale est seulement restreinte, pas abolie."
+        }
+      ]
+    },
+    "BRA": {
+      "steps": [
+        {
+          "year": 1962,
+          "level": "full",
+          "excerpt": "Brésil : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "BOL": {
+      "steps": [
+        {
+          "year": 1972,
+          "level": "full",
+          "excerpt": "Bolivie : majorité légale pour les femmes mariées."
+        }
+      ]
+    },
+    "DOM": {
+      "steps": [
+        {
+          "year": 1978,
+          "level": "full",
+          "excerpt": "République dominicaine : les femmes mariées n'ont plus besoin du consentement de leur conjoint pour initier des procédures légales."
+        }
+      ]
+    },
+    "PRY": {
+      "steps": [
+        {
+          "year": 1987,
+          "level": "full",
+          "excerpt": "Paraguay : les femmes mariées n'ont plus besoin du consentement de leur conjoint pour initier des procédures légales."
+        }
+      ]
+    },
+    "RWA": {
+      "steps": [
+        {
+          "year": 1988,
+          "level": "full",
+          "excerpt": "Rwanda : les femmes mariées n'ont plus besoin du consentement de leur conjoint pour initier des procédures légales."
+        }
+      ]
+    },
+    "NAM": {
+      "steps": [
+        {
+          "year": 1996,
+          "level": "full",
+          "excerpt": "Namibie : le potestas maritalis est aboli par le Married Persons Equality Act."
+        }
+      ]
+    },
+    "AGO": {
+      "steps": [
+        {
+          "year": 1996,
+          "level": "full",
+          "excerpt": "Angola : les femmes mariées n'ont plus besoin du consentement de leur conjoint pour initier des procédures légales."
+        }
+      ]
+    },
+    "BEN": {
+      "steps": [
+        {
+          "year": 2002,
+          "level": "full",
+          "excerpt": "Bénin : abolition de l'obligation faite à l'épouse d'obtenir le consentement de son mari pour initier un acte en justice."
+        }
+      ]
+    },
+    "BWA": {
+      "steps": [
+        {
+          "year": 2004,
+          "level": "full",
+          "excerpt": "Botswana : la suprématie du mari sur son épouse est abolie par la loi Abolition of Marital Power Act."
+        }
+      ]
+    },
+    "MOZ": {
+      "steps": [
+        {
+          "year": 2004,
+          "level": "full",
+          "excerpt": "Mozambique : abolition de l'obligation faite à l'épouse d'obtenir le consentement de son mari pour initier un acte en justice."
+        }
+      ]
+    },
+    "LSO": {
+      "steps": [
+        {
+          "year": 2006,
+          "level": "full",
+          "excerpt": "Lesotho : la suprématie du mari sur son épouse est abolie par la loi The Married Persons Equality Act 2006."
+        }
+      ]
+    }
+  }
+}

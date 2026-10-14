@@ -17,7 +17,9 @@
     "prebuild": "node scripts/build-images.mjs",
     "redaction:proposer": "tsx --tsconfig tsconfig.json scripts/redaction/proposer.ts",
     "redaction:relire": "tsx --tsconfig tsconfig.json scripts/redaction/relire.ts",
-    "redaction:accepter": "tsx --tsconfig tsconfig.json scripts/redaction/accepter.ts"
+    "redaction:accepter": "tsx --tsconfig tsconfig.json scripts/redaction/accepter.ts",
+    "redaction:droits": "tsx --tsconfig tsconfig.json scripts/redaction/extraire-droits.ts",
+    "redaction:droits-site": "tsx --tsconfig tsconfig.json scripts/redaction/droits-vers-site.ts"
   },
   "dependencies": {
     "lucide-react": "^1.57.0",

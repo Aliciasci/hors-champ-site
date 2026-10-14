@@ -1,0 +1,324 @@
+{
+  "id": "avortement",
+  "source": "https://en.wikipedia.org/wiki/Timeline_of_reproductive_rights_legislation",
+  "countries": {
+    "RUS": {
+      "steps": [
+        {
+          "year": 1920,
+          "level": "full",
+          "excerpt": "In the Soviet Union, Vladimir Lenin legalized abortion on request, the first country to do so.",
+          "note": "La loi est d’abord introduite dans la RSFS de Russie, puis dans le reste de l’Union soviétique en 1922."
+        },
+        {
+          "year": 1936,
+          "level": "partial",
+          "excerpt": "Joseph Stalin reversed most parts of Lenin's legalization of abortion in the Soviet Union to increase population growth.",
+          "note": "Retour en arrière après la légalisation à la demande de 1920."
+        },
+        {
+          "year": 1955,
+          "level": "full",
+          "excerpt": "In the Soviet Union abortion was legalized again.",
+          "note": "L’extrait ne détaille pas les conditions ; « again » renvoie à la légalisation soviétique antérieure."
+        }
+      ]
+    },
+    "MEX": {
+      "steps": [
+        {
+          "year": 1931,
+          "level": "partial",
+          "excerpt": "In Mexico abortion was legalized in cases of rape.",
+          "note": "Autorisé en cas de viol."
+        }
+      ]
+    },
+    "POL": {
+      "steps": [
+        {
+          "year": 1932,
+          "level": "partial",
+          "excerpt": "Poland was the first country in Europe outside the Soviet Union to legalize abortion in cases of rape and threat to maternal health.",
+          "note": "Autorisé en cas de viol ou de menace pour la santé maternelle."
+        }
+      ]
+    },
+    "ISL": {
+      "steps": [
+        {
+          "year": 1935,
+          "level": "partial",
+          "excerpt": "Iceland became the first Western country to legalize therapeutic abortion under limited circumstances.",
+          "note": "Avortement thérapeutique dans des circonstances limitées."
+        }
+      ]
+    },
+    "DEU": {
+      "steps": [
+        {
+          "year": 1976,
+          "level": "full",
+          "excerpt": "France (1975), West Germany (1976), New Zealand (1977), Italy (1978), and the Netherlands (1980) legalized abortion on demand in the first trimester.",
+          "note": "Allemagne de l’Ouest; à la demande au premier trimestre."
+        }
+      ]
+    },
+    "GBR": {
+      "steps": [
+        {
+          "year": 1938,
+          "level": "partial",
+          "excerpt": "The legal precedent of allowing abortion in order to avoid mental or physical damage was adopted by other countries in the Commonwealth of Nations.",
+          "note": "Précédent juridique lié au risque de dommage mental ou physique."
+        }
+      ]
+    },
+    "SWE": {
+      "steps": [
+        {
+          "year": 1938,
+          "level": "partial",
+          "excerpt": "In Sweden abortion was legalized on a limited basis.",
+          "note": "Base limitée, motifs non précisés dans l’extrait."
+        }
+      ]
+    },
+    "FRA": {
+      "steps": [
+        {
+          "year": 1939,
+          "level": "partial",
+          "excerpt": "The Penal Code of France was altered to permit an abortion that would save the pregnant woman's life.",
+          "note": "Autorisé pour sauver la vie de la femme enceinte."
+        },
+        {
+          "year": 1975,
+          "level": "full",
+          "excerpt": "France (1975), West Germany (1976), New Zealand (1977), Italy (1978), and the Netherlands (1980) legalized abortion on demand in the first trimester.",
+          "note": "À la demande au premier trimestre; le texte précise qu’en France les avortements non médicaux n’étaient pas permis après 10–12 semaines."
+        }
+      ]
+    },
+    "JPN": {
+      "steps": [
+        {
+          "year": 1948,
+          "level": "partial",
+          "excerpt": "The Eugenic Protection Law in Japan expanded the circumstances in which abortion is allowed.",
+          "note": "Circonstances élargies, motifs non précisés dans l’extrait."
+        }
+      ]
+    },
+    "NOR": {
+      "steps": [
+        {
+          "year": 1964,
+          "level": "partial",
+          "excerpt": "In Norway the first law to legalize abortion was passed. It allowed abortion in cases of danger to the mother, and the abortion decision was made by two doctors.",
+          "note": "Autorisé en cas de danger pour la mère ; décision par deux médecins."
+        },
+        {
+          "year": 1978,
+          "level": "full",
+          "excerpt": "In the spring of 1978, the law on free access to abortion in Norway was passed.",
+          "note": "Accès libre à l’avortement."
+        }
+      ]
+    },
+    "CAN": {
+      "steps": [
+        {
+          "year": 1969,
+          "level": "partial",
+          "excerpt": "Canada passed the Criminal Law Amendment Act, 1968-69, which began to allow abortion for selective reasons.",
+          "note": "Autorisé pour des raisons sélectives."
+        },
+        {
+          "year": 1988,
+          "level": "full",
+          "excerpt": "the Supreme Court of Canada struck down an abortion regulation which allowed abortions in some circumstances but required approval of a committee of doctors",
+          "note": "Depuis cette décision, le texte indique que la loi canadienne n’a plus réglementé l’avortement."
+        }
+      ]
+    },
+    "IND": {
+      "steps": [
+        {
+          "year": 1971,
+          "level": "partial",
+          "excerpt": "The Parliament of India, under the Prime Ministership of Indira Gandhi, passes the Medical Termination of Pregnancy Act 1971 (MTP Act 1971)",
+          "note": "Les conditions précises ne sont pas indiquées dans l’extrait."
+        }
+      ]
+    },
+    "USA": {
+      "steps": [
+        {
+          "year": 1973,
+          "level": "full",
+          "excerpt": "The U.S. Supreme Court, in Roe v. Wade, declared all individual state bans on abortion during the first trimester to be unconstitutional",
+          "note": "Avortement à la demande protégé au premier trimestre; réglementation possible ensuite, avec exception pour la santé physique ou mentale."
+        },
+        {
+          "year": 2022,
+          "level": "partial",
+          "excerpt": "Dobbs v. Jackson Women's Health Organization, No. 19-1392, 597 U.S. ___ (2022), is a decision of the United States Supreme Court, in which the Court held that the Constitution of the United States does not confer any right to abortion, thus overruling both Roe v. Wade (1973) and Planned Parenthood v. Casey (1992).",
+          "note": "L’arrêt Dobbs supprime la protection fédérale : l’accès dépend désormais de chaque État."
+        }
+      ]
+    },
+    "DNK": {
+      "steps": [
+        {
+          "year": 1973,
+          "level": "full",
+          "excerpt": "Denmark granted its permanent residents the right to legal abortion up to the end of the 12th week of pregnancy.",
+          "note": "Jusqu’à la fin de la 12e semaine de grossesse."
+        }
+      ]
+    },
+    "KOR": {
+      "steps": [
+        {
+          "year": 1973,
+          "level": "partial",
+          "excerpt": "permitted a physician to perform an abortion if the pregnant woman or her spouse suffered from certain hereditary or communicable diseases, if the pregnancy resulted from rape or incest, or if continuing the pregnancy would jeopardize the woman's health.",
+          "note": "Autorisé pour certaines maladies, viol, inceste ou risque pour la santé de la femme."
+        }
+      ]
+    },
+    "SGP": {
+      "steps": [
+        {
+          "year": 1974,
+          "level": "full",
+          "excerpt": "This allowed all women to abort a fetus \"on request\" before 24 weeks of the pregnancy had passed",
+          "note": "À la demande avant 24 semaines ; sauf nécessité immédiate pour sauver la vie ou prévenir une atteinte grave permanente."
+        }
+      ]
+    },
+    "NZL": {
+      "steps": [
+        {
+          "year": 1977,
+          "level": "full",
+          "excerpt": "France (1975), West Germany (1976), New Zealand (1977), Italy (1978), and the Netherlands (1980) legalized abortion on demand in the first trimester.",
+          "note": "À la demande au premier trimestre."
+        }
+      ]
+    },
+    "ITA": {
+      "steps": [
+        {
+          "year": 1978,
+          "level": "full",
+          "excerpt": "France (1975), West Germany (1976), New Zealand (1977), Italy (1978), and the Netherlands (1980) legalized abortion on demand in the first trimester.",
+          "note": "À la demande au premier trimestre."
+        }
+      ]
+    },
+    "NLD": {
+      "steps": [
+        {
+          "year": 1980,
+          "level": "full",
+          "excerpt": "France (1975), West Germany (1976), New Zealand (1977), Italy (1978), and the Netherlands (1980) legalized abortion on demand in the first trimester.",
+          "note": "À la demande au premier trimestre."
+        }
+      ]
+    },
+    "IRL": {
+      "steps": [
+        {
+          "year": 1992,
+          "level": "partial",
+          "excerpt": "established the right of Irish women to an abortion if a pregnant woman's life was at risk because of pregnancy, including the risk of suicide.",
+          "note": "Autorisé lorsque la vie de la femme enceinte est en danger, y compris en cas de risque de suicide."
+        },
+        {
+          "year": 2019,
+          "level": "full",
+          "excerpt": "It permits terminations to be carried out up to 12 weeks of pregnancy; or where there is a risk to the life, or of serious harm to the health, of the pregnant woman; or where there is a risk to the life, or of serious harm to the health, of the pregnant woman in an emergency; or where there is a condition present which is likely to lead to the death of the fetus either before or within 28 days of birth.",
+          "note": "Autorisé jusqu’à 12 semaines de grossesse ; au-delà, seulement dans certains cas."
+        }
+      ]
+    },
+    "ZAF": {
+      "steps": [
+        {
+          "year": 1997,
+          "level": "full",
+          "excerpt": "In South Africa, the Choice on Termination of Pregnancy Act, 1996 came into effect, allowing elective abortion care.",
+          "note": "La loi précédente, qui n’autorisait l’avortement que dans des circonstances très limitées, a été abrogée."
+        }
+      ]
+    },
+    "PRT": {
+      "steps": [
+        {
+          "year": 2007,
+          "level": "full",
+          "excerpt": "The Parliament of Portugal voted to legalize abortion during the first ten weeks of pregnancy.",
+          "note": "Autorisé pendant les 10 premières semaines de grossesse."
+        }
+      ]
+    },
+    "ESP": {
+      "steps": [
+        {
+          "year": 2009,
+          "level": "full",
+          "excerpt": "In Spain, a bill decriminalized abortion, making it legally accessible to women in the first 14 weeks of pregnancy.",
+          "note": "Autorisé pendant les 14 premières semaines de grossesse."
+        }
+      ]
+    },
+    "URY": {
+      "steps": [
+        {
+          "year": 2012,
+          "level": "full",
+          "excerpt": "Uruguay legalized abortion in the first trimester, making it legally accessible to women.",
+          "note": "Autorisé au premier trimestre."
+        }
+      ]
+    },
+    "ARG": {
+      "steps": [
+        {
+          "year": 2019,
+          "level": "partial",
+          "excerpt": "The newly elected government in Argentina issued a protocol expanding access to abortion to include cases of rape.",
+          "note": "Accès élargi aux cas de viol."
+        },
+        {
+          "year": 2020,
+          "level": "full",
+          "excerpt": "In Argentina, abortion was legalized up to fourteen weeks of pregnancy on 30 December 2020.",
+          "note": "Autorisé jusqu’à quatorze semaines de grossesse."
+        }
+      ]
+    },
+    "COL": {
+      "steps": [
+        {
+          "year": 2022,
+          "level": "full",
+          "excerpt": "In February 2022, Colombia's highest court decriminalizes abortion in the first 24 weeks of the pregnancy.",
+          "note": "Avortement dépénalisé pendant les 24 premières semaines de grossesse."
+        }
+      ]
+    },
+    "IDN": {
+      "steps": [
+        {
+          "year": 2024,
+          "level": "partial",
+          "excerpt": "Abortion was legalized for up to 14 weeks of pregnancy in Indonesia in cases of medical emergency and rape.",
+          "note": "Autorisé jusqu’à 14 semaines en cas d’urgence médicale ou de viol."
+        }
+      ]
+    }
+  }
+}

@@ -60,12 +60,18 @@ export function parseArgs(argv: string[]) {
  * articles longs : les extraits cités sur les fiches ne font qu'une phrase.
  */
 export async function wikipediaText(url: string): Promise<string | null> {
-  const match = /^https:\/\/fr\.wikipedia\.org\/wiki\/(.+)$/.exec(url);
+  const match = /^https:\/\/(fr|en)\.wikipedia\.org\/wiki\/(.+)$/.exec(url);
   if (!match) return null;
-  const title = decodeURIComponent(match[1]!);
-  const cache = path.join(WORK, 'cache', `${title.replace(/[^\p{L}\p{N}_-]+/gu, '_')}.txt`);
+  const lang = match[1]!;
+  const title = decodeURIComponent(match[2]!);
+  const prefix = lang === 'fr' ? '' : `${lang}-`;
+  const cache = path.join(
+    WORK,
+    'cache',
+    `${prefix}${title.replace(/[^\p{L}\p{N}_-]+/gu, '_')}.txt`,
+  );
   if (existsSync(cache)) return readFileSync(cache, 'utf8');
-  const api = new URL('https://fr.wikipedia.org/w/api.php');
+  const api = new URL(`https://${lang}.wikipedia.org/w/api.php`);
   api.search = new URLSearchParams({
     action: 'query',
     prop: 'extracts',

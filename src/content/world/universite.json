@@ -1,0 +1,433 @@
+{
+  "id": "universite",
+  "source": "https://fr.wikipedia.org/wiki/Chronologie_des_droits_des_femmes_autres_que_le_suffrage",
+  "countries": {
+    "USA": {
+      "steps": [
+        {
+          "year": 1833,
+          "level": "partial",
+          "excerpt": "États-Unis, Ohio : première université mixte (aux États-Unis), le Oberlin College.",
+          "note": "Ouverture limitée à une université, l’Oberlin College."
+        }
+      ]
+    },
+    "RUS": {
+      "steps": [
+        {
+          "year": 1859,
+          "level": "partial",
+          "excerpt": "Russie : droit pour les femmes d'assister en auditrices aux cours universitaires (retiré en 1863).",
+          "note": "Accès comme auditrices seulement ; droit retiré en 1863."
+        },
+        {
+          "year": 1905,
+          "level": "full",
+          "excerpt": "Russie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "FRA": {
+      "steps": [
+        {
+          "year": 1861,
+          "level": "partial",
+          "excerpt": "France : Julie-Victoire Daubié est la première femme étudiante.",
+          "note": "Premier cas individuel mentionné."
+        },
+        {
+          "year": 1880,
+          "level": "full",
+          "excerpt": "France : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "CHE": {
+      "steps": [
+        {
+          "year": 1867,
+          "level": "partial",
+          "excerpt": "Suisse : l'université de Zurich s'ouvre officiellement aux femmes, même si leur présence en cours était déjà acceptée depuis quelques années.",
+          "note": "Ouverture limitée à l'université de Zurich."
+        }
+      ]
+    },
+    "GBR": {
+      "steps": [
+        {
+          "year": 1869,
+          "level": "partial",
+          "excerpt": "Grande-Bretagne : le Girton College de Cambridge est le premier collège pour femmes résidentielles d'Angleterre.",
+          "note": "Collège pour femmes à Cambridge."
+        },
+        {
+          "year": 1876,
+          "level": "full",
+          "excerpt": "Grande-Bretagne : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "FIN": {
+      "steps": [
+        {
+          "year": 1870,
+          "level": "partial",
+          "excerpt": "Finlande : on permet aux femmes d'étudier à l'université si elles ont une dispensation (la demande de dispensation n'est plus demandée dès 1901).",
+          "note": "Accès soumis à une dispensation."
+        },
+        {
+          "year": 1901,
+          "level": "full",
+          "excerpt": "Finlande : on permet aux femmes d'étudier à l'université si elles ont une dispensation (la demande de dispensation n'est plus demandée dès 1901).",
+          "note": "La demande de dispensation n'est plus demandée."
+        }
+      ]
+    },
+    "SWE": {
+      "steps": [
+        {
+          "year": 1870,
+          "level": "partial",
+          "excerpt": "Suède : les universités sont ouvertes aux femmes (aux mêmes termes que pour les hommes, en 1873) ; la première femme étudiante est Betty Pettersson.",
+          "note": "Ouverture avant l'égalité complète de 1873."
+        },
+        {
+          "year": 1873,
+          "level": "full",
+          "excerpt": "Suède : les universités sont ouvertes aux femmes (aux mêmes termes que pour les hommes, en 1873) ; la première femme étudiante est Betty Pettersson.",
+          "note": "Admission aux mêmes termes que les hommes."
+        }
+      ]
+    },
+    "NZL": {
+      "steps": [
+        {
+          "year": 1871,
+          "level": "full",
+          "excerpt": "Nouvelle-Zélande : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "NLD": {
+      "steps": [
+        {
+          "year": 1874,
+          "level": "partial",
+          "excerpt": "Pays-Bas : Aletta Jacobs est la première femme à étudier en médecine.",
+          "note": "Première femme mentionnée dans une filière universitaire, la médecine."
+        },
+        {
+          "year": 1876,
+          "level": "full",
+          "excerpt": "Pays-Bas : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "CAN": {
+      "steps": [
+        {
+          "year": 1875,
+          "level": "partial",
+          "excerpt": "Canada : Grace Annie Lockhart est la première diplômée universitaire, aussi la première femme détentrice d'un baccalauréat universitaire de l'Empire britannique.",
+          "note": "Premier diplôme universitaire féminin mentionné."
+        },
+        {
+          "year": 1880,
+          "level": "full",
+          "excerpt": "Canada : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "DNK": {
+      "steps": [
+        {
+          "year": 1875,
+          "level": "full",
+          "excerpt": "Danemark : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "ITA": {
+      "steps": [
+        {
+          "year": 1876,
+          "level": "full",
+          "excerpt": "Italie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "CHL": {
+      "steps": [
+        {
+          "year": 1877,
+          "level": "full",
+          "excerpt": "Chili : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "AUT": {
+      "steps": [
+        {
+          "year": 1878,
+          "level": "partial",
+          "excerpt": "Autriche-Hongrie : les femmes peuvent être auditrices invitées aux cours universitaires.",
+          "note": "Dans le texte : Autriche-Hongrie ; accès comme auditrices invitées."
+        },
+        {
+          "year": 1895,
+          "level": "full",
+          "excerpt": "Autriche-Hongrie : les universités sont ouvertes aux femmes.",
+          "note": "Le texte mentionne l'Autriche-Hongrie."
+        }
+      ]
+    },
+    "BRA": {
+      "steps": [
+        {
+          "year": 1879,
+          "level": "full",
+          "excerpt": "Brésil : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "IND": {
+      "steps": [
+        {
+          "year": 1879,
+          "level": "partial",
+          "excerpt": "Inde : le premier collège universitaire ouvert aux femmes, Bethune College.",
+          "note": "Premier collège universitaire ouvert aux femmes."
+        }
+      ]
+    },
+    "AUS": {
+      "steps": [
+        {
+          "year": 1880,
+          "level": "full",
+          "excerpt": "Australie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "BEL": {
+      "steps": [
+        {
+          "year": 1880,
+          "level": "partial",
+          "excerpt": "Belgique : l'université de Bruxelles est ouverte aux femmes.",
+          "note": "Ouverture limitée à l'université de Bruxelles."
+        },
+        {
+          "year": 1883,
+          "level": "full",
+          "excerpt": "Belgique : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "POL": {
+      "steps": [
+        {
+          "year": 1882,
+          "level": "partial",
+          "excerpt": "Pologne : l'Université volante fournit une éducation aux femmes (entre autres).",
+          "note": "Accès limité à l'Université volante."
+        }
+      ]
+    },
+    "ROU": {
+      "steps": [
+        {
+          "year": 1883,
+          "level": "full",
+          "excerpt": "Roumanie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "NOR": {
+      "steps": [
+        {
+          "year": 1884,
+          "level": "full",
+          "excerpt": "Norvège : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "MEX": {
+      "steps": [
+        {
+          "year": 1887,
+          "level": "full",
+          "excerpt": "Mexique : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "SRB": {
+      "steps": [
+        {
+          "year": 1888,
+          "level": "full",
+          "excerpt": "Serbie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "ESP": {
+      "steps": [
+        {
+          "year": 1888,
+          "level": "partial",
+          "excerpt": "Espagne : on accorde aux femmes des diplômes universitaires par dispensation (les universités sont ouvertes aux femmes en 1910).",
+          "note": "Diplômes universitaires accordés par dispensation."
+        },
+        {
+          "year": 1910,
+          "level": "full",
+          "excerpt": "Espagne : on accorde aux femmes des diplômes universitaires par dispensation (les universités sont ouvertes aux femmes en 1910)."
+        }
+      ]
+    },
+    "GRC": {
+      "steps": [
+        {
+          "year": 1890,
+          "level": "full",
+          "excerpt": "Grèce : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "DEU": {
+      "steps": [
+        {
+          "year": 1891,
+          "level": "partial",
+          "excerpt": "Allemagne : les femmes peuvent dorénavant prendre des cours universitaires, ce qui rend possible à des professeurs d'accepter des femmes étudiantes.",
+          "note": "Accès aux cours et acceptation par des professeurs."
+        }
+      ]
+    },
+    "PRT": {
+      "steps": [
+        {
+          "year": 1891,
+          "level": "partial",
+          "excerpt": "Portugal : le premier diplôme universitaire en médecine à une femme.",
+          "note": "Premier diplôme isolé en médecine."
+        }
+      ]
+    },
+    "HUN": {
+      "steps": [
+        {
+          "year": 1895,
+          "level": "full",
+          "excerpt": "Autriche-Hongrie : les universités sont ouvertes aux femmes.",
+          "note": "Le texte mentionne l'Autriche-Hongrie."
+        }
+      ]
+    },
+    "HTI": {
+      "steps": [
+        {
+          "year": 1898,
+          "level": "partial",
+          "excerpt": "Haïti : l'université médicale accepte les étudiantes en obstétrique.",
+          "note": "Accès limité à l'université médicale et à l'obstétrique."
+        }
+      ]
+    },
+    "JPN": {
+      "steps": [
+        {
+          "year": 1900,
+          "level": "partial",
+          "excerpt": "Japon : la première université pour femmes.",
+          "note": "Création d'une université pour femmes."
+        }
+      ]
+    },
+    "BGR": {
+      "steps": [
+        {
+          "year": 1901,
+          "level": "full",
+          "excerpt": "Bulgarie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "CUB": {
+      "steps": [
+        {
+          "year": 1901,
+          "level": "full",
+          "excerpt": "Cuba : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "PER": {
+      "steps": [
+        {
+          "year": 1908,
+          "level": "full",
+          "excerpt": "Pérou : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "KOR": {
+      "steps": [
+        {
+          "year": 1910,
+          "level": "partial",
+          "excerpt": "Corée : des cours de niveau universitaire pour les femmes (à l'université des femmes Ewha).",
+          "note": "Cours de niveau universitaire à l'université des femmes Ewha."
+        }
+      ]
+    },
+    "NIC": {
+      "steps": [
+        {
+          "year": 1918,
+          "level": "partial",
+          "excerpt": "Nicaragua : Josefa Toledo de Aguerri est la première femme diplômée de l'université du pays.",
+          "note": "Premier diplôme universitaire féminin mentionné."
+        }
+      ]
+    },
+    "THA": {
+      "steps": [
+        {
+          "year": 1918,
+          "level": "full",
+          "excerpt": "Thaïlande : les universités sont ouvertes aux femmes"
+        }
+      ]
+    },
+    "CHN": {
+      "steps": [
+        {
+          "year": 1920,
+          "level": "partial",
+          "excerpt": "Chine : les femmes sont admises à l'université de Pékin et les autres universités chinoises suivent sous peu.",
+          "note": "Admission d'abord à l'université de Pékin ; les autres suivent sous peu."
+        }
+      ]
+    },
+    "COL": {
+      "steps": [
+        {
+          "year": 1933,
+          "level": "full",
+          "excerpt": "Colombie : les universités sont ouvertes aux femmes."
+        }
+      ]
+    },
+    "IRN": {
+      "steps": [
+        {
+          "year": 1935,
+          "level": "partial",
+          "excerpt": "Iran : les femmes sont admises à l'université de Téhéran.",
+          "note": "Ouverture limitée à l'université de Téhéran."
+        }
+      ]
+    }
+  }
+}

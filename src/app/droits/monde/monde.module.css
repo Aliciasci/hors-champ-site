@@ -1,32 +1,6 @@
-.layout {
-  display: grid;
-  gap: var(--space-xxl);
-  min-width: 0;
-}
-
-.aside {
-  display: grid;
-  gap: var(--space-xl);
-  align-content: start;
-}
-
-.list {
-  display: grid;
-  gap: var(--space-xs);
-}
-
-.list h2 {
-  padding-bottom: var(--space-sm);
-  border-bottom: var(--border-bold) solid var(--border-strong);
-}
-
-.list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-md);
-  padding: var(--space-sm) 0;
-  border-bottom: var(--border-hairline) solid var(--border);
+.method {
+  max-width: var(--measure);
+  margin-top: var(--space-xl);
 }
 
 .sources {
@@ -34,10 +8,4 @@
   gap: var(--space-md);
   margin-top: var(--space-huge);
   max-width: var(--reading);
-}
-
-@media (min-width: 1200px) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr) 240px;
-  }
 }

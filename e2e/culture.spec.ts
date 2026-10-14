@@ -88,5 +88,13 @@ test('droits dans le monde : années clés et curseur font évoluer la carte', a
   await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'none');
   await expect(page.getByTestId('suffrage-tile-GBR')).toHaveAttribute('data-state', 'partial');
   await page.getByTestId('suffrage-year').fill('1893');
-  await expect(page.getByTestId('suffrage-count')).toContainText('1 pays');
+  await expect(page.getByTestId('suffrage-count')).toContainText('1 des');
+
+  // Autre droit : l'avortement, avec le recul soviétique de 1936.
+  await page.getByTestId('world-right-avortement').click({ force: true });
+  await expect(page).toHaveURL(/droit=avortement/);
+  await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'full');
+  await page.getByTestId('suffrage-key-1936').click();
+  await expect(page.getByTestId('suffrage-tile-RUS')).toHaveAttribute('data-state', 'partial');
+  await expect(page.getByTestId('suffrage-tile-FRA')).toHaveAttribute('data-state', 'none');
 });
