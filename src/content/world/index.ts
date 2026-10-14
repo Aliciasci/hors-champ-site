@@ -235,3 +235,28 @@ export function firstYear(steps: readonly RightStep[]) {
 export function fullYear(steps: readonly RightStep[]) {
   return steps.find((s) => s.level === 'full')?.year ?? null;
 }
+
+/**
+ * Le récit défilant de la page du monde : la carte du vote avance d'étape en étape.
+ * Chaque phrase reprend un fait de la chronologie du vote ou de la fiche française, sourcées.
+ */
+export const VOTE_STORY: { year: number; text: string }[] = [
+  { year: 1893, text: 'La Nouvelle-Zélande est le premier pays où les femmes votent.' },
+  {
+    year: 1918,
+    text: 'Après la guerre, une vague. Le Royaume-Uni l’accorde, mais à partir de 30 ans seulement.',
+  },
+  { year: 1944, text: 'Le 21 avril, les Françaises obtiennent enfin le droit de vote.' },
+  {
+    year: 1971,
+    text: 'La Suisse l’accorde au niveau fédéral. Le dernier canton suivra en 1990.',
+  },
+  {
+    year: 2011,
+    text: 'L’Arabie saoudite, où seules les élections municipales donnent lieu à un vote.',
+  },
+  {
+    year: TODAY,
+    text: 'Les femmes ne votent toujours pas, ou plus, en Afghanistan, au Yémen et au Vatican.',
+  },
+];

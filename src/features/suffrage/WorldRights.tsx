@@ -128,7 +128,23 @@ export function hoverText(
     : capitalize(right.noneLabel);
 }
 
-function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
+/**
+ * La carte en tuiles d'un droit, une année donnée, avec l'infobulle au survol.
+ * `testIds` : identifiants de test sur les tuiles (une seule carte par page en porte).
+ */
+export function TileMap({
+  right,
+  countries,
+  year,
+  label,
+  testIds = true,
+}: {
+  right: WorldRight;
+  countries: WorldCountry[];
+  year: number;
+  label: string;
+  testIds?: boolean;
+}) {
   const [hover, setHover] = useState<{ code: string; x: number; y: number } | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const onPointer = (event: PointerEvent<HTMLDivElement>) => {
@@ -142,6 +158,48 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
       y: rect.top - box.top,
     });
   };
+  return (
+    <div
+      ref={mapRef}
+      className={styles.map}
+      onPointerMove={onPointer}
+      onPointerDown={onPointer}
+      onPointerLeave={() => setHover(null)}
+      role="img"
+      aria-label={label}
+      data-testid={testIds ? 'suffrage-map' : undefined}
+    >
+      {countries.map((country) => {
+        const level = levelAt(right.countries[country.code], year) ?? 'unknown';
+        return (
+          <span
+            key={country.code}
+            className={`${styles.tile} ${styles[level]} ${country.code === 'FRA' ? styles.france : ''}`}
+            style={{ gridColumn: country.col + 1, gridRow: country.row + 1 }}
+            data-code={country.code}
+            data-state={level}
+            data-testid={testIds ? `suffrage-tile-${country.code}` : undefined}
+          >
+            <span className={styles.code}>{country.code}</span>
+          </span>
+        );
+      })}
+      {hover ? (
+        <span
+          className={styles.hover}
+          style={{ left: hover.x, top: hover.y }}
+          aria-hidden="true"
+          data-testid={testIds ? 'suffrage-hover' : undefined}
+        >
+          <strong>{countries.find((c) => c.code === hover.code)?.name}</strong>
+          <span>{hoverText(right, right.countries[hover.code], year)}</span>
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+function RightMap({ right, countries }: { right: WorldRight; countries: WorldCountry[] }) {
   const [year, setYear] = useState(right.defaultYear);
   const [playing, setPlaying] = useState(false);
   const sliderId = useId();
@@ -280,43 +338,12 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
 
       <div className={styles.layout}>
         <div className={styles.mapColumn}>
-          <div
-            ref={mapRef}
-            className={styles.map}
-            onPointerMove={onPointer}
-            onPointerDown={onPointer}
-            onPointerLeave={() => setHover(null)}
-            role="img"
-            aria-label={`Carte en tuiles : en ${year}, ${total} pays ${right.verb}. Le détail est dans le tableau ci-dessous.`}
-            data-testid="suffrage-map"
-          >
-            {countries.map((country) => {
-              const level = levelAt(right.countries[country.code], year) ?? 'unknown';
-              return (
-                <span
-                  key={country.code}
-                  className={`${styles.tile} ${styles[level]} ${country.code === 'FRA' ? styles.france : ''}`}
-                  style={{ gridColumn: country.col + 1, gridRow: country.row + 1 }}
-                  data-code={country.code}
-                  data-state={level}
-                  data-testid={`suffrage-tile-${country.code}`}
-                >
-                  <span className={styles.code}>{country.code}</span>
-                </span>
-              );
-            })}
-            {hover ? (
-              <span
-                className={styles.hover}
-                style={{ left: hover.x, top: hover.y }}
-                aria-hidden="true"
-                data-testid="suffrage-hover"
-              >
-                <strong>{countries.find((c) => c.code === hover.code)?.name}</strong>
-                <span>{hoverText(right, right.countries[hover.code], year)}</span>
-              </span>
-            ) : null}
-          </div>
+          <TileMap
+            right={right}
+            countries={countries}
+            year={year}
+            label={`Carte en tuiles : en ${year}, ${total} pays ${right.verb}. Le détail est dans le tableau ci-dessous.`}
+          />
 
           <ul className={styles.legend} aria-hidden="true">
             {legend.map(([level, label]) => (

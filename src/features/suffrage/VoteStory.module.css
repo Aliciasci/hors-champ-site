@@ -1,0 +1,101 @@
+/* Récit défilant : la carte fixée, les étapes qui défilent par-dessus (mobile) ou à côté. */
+.story {
+  position: relative;
+  display: grid;
+  margin: var(--space-xl) 0 var(--space-huge);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg) 0;
+  background: var(--bg);
+}
+
+.year {
+  font-family: var(--font-display);
+  font-weight: var(--display-strong-weight);
+  font-size: clamp(3rem, 2rem + 5vw, 7rem);
+  line-height: 0.9;
+  color: var(--primary);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.steps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+}
+
+.step {
+  min-height: 70vh;
+  display: grid;
+  align-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl) 0;
+  opacity: 0.35;
+  transition: opacity var(--duration-base);
+}
+
+.on {
+  opacity: 1;
+}
+
+.stepYear {
+  font-family: var(--font-mono);
+  font-size: var(--fs-overline);
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.stepText {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.5rem);
+  line-height: 1.12;
+}
+
+.stepCount {
+  font-size: var(--fs-body-sm);
+  color: var(--text-2);
+}
+
+/* Petit écran : la carte fixée reste au-dessus ; les étapes glissent dessous. */
+@media (max-width: 899px) {
+  .sticky {
+    z-index: 2;
+    border-bottom: var(--border-hairline) solid var(--border);
+  }
+
+  .step {
+    min-height: 60vh;
+  }
+}
+
+@media (min-width: 900px) {
+  .story {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: var(--space-xxl);
+    align-items: start;
+  }
+
+  .sticky {
+    top: var(--space-xl);
+    padding: 0;
+  }
+
+  .steps {
+    padding: 20vh 0 30vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    transition: none;
+  }
+}

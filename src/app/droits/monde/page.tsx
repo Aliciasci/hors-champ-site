@@ -5,9 +5,10 @@ import { PageMasthead } from '@/components/layout/PageMasthead';
 import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { WORLD_COUNTRIES, WORLD_RIGHTS } from '@/content/world';
+import { VOTE_STORY, WORLD_COUNTRIES, WORLD_RIGHTS } from '@/content/world';
 import { VOTE_GAP_SOURCE } from '@/content/world/vote-gap';
 import { VoteGap } from '@/features/suffrage/VoteGap';
+import { VoteStory } from '@/features/suffrage/VoteStory';
 import { WorldRights } from '@/features/suffrage/WorldRights';
 import { pageMetadata } from '@/lib/seo';
 
@@ -40,6 +41,13 @@ export default function WorldPage() {
       />
       <PageMasthead kicker="Dans le monde" title="Les droits de la femme à travers l’histoire" />
 
+      <VoteStory right={WORLD_RIGHTS[0]!} countries={WORLD_COUNTRIES} steps={VOTE_STORY} />
+
+      <SectionHeader
+        id="explorer-title"
+        kicker="À vous d’explorer"
+        title="Quatre droits, toutes les années"
+      />
       <Suspense fallback={<WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} />}>
         <WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} withUrl />
       </Suspense>
