@@ -49,7 +49,10 @@ function Face({
 export function WallTile({ person, theme }: { person: CultureEntity; theme?: PortraitThemeId }) {
   return (
     <Link href={cultureHref(person.id)} className={styles.tile} data-testid={`wall-${person.id}`}>
-      <Face person={person} sizes="(min-width: 1200px) 180px, (min-width: 600px) 25vw, 50vw" />
+      <span className={styles.faceWrap}>
+        <Face person={person} sizes="(min-width: 1200px) 180px, (min-width: 600px) 25vw, 50vw" />
+        {person.hook ? <span className={styles.hook}>{person.hook}</span> : null}
+      </span>
       <span className={`t-title3 ${styles.name}`}>{person.title}</span>
       {person.period ? <span className="t-caption c-muted">{person.period.label}</span> : null}
       {theme ? (

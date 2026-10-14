@@ -1,3 +1,4 @@
+import { CountUp } from '@/components/ui/CountUp';
 import { sortedVoteGaps } from '@/content/world/vote-gap';
 
 import styles from './VoteGap.module.css';
@@ -13,9 +14,10 @@ export function VoteGap() {
   const gaps = sortedVoteGaps();
   const row = (g: (typeof gaps)[number]) => (
     <li key={g.name} className={styles.row}>
-      <span className={`${styles.number} ${g.name === 'France' ? styles.france : ''}`}>
-        {g.women - g.men}
-      </span>
+      <CountUp
+        value={g.women - g.men}
+        className={`${styles.number} ${g.name === 'France' ? styles.france : ''}`}
+      />
       <span className={styles.text}>
         <span className={styles.name}>{g.name}</span>
         <span className={styles.years}>

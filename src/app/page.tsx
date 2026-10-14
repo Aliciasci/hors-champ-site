@@ -20,6 +20,8 @@ import {
   OPENING_SOURCES,
 } from '@/content/opening';
 import { HorsChampIntro } from '@/features/home/web/HorsChampIntro';
+import { WomanOfTheDay } from '@/features/home/web/WomanOfTheDay';
+import { WomanOfTheDayCard } from '@/features/home/web/WomanOfTheDayCard';
 import { pageMetadata } from '@/lib/seo';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import { PageMasthead } from '@/components/layout/PageMasthead';
@@ -127,6 +129,13 @@ export default function Home() {
           title="L’histoire les a laissées hors champ."
           accent="On les remet dans le cadre."
           centered
+        />
+        <WomanOfTheDay
+          cards={culture
+            .filter((e) => e.kind === 'person' && e.image && e.hook)
+            .map((person) => (
+              <WomanOfTheDayCard key={person.id} person={person} />
+            ))}
         />
         <Suspense fallback={<HomeFeed data={data} />}>
           <HomeFeed data={data} withUrl />
