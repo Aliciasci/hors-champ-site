@@ -7,6 +7,7 @@ import { getCatalog } from '@/content/catalog';
 import { pageMetadata } from '@/lib/seo';
 import type { Artwork } from '@/types';
 import { PageMasthead } from '@/components/layout/PageMasthead';
+import { OPENING_PHOTO } from '@/content/opening';
 
 import styles from './credits.module.css';
 
@@ -36,6 +37,10 @@ function collect(entries: { artwork: Artwork; label: string; href: string }[]): 
 export default function CreditsPage() {
   const { categories, culture, youthItems } = getCatalog();
   const groups: { title: string; credits: Credit[] }[] = [
+    {
+      title: 'Ouverture de la une',
+      credits: collect([{ artwork: OPENING_PHOTO, label: 'Ouverture de la une', href: '/' }]),
+    },
     {
       title: 'Thèmes des contrechamps',
       credits: collect(
