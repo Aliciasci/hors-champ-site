@@ -1,0 +1,88 @@
+/*
+ * Mode nuit, propre au web : mêmes rôles de couleur que tokens.css, en clair sur sombre.
+ * Posé par <html data-scheme="dark"> (choix enregistré, sinon réglage de l'appareil).
+ * __tests__/logic/night.test.ts vérifie les contrastes de ces valeurs.
+ */
+[data-scheme='dark'],
+[data-scheme='dark'][data-theme='cartel'] {
+  color-scheme: dark;
+
+  --bg: #13120f;
+  --surface: #1c1a16;
+  --surface-alt: #2a2620;
+  --surface-accent: #2e2a23;
+  --on-surface-accent: #efe9dd;
+  --surface-accent-soft: #211e19;
+  --primary: #9db0ff;
+  --primary-deep: #c3cfff;
+  --primary-soft: #232a4c;
+  --on-primary: #13120f;
+  --action: #efe9dd;
+  --on-action: #13120f;
+  --accent: #ff6a4a;
+  --accent-fill: #9db0ff;
+  --on-accent: #13120f;
+  --accent-ink: #ff8b70;
+  --accent-soft: #3a1f17;
+  --text: #efe9dd;
+  --text-2: #d2c9b8;
+  --text-muted: #a89f8f;
+  --text-inverse: #13120f;
+  --border: #3b372f;
+  --border-strong: #efe9dd;
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  --fb-solid: #6fcf9b;
+  --fb-solid-soft: #15301f;
+  --fb-partial: #e0b450;
+  --fb-partial-soft: #33280f;
+  --fb-open: #9db0ff;
+  --fb-open-soft: #232a4c;
+  --fb-weak: #ff8b70;
+  --fb-weak-soft: #3a1f17;
+}
+
+[data-scheme='dark'][data-theme='revue'] {
+  --bg: #17150f;
+  --surface: #211e16;
+  --surface-alt: #2e2a1c;
+  --surface-accent: #ff5a3c;
+  --on-surface-accent: #17150f;
+  --surface-accent-soft: #2a2316;
+  --primary: #a8b6ff;
+  --primary-deep: #ccd5ff;
+  --primary-soft: #262b4d;
+  --on-primary: #17150f;
+  --action: #a8b6ff;
+  --on-action: #17150f;
+  --accent: #ff6a4a;
+  --accent-fill: #ff6a4a;
+  --on-accent: #17150f;
+  --accent-ink: #ff9076;
+  --accent-soft: #3d2018;
+  --text: #f3e8c6;
+  --text-2: #d8ccaa;
+  --text-muted: #ab9f80;
+  --text-inverse: #17150f;
+  --border: #3e3826;
+  --border-strong: #f3e8c6;
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  --fb-solid: #74cf9c;
+  --fb-solid-soft: #172f1e;
+  --fb-partial: #e6b955;
+  --fb-partial-soft: #33290f;
+  --fb-open: #a8b6ff;
+  --fb-open-soft: #262b4d;
+  --fb-weak: #ff9076;
+  --fb-weak-soft: #3d2018;
+}
+
+/* Grain de papier, très léger : sombre le jour, clair la nuit. */
+body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-scheme='dark'] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

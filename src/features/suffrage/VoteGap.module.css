@@ -1,11 +1,15 @@
-/* Bloc sombre, dans les deux thèmes : le texte du site sert de fond, le fond de texte. */
+/* Bloc toujours sombre (jour comme nuit), couleurs fixes de l'affiche. */
 .block {
+  --poster-bg: #0f0e0c;
+  --poster-text: #f3eee5;
+  --poster-muted: #d2c9b8;
+  --poster-red: #ff6a4a;
   display: grid;
   gap: var(--space-xl);
   margin-top: var(--space-huge);
   padding: var(--space-xxl) var(--space-xl);
-  background: var(--text);
-  color: var(--bg);
+  background: var(--poster-bg);
+  color: var(--poster-text);
   border-radius: var(--radius-card);
 }
 
@@ -20,7 +24,7 @@
   font-size: var(--fs-overline);
   letter-spacing: var(--ls-overline);
   text-transform: uppercase;
-  color: var(--surface-alt);
+  color: var(--poster-muted);
 }
 
 .title {
@@ -59,12 +63,12 @@
   font-size: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
   line-height: 0.9;
   font-variant-numeric: lining-nums tabular-nums;
-  color: var(--accent);
+  color: var(--poster-red);
 }
 
 /* La France, en clair : le repère de la lectrice. */
 .france {
-  color: var(--bg);
+  color: var(--poster-text);
 }
 
 .text {
@@ -82,7 +86,7 @@
 .years {
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
-  color: var(--surface-alt);
+  color: var(--poster-muted);
 }
 
 .more summary {

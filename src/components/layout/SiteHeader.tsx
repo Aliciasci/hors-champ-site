@@ -9,6 +9,7 @@ import { HandUnderline } from '@/components/ui/HandDrawn';
 import { useAppStore } from '@/store/useAppStore';
 
 import { NAV_ITEMS, normalizePath } from './nav';
+import { SchemeToggle } from './SchemeToggle';
 import styles from './SiteHeader.module.css';
 
 /** Défilement au-delà duquel l'en-tête peut s'effacer, et seuil de sens du défilement. */
@@ -81,6 +82,7 @@ export function SiteHeader() {
         </nav>
 
         <div className={styles.tools}>
+          <SchemeToggle />
           <Link
             href="/bibliotheque"
             className={`${styles.icon} ${libraryActive ? styles.iconActive : ''}`}

@@ -55,6 +55,38 @@ for (const theme of ['cartel', 'revue'] as const) {
   }
 }
 
+/** Le mode nuit, sur un échantillon de gabarits, dans les deux thèmes. */
+const NIGHT_PAGES = [
+  '/',
+  '/droits/',
+  '/droits/monde/',
+  '/elles/',
+  '/culture/person-lise-meitner/',
+  '/activites/',
+];
+for (const theme of ['cartel', 'revue'] as const) {
+  for (const path of NIGHT_PAGES) {
+    test(`axe nuit ${theme} ${path}`, async ({ page, browserName }) => {
+      test.skip(browserName !== 'chromium', 'axe : un seul moteur suffit');
+      await seedState(page, { themeId: theme });
+      await page.addInitScript(() => localStorage.setItem('hors-champ:scheme', 'dark'));
+      await open(page, path);
+      await expect(page.locator('html')).toHaveAttribute('data-scheme', 'dark');
+      const results = await new AxeBuilder({ page })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+        .analyze();
+      const summary = results.violations.map(
+        (v) =>
+          `${v.id} (${v.impact}) : ${v.nodes
+            .map((n) => n.target.join(' '))
+            .slice(0, 3)
+            .join(' | ')}`,
+      );
+      expect(summary, summary.join('\n')).toEqual([]);
+    });
+  }
+}
+
 test('un seul h1 par page', async ({ page, browserName }) => {
   test.skip(browserName !== 'chromium');
   await seedState(page);

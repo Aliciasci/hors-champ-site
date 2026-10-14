@@ -62,3 +62,19 @@ test('Tout est possible : la tranche d’âge adapte les textes', async ({ page 
   await open(page, '/possible/metier-astronome/');
   await expect(page.getByText('Comprendre les étoiles et les galaxies.').first()).toBeVisible();
 });
+
+test('mode nuit : la bascule s’applique et survit au rechargement', async ({ page }) => {
+  await seedState(page);
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('scheme-seeded')) {
+      sessionStorage.setItem('scheme-seeded', '1');
+      localStorage.setItem('hors-champ:scheme', 'light');
+    }
+  });
+  await open(page, '/');
+  await expect(page.locator('html')).toHaveAttribute('data-scheme', 'light');
+  await page.getByTestId('scheme-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('data-scheme', 'dark');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-scheme', 'dark');
+});
