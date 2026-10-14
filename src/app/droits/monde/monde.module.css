@@ -9,3 +9,44 @@
   margin-top: var(--space-huge);
   max-width: var(--reading);
 }
+
+/* Chapitres : une ouverture par droit, en très grand, entre deux filets. */
+.chapter {
+  display: grid;
+  margin-top: var(--space-huge);
+}
+
+.opener {
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-huge) 0 var(--space-xl);
+  border-top: var(--border-bold) solid var(--text);
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: var(--fs-overline);
+  letter-spacing: 0.3em;
+  color: var(--accent-ink);
+}
+
+.chapterTitle {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(3.5rem, 2rem + 7vw, 8rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.chapterAccent {
+  display: block;
+  margin-top: var(--space-sm);
+  font-size: 0.42em;
+  font-style: var(--display-accent-style);
+  color: var(--primary);
+  letter-spacing: 0;
+}
+
+.chapterIntro {
+  max-width: var(--measure);
+}

@@ -5,10 +5,10 @@ import { PageMasthead } from '@/components/layout/PageMasthead';
 import { PageTop } from '@/components/layout/PageTop';
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { VOTE_STORY, WORLD_COUNTRIES, WORLD_RIGHTS } from '@/content/world';
-import { VOTE_GAP_SOURCE } from '@/content/world/vote-gap';
-import { VoteGap } from '@/features/suffrage/VoteGap';
-import { VoteStory } from '@/features/suffrage/VoteStory';
+import { rightGaps, WORLD_COUNTRIES, WORLD_RIGHTS, type WorldRight } from '@/content/world';
+import { sortedVoteGaps, VOTE_GAP_SOURCE } from '@/content/world/vote-gap';
+import { GapPoster } from '@/features/suffrage/GapPoster';
+import { RightStory } from '@/features/suffrage/RightStory';
 import { WorldRights } from '@/features/suffrage/WorldRights';
 import { pageMetadata } from '@/lib/seo';
 
@@ -27,6 +27,33 @@ const SOURCES = [
   VOTE_GAP_SOURCE,
 ];
 
+/** Pour le vote, l'attente est comparée aux hommes ; ailleurs, du premier pas au droit plein. */
+const gapsOf = (right: WorldRight) =>
+  right.id === 'vote'
+    ? sortedVoteGaps().map((g) => ({ name: g.name, from: g.men, to: g.women }))
+    : rightGaps(right);
+
+/** Un chapitre : son ouverture, le récit défilant de la carte, puis l'affiche des années. */
+function Chapter({ right, index }: { right: WorldRight; index: number }) {
+  return (
+    <section
+      className={styles.chapter}
+      aria-labelledby={`chapitre-${right.id}`}
+      data-testid={`chapter-${right.id}`}
+    >
+      <header className={styles.opener}>
+        <p className={styles.number}>{String(index + 1).padStart(2, '0')}</p>
+        <h2 id={`chapitre-${right.id}`} className={styles.chapterTitle}>
+          {right.chapter.title} <span className={styles.chapterAccent}>{right.chapter.accent}</span>
+        </h2>
+        {right.intro ? <p className={`t-deck ${styles.chapterIntro}`}>{right.intro}</p> : null}
+      </header>
+      <RightStory right={right} countries={WORLD_COUNTRIES} />
+      <GapPoster copy={right.gap} rows={gapsOf(right)} />
+    </section>
+  );
+}
+
 export default function WorldPage() {
   return (
     <Container>
@@ -41,7 +68,9 @@ export default function WorldPage() {
       />
       <PageMasthead kicker="Dans le monde" title="Les droits de la femme à travers l’histoire" />
 
-      <VoteStory right={WORLD_RIGHTS[0]!} countries={WORLD_COUNTRIES} steps={VOTE_STORY} />
+      {WORLD_RIGHTS.map((right, index) => (
+        <Chapter key={right.id} right={right} index={index} />
+      ))}
 
       <SectionHeader
         id="explorer-title"
@@ -51,8 +80,6 @@ export default function WorldPage() {
       <Suspense fallback={<WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} />}>
         <WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} withUrl />
       </Suspense>
-
-      <VoteGap />
 
       <p className={`t-caption c-muted ${styles.method}`}>
         Une case par pays, à une position approximative ; une case pointillée signale un pays dont

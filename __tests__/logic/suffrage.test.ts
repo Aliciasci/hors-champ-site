@@ -103,3 +103,31 @@ describe('l’attente des femmes après les hommes', () => {
     expect(sorted.find((g) => g.name === 'France')).toMatchObject({ men: 1848, women: 1944 });
   });
 });
+
+describe('rightGaps : du premier pas au droit plein', () => {
+  it('mesure l’attente des femmes mariées et des exceptions à l’avortement', async () => {
+    const { rightGaps } = await import('@/content/world');
+    const majority = rightGaps(right('majorite'));
+    expect(majority.find((g) => g.name === 'France')).toEqual({
+      name: 'France',
+      from: 1893,
+      to: 1938,
+    });
+    expect(majority[0]).toMatchObject({ name: 'Suisse', from: 1884, to: 1984 });
+    expect(rightGaps(right('avortement')).find((g) => g.name === 'France')).toMatchObject({
+      from: 1939,
+      to: 1975,
+    });
+    for (const r of WORLD_RIGHTS.filter((x) => x.id !== 'vote')) {
+      for (const g of rightGaps(r)) expect(g.to).toBeGreaterThan(g.from);
+    }
+  });
+
+  it('donne à chaque droit un récit, dans l’ordre des années', () => {
+    for (const r of WORLD_RIGHTS) {
+      expect(r.story.length).toBeGreaterThanOrEqual(4);
+      const years = r.story.map((s) => s.year);
+      expect([...years].sort((a, b) => a - b)).toEqual(years);
+    }
+  });
+});

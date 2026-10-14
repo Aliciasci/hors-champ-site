@@ -6,7 +6,7 @@
   --poster-red: #ff6a4a;
   display: grid;
   gap: var(--space-xl);
-  margin-top: var(--space-huge);
+  margin-top: var(--space-xl);
   padding: var(--space-xxl) var(--space-xl);
   background: var(--poster-bg);
   color: var(--poster-text);

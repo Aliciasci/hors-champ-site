@@ -29,6 +29,20 @@ export const TODAY = 2026;
 
 export type WorldRightId = 'vote' | 'universite' | 'majorite' | 'avortement';
 
+export interface StoryStep {
+  year: number;
+  text: string;
+}
+
+/** Le bloc sombre d'un droit : combien d'années entre le premier pas et le droit plein. */
+export interface GapPosterCopy {
+  kicker: string;
+  title: string;
+  /** Libellés des deux années (« hommes 1848, femmes 1971 »). */
+  fromLabel: string;
+  toLabel: string;
+}
+
 export interface WorldRight {
   id: WorldRightId;
   /** Libellé court, pour le sélecteur. */
@@ -52,6 +66,11 @@ export interface WorldRight {
   /** Précision affichée à la position « Aujourd'hui ». */
   todayNote?: string;
   source: Source;
+  /** Ouverture du chapitre de ce droit, sur la page. */
+  chapter: { title: string; accent: string };
+  /** Le récit défilant : chaque phrase reprend un fait de la source du droit. */
+  story: StoryStep[];
+  gap: GapPosterCopy;
   /** Étapes par code de pays, dans l'ordre chronologique. */
   countries: Record<string, RightStep[]>;
 }
@@ -158,6 +177,33 @@ export const WORLD_RIGHTS: WorldRight[] = [
     todayNote:
       'En Arabie saoudite et à Brunei, seules des élections locales existent, pour les femmes comme pour les hommes.',
     source: SUFFRAGE_SOURCE,
+    chapter: { title: 'Voter.', accent: 'De 1893 à aujourd’hui.' },
+    story: [
+      { year: 1893, text: 'La Nouvelle-Zélande est le premier pays où les femmes votent.' },
+      {
+        year: 1918,
+        text: 'Après la guerre, une vague. Le Royaume-Uni l’accorde, mais à partir de 30 ans seulement.',
+      },
+      { year: 1944, text: 'Le 21 avril, les Françaises obtiennent enfin le droit de vote.' },
+      {
+        year: 1971,
+        text: 'La Suisse l’accorde au niveau fédéral. Le dernier canton suivra en 1990.',
+      },
+      {
+        year: 2011,
+        text: 'L’Arabie saoudite, où seules les élections municipales donnent lieu à un vote.',
+      },
+      {
+        year: TODAY,
+        text: 'Les femmes ne votent toujours pas, ou plus, en Afghanistan, au Yémen et au Vatican.',
+      },
+    ],
+    gap: {
+      kicker: 'Voter · l’attente des femmes',
+      title: 'Combien d’années les femmes ont-elles attendu, après les hommes, pour voter ?',
+      fromLabel: 'hommes',
+      toLabel: 'femmes',
+    },
     countries: voteSteps(),
   },
   {
@@ -174,6 +220,27 @@ export const WORLD_RIGHTS: WorldRight[] = [
     keyYears: [1833, 1861, 1880, 1905, 1935],
     defaultYear: 1880,
     source: FR_CHRONOLOGY,
+    chapter: { title: 'Étudier.', accent: 'Passer la porte de l’université.' },
+    story: [
+      {
+        year: 1833,
+        text: 'Aux États-Unis, l’Oberlin College devient la première université mixte du pays.',
+      },
+      { year: 1861, text: 'En France, Julie-Victoire Daubié est la première femme étudiante.' },
+      {
+        year: 1880,
+        text: 'La France, le Canada et l’Australie ouvrent leurs universités aux femmes.',
+      },
+      { year: 1905, text: 'En Russie, les universités s’ouvrent enfin aux femmes.' },
+      { year: 1935, text: 'En Iran, les femmes sont admises à l’université de Téhéran.' },
+    ],
+    gap: {
+      kicker: 'Étudier · l’attente des femmes',
+      title:
+        'Combien d’années entre les premières étudiantes et des universités ouvertes à toutes ?',
+      fromLabel: 'premier pas',
+      toLabel: 'ouverture',
+    },
     countries: stepsOf(universite as Extracted),
   },
   {
@@ -191,6 +258,34 @@ export const WORLD_RIGHTS: WorldRight[] = [
     keyYears: [1857, 1900, 1938, 1975, 2006],
     defaultYear: 1938,
     source: FR_CHRONOLOGY,
+    chapter: { title: 'Être majeure.', accent: 'Sans tuteur ni mari.' },
+    story: [
+      { year: 1857, text: 'Au Danemark, les femmes non mariées deviennent majeures.' },
+      {
+        year: 1893,
+        text: 'En France, la majorité légale est accordée aux femmes non mariées et séparées.',
+      },
+      { year: 1938, text: 'En France, les femmes mariées deviennent enfin majeures.' },
+      {
+        year: 1939,
+        text: 'En Espagne, la majorité des femmes mariées, accordée en 1931, est annulée.',
+      },
+      {
+        year: 1984,
+        text: 'En Suisse, une femme mariée n’a plus besoin de l’accord de son mari pour agir en justice.',
+      },
+      {
+        year: 2006,
+        text: 'Au Lesotho, la loi abolit la suprématie du mari sur son épouse.',
+      },
+    ],
+    gap: {
+      kicker: 'Être majeure · l’attente des femmes mariées',
+      title:
+        'Combien d’années les femmes mariées ont-elles attendu, après les célibataires, pour être majeures ?',
+      fromLabel: 'célibataires',
+      toLabel: 'mariées',
+    },
     countries: stepsOf(majorite as Extracted),
   },
   {
@@ -206,6 +301,36 @@ export const WORLD_RIGHTS: WorldRight[] = [
     keyYears: [1920, 1936, 1975, 2000, 2022],
     defaultYear: 1975,
     source: EN_REPRODUCTIVE,
+    chapter: { title: 'Avorter.', accent: 'Un droit qui peut reculer.' },
+    story: [
+      {
+        year: 1920,
+        text: 'L’Union soviétique est le premier pays à autoriser l’avortement à la demande.',
+      },
+      { year: 1936, text: 'Staline revient sur l’essentiel de cette légalisation.' },
+      {
+        year: 1939,
+        text: 'En France, l’avortement est permis pour sauver la vie de la femme enceinte.',
+      },
+      {
+        year: 1975,
+        text: 'La France l’autorise à la demande, au premier trimestre. L’Allemagne de l’Ouest suit en 1976.',
+      },
+      {
+        year: 2019,
+        text: 'En Irlande, l’interruption de grossesse devient possible jusqu’à 12 semaines.',
+      },
+      {
+        year: 2022,
+        text: 'Aux États-Unis, l’arrêt Dobbs supprime la protection fédérale. La Colombie, elle, dépénalise.',
+      },
+    ],
+    gap: {
+      kicker: 'Avorter · l’attente des femmes',
+      title: 'Combien d’années entre les premières exceptions et l’avortement à la demande ?',
+      fromLabel: 'exceptions',
+      toLabel: 'à la demande',
+    },
     countries: stepsOf(avortement as Extracted),
   },
 ];
@@ -236,27 +361,25 @@ export function fullYear(steps: readonly RightStep[]) {
   return steps.find((s) => s.level === 'full')?.year ?? null;
 }
 
+export interface GapRow {
+  name: string;
+  from: number;
+  to: number;
+}
+
 /**
- * Le récit défilant de la page du monde : la carte du vote avance d'étape en étape.
- * Chaque phrase reprend un fait de la chronologie du vote ou de la fiche française, sourcées.
+ * Pour un droit hors vote : par pays, l'année du premier pas (droit partiel) et celle du droit
+ * plein qui suit ; seuls les pays où les deux existent sont retenus, du plus long au plus court.
  */
-export const VOTE_STORY: { year: number; text: string }[] = [
-  { year: 1893, text: 'La Nouvelle-Zélande est le premier pays où les femmes votent.' },
-  {
-    year: 1918,
-    text: 'Après la guerre, une vague. Le Royaume-Uni l’accorde, mais à partir de 30 ans seulement.',
-  },
-  { year: 1944, text: 'Le 21 avril, les Françaises obtiennent enfin le droit de vote.' },
-  {
-    year: 1971,
-    text: 'La Suisse l’accorde au niveau fédéral. Le dernier canton suivra en 1990.',
-  },
-  {
-    year: 2011,
-    text: 'L’Arabie saoudite, où seules les élections municipales donnent lieu à un vote.',
-  },
-  {
-    year: TODAY,
-    text: 'Les femmes ne votent toujours pas, ou plus, en Afghanistan, au Yémen et au Vatican.',
-  },
-];
+export function rightGaps(right: WorldRight): GapRow[] {
+  const names = new Map(WORLD_COUNTRIES.map((c) => [c.code, c.name]));
+  return Object.entries(right.countries)
+    .flatMap(([code, steps]) => {
+      const first = steps.find((s) => s.level === 'partial');
+      const full = first && steps.find((s) => s.level === 'full' && s.year > first.year);
+      return first && full
+        ? [{ name: names.get(code) ?? code, from: first.year, to: full.year }]
+        : [];
+    })
+    .sort((a, b) => b.to - b.from - (a.to - a.from) || a.name.localeCompare(b.name));
+}
