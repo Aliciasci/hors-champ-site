@@ -45,6 +45,14 @@ const GAPS = Object.fromEntries(WORLD_RIGHTS.map((r) => [r.id, gapsOf(r)])) as R
 >;
 
 export default function WorldPage() {
+  const masthead = (
+    <PageMasthead
+      kicker="Dans le monde"
+      title="Les droits de la femme à travers l’histoire"
+      tone="droits"
+    />
+  );
+
   return (
     <Container>
       <PageTop
@@ -56,16 +64,23 @@ export default function WorldPage() {
         path="/droits/monde"
         fallback="/droits"
       />
-      <PageMasthead
-        kicker="Dans le monde"
-        title="Les droits de la femme à travers l’histoire"
-        tone="droits"
-      />
-
       <Suspense
-        fallback={<WorldChapters rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} gaps={GAPS} />}
+        fallback={
+          <WorldChapters
+            rights={WORLD_RIGHTS}
+            countries={WORLD_COUNTRIES}
+            gaps={GAPS}
+            masthead={masthead}
+          />
+        }
       >
-        <WorldChapters rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} gaps={GAPS} withUrl />
+        <WorldChapters
+          rights={WORLD_RIGHTS}
+          countries={WORLD_COUNTRIES}
+          gaps={GAPS}
+          masthead={masthead}
+          withUrl
+        />
       </Suspense>
 
       <p className={`t-caption c-muted ${styles.method}`}>

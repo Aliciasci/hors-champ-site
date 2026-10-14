@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, type ReactNode } from 'react';
 
 import { Segmented } from '@/components/ui/Chip';
-import { SectionHeader } from '@/components/ui/SectionHeader';
 import type { GapRow, WorldCountry, WorldRight, WorldRightId } from '@/content/world';
 import { readOne, useQueryState } from '@/lib/useQueryState';
 import type { Tone } from '@/types';
@@ -27,6 +26,8 @@ interface Props {
   countries: WorldCountry[];
   /** Les années d'attente de chaque droit, calculées côté serveur. */
   gaps: Record<WorldRightId, GapRow[]>;
+  /** En-tête de la page, rendu côté serveur : le choix du mode se place à sa droite. */
+  masthead?: ReactNode;
   withUrl?: boolean;
 }
 
@@ -108,6 +109,7 @@ function View({
   rights,
   countries,
   gaps,
+  masthead,
   rightId,
   mode,
   onRight,
@@ -133,11 +135,10 @@ function View({
 
   return (
     <>
-      <div ref={top} className={styles.picker}>
+      {/* Titre à gauche, mode à droite : le haut de page tient en peu de hauteur. */}
+      <div className={styles.head}>
+        {masthead}
         <div className={styles.modes}>
-          <span className="t-overline c-2" aria-hidden="true">
-            Mode
-          </span>
           <Segmented
             legend="Mode"
             name="mode"
@@ -147,7 +148,11 @@ function View({
             testIdPrefix="world-mode"
           />
         </div>
-        <p className="t-overline c-2">Choisissez un droit</p>
+      </div>
+      <div ref={top} className={styles.picker}>
+        <p className="t-overline c-2" aria-hidden="true">
+          Choisissez un droit
+        </p>
         <RightPills
           rights={rights}
           current={right.id}
@@ -166,11 +171,10 @@ function View({
           aria-labelledby="explorer-title"
           data-testid={`explore-${right.id}`}
         >
-          <SectionHeader
-            id="explorer-title"
-            kicker="À vous d’explorer"
-            title={`${right.label}, toutes les années`}
-          />
+          {/* Le mode, choisi en haut, sert de titre visible ; celui-ci guide les lecteurs d'écran. */}
+          <h2 id="explorer-title" className="sr-only">
+            À vous d’explorer : {right.label.toLowerCase()}, toutes les années
+          </h2>
           <RightMap right={right} countries={countries} />
         </section>
       ) : (

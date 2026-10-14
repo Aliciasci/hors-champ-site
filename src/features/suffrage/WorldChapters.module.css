@@ -1,24 +1,40 @@
-.picker {
+/* En-tête de page et choix du mode : côte à côte sur grand écran, l'un sous l'autre sinon. */
+.head {
   display: grid;
-  gap: var(--space-sm);
-  scroll-margin-top: var(--space-lg);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
-/* Le récit ou la carte à explorer, au-dessus du choix du droit. */
+.head > :first-child {
+  margin-bottom: 0;
+}
+
 .modes {
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (min-width: 900px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--space-xl);
+  }
+
+  .modes {
+    width: 380px;
+  }
+}
+
+/* Choix du droit : libellé et pastilles sur une même ligne. */
+.picker {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-sm) var(--space-lg);
-  padding: var(--space-md) 0;
-  margin-bottom: var(--space-sm);
+  padding-top: var(--space-md);
   border-top: var(--border-hairline) solid var(--border);
-  border-bottom: var(--border-hairline) solid var(--border);
-}
-
-.modes > :last-child {
-  flex: 1 1 320px;
-  max-width: 480px;
+  scroll-margin-top: var(--space-lg);
 }
 
 /* Le chapitre du droit choisi : ouverture en très grand, entre deux filets. */
