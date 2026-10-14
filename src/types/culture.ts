@@ -169,6 +169,7 @@ export interface SavedDiscovery {
 
 /** Les grandes thématiques qui regroupent les portraits (onglet « Elles »). */
 export type PortraitThemeId =
+  | 'epoque'
   | 'revolutionne'
   | 'culture'
   | 'droits'

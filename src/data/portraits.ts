@@ -6,6 +6,10 @@ import type { Artwork } from '@/types';
  * sur Wikimedia Commons, page liée dans `sourceUrl`). Pas de portrait pour Hedy Lamarr
  * (domaine public aux États-Unis seulement) ni pour Rosalind Franklin (CC BY-SA).
  * Fichiers redimensionnés à 900 px.
+ *
+ * Contemporaines (licence vérifiée le 2026-10-14) : photographies officielles d'agences fédérales
+ * américaines, dans le domaine public. Pas de portrait libre et utilisable pour Wangari Maathai,
+ * Tu Youyou, Zaha Hadid, Katalin Karikó, Emmanuelle Charpentier ni Agnès Varda.
  */
 export const portraits = {
   'ada-lovelace': {
@@ -68,6 +72,70 @@ export const portraits = {
     date: '1983',
     license: 'Domaine public',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Katherine_Johnson_1983.jpg',
+    focus: { top: '25%' },
+  },
+  'ruth-bader-ginsburg': {
+    image: img('people/ruth-bader-ginsburg.jpg'),
+    alt: 'Photographie officielle en couleurs : Ruth Bader Ginsburg assise, lunettes, robe de juge noire et col de dentelle blanche.',
+    title: 'Portrait officiel de Ruth Bader Ginsburg',
+    artist: 'Cour suprême des États-Unis',
+    date: '2016',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Ruth_Bader_Ginsburg_2016_portrait_cropped.jpg',
+    focus: { top: '15%' },
+  },
+  'toni-morrison': {
+    image: img('people/toni-morrison.jpg'),
+    alt: 'Photographie en couleurs : Toni Morrison riant aux éclats, foulard clair dans les cheveux, pendant une conférence.',
+    title: 'Toni Morrison lors d’une conférence à West Point',
+    artist: 'Académie militaire de West Point',
+    date: '2013',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:ToniMorrison_WestPointLecture_2013_(cropped).jpg',
+    focus: { top: '25%' },
+  },
+  'ellen-johnson-sirleaf': {
+    image: img('people/ellen-johnson-sirleaf.jpg'),
+    alt: 'Photographie en couleurs : Ellen Johnson Sirleaf, turban et étole brune, parle derrière un pupitre à Monrovia.',
+    title: 'Ellen Johnson Sirleaf s’adressant aux diplômés des forces armées du Liberia',
+    artist: 'Elizabeth Merriam (US Navy)',
+    date: '2008',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Ellen_Johnson-Sirleaf_detail_080327-N-0193M-039.jpg',
+    focus: { top: '20%' },
+  },
+  'malala-yousafzai': {
+    image: img('people/malala-yousafzai.jpg'),
+    alt: 'Photographie en couleurs : Malala Yousafzai de trois quarts, voile bleu sur les cheveux, devant une porte en bois.',
+    title: 'Malala Yousafzai au département d’État américain (recadrage)',
+    artist: 'Département d’État des États-Unis',
+    date: '2021',
+    license: 'Domaine public',
+    sourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Malala_Yousafzai_-_2021_(51728088292)_(cropped).jpg',
+    focus: { top: '25%', left: '55%' },
+  },
+  'mae-jemison': {
+    image: img('people/mae-jemison.jpg'),
+    alt: 'Photographie officielle en couleurs : Mae Jemison souriante, en combinaison orange d’astronaute, col de casque autour du cou.',
+    title: 'Portrait officiel de Mae Jemison',
+    artist: 'NASA',
+    date: '1992',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Mae_Carol_Jemison_(cropped_2).jpg',
+    focus: { top: '20%' },
+  },
+  'jane-goodall': {
+    image: img('people/jane-goodall.jpg'),
+    alt: 'Photographie en couleurs : Jane Goodall, cheveux blancs attachés, pull à col roulé et étole verte, devant des fleurs.',
+    title: 'Jane Goodall au département d’État américain',
+    artist: 'Département d’État des États-Unis',
+    date: '2015',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Jane_Goodall_2015.jpg',
     focus: { top: '25%' },
   },
 } satisfies Record<string, Artwork>;

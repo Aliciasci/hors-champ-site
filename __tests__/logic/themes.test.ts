@@ -8,8 +8,9 @@ const catalog = prepareCultureEntities(localCultureEntities, () => {});
 const byId = new Map(catalog.map((e) => [e.id, e]));
 
 describe('thématiques des portraits', () => {
-  it('propose les neuf thématiques, dans l’ordre', () => {
+  it('propose les dix thématiques, dans l’ordre', () => {
     expect(portraitThemes.map((t) => t.title)).toEqual([
+      'Elles changent notre époque',
       'Elles ont révolutionné le monde',
       'Elles ont changé la culture',
       'Elles ont conquis des droits',
@@ -57,7 +58,7 @@ describe('thématiques des portraits', () => {
 
   it('laisse vides les thématiques sans fiche documentée plutôt que de les remplir', () => {
     const empty = portraitThemes.filter((t) => t.members.length === 0).map((t) => t.id);
-    expect(empty).toEqual(['quotidien', 'limites']);
+    expect(empty).toEqual(['quotidien']);
   });
 
   it('ignore une membre dont la fiche a disparu', () => {

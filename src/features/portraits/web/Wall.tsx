@@ -8,6 +8,7 @@ import styles from './Wall.module.css';
 
 /** Libellés courts des thématiques, pour les filtres et les tuiles du mur. */
 export const THEME_SHORT_LABELS: Record<PortraitThemeId, string> = {
+  epoque: 'Notre époque',
   revolutionne: 'Révolutionné le monde',
   culture: 'Changé la culture',
   droits: 'Conquis des droits',

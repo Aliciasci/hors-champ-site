@@ -13,12 +13,20 @@ const raw = {
 };
 
 describe('catalogue du site (validation au build)', () => {
-  it('reprend tous les contenus du mobile', () => {
+  it('reprend tous les contenus du mobile, plus les contemporaines propres au site', () => {
     const catalog = buildCatalog(raw, { includeDevExamples: true });
-    expect(catalog.culture).toHaveLength(85);
+    expect(catalog.culture).toHaveLength(85 + 12);
     expect(catalog.experiences).toHaveLength(6);
-    expect(catalog.themes).toHaveLength(9);
+    expect(catalog.themes).toHaveLength(10);
     expect(catalog.youthItems.length).toBeGreaterThan(0);
+  });
+
+  it('construit le site avec toutes les fiches du catalogue local, sans en oublier un fichier', () => {
+    expect(
+      getCatalog()
+        .culture.map((e) => e.id)
+        .sort(),
+    ).toEqual(localCultureEntities.map((e) => e.id).sort());
   });
 
   it('masque les exemples de développement sans le drapeau', () => {

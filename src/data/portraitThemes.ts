@@ -7,12 +7,73 @@ import type { PortraitTheme } from '@/types';
  * les remplir.
  *
  * Pistes éditoriales proposées pour les compléter (fiches à rédiger et sourcer avant tout ajout) :
- * Agnès Varda, Toni Morrison, Nina Simone, pionnières du cinéma (culture) ; bell hooks,
+ * Nina Simone, pionnières du cinéma (culture) ; bell hooks,
  * Angela Davis, Judith Butler (idées) ; Alice Ball (oubliées) ; premières femmes médecins
  * (pionnières) ; Alice Milliat, aviatrices, exploratrices, alpinistes (limites) ; militantes
  * ouvrières (droits).
  */
 export const portraitThemes: PortraitTheme[] = [
+  {
+    id: 'epoque',
+    title: 'Elles changent notre époque',
+    subtitle: 'Sciences, droits, arts : nos contemporaines',
+    description:
+      'Prix Nobel, présidente, juge, architecte, astronaute : des femmes de notre temps, dont les combats et les découvertes transforment encore le monde.',
+    members: [
+      {
+        personId: 'person-malala-yousafzai',
+        reason: 'Plus jeune lauréate du prix Nobel de la paix, en 2014, pour l’école des filles.',
+      },
+      {
+        personId: 'person-katalin-kariko',
+        reason:
+          'Ses recherches sur l’ARN messager ont permis de nouveaux vaccins, dont celui contre le Covid-19.',
+      },
+      {
+        personId: 'person-emmanuelle-charpentier',
+        reason:
+          'A inventé avec Jennifer Doudna la technique CRISPR-Cas9, prix Nobel de chimie 2020.',
+      },
+      {
+        personId: 'person-wangari-maathai',
+        reason: 'Fonde le Mouvement de la ceinture verte, prix Nobel de la paix en 2004.',
+      },
+      {
+        personId: 'person-ellen-johnson-sirleaf',
+        reason:
+          'Première femme élue à la tête d’un État africain, présidente du Liberia de 2006 à 2018.',
+      },
+      {
+        personId: 'person-ruth-bader-ginsburg',
+        reason:
+          'Plaide contre les discriminations sexistes, puis siège à la Cour suprême de 1993 à 2020.',
+      },
+      {
+        personId: 'person-tu-youyou',
+        reason: 'Identifie l’artémisinine contre le paludisme, prix Nobel de médecine en 2015.',
+      },
+      {
+        personId: 'person-zaha-hadid',
+        reason: 'Première femme à recevoir le prix Pritzker d’architecture, en 2004.',
+      },
+      {
+        personId: 'person-toni-morrison',
+        reason: 'Première Afro-Américaine prix Nobel de littérature, en 1993.',
+      },
+      {
+        personId: 'person-mae-jemison',
+        reason: 'Première femme afro-américaine à aller dans l’espace, en 1992.',
+      },
+      {
+        personId: 'person-jane-goodall',
+        reason: 'La première à observer que les chimpanzés utilisent des outils.',
+      },
+      {
+        personId: 'person-agnes-varda',
+        reason: 'Cinéaste de Cléo de 5 à 7, signataire du manifeste des 343.',
+      },
+    ],
+  },
   {
     id: 'revolutionne',
     title: 'Elles ont révolutionné le monde',
@@ -49,6 +110,22 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-katherine-johnson',
         reason: 'Calculait et vérifiait les trajectoires de vols spatiaux de la NASA.',
       },
+      {
+        personId: 'person-jane-goodall',
+        reason: 'A transformé la compréhension des rapports entre humains et animaux.',
+      },
+      {
+        personId: 'person-tu-youyou',
+        reason: 'A identifié l’artémisinine, le remède le plus efficace contre le paludisme.',
+      },
+      {
+        personId: 'person-katalin-kariko',
+        reason: 'Ses travaux sur l’ARN messager ont permis des vaccins d’un nouveau type.',
+      },
+      {
+        personId: 'person-emmanuelle-charpentier',
+        reason: 'A inventé avec Jennifer Doudna la technique CRISPR-Cas9.',
+      },
     ],
   },
   {
@@ -81,6 +158,19 @@ export const portraitThemes: PortraitTheme[] = [
       {
         personId: 'person-suzanne-valadon',
         reason: 'Modèle devenue peintre, qui peint notamment la nudité masculine et féminine.',
+      },
+      {
+        personId: 'person-toni-morrison',
+        reason: 'Romancière, prix Pulitzer en 1988 et prix Nobel de littérature en 1993.',
+      },
+      {
+        personId: 'person-zaha-hadid',
+        reason:
+          'Architecte du déconstructivisme, de l’Aquatics Centre de Londres à l’opéra de Canton.',
+      },
+      {
+        personId: 'person-agnes-varda',
+        reason: 'Cinéaste de La Pointe courte, de Cléo de 5 à 7 et de L’une chante, l’autre pas.',
       },
     ],
   },
@@ -127,6 +217,19 @@ export const portraitThemes: PortraitTheme[] = [
       {
         personId: 'person-brigitte-gros',
         reason: 'Dépose en 1978 une proposition de loi pour mieux protéger les femmes du viol.',
+      },
+      {
+        personId: 'person-agnes-varda',
+        reason: 'Signe le manifeste des 343 et manifeste pour le droit à l’IVG en 1972.',
+      },
+      {
+        personId: 'person-ruth-bader-ginsburg',
+        reason:
+          'Cofonde le Women’s Rights Project, qui défend plus de 300 cas de discriminations sexistes.',
+      },
+      {
+        personId: 'person-malala-yousafzai',
+        reason: 'Défend la scolarisation des filles face aux talibans pakistanais.',
       },
     ],
   },
@@ -179,6 +282,22 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-artemisia-gentileschi',
         reason: 'L’une des premières femmes à peindre des sujets historiques et religieux.',
       },
+      {
+        personId: 'person-toni-morrison',
+        reason: 'Première Afro-Américaine à recevoir le prix Nobel de littérature.',
+      },
+      {
+        personId: 'person-zaha-hadid',
+        reason: 'Première femme à recevoir le prix Pritzker.',
+      },
+      {
+        personId: 'person-ellen-johnson-sirleaf',
+        reason: 'Première femme élue au suffrage universel à la tête d’un État africain.',
+      },
+      {
+        personId: 'person-wangari-maathai',
+        reason: 'Première femme africaine à recevoir le prix Nobel de la paix.',
+      },
     ],
   },
   {
@@ -205,6 +324,14 @@ export const portraitThemes: PortraitTheme[] = [
         reason: 'Nommée sous-secrétaire d’État à l’Éducation nationale en 1936.',
       },
       { personId: 'person-simone-veil', reason: 'Magistrate et femme d’État.' },
+      {
+        personId: 'person-wangari-maathai',
+        reason: 'Mobilise les femmes des villages kényans contre la déforestation.',
+      },
+      {
+        personId: 'person-ellen-johnson-sirleaf',
+        reason: 'Présidente du Liberia de 2006 à 2018, prix Nobel de la paix en 2011.',
+      },
     ],
   },
   {
@@ -213,6 +340,12 @@ export const portraitThemes: PortraitTheme[] = [
     subtitle: 'Exploration, sport, aventure et exploits',
     description:
       'Des femmes qui ont ouvert des voies dans des domaines où elles étaient exclues ou sous-représentées.',
-    members: [],
+    members: [
+      {
+        personId: 'person-mae-jemison',
+        reason:
+          'Première femme afro-américaine à aller dans l’espace, à bord de la navette Endeavour.',
+      },
+    ],
   },
 ];

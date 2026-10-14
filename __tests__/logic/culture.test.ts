@@ -1,5 +1,7 @@
 import { CATEGORY_IDS } from '@/constants/enums';
 import { localCultureEntities } from '@/data/culture';
+import { contemporaries } from '@/data/culture/contemporaines';
+import { portraitThemes } from '@/data/portraitThemes';
 import { localExperiences } from '@/data/experiences';
 import {
   groupByKind,
@@ -20,6 +22,8 @@ import { TEST_SOURCE } from './fixtures';
 
 const issues: unknown[] = [];
 const catalog = prepareCultureEntities(localCultureEntities, (issue) => issues.push(issue));
+/** Les contemporaines n'ont pas encore de fiches d'œuvres ni de découvertes : tests dédiés. */
+const contemporaryIds = new Set(contemporaries.map((e) => e.id));
 
 describe('catalogue culturel', () => {
   it('est entièrement valide, sans lien cassé', () => {
@@ -35,7 +39,9 @@ describe('catalogue culturel', () => {
 
   it('relie chaque femme à au moins une œuvre, et chaque œuvre à une idée', () => {
     // Les femmes de « Derrière chaque droit » sont reliées à des conquêtes (tests dédiés).
-    const people = catalog.filter((e) => e.kind === 'person' && e.domain !== 'droits');
+    const people = catalog.filter(
+      (e) => e.kind === 'person' && e.domain !== 'droits' && !contemporaryIds.has(e.id),
+    );
     expect(people.length).toBeGreaterThan(0);
     for (const person of people)
       expect(person.links.some((l) => l.relation === 'created')).toBe(true);
@@ -59,7 +65,9 @@ describe('catalogue culturel', () => {
   });
 
   it('relie chaque scientifique à une invention ou découverte sourcée', () => {
-    const scientists = catalog.filter((e) => e.kind === 'person' && e.domain === 'sciences');
+    const scientists = catalog.filter(
+      (e) => e.kind === 'person' && e.domain === 'sciences' && !contemporaryIds.has(e.id),
+    );
     expect(scientists).toHaveLength(8);
     for (const person of scientists) {
       const created = relatedEntities(catalog, person.id).filter(
@@ -110,6 +118,24 @@ describe('catalogue culturel', () => {
       .filter((e) => e.kind === 'person')
       .map((e) => (e.hook ?? '').split(' ').slice(0, 2).join(' ').toLowerCase());
     expect(new Set(openings).size).toBe(openings.length);
+  });
+
+  it('documente chaque contemporaine : citations, Wikidata, « Notre époque » et une autre thématique', () => {
+    const epoque = portraitThemes.find((t) => t.id === 'epoque')!;
+    expect(contemporaries).toHaveLength(12);
+    for (const person of contemporaries) {
+      expect(person.kind).toBe('person');
+      const quotes = person.sources.filter((s) => s.publisher === 'Wikipédia');
+      expect(quotes.length).toBeGreaterThan(0);
+      for (const quote of quotes) expect(quote.relevantExcerpt?.length).toBeGreaterThan(30);
+      expect(person.sources.some((s) => s.publisher === 'Wikidata')).toBe(true);
+      expect(epoque.members.map((m) => m.personId)).toContain(person.id);
+      const others = portraitThemes.filter(
+        (t) => t.id !== 'epoque' && t.members.some((m) => m.personId === person.id),
+      );
+      expect({ id: person.id, n: others.length > 0 }).toEqual({ id: person.id, n: true });
+      if (person.image) expect(person.image.license).toBe('Domaine public');
+    }
   });
 
   it('ne présente aucune fiche non relue comme vérifiée', () => {

@@ -1,4 +1,5 @@
 import { categories } from '@/data/categories';
+import { contemporaries } from '@/data/culture/contemporaines';
 import { events } from '@/data/culture/events';
 import { ideas } from '@/data/culture/ideas';
 import { movements } from '@/data/culture/movements';
@@ -32,6 +33,7 @@ import type {
 const CULTURE_FILES: [file: string, items: readonly unknown[]][] = [
   ['src/data/culture/people.ts', people],
   ['src/data/culture/sciences.ts', [...scientists, ...discoveries, ...scienceEvents, matildaIdea]],
+  ['src/data/culture/contemporaines.ts', contemporaries],
   ['src/data/culture/works.ts', works],
   ['src/data/culture/movements.ts', movements],
   ['src/data/culture/events.ts', events],

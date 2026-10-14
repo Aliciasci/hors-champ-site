@@ -28,6 +28,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 567,
     "height": 900
   },
+  "people/ellen-johnson-sirleaf.jpg": {
+    "width": 949,
+    "height": 1101
+  },
   "people/emmy-noether.jpg": {
     "width": 591,
     "height": 900
@@ -35,6 +39,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
   "people/grace-hopper.jpg": {
     "width": 720,
     "height": 900
+  },
+  "people/jane-goodall.jpg": {
+    "width": 617,
+    "height": 898
   },
   "people/katherine-johnson.jpg": {
     "width": 720,
@@ -44,13 +52,29 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 665,
     "height": 900
   },
+  "people/mae-jemison.jpg": {
+    "width": 960,
+    "height": 1200
+  },
+  "people/malala-yousafzai.jpg": {
+    "width": 833,
+    "height": 1000
+  },
   "people/marie-curie.jpg": {
     "width": 614,
     "height": 900
   },
+  "people/ruth-bader-ginsburg.jpg": {
+    "width": 960,
+    "height": 1270
+  },
   "people/solvay-1927.jpg": {
     "width": 3000,
     "height": 2171
+  },
+  "people/toni-morrison.jpg": {
+    "width": 960,
+    "height": 1205
   },
   "inventions/cliche-51.jpg": {
     "width": 900,

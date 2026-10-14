@@ -1,3 +1,4 @@
+import { contemporaries } from './contemporaines';
 import { events } from './events';
 import { ideas } from './ideas';
 import { movements } from './movements';
@@ -10,6 +11,7 @@ import { works } from './works';
 export const localCultureEntities = [
   ...people,
   ...scientists,
+  ...contemporaries,
   ...works,
   ...discoveries,
   ...movements,
