@@ -109,22 +109,31 @@
   max-width: 1040px;
 }
 
-/* Une pastille par pays, centrée dans sa case de la grille. */
 .tile {
-  width: 55%;
   aspect-ratio: 1 / 1;
-  justify-self: center;
-  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
-  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2px;
   transition:
     background-color var(--duration-base),
     color var(--duration-base);
 }
 
+.code {
+  display: none;
+}
+
 @media (min-width: 900px) {
   .map {
     gap: 4px;
+  }
+
+  .code {
+    display: inline;
   }
 }
 
@@ -145,8 +154,9 @@
 }
 
 .france {
-  outline: 2px solid var(--text);
-  outline-offset: 2px;
+  box-shadow:
+    inset 0 0 0 3px var(--text),
+    inset 0 0 0 4px var(--bg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -170,10 +180,9 @@
 }
 
 .swatch {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   box-sizing: border-box;
-  border-radius: 50%;
 }
 
 .table summary {
@@ -278,7 +287,44 @@
   border-left: 3px solid var(--accent);
 }
 
-/* Le contour de la France déborde de la pastille : un peu d'air dans la légende. */
-.legend .france {
-  margin: 0 4px;
+/* Choix du droit : petites pastilles. */
+.rights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 var(--space-lg);
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: 999px;
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pill:hover {
+  background: var(--surface-alt);
+}
+
+.pill:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.pillOn {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}
+
+.pillOn:hover {
+  background: var(--primary-deep);
 }

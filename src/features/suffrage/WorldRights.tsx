@@ -3,7 +3,6 @@
 import { useEffect, useId, useState } from 'react';
 
 import { Pause, Play } from '@/components/icons';
-import { Segmented } from '@/components/ui/Chip';
 import {
   firstYear,
   fullYear,
@@ -30,7 +29,7 @@ interface Props {
 }
 
 /**
- * Les droits des femmes dans le monde : une carte en pastilles (un pays par pastille), au fil des années,
+ * « Le monde s'allume » : une carte en tuiles (un pays par case) qui s'allume au fil des années,
  * pour le droit choisi (voter, étudier, être majeure, avorter). Curseur, années clés, lecture
  * automatique ; un tableau donne les mêmes informations aux lecteurs d'écran.
  */
@@ -64,14 +63,23 @@ function WorldMap({
   // L'année et la lecture repartent de zéro à chaque changement de droit (voir la clé).
   return (
     <div className={styles.root}>
-      <Segmented
-        legend="Droit"
-        name="droit"
-        options={rights.map((r) => ({ id: r.id, label: r.label }))}
-        value={right.id}
-        onChange={(id) => onRight?.(id)}
-        testIdPrefix="world-right"
-      />
+      <fieldset className={styles.rights}>
+        <legend className="sr-only">Droit</legend>
+        {rights.map((r) => (
+          <label key={r.id} className={`${styles.pill} ${r.id === right.id ? styles.pillOn : ''}`}>
+            <input
+              type="radio"
+              name="droit"
+              value={r.id}
+              checked={r.id === right.id}
+              onChange={() => onRight?.(r.id)}
+              className="sr-only"
+              data-testid={`world-right-${r.id}`}
+            />
+            {r.label}
+          </label>
+        ))}
+      </fieldset>
       <RightMap key={right.id} right={right} countries={countries} />
     </div>
   );
@@ -251,7 +259,9 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
                   title={title}
                   data-state={level}
                   data-testid={`suffrage-tile-${country.code}`}
-                ></span>
+                >
+                  <span className={styles.code}>{country.code}</span>
+                </span>
               );
             })}
           </div>
