@@ -30,7 +30,7 @@ interface Props {
 }
 
 /**
- * « Le monde s'allume » : une carte en tuiles (un pays par case) qui s'allume au fil des années,
+ * Les droits des femmes dans le monde : une carte en pastilles (un pays par pastille), au fil des années,
  * pour le droit choisi (voter, étudier, être majeure, avorter). Curseur, années clés, lecture
  * automatique ; un tableau donne les mêmes informations aux lecteurs d'écran.
  */
@@ -147,7 +147,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
 
   return (
     <>
-      <p className="t-deck">{right.intro}</p>
+      {right.intro ? <p className="t-deck">{right.intro}</p> : null}
 
       <div className={styles.controls}>
         <button
@@ -251,9 +251,7 @@ function RightMap({ right, countries }: { right: WorldRight; countries: WorldCou
                   title={title}
                   data-state={level}
                   data-testid={`suffrage-tile-${country.code}`}
-                >
-                  <span className={styles.code}>{country.code}</span>
-                </span>
+                ></span>
               );
             })}
           </div>

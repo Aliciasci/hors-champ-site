@@ -33,22 +33,17 @@ export default function WorldPage() {
         path="/droits/monde"
         fallback="/droits"
       />
-      <PageMasthead
-        kicker="Les droits des femmes à travers l’histoire"
-        title="Le monde s’allume, droit après droit."
-        accent="Et pas au même rythme."
-        dek="Choisissez un droit, puis faites défiler les années, ou lancez la lecture, pour voir la carte changer."
-      />
+      <PageMasthead kicker="Dans le monde" title="Les droits de la femme à travers l’histoire" />
 
       <Suspense fallback={<WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} />}>
         <WorldRights rights={WORLD_RIGHTS} countries={WORLD_COUNTRIES} withUrl />
       </Suspense>
 
       <p className={`t-caption c-muted ${styles.method}`}>
-        Une case par pays, à une position approximative ; une case pointillée signale un pays dont
-        la source ne dit rien pour ce droit. Pour étudier, être majeure et avorter, les années ont
-        été relevées dans les chronologies avec l’aide d’une IA, puis vérifiées une à une contre un
-        extrait exact de la source, que reprend le tableau.
+        Une pastille par pays, à une position approximative ; une pastille pointillée signale un
+        pays dont la source ne dit rien pour ce droit. Pour étudier, être majeure et avorter, les
+        années ont été relevées dans les chronologies avec l’aide d’une IA, puis vérifiées une à une
+        contre un extrait exact de la source, que reprend le tableau.
       </p>
 
       <section className={styles.sources} aria-labelledby="sources-title">

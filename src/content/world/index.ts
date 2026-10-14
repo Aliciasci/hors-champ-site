@@ -35,7 +35,8 @@ export interface WorldRight {
   label: string;
   /** « … pays de cette carte {verb} ». */
   verb: string;
-  intro: string;
+  /** Phrase d'introduction, facultative. */
+  intro?: string;
   fullLabel: string;
   partialLabel: string;
   /** « …, dont 7 {partialPhrase} ». */
@@ -191,8 +192,6 @@ export const WORLD_RIGHTS: WorldRight[] = [
     id: 'avortement',
     label: 'Avorter',
     verb: 'autorisent l’avortement',
-    intro:
-      'Pour certains motifs, puis à la demande des femmes. Et ce droit peut reculer : en URSS en 1936, aux États-Unis en 2022.',
     fullLabel: 'à la demande',
     partialLabel: 'pour certains motifs',
     partialPhrase: 'pour certains motifs',
