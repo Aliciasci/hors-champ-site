@@ -52,16 +52,16 @@ function makeFlies(count: number): Fly[] {
 function densityAt({ act, progress }: StoryPosition) {
   switch (act) {
     case 0:
-      return 0.08;
+      return 0.12;
     case 1:
       // Une lumière, puis une autre, puis des milliers.
       return 0.04 + 0.96 * Math.min(1, progress * 1.25) ** 2;
     case 2:
-      return 0.32;
+      return 0.45;
     case 3:
-      return 0.5;
+      return 0.7;
     default:
-      return 0.6;
+      return 0.7;
   }
 }
 
@@ -102,15 +102,16 @@ export function Fireflies({
     if (!canvas || !context) return;
 
     const small = window.matchMedia('(max-width: 699px)').matches;
-    const flies = makeFlies(small ? 180 : 520);
+    const flies = makeFlies(small ? 260 : 700);
     // Une seule lueur, dessinée une fois puis copiée : pas de dégradé recalculé à chaque image.
     const sprite = document.createElement('canvas');
     sprite.width = sprite.height = 64;
     const s = sprite.getContext('2d')!;
     const glow = s.createRadialGradient(32, 32, 0, 32, 32, 32);
-    glow.addColorStop(0, 'rgba(255, 236, 196, 1)');
-    glow.addColorStop(0.12, 'rgba(255, 198, 109, 0.9)');
-    glow.addColorStop(0.4, 'rgba(255, 198, 109, 0.22)');
+    glow.addColorStop(0, 'rgba(255, 244, 220, 1)');
+    glow.addColorStop(0.1, 'rgba(255, 214, 140, 1)');
+    glow.addColorStop(0.28, 'rgba(255, 198, 109, 0.5)');
+    glow.addColorStop(0.6, 'rgba(255, 198, 109, 0.12)');
     glow.addColorStop(1, 'rgba(255, 198, 109, 0)');
     s.fillStyle = glow;
     s.fillRect(0, 0, 64, 64);
@@ -159,11 +160,13 @@ export function Fireflies({
           y = lerp(y, p.y, gather);
         }
         if (x < -0.05 || x > 1.05 || y < -0.05 || y > 1.05) continue;
-        const breath = animate ? 0.55 + 0.45 * Math.sin(seconds * fly.speed + fly.phase) : 0.75;
+        const breath = animate ? 0.72 + 0.28 * Math.sin(seconds * fly.speed + fly.phase) : 0.85;
         // Au début, peu de lumières : chacune un peu plus présente.
-        const alpha =
-          on * breath * (0.25 + 0.75 * fly.z) * (1 + 0.6 * Math.max(0, 1 - density * 8));
-        const size = (base / 90) * (0.6 + fly.z * 1.4) * Math.max(0.75, zoom * 0.8);
+        const alpha = Math.min(
+          1,
+          on * breath * (0.55 + 0.45 * fly.z) * (1 + 0.5 * Math.max(0, 1 - density * 6)),
+        );
+        const size = (base / 38) * (0.5 + fly.z * 1.2) * Math.max(0.75, zoom * 0.8);
         context.globalAlpha = alpha;
         context.drawImage(sprite, x * width - size / 2, y * height - size / 2, size, size);
       }

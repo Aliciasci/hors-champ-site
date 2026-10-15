@@ -851,3 +851,16 @@
     padding-top: 96px;
   }
 }
+
+/* Les lucioles passent derrière les blocs de lecture sans en gêner la lecture : un voile sombre,
+   aux bords fondus. */
+.figure,
+.metaphor,
+.note,
+.blockLead,
+.facts,
+.cite,
+.responsibility {
+  background: rgb(7 9 11 / 0.72);
+  box-shadow: 0 0 48px 28px rgb(7 9 11 / 0.72);
+}
