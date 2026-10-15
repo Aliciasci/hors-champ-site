@@ -48,13 +48,6 @@ const INTERIEUR_2024: FemicideSource = {
   url: 'https://www.interieur.gouv.fr/documentation/etudes-et-statistiques/etude-nationale-sur-morts-violentes-au-sein-du-couple-en-2024.html-0',
 };
 
-const INTERIEUR_2024_AFP: FemicideSource = {
-  label: 'Violences conjugales : 107 femmes tuées en 2024, en hausse de 11 % en un an',
-  publisher: 'Maire-info, d’après l’AFP et l’étude nationale du ministère de l’Intérieur',
-  date: '31 octobre 2025',
-  url: 'https://www.maire-info.com/violences-faites-aux-femmes/violences-conjugales-107-femmes-tuees-en-2024-en-hausse-de-11-en-un-an-article-30156',
-};
-
 const ONU_2024: FemicideSource = {
   label: 'Femicides in 2024: Global estimates of intimate partner/family member femicides',
   publisher: 'ONUDC et ONU Femmes',
@@ -134,13 +127,6 @@ export const FRANCE_FACTS: { text: string; year: number; source: FemicideSource 
     source: INTERIEUR_2024,
   },
 ];
-
-/** Ce que disent les chiffres des protections en place au moment des faits. */
-export const PROTECTION_FACT = {
-  text: 'Sur les 107 femmes tuées par leur conjoint ou ex-conjoint cette année-là, une seule disposait d’un téléphone grave danger, et deux d’une ordonnance de protection.',
-  year: 2024,
-  source: INTERIEUR_2024_AFP,
-};
 
 /** Les formes de féminicide, d'après le cadre statistique des Nations unies. */
 export const FORMS: { title: string; text: string }[] = [
@@ -270,12 +256,8 @@ export const ORGANISATIONS: Organisation[] = [
 export const FEMICIDE_SOURCES: FemicideSource[] = [
   INTERIEUR_2025,
   INTERIEUR_2024,
-  INTERIEUR_2024_AFP,
   ONU_2024,
   ONU_2024_PRESS,
   UNODC_FRAMEWORK,
   SERVICE_PUBLIC,
 ];
-
-/** Source des formes de féminicide (cadre statistique des Nations unies). */
-export const FORMS_SOURCE = UNODC_FRAMEWORK;

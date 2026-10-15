@@ -3,15 +3,15 @@
 import styles from './Feminicides.module.css';
 
 export const ACTS = [
-  { id: 'les-lumieres', numeral: 'I', title: 'Les lumières' },
-  { id: 'l-ampleur', numeral: 'II', title: 'L’ampleur' },
-  { id: 'les-vies', numeral: 'III', title: 'Les vies derrière les chiffres' },
-  { id: 'comprendre-les-violences', numeral: 'IV', title: 'Comprendre' },
-  { id: 'ce-qui-reste', numeral: 'V', title: 'Ce qui reste' },
+  { id: 'nuit', numeral: 'I', title: 'La nuit' },
+  { id: 'des-vies', numeral: 'II', title: 'Des vies, pas seulement des chiffres' },
+  { id: 'derriere-les-lumieres', numeral: 'III', title: 'Derrière les lumières' },
+  { id: 'pas-une-fatalite', numeral: 'IV', title: 'Ce n’est pas une fatalité' },
+  { id: 'ne-pas-laisser-le-silence', numeral: 'V', title: 'Ne pas laisser le silence gagner' },
 ] as const;
 
 /**
- * Où l'on en est : un point par mouvement, sur le bord droit. Chaque point mène à son mouvement ; aucun
+ * Où l'on en est : un point par acte, sur le bord droit. Chaque point mène à son acte ; aucun
  * n'est obligatoire, on peut lire dans l'ordre ou sauter.
  */
 export function StoryProgress({
@@ -22,7 +22,7 @@ export function StoryProgress({
   onJump: (index: number) => void;
 }) {
   return (
-    <nav className={styles.progress} aria-label="Les cinq mouvements du récit">
+    <nav className={styles.progress} aria-label="Les cinq actes du récit">
       <ol>
         {ACTS.map((act, index) => (
           <li key={act.id}>

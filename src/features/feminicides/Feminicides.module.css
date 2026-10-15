@@ -1,24 +1,22 @@
 /*
- * Féminicides : une prairie de nuit, des lucioles, du texte ivoire. Une direction artistique
+ * Féminicides : une nuit presque noire, des lucioles, du texte ivoire. Une direction artistique
  * propre à cette page, quel que soit le thème choisi : les couleurs sont fixées ici.
- * Contrastes (sur #050607) : ivoire 17,1:1, ivoire atténué 9,6:1, ambre 11,6:1, orange 5,9:1.
+ * Contrastes (sur #07090B) : ivoire 16,9:1, ivoire atténué 9,4:1, ambre 12,6:1, vermillon 4,9:1.
  */
 .page {
-  --night: #050607;
-  --night-blue: #0b111b;
+  --night: #07090b;
+  --night-blue: #101722;
   --ivory: #f1ebdd;
   --ivory-2: #bdb5a6;
-  --amber: #f7b95e;
-  --ember: #e96b35;
+  --amber: #ffc66d;
+  --vermilion: #e94b2c;
   --serif-title: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   --serif-text: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
   --hand: var(--font-caveat), 'Caveat', cursive;
-  --edge: clamp(var(--space-lg), 7vw, 8rem);
+  --chrome-h: 100svh;
 
   position: relative;
   isolation: isolate;
-  /* La scène passe sous l'en-tête, rendu transparent sur cette page. */
-  margin-top: calc(-1 * var(--header-h));
   background: var(--night);
   color: var(--ivory);
   color-scheme: dark;
@@ -35,177 +33,64 @@
   outline-offset: 4px;
 }
 
-/* ---------- L'en-tête, la barre d'onglets et le pied de page, accordés à la nuit ---------- */
-
-:global(body:has([data-feminicides])) {
-  background: #050607;
-}
-
-:global(body:has([data-feminicides]) [data-site-header]),
-:global(body:has([data-feminicides]) [data-tabbar]),
-:global(body:has([data-feminicides]) [data-site-footer]) {
-  color-scheme: dark;
-  color: #f1ebdd;
-  --bg: #050607;
-  --surface: #0b111b;
-  --surface-alt: rgb(241 235 221 / 0.08);
-  --primary: #f7b95e;
-  --primary-deep: #f7b95e;
-  --primary-soft: rgb(247 185 94 / 0.14);
-  --on-primary: #050607;
-  --action: #f1ebdd;
-  --on-action: #050607;
-  --accent: #e96b35;
-  --accent-ink: #f7b95e;
-  --text: #f1ebdd;
-  --text-2: #cfc6b6;
-  --text-muted: #a9a090;
-  --border: rgb(241 235 221 / 0.14);
-  --border-strong: #f1ebdd;
-  --dom: #f7b95e;
-  --dom-arts: #f7b95e;
-  --dom-sciences: #f7b95e;
-  --dom-droits: #f7b95e;
-  --day-ink: #f7b95e;
-}
-
-/* L'en-tête se fond dans le ciel : un simple voile, sans filet. */
-:global(body:has([data-feminicides]) [data-site-header]) {
-  background: linear-gradient(to bottom, rgb(5 6 7 / 0.92), rgb(5 6 7 / 0));
-  border-bottom-color: transparent;
-}
-
-:global(body:has([data-feminicides]) [data-tabbar]) {
-  background: rgb(5 6 7 / 0.92);
-  border-top-color: rgb(241 235 221 / 0.1);
-}
-
-/* ---------- La scène : ciel, horizon, herbes, lucioles, grain ---------- */
+/* ---------- La scène fixe : ciel et lucioles ---------- */
 
 .stage {
   position: sticky;
   top: 0;
   z-index: 0;
-  height: 100svh;
-  margin-bottom: -100svh;
-  overflow: hidden;
+  height: var(--chrome-h);
+  margin-bottom: calc(-1 * var(--chrome-h));
   pointer-events: none;
 }
 
-.stage > * {
+.sky,
+.sky::before,
+.sky::after {
   position: absolute;
-  will-change: transform;
-}
-
-/* Un ciel presque noir, qui s'éclaircit à peine vers l'horizon. */
-.sky {
   inset: 0;
-  will-change: auto;
-  background:
-    radial-gradient(140% 60% at 30% 0%, rgb(11 17 27 / 0.6), transparent 60%),
-    linear-gradient(to bottom, #050607 0%, #070a10 45%, #0b111b 70%, #0a0f17 100%);
 }
 
-/* Un halo ambré très bas sur l'horizon, comme une ville lointaine, ou l'aube qui ne vient pas. */
-.horizonGlow {
-  left: -10%;
-  right: -10%;
-  top: 0;
-  height: 100%;
-  background:
-    radial-gradient(42% 16% at 68% 60%, rgb(247 185 94 / 0.07), transparent 70%),
-    radial-gradient(70% 22% at 30% 61%, rgb(233 107 53 / 0.045), transparent 70%);
-  transition: filter 3s ease;
+/* Une profondeur presque imperceptible : un bleu nuit qui monte de l'horizon. */
+.sky {
+  background: radial-gradient(120% 70% at 50% 110%, var(--night-blue) 0%, transparent 70%);
 }
 
-.page[data-act='3'] .horizonGlow {
-  filter: brightness(1.5);
-}
-
-.page[data-act='4'] .horizonGlow {
-  filter: brightness(1.9);
-}
-
-.hillsLayer,
-.farLayer {
-  left: -20%;
-  width: 140%;
-  top: 0;
-}
-
-.hillsLayer {
-  transform: translateY(64svh);
-}
-
-.hills {
-  display: block;
-  width: 100%;
-  height: clamp(36px, 6vw, 80px);
-  margin-top: calc(-1 * clamp(36px, 6vw, 80px) + 2px);
-  fill: #070a0f;
-}
-
-/* Sous l'horizon : la prairie, en un aplat de nuit. */
-.farLayer::after {
+/* Acte IV : la lumière devient plus lisible, sans que le noir disparaisse. */
+.sky::before {
   content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 100svh;
-  background: linear-gradient(to bottom, #06080c, #040506 60%);
+  background:
+    radial-gradient(90% 60% at 50% 100%, rgb(255 198 109 / 0.1) 0%, transparent 70%),
+    linear-gradient(to bottom, #0d131c 0%, #141d2a 100%);
+  opacity: 0;
+  transition: opacity 2.4s ease;
 }
 
-.meadowFar {
-  position: relative;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  height: clamp(18px, 2.4vw, 32px);
-  margin-top: calc(-1 * clamp(18px, 2.4vw, 32px) + 1px);
-  color: #06080c;
+/* Acte V : un halo très bas, là où le chemin commence. */
+.sky::after {
+  content: '';
+  background: radial-gradient(60% 40% at 15% 100%, rgb(255 198 109 / 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 2.4s ease;
+}
+
+.page[data-act='3'] .sky::before {
+  opacity: 1;
+}
+
+.page[data-act='4'] .sky::before {
+  opacity: 0.45;
+}
+
+.page[data-act='4'] .sky::after {
+  opacity: 1;
 }
 
 .canvas {
+  position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  will-change: auto;
-}
-
-.midLayer,
-.nearLayer {
-  left: -25%;
-  width: 150%;
-  bottom: 0;
-}
-
-.meadowMid {
-  display: block;
-  width: 100%;
-  height: clamp(90px, 15vw, 190px);
-  color: #030405;
-  opacity: 0.92;
-}
-
-.nearLayer {
-  bottom: -8px;
-}
-
-.meadowNear {
-  display: block;
-  width: 100%;
-  height: clamp(110px, 20vw, 280px);
-  color: #010102;
-}
-
-/* Le grain d'une pellicule, très fin et immobile. */
-.grain {
-  inset: -50%;
-  will-change: auto;
-  opacity: 0.09;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 /* ---------- Commandes : quitter, animations, progression ---------- */
@@ -214,44 +99,47 @@
   position: sticky;
   top: 0;
   z-index: 3;
-  height: 100svh;
-  margin-bottom: -100svh;
+  height: var(--chrome-h);
+  margin-bottom: calc(-1 * var(--chrome-h));
   pointer-events: none;
 }
 
 .controls {
   position: absolute;
-  inset: auto var(--space-lg) var(--space-lg) auto;
+  inset: 0 0 auto;
   display: flex;
-  gap: var(--space-md);
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: calc(var(--header-h) + var(--space-sm)) var(--space-lg) 0;
+  pointer-events: none;
 }
 
 .exit,
 .motion {
   pointer-events: auto;
-  min-height: 36px;
-  padding: 0 var(--space-xs);
-  border: 0;
-  background: transparent;
-  color: rgb(241 235 221 / 0.7);
+  min-height: 40px;
+  padding: 0 var(--space-md);
+  border: 1px solid rgb(241 235 221 / 0.35);
+  border-radius: 999px;
+  background: rgb(7 9 11 / 0.7);
+  color: var(--ivory);
   font-family: var(--font-body);
   font-size: var(--fs-caption);
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: rgb(241 235 221 / 0.25);
-  text-underline-offset: 4px;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
 }
 
 .exit:hover,
-.motion:hover,
-.exit:focus-visible,
-.motion:focus-visible {
-  color: var(--ivory);
-  text-decoration-color: var(--ivory);
+.motion:hover {
+  border-color: var(--ivory);
+}
+
+.motion[aria-pressed='true'] {
+  color: var(--ivory-2);
 }
 
 .progress {
@@ -278,27 +166,26 @@
 
 .progressDot::after {
   content: '';
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgb(241 235 221 / 0.35);
+  border: 1px solid rgb(241 235 221 / 0.6);
   transition:
-    background-color 1s ease,
-    box-shadow 1s ease,
-    transform 1s ease;
+    background-color 0.8s ease,
+    box-shadow 0.8s ease;
 }
 
 .progressPast::after {
-  background: rgb(247 185 94 / 0.6);
+  background: rgb(255 198 109 / 0.55);
+  border-color: transparent;
 }
 
 .progressDot[aria-current='step']::after {
   background: var(--amber);
-  transform: scale(1.5);
-  box-shadow: 0 0 12px 3px rgb(247 185 94 / 0.45);
+  box-shadow: 0 0 10px 2px rgb(255 198 109 / 0.45);
 }
 
-/* Le titre du mouvement, au survol ou au clavier seulement. */
+/* Le titre de l'acte, au survol ou au clavier seulement. */
 .progressLabel {
   position: absolute;
   right: 26px;
@@ -307,7 +194,7 @@
   font-family: var(--font-body);
   font-size: var(--fs-caption);
   color: var(--ivory);
-  background: rgb(5 6 7 / 0.85);
+  background: rgb(7 9 11 / 0.85);
   opacity: 0;
   transform: translateX(4px);
   transition:
@@ -327,101 +214,117 @@
 }
 
 @media (max-width: 699px) {
-  .controls {
-    inset: calc(var(--header-h) + var(--space-xs)) var(--space-md) auto auto;
-  }
-
   .controls .motion {
     display: none;
   }
 
   .inlineMotion {
     display: block;
+    margin-top: var(--space-xs);
+  }
+
+  .exit {
+    min-height: 36px;
+    padding: 0 var(--space-sm);
+  }
+
+  .controls {
+    padding: calc(var(--header-h) + var(--space-xs)) var(--space-md) 0;
   }
 
   .progress {
-    right: 2px;
+    right: 4px;
   }
 
   .progressDot {
-    width: 22px;
+    width: 24px;
   }
 }
 
-/* ---------- Les mouvements ---------- */
+/* ---------- Les actes ---------- */
 
 .act {
   position: relative;
   z-index: 1;
-  display: grid;
-  padding: 0 var(--edge);
+  padding: 0 clamp(var(--space-lg), 8vw, 9rem);
 }
 
 @media (max-width: 699px) {
   .act {
-    padding: 0 calc(var(--space-lg) + 12px) 0 var(--space-lg);
-  }
-}
-
-.atLeft {
-  justify-self: start;
-}
-
-.atRight {
-  justify-self: end;
-  text-align: right;
-}
-
-@media (max-width: 699px) {
-  .atRight {
-    text-align: left;
+    padding: 0 calc(var(--space-lg) + 16px) 0 var(--space-lg);
   }
 }
 
 /* Les textes arrivent en fondu au défilement (rien n'est caché sans JavaScript). */
 .reveal {
   transition:
-    opacity 2s ease var(--d, 0s),
-    transform 2s ease var(--d, 0s),
-    filter 2s ease var(--d, 0s);
+    opacity 1.6s ease var(--d, 0s),
+    transform 1.6s ease var(--d, 0s);
 }
 
 .page[data-ready][data-motion='on'] .reveal:not([data-shown]) {
   opacity: 0;
-  transform: translateY(18px);
-  filter: blur(4px);
+  transform: translateY(14px);
 }
 
-/* L'ouverture : le temps s'arrête. Le titre dans le ciel, en haut à gauche. */
-.opening {
-  min-height: 100svh;
+/* Acte I : la nuit. */
+.night {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: calc(var(--header-h) + 17svh);
-  max-width: 62rem;
+  min-height: calc(100svh - var(--header-h));
+  padding-top: calc(var(--space-xl) + 40px);
+}
+
+.warning {
+  max-width: 46ch;
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  border-left: 2px solid var(--vermilion);
+  background: rgb(16 23 34 / 0.75);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--ivory);
+}
+
+.warning a {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.opening {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xs);
+  max-width: 60rem;
+  padding: var(--space-xxl) 0 calc(var(--space-xxl) + 110px);
 }
 
 .intro {
-  animation: emerge 3.2s ease both;
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  line-height: 1.45;
+  animation: dawnIn 1.8s ease both;
   animation-delay: var(--d, 0s);
 }
 
-.title {
-  font-family: var(--serif-title);
-  font-weight: 600;
-  font-size: clamp(2.75rem, 1.4rem + 5.2vw, 6.25rem);
-  line-height: 0.98;
-  letter-spacing: -0.012em;
-  outline: none;
+.breath {
+  margin-top: var(--space-lg);
+  color: var(--ivory);
+  font-style: italic;
 }
 
-.subtitle {
+.title {
   margin-top: var(--space-xl);
-  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
-  line-height: 1.55;
-  font-style: italic;
-  color: var(--ivory);
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.5rem + 3.6vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  outline: none;
 }
 
 .enter {
@@ -429,81 +332,24 @@
   margin-top: var(--space-xl);
   padding: var(--space-sm) 0;
   font-family: var(--font-body);
-  font-size: var(--fs-body-sm);
-  letter-spacing: 0.06em;
+  font-size: var(--fs-body);
   color: var(--amber) !important;
   text-decoration: none;
+  border-bottom: 1px solid rgb(255 198 109 / 0.5);
 }
 
-.enter span {
-  display: inline-block;
-  margin-left: var(--space-xs);
+.enter:hover {
+  border-bottom-color: var(--amber);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .page[data-motion='on'] .enter span {
-    animation: sink 3.4s ease-in-out infinite;
-  }
-}
-
-/* L'avertissement : bas de l'écran, discret mais lisible, avant toute chose. */
-.warning {
-  position: absolute;
-  left: var(--edge);
-  top: calc(100svh - var(--space-xl));
-  transform: translateY(-100%);
-  max-width: 38rem;
-  display: grid;
-  gap: 4px;
-  padding: var(--space-sm) var(--space-md);
-  border-left: 1px solid var(--ember);
-  background: rgb(5 6 7 / 0.66);
-  font-family: var(--font-body);
-  font-size: var(--fs-caption);
-  line-height: 1.5;
-  color: var(--ivory-2);
-}
-
-.warning a {
-  color: var(--amber) !important;
-  font-weight: 600;
-}
-
-.inlineMotion .motion {
-  padding: 0;
-  min-height: 32px;
-}
-
-@media (max-width: 699px) {
-  .warning {
-    left: var(--space-lg);
-    right: var(--space-lg);
-    top: calc(100svh - var(--tabbar-h) - var(--space-md));
-  }
-
-  .opening {
-    padding-top: calc(var(--header-h) + 10svh);
-  }
-}
-
-@keyframes emerge {
+@keyframes dawnIn {
   from {
     opacity: 0;
-    filter: blur(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    filter: none;
-  }
-}
-
-@keyframes sink {
-  0%,
-  100% {
     transform: none;
-  }
-  50% {
-    transform: translateY(4px);
   }
 }
 
@@ -516,156 +362,133 @@
     animation: none;
   }
 
-  .reveal {
+  .reveal,
+  .sky::before,
+  .sky::after {
     transition: none;
   }
 }
 
-/* Le sens des lumières : deux phrases, de part et d'autre du cadre. */
-.meaning {
+/* Herbes en contre-jour, au bas des scènes. */
+.grass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(90px, 14vw, 170px);
+  pointer-events: none;
+}
+
+.grassFar {
+  fill: #0d121a;
+}
+
+.grassNear {
+  fill: #030405;
+}
+
+.stems {
+  fill: none;
+  stroke: #05070a;
+  stroke-width: 2;
+}
+
+/* Acte II : des vies, pas seulement des chiffres. */
+.lives {
   display: grid;
-  gap: 38svh;
-  padding: 26svh 0 30svh;
+  gap: 0;
+  padding-top: 30vh;
+  padding-bottom: 20vh;
 }
 
-.whisper {
-  max-width: 22ch;
-  font-family: var(--serif-title);
-  font-weight: 600;
-  font-style: italic;
-  font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
-  line-height: 1.1;
-}
-
-/* Mouvement II : l'ampleur. */
-.scale {
-  padding-top: 10svh;
-  padding-bottom: 20svh;
-  row-gap: 0;
-}
-
-.huge {
-  font-family: var(--serif-title);
-  font-weight: 600;
-  font-size: clamp(3.25rem, 1.6rem + 7vw, 8.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.015em;
-  margin-bottom: 30svh;
-}
-
-.aside {
-  max-width: 24ch;
-  margin-bottom: 34svh;
-  font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem);
-  line-height: 1.4;
-  font-style: italic;
-}
-
-/* Le nombre, monumental, intégré au paysage ; le texte se range dans son ombre. */
-.monument {
+.lines {
   display: grid;
-  align-items: end;
-  gap: var(--space-md) var(--space-xl);
-  margin-bottom: 26svh;
+  gap: 32vh;
+  margin-bottom: 32vh;
 }
 
-@media (min-width: 900px) {
-  .monument {
-    grid-template-columns: auto minmax(0, 24rem);
-  }
-
-  .monumentRight {
-    grid-template-columns: minmax(0, 24rem) auto;
-    justify-content: end;
-  }
-
-  .monumentRight .monumentValue {
-    order: 2;
-  }
-
-  .monumentRight .monumentText {
-    text-align: right;
-  }
-}
-
-.monumentValue {
-  margin-left: -0.04em;
+.line {
   font-family: var(--serif-title);
   font-weight: 600;
-  font-size: clamp(7rem, 2rem + 22vw, 22rem);
-  line-height: 0.78;
-  letter-spacing: -0.03em;
-  color: var(--amber);
-  font-variant-numeric: lining-nums;
-  text-shadow: 0 0 80px rgb(247 185 94 / 0.25);
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  line-height: 1.05;
 }
 
-.monumentRight .monumentValue {
-  font-size: clamp(5rem, 1.6rem + 14vw, 15rem);
+.lineBig {
+  font-size: clamp(2.75rem, 1.6rem + 4.6vw, 5.5rem);
 }
 
-.monumentText {
+.quiet {
+  max-width: 26ch;
+  margin-bottom: 30vh;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.35;
+  font-style: italic;
+  color: var(--ivory);
+}
+
+.figure {
   display: grid;
   gap: var(--space-sm);
-  padding-bottom: var(--space-md);
+  max-width: 44rem;
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgb(241 235 221 / 0.25);
 }
 
-.monumentLead {
-  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
-  line-height: 1.45;
+.figureLarge {
+  margin-bottom: var(--space-huge);
 }
 
-.leadSoft {
-  color: var(--ivory-2);
+.figureValue {
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 2.4rem + 4vw, 6rem);
+  line-height: 0.9;
+  color: var(--amber);
+  font-variant-numeric: lining-nums;
 }
 
-.monumentMeta {
-  font-family: var(--font-body);
-  font-size: var(--fs-caption);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ivory-2);
+.figureLarge .figureValue {
+  font-size: clamp(5rem, 3rem + 8vw, 10rem);
 }
 
-.details {
+.figureLabel {
+  max-width: 30ch;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  line-height: 1.3;
+}
+
+.figureFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-xl);
+  margin-top: var(--space-md);
   font-family: var(--font-body);
   font-size: var(--fs-body-sm);
   line-height: 1.55;
-  text-align: left;
 }
 
-.details summary {
-  display: inline-flex;
-  min-height: 32px;
-  align-items: center;
-  cursor: pointer;
-  color: var(--amber);
-  text-decoration: underline;
-  text-decoration-color: rgb(247 185 94 / 0.4);
-  text-underline-offset: 4px;
-}
-
-.details dl {
-  display: grid;
-  gap: 4px;
-  margin-top: var(--space-sm);
-  padding: var(--space-md);
-  background: rgb(5 6 7 / 0.88);
-  border-left: 1px solid rgb(247 185 94 / 0.5);
-}
-
-.details dt {
-  margin-top: var(--space-xs);
+.figureFacts dt {
+  margin-bottom: 2px;
   font-size: var(--fs-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ivory-2);
 }
 
+.figureFacts dd {
+  color: var(--ivory);
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
 .sourceLink {
   color: var(--amber) !important;
   text-decoration: underline;
-  text-decoration-color: rgb(247 185 94 / 0.45);
+  text-decoration-color: rgb(255 198 109 / 0.45);
   text-underline-offset: 3px;
 }
 
@@ -673,16 +496,17 @@
   text-decoration-color: var(--amber);
 }
 
-.metaphor {
-  max-width: 30rem;
-  margin-bottom: 28svh;
-  background: rgb(5 6 7 / 0.72);
-  box-shadow: 0 0 50px 34px rgb(5 6 7 / 0.72);
+.metaphor,
+.note {
+  position: relative;
+  max-width: 38rem;
+  margin: var(--space-huge) 0;
+  padding-left: var(--space-lg);
+  border-left: 1px solid rgb(241 235 221 / 0.25);
   font-family: var(--font-body);
   font-size: var(--fs-body-sm);
   line-height: 1.6;
   color: var(--ivory-2);
-  text-align: left;
 }
 
 .hand {
@@ -690,74 +514,69 @@
   margin-bottom: var(--space-xs);
   font-family: var(--hand);
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1.1;
   color: var(--amber);
   transform: rotate(-2deg);
   transform-origin: left;
 }
 
-/* Mouvement III : des fragments, comme des souvenirs dans l'espace. */
-.lives {
-  padding-top: 18svh;
-  padding-bottom: 10svh;
+/* Acte III : des fragments de papier éclairés dans l'obscurité. */
+.behind {
+  padding-top: 24vh;
+  padding-bottom: 16vh;
 }
 
 .fragments {
   display: grid;
-  gap: 34svh;
-  margin-bottom: 30svh;
+  gap: 28vh;
 }
 
-.fragment {
-  max-width: 18ch;
-  font-family: var(--serif-title);
-  font-weight: 600;
-  font-style: italic;
-  font-size: clamp(2rem, 1.3rem + 3vw, 4.25rem);
-  line-height: 1.04;
-}
-
-.fragment:nth-child(1) {
-  justify-self: start;
-}
-
-.fragment:nth-child(2) {
+.fragment:nth-child(even) {
   justify-self: end;
   text-align: right;
-  margin-right: 6vw;
 }
 
 .fragment:nth-child(3) {
   justify-self: center;
 }
 
-.fragment:nth-child(4) {
-  justify-self: start;
-  max-width: 20ch;
-  margin-left: 4vw;
+.paper {
+  display: inline-block;
+  max-width: 22ch;
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--ivory);
+  color: #1b1712;
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.1;
+  text-align: left;
+  transform: rotate(var(--tilt, 0deg));
+  box-shadow:
+    0 0 60px 6px rgb(255 198 109 / 0.16),
+    0 18px 40px rgb(0 0 0 / 0.6);
 }
 
-@media (max-width: 699px) {
-  .fragment:nth-child(n) {
-    justify-self: start;
-    text-align: left;
-    margin: 0;
-  }
+.after {
+  max-width: 30ch;
+  margin-top: 30vh;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.4;
 }
 
-/* Mouvement IV : comprendre. */
-.understand {
-  padding-top: 24svh;
-  padding-bottom: 24svh;
+/* Acte IV : ce n'est pas une fatalité. */
+.dawn {
+  padding-top: 24vh;
+  padding-bottom: var(--space-huge);
 }
 
 .statement {
-  max-width: 14ch;
+  max-width: 16ch;
   font-family: var(--serif-title);
   font-weight: 600;
-  font-size: clamp(2.75rem, 1.6rem + 5vw, 6rem);
-  line-height: 0.98;
+  font-size: clamp(2.5rem, 1.6rem + 3.8vw, 4.75rem);
+  line-height: 1.02;
   text-wrap: balance;
 }
 
@@ -766,83 +585,79 @@
 }
 
 .lead {
-  max-width: 32ch;
+  max-width: 34ch;
   margin-top: var(--space-xl);
   font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
-.chapter {
+.block {
   display: grid;
   gap: var(--space-lg);
-  max-width: 70rem;
-  margin-top: 20svh;
-  padding: var(--space-xl) 0;
-  scroll-margin-top: calc(var(--header-h) + var(--space-lg));
-  /* Un voile aux bords fondus : les lucioles passent derrière sans gêner la lecture. */
-  background: rgb(5 6 7 / 0.78);
-  box-shadow: 0 0 90px 70px rgb(5 6 7 / 0.78);
+  max-width: 72rem;
+  margin-top: 18vh;
+  scroll-margin-top: calc(var(--header-h) + var(--space-xl));
 }
 
-.chapterTitle {
+.blockTitle {
   font-family: var(--serif-title);
   font-weight: 600;
-  font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem);
-  line-height: 1.02;
+  font-size: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem);
+  line-height: 1.05;
 }
 
-.chapterLead {
-  max-width: 40rem;
+.blockLead {
+  max-width: 42rem;
   font-size: var(--fs-body-lg);
   line-height: 1.6;
 }
 
-.notes {
+.cards {
   display: grid;
-  gap: var(--space-lg) var(--space-xl);
+  gap: var(--space-md);
 }
 
 @media (min-width: 700px) {
-  .notes {
+  .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1100px) {
-  .notes {
+  .cards {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .notes:has(> :nth-child(3):last-child) {
+  .cards:has(> :nth-child(3):last-child) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.noteItem {
+.card {
   display: grid;
   align-content: start;
   gap: var(--space-xs);
-  padding-top: var(--space-md);
-  border-top: 1px solid rgb(247 185 94 / 0.45);
+  padding: var(--space-lg);
+  border-top: 1px solid rgb(255 198 109 / 0.5);
+  background: rgb(16 23 34 / 0.6);
   font-family: var(--font-body);
   font-size: var(--fs-body-sm);
-  line-height: 1.6;
-  color: var(--ivory-2);
+  line-height: 1.55;
+  color: var(--ivory);
 }
 
-.noteItem strong,
+.card strong,
 .orgLink {
   font-family: var(--serif-text);
   font-size: var(--fs-body-lg);
   font-weight: 600;
   line-height: 1.3;
-  color: var(--ivory);
 }
 
 .orgLink {
   color: var(--amber) !important;
   text-decoration: underline;
-  text-decoration-color: rgb(247 185 94 / 0.45);
+  text-decoration-color: rgb(255 198 109 / 0.45);
   text-underline-offset: 3px;
 }
 
@@ -856,15 +671,16 @@
 
 .facts {
   display: grid;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
   max-width: 46rem;
+  margin-top: var(--space-lg);
 }
 
 .fact {
   display: grid;
   gap: var(--space-xs);
   padding-left: var(--space-lg);
-  border-left: 1px solid rgb(247 185 94 / 0.6);
+  border-left: 2px solid rgb(255 198 109 / 0.6);
   font-size: var(--fs-body-lg);
   line-height: 1.5;
 }
@@ -872,32 +688,30 @@
 .factYear {
   font-family: var(--font-body);
   font-size: var(--fs-caption);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ivory-2);
 }
 
 .responsibility {
-  max-width: 38rem;
+  max-width: 40rem;
   margin-top: var(--space-lg);
-  padding-left: var(--space-lg);
-  border-left: 2px solid var(--ember);
-  font-family: var(--serif-title);
-  font-weight: 600;
-  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
-  line-height: 1.25;
+  padding: var(--space-lg);
+  border-left: 2px solid var(--vermilion);
+  font-size: var(--fs-body-lg);
+  line-height: 1.55;
 }
 
 /* Les ressources d'aide : toujours lisibles, jamais en fondu. */
 .help {
   padding: var(--space-xl);
-  background: rgb(5 6 7 / 0.9);
-  border: 1px solid rgb(247 185 94 / 0.35);
+  background: rgb(7 9 11 / 0.85);
+  border: 1px solid rgb(255 198 109 / 0.4);
 }
 
 .helpList {
   display: grid;
-  gap: var(--space-lg) var(--space-xl);
+  gap: var(--space-lg);
 }
 
 @media (min-width: 900px) {
@@ -912,19 +726,19 @@
   font-family: var(--font-body);
   font-size: var(--fs-body-sm);
   line-height: 1.5;
-  color: var(--ivory-2);
 }
 
 .helpName {
   font-size: var(--fs-caption);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--ivory-2);
 }
 
 .helpContact {
   font-family: var(--serif-title);
   font-weight: 700;
-  font-size: clamp(1.875rem, 1.4rem + 1.4vw, 2.75rem);
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
   line-height: 1.1;
   color: var(--amber) !important;
   text-decoration: none;
@@ -935,25 +749,23 @@
   text-underline-offset: 4px;
 }
 
-/* Mouvement V : ce qui reste. Une phrase seule au-dessus de l'horizon, beaucoup d'espace. */
-.remains {
-  padding-top: 30svh;
-  padding-bottom: 40svh;
-}
-
-/* La phrase reste dans le ciel pendant que le chemin de lumière se dessine dessous. */
-.closingStage {
-  min-height: 130svh;
+/* Acte V : ne pas laisser le silence gagner. */
+.path {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xxl);
+  min-height: calc(var(--chrome-h) + 20vh);
+  padding-top: 20vh;
+  padding-bottom: calc(clamp(90px, 14vw, 170px) + var(--space-huge));
 }
 
 .closing {
-  position: sticky;
-  top: calc(var(--header-h) + 14svh);
   display: grid;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   font-family: var(--serif-title);
   font-weight: 600;
-  font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4.75rem);
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4.25rem);
   line-height: 1.05;
   outline: none;
 }
@@ -964,45 +776,51 @@
 
 .exits {
   display: grid;
+  gap: var(--space-md);
+  max-width: 64rem;
+}
+
+@media (min-width: 800px) {
+  .exits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.exitCard {
+  display: grid;
   gap: var(--space-xs);
-  margin-top: 8svh;
-  justify-self: start;
+  height: 100%;
+  padding: var(--space-lg);
+  border: 1px solid rgb(255 198 109 / 0.45);
+  background: rgb(7 9 11 / 0.75);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  color: var(--ivory-2) !important;
+  text-decoration: none;
+  transition:
+    border-color 0.4s,
+    box-shadow 0.4s;
 }
 
-.exitLink {
-  display: inline-flex;
-  gap: var(--space-sm);
-  min-height: 44px;
-  align-items: center;
+.exitCard strong {
   font-family: var(--serif-text);
-  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
-  color: var(--ivory) !important;
-  text-decoration: underline;
-  text-decoration-color: rgb(247 185 94 / 0.4);
-  text-underline-offset: 6px;
-  transition: text-decoration-color 0.4s;
+  font-size: var(--fs-body-lg);
+  font-weight: 600;
+  color: var(--ivory);
 }
 
-.exitLink span {
-  color: var(--amber);
-  transition: transform 0.4s;
+.exitCard:hover {
+  border-color: var(--amber);
+  box-shadow: 0 0 30px rgb(255 198 109 / 0.15);
 }
 
-.exitLink:hover {
-  text-decoration-color: var(--amber);
-}
-
-.exitLink:hover span {
-  transform: translateX(4px);
-}
-
-/* Sources et méthode : sobre, en fin de page, hors de la scène. */
+/* Sources et méthode : sobre, en fin de page. */
 .sources {
   position: relative;
   z-index: 1;
   display: grid;
   gap: var(--space-md);
-  padding: var(--space-huge) var(--edge);
+  padding: var(--space-huge) clamp(var(--space-lg), 8vw, 9rem) var(--space-huge);
   background: var(--night);
   font-family: var(--font-body);
   font-size: var(--fs-body-sm);
@@ -1027,24 +845,9 @@
   color: var(--ivory);
 }
 
-/* Les grands textes gardent une ombre de nuit : lisibles même devant une lumière. */
-.title,
-.subtitle,
-.whisper,
-.huge,
-.aside,
-.fragment,
-.statement,
-.lead,
-.closing,
-.monumentLead,
-.exitLink {
-  text-shadow:
-    0 0 18px rgb(5 6 7 / 0.9),
-    0 0 42px rgb(5 6 7 / 0.8);
-}
-
-.monumentText {
-  background: rgb(5 6 7 / 0.55);
-  box-shadow: 0 0 60px 40px rgb(5 6 7 / 0.55);
+/* Mobile : la place du bouton « Quitter » au-dessus de l'avertissement. */
+@media (max-width: 699px) {
+  .night {
+    padding-top: 96px;
+  }
 }

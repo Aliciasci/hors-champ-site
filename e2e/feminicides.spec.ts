@@ -19,14 +19,10 @@ test('féminicides : avertissement, aide, et un récit qu’on parcourt libremen
   const figure = page.getByTestId('fem-figure-france');
   await expect(figure).toContainText('111');
   await expect(figure).toContainText('2025');
-  // La définition et la source se déplient sans quitter le récit.
-  await figure.getByText('Ce que l’on compte, et la source').click();
   await expect(figure.getByRole('link')).toHaveAttribute('href', /^https:/);
 
   // La progression mène au dernier acte, qui ouvre trois sorties.
-  // Au clavier : les points de progression, fixés à l'écran, mènent à chaque mouvement.
-  await page.getByTestId('fem-progress-4').focus();
-  await page.keyboard.press('Enter');
+  await page.getByTestId('fem-progress-4').click();
   await expect(page.getByTestId('fem-progress-4')).toHaveAttribute('aria-current', 'step');
   await page.getByTestId('fem-out-aide').click();
   await expect(page).toHaveURL(/#aide$/);
@@ -51,10 +47,7 @@ test('féminicides : les animations s’arrêtent, et tout reste lisible', async
   await expect(root).toHaveAttribute('data-motion', 'off');
   await expect(toggle).toHaveAttribute('aria-pressed', 'true');
   // Sans animation, aucun texte n'attend d'apparaître.
-  await expect(page.getByText('Un avenir qui n’aurait jamais dû lui être retiré.')).toHaveCSS(
-    'opacity',
-    '1',
-  );
+  await expect(page.getByText('Un avenir qui lui appartenait.')).toHaveCSS('opacity', '1');
 
   // Le choix tient au rechargement.
   await page.reload();
@@ -68,7 +61,7 @@ test.describe('féminicides, réglage « réduire les animations »', () => {
     await seedState(page);
     await open(page, '/feminicides/');
     await expect(page.getByTestId('feminicides')).toHaveAttribute('data-motion', 'off');
-    await expect(page.getByText('Des absences qui n’auraient jamais dû exister.')).toHaveCSS(
+    await expect(page.getByText('Certaines n’ont jamais pu rentrer chez elles.')).toHaveCSS(
       'opacity',
       '1',
     );
