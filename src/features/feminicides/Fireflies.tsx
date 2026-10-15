@@ -18,8 +18,12 @@ interface Fly {
   /** Ordre d'apparition : une luciole s'allume quand la densité dépasse ce seuil. */
   rank: number;
   phase: number;
-  /** Respiration lente, entre 6 et 16 secondes par cycle : jamais de scintillement. */
+  /** Lueur qui monte et s'éteint en douceur, entre 3 et 7 secondes par cycle : jamais de scintillement. */
   speed: number;
+  /** Vol : fréquences (radians par seconde) et amplitude de la boucle que décrit chaque luciole. */
+  fx: number;
+  fy: number;
+  reach: number;
   /** Place sur le chemin de lumière du dernier acte. */
   pathT: number;
   pathJitter: number;
@@ -42,7 +46,10 @@ function makeFlies(count: number): Fly[] {
     z: 0.3 + rand() * 0.7,
     rank: index / count,
     phase: rand() * Math.PI * 2,
-    speed: (Math.PI * 2) / (6 + rand() * 10),
+    speed: (Math.PI * 2) / (3 + rand() * 4),
+    fx: 0.15 + rand() * 0.35,
+    fy: 0.12 + rand() * 0.3,
+    reach: 0.02 + rand() * 0.035,
     pathT: rand(),
     pathJitter: rand() - 0.5,
   }));
@@ -82,8 +89,8 @@ function pathPoint(t: number, jitter: number) {
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 /**
- * Les lucioles : un canvas sous le texte. Leur nombre suit le récit (densityAt), elles respirent
- * lentement et dérivent à peine. Au dernier acte, elles se rangent en chemin. Sans animation
+ * Les lucioles : un canvas sous le texte. Leur nombre suit le récit (densityAt), elles volent en
+ * boucles lentes et s'allument puis s'éteignent en douceur. Au dernier acte, elles se rangent en chemin. Sans animation
  * (réglage du système ou bouton de la page), la scène est redessinée seulement quand le récit
  * avance : les lumières sont là, immobiles.
  */
@@ -148,9 +155,20 @@ export function Fireflies({
         // Les dernières à s'allumer arrivent en fondu, sur un dixième de la densité.
         const on = Math.min(1, Math.max(0, (density - fly.rank) / 0.1));
         if (on <= 0) continue;
-        const drift = animate ? seconds * 0.02 * fly.z : 0;
-        let x = fly.x + Math.sin(drift * 3 + fly.phase) * 0.012;
-        let y = fly.y + Math.cos(drift * 2 + fly.phase * 1.3) * 0.01;
+        // Vol en boucles lentes, deux sinus par axe pour que le tracé ne se répète pas ; les plus
+        // proches vont plus loin (parallaxe).
+        const t = animate ? seconds : 0;
+        const reach = fly.reach * (0.5 + fly.z * 0.7);
+        let x =
+          fly.x +
+          (Math.sin(t * fly.fx + fly.phase) + 0.45 * Math.sin(t * fly.fx * 2.3 + fly.phase * 2)) *
+            reach;
+        let y =
+          fly.y +
+          (Math.cos(t * fly.fy + fly.phase * 1.3) +
+            0.4 * Math.sin(t * fly.fy * 2.7 + fly.phase)) *
+            reach *
+            0.8;
         x = 0.5 + (x - 0.5) * zoom;
         y = 0.55 + (y - 0.55) * zoom;
         if (gather > 0.001) {
@@ -159,7 +177,9 @@ export function Fireflies({
           y = lerp(y, p.y, gather);
         }
         if (x < -0.05 || x > 1.05 || y < -0.05 || y > 1.05) continue;
-        const breath = animate ? 0.55 + 0.45 * Math.sin(seconds * fly.speed + fly.phase) : 0.75;
+        // Une lueur qui s'allume puis s'éteint presque, comme une luciole, mais en fondu lent.
+        const pulse = 0.5 + 0.5 * Math.sin(seconds * fly.speed + fly.phase);
+        const breath = animate ? 0.2 + 0.8 * pulse * pulse : 0.75;
         // Au début, peu de lumières : chacune un peu plus présente.
         const alpha =
           on * breath * (0.25 + 0.75 * fly.z) * (1 + 0.6 * Math.max(0, 1 - density * 8));
