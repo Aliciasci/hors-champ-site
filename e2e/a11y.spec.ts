@@ -21,6 +21,7 @@ const PAGES = [
   '/droits/',
   '/droits/monde/',
   '/droits/monde/?mode=explorer',
+  '/feminicides/',
   '/collection/',
   '/culture/person-lise-meitner/',
   '/culture/right-ivg/',
@@ -43,6 +44,9 @@ for (const theme of ['cartel', 'revue', 'atlas'] as const) {
       test.skip(browserName !== 'chromium', 'axe : un seul moteur suffit');
       // La une est contrôlée avec son ouverture, telle qu'à la première visite.
       await seedState(page, { themeId: theme }, { showIntro: path === '/' });
+      // Féminicides : les textes y apparaissent en fondu, et axe les mesurerait en plein
+      // fondu ; la version sans animation montre chaque texte avec son contraste final.
+      if (path.startsWith('/feminicides')) await page.emulateMedia({ reducedMotion: 'reduce' });
       await open(page, path);
       const results = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
@@ -65,6 +69,7 @@ const NIGHT_PAGES = [
   '/droits/',
   '/droits/monde/',
   '/droits/monde/?mode=explorer',
+  '/feminicides/',
   '/elles/',
   '/elles/?vue=carte&pays=USA',
   '/culture/person-lise-meitner/',
@@ -76,6 +81,9 @@ for (const theme of ['cartel', 'revue', 'atlas'] as const) {
       test.skip(browserName !== 'chromium', 'axe : un seul moteur suffit');
       await seedState(page, { themeId: theme });
       await page.addInitScript(() => localStorage.setItem('hors-champ:scheme', 'dark'));
+      // Féminicides : les textes y apparaissent en fondu, et axe les mesurerait en plein
+      // fondu ; la version sans animation montre chaque texte avec son contraste final.
+      if (path.startsWith('/feminicides')) await page.emulateMedia({ reducedMotion: 'reduce' });
       await open(page, path);
       await expect(page.locator('html')).toHaveAttribute('data-scheme', 'dark');
       const results = await new AxeBuilder({ page })

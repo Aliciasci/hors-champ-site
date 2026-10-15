@@ -1,0 +1,853 @@
+/*
+ * Féminicides : une nuit presque noire, des lucioles, du texte ivoire. Une direction artistique
+ * propre à cette page, quel que soit le thème choisi : les couleurs sont fixées ici.
+ * Contrastes (sur #07090B) : ivoire 16,9:1, ivoire atténué 9,4:1, ambre 12,6:1, vermillon 4,9:1.
+ */
+.page {
+  --night: #07090b;
+  --night-blue: #101722;
+  --ivory: #f1ebdd;
+  --ivory-2: #bdb5a6;
+  --amber: #ffc66d;
+  --vermilion: #e94b2c;
+  --serif-title: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --serif-text: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
+  --hand: var(--font-caveat), 'Caveat', cursive;
+  --chrome-h: 100svh;
+
+  position: relative;
+  isolation: isolate;
+  background: var(--night);
+  color: var(--ivory);
+  color-scheme: dark;
+  font-family: var(--serif-text);
+  overflow-x: clip;
+}
+
+.page a {
+  color: inherit;
+}
+
+.page :focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+
+/* ---------- La scène fixe : ciel et lucioles ---------- */
+
+.stage {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: var(--chrome-h);
+  margin-bottom: calc(-1 * var(--chrome-h));
+  pointer-events: none;
+}
+
+.sky,
+.sky::before,
+.sky::after {
+  position: absolute;
+  inset: 0;
+}
+
+/* Une profondeur presque imperceptible : un bleu nuit qui monte de l'horizon. */
+.sky {
+  background: radial-gradient(120% 70% at 50% 110%, var(--night-blue) 0%, transparent 70%);
+}
+
+/* Acte IV : la lumière devient plus lisible, sans que le noir disparaisse. */
+.sky::before {
+  content: '';
+  background:
+    radial-gradient(90% 60% at 50% 100%, rgb(255 198 109 / 0.1) 0%, transparent 70%),
+    linear-gradient(to bottom, #0d131c 0%, #141d2a 100%);
+  opacity: 0;
+  transition: opacity 2.4s ease;
+}
+
+/* Acte V : un halo très bas, là où le chemin commence. */
+.sky::after {
+  content: '';
+  background: radial-gradient(60% 40% at 15% 100%, rgb(255 198 109 / 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 2.4s ease;
+}
+
+.page[data-act='3'] .sky::before {
+  opacity: 1;
+}
+
+.page[data-act='4'] .sky::before {
+  opacity: 0.45;
+}
+
+.page[data-act='4'] .sky::after {
+  opacity: 1;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Commandes : quitter, animations, progression ---------- */
+
+.chrome {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: var(--chrome-h);
+  margin-bottom: calc(-1 * var(--chrome-h));
+  pointer-events: none;
+}
+
+.controls {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: calc(var(--header-h) + var(--space-sm)) var(--space-lg) 0;
+  pointer-events: none;
+}
+
+.exit,
+.motion {
+  pointer-events: auto;
+  min-height: 40px;
+  padding: 0 var(--space-md);
+  border: 1px solid rgb(241 235 221 / 0.35);
+  border-radius: 999px;
+  background: rgb(7 9 11 / 0.7);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+}
+
+.exit:hover,
+.motion:hover {
+  border-color: var(--ivory);
+}
+
+.motion[aria-pressed='true'] {
+  color: var(--ivory-2);
+}
+
+.progress {
+  position: absolute;
+  right: var(--space-lg);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+
+.progress ol {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.progressDot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 32px;
+  height: 32px;
+}
+
+.progressDot::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgb(241 235 221 / 0.6);
+  transition:
+    background-color 0.8s ease,
+    box-shadow 0.8s ease;
+}
+
+.progressPast::after {
+  background: rgb(255 198 109 / 0.55);
+  border-color: transparent;
+}
+
+.progressDot[aria-current='step']::after {
+  background: var(--amber);
+  box-shadow: 0 0 10px 2px rgb(255 198 109 / 0.45);
+}
+
+/* Le titre de l'acte, au survol ou au clavier seulement. */
+.progressLabel {
+  position: absolute;
+  right: 26px;
+  white-space: nowrap;
+  padding: 2px var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  color: var(--ivory);
+  background: rgb(7 9 11 / 0.85);
+  opacity: 0;
+  transform: translateX(4px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  pointer-events: none;
+}
+
+.progressDot:hover .progressLabel,
+.progressDot:focus-visible .progressLabel {
+  opacity: 1;
+  transform: none;
+}
+
+.inlineMotion {
+  display: none;
+}
+
+@media (max-width: 699px) {
+  .controls .motion {
+    display: none;
+  }
+
+  .inlineMotion {
+    display: block;
+    margin-top: var(--space-xs);
+  }
+
+  .exit {
+    min-height: 36px;
+    padding: 0 var(--space-sm);
+  }
+
+  .controls {
+    padding: calc(var(--header-h) + var(--space-xs)) var(--space-md) 0;
+  }
+
+  .progress {
+    right: 4px;
+  }
+
+  .progressDot {
+    width: 24px;
+  }
+}
+
+/* ---------- Les actes ---------- */
+
+.act {
+  position: relative;
+  z-index: 1;
+  padding: 0 clamp(var(--space-lg), 8vw, 9rem);
+}
+
+@media (max-width: 699px) {
+  .act {
+    padding: 0 calc(var(--space-lg) + 16px) 0 var(--space-lg);
+  }
+}
+
+/* Les textes arrivent en fondu au défilement (rien n'est caché sans JavaScript). */
+.reveal {
+  transition:
+    opacity 1.6s ease var(--d, 0s),
+    transform 1.6s ease var(--d, 0s);
+}
+
+.page[data-ready][data-motion='on'] .reveal:not([data-shown]) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Acte I : la nuit. */
+.night {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--header-h));
+  padding-top: calc(var(--space-xl) + 40px);
+}
+
+.warning {
+  max-width: 46ch;
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  border-left: 2px solid var(--vermilion);
+  background: rgb(16 23 34 / 0.75);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--ivory);
+}
+
+.warning a {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.opening {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xs);
+  max-width: 60rem;
+  padding: var(--space-xxl) 0 calc(var(--space-xxl) + 110px);
+}
+
+.intro {
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  line-height: 1.45;
+  animation: dawnIn 1.8s ease both;
+  animation-delay: var(--d, 0s);
+}
+
+.breath {
+  margin-top: var(--space-lg);
+  color: var(--ivory);
+  font-style: italic;
+}
+
+.title {
+  margin-top: var(--space-xl);
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.5rem + 3.6vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  outline: none;
+}
+
+.enter {
+  align-self: flex-start;
+  margin-top: var(--space-xl);
+  padding: var(--space-sm) 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--amber) !important;
+  text-decoration: none;
+  border-bottom: 1px solid rgb(255 198 109 / 0.5);
+}
+
+.enter:hover {
+  border-bottom-color: var(--amber);
+}
+
+@keyframes dawnIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page[data-motion='off'] .intro {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    animation: none;
+  }
+
+  .reveal,
+  .sky::before,
+  .sky::after {
+    transition: none;
+  }
+}
+
+/* Herbes en contre-jour, au bas des scènes. */
+.grass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(90px, 14vw, 170px);
+  pointer-events: none;
+}
+
+.grassFar {
+  fill: #0d121a;
+}
+
+.grassNear {
+  fill: #030405;
+}
+
+.stems {
+  fill: none;
+  stroke: #05070a;
+  stroke-width: 2;
+}
+
+/* Acte II : des vies, pas seulement des chiffres. */
+.lives {
+  display: grid;
+  gap: 0;
+  padding-top: 30vh;
+  padding-bottom: 20vh;
+}
+
+.lines {
+  display: grid;
+  gap: 32vh;
+  margin-bottom: 32vh;
+}
+
+.line {
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.lineBig {
+  font-size: clamp(2.75rem, 1.6rem + 4.6vw, 5.5rem);
+}
+
+.quiet {
+  max-width: 26ch;
+  margin-bottom: 30vh;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.35;
+  font-style: italic;
+  color: var(--ivory);
+}
+
+.figure {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: 44rem;
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgb(241 235 221 / 0.25);
+}
+
+.figureLarge {
+  margin-bottom: var(--space-huge);
+}
+
+.figureValue {
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 2.4rem + 4vw, 6rem);
+  line-height: 0.9;
+  color: var(--amber);
+  font-variant-numeric: lining-nums;
+}
+
+.figureLarge .figureValue {
+  font-size: clamp(5rem, 3rem + 8vw, 10rem);
+}
+
+.figureLabel {
+  max-width: 30ch;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  line-height: 1.3;
+}
+
+.figureFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-xl);
+  margin-top: var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+}
+
+.figureFacts dt {
+  margin-bottom: 2px;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory-2);
+}
+
+.figureFacts dd {
+  color: var(--ivory);
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.sourceLink {
+  color: var(--amber) !important;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 198 109 / 0.45);
+  text-underline-offset: 3px;
+}
+
+.sourceLink:hover {
+  text-decoration-color: var(--amber);
+}
+
+.metaphor,
+.note {
+  position: relative;
+  max-width: 38rem;
+  margin: var(--space-huge) 0;
+  padding-left: var(--space-lg);
+  border-left: 1px solid rgb(241 235 221 / 0.25);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  color: var(--ivory-2);
+}
+
+.hand {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-family: var(--hand);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--amber);
+  transform: rotate(-2deg);
+  transform-origin: left;
+}
+
+/* Acte III : des fragments de papier éclairés dans l'obscurité. */
+.behind {
+  padding-top: 24vh;
+  padding-bottom: 16vh;
+}
+
+.fragments {
+  display: grid;
+  gap: 28vh;
+}
+
+.fragment:nth-child(even) {
+  justify-self: end;
+  text-align: right;
+}
+
+.fragment:nth-child(3) {
+  justify-self: center;
+}
+
+.paper {
+  display: inline-block;
+  max-width: 22ch;
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--ivory);
+  color: #1b1712;
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.1;
+  text-align: left;
+  transform: rotate(var(--tilt, 0deg));
+  box-shadow:
+    0 0 60px 6px rgb(255 198 109 / 0.16),
+    0 18px 40px rgb(0 0 0 / 0.6);
+}
+
+.after {
+  max-width: 30ch;
+  margin-top: 30vh;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.4;
+}
+
+/* Acte IV : ce n'est pas une fatalité. */
+.dawn {
+  padding-top: 24vh;
+  padding-bottom: var(--space-huge);
+}
+
+.statement {
+  max-width: 16ch;
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.6rem + 3.8vw, 4.75rem);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.statement span {
+  outline: none;
+}
+
+.lead {
+  max-width: 34ch;
+  margin-top: var(--space-xl);
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  line-height: 1.4;
+}
+
+.block {
+  display: grid;
+  gap: var(--space-lg);
+  max-width: 72rem;
+  margin-top: 18vh;
+  scroll-margin-top: calc(var(--header-h) + var(--space-xl));
+}
+
+.blockTitle {
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem);
+  line-height: 1.05;
+}
+
+.blockLead {
+  max-width: 42rem;
+  font-size: var(--fs-body-lg);
+  line-height: 1.6;
+}
+
+.cards {
+  display: grid;
+  gap: var(--space-md);
+}
+
+@media (min-width: 700px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cards:has(> :nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  border-top: 1px solid rgb(255 198 109 / 0.5);
+  background: rgb(16 23 34 / 0.6);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: var(--ivory);
+}
+
+.card strong,
+.orgLink {
+  font-family: var(--serif-text);
+  font-size: var(--fs-body-lg);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.orgLink {
+  color: var(--amber) !important;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 198 109 / 0.45);
+  text-underline-offset: 3px;
+}
+
+.cite {
+  max-width: 48rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--ivory-2);
+}
+
+.facts {
+  display: grid;
+  gap: var(--space-lg);
+  max-width: 46rem;
+  margin-top: var(--space-lg);
+}
+
+.fact {
+  display: grid;
+  gap: var(--space-xs);
+  padding-left: var(--space-lg);
+  border-left: 2px solid rgb(255 198 109 / 0.6);
+  font-size: var(--fs-body-lg);
+  line-height: 1.5;
+}
+
+.factYear {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory-2);
+}
+
+.responsibility {
+  max-width: 40rem;
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border-left: 2px solid var(--vermilion);
+  font-size: var(--fs-body-lg);
+  line-height: 1.55;
+}
+
+/* Les ressources d'aide : toujours lisibles, jamais en fondu. */
+.help {
+  padding: var(--space-xl);
+  background: rgb(7 9 11 / 0.85);
+  border: 1px solid rgb(255 198 109 / 0.4);
+}
+
+.helpList {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 900px) {
+  .helpList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.helpList li {
+  display: grid;
+  gap: 2px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+}
+
+.helpName {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ivory-2);
+}
+
+.helpContact {
+  font-family: var(--serif-title);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--amber) !important;
+  text-decoration: none;
+}
+
+.helpContact:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Acte V : ne pas laisser le silence gagner. */
+.path {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xxl);
+  min-height: calc(var(--chrome-h) + 20vh);
+  padding-top: 20vh;
+  padding-bottom: calc(clamp(90px, 14vw, 170px) + var(--space-huge));
+}
+
+.closing {
+  display: grid;
+  gap: var(--space-xs);
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4.25rem);
+  line-height: 1.05;
+  outline: none;
+}
+
+.closing > span {
+  display: block;
+}
+
+.exits {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 64rem;
+}
+
+@media (min-width: 800px) {
+  .exits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.exitCard {
+  display: grid;
+  gap: var(--space-xs);
+  height: 100%;
+  padding: var(--space-lg);
+  border: 1px solid rgb(255 198 109 / 0.45);
+  background: rgb(7 9 11 / 0.75);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  color: var(--ivory-2) !important;
+  text-decoration: none;
+  transition:
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+
+.exitCard strong {
+  font-family: var(--serif-text);
+  font-size: var(--fs-body-lg);
+  font-weight: 600;
+  color: var(--ivory);
+}
+
+.exitCard:hover {
+  border-color: var(--amber);
+  box-shadow: 0 0 30px rgb(255 198 109 / 0.15);
+}
+
+/* Sources et méthode : sobre, en fin de page. */
+.sources {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-huge) clamp(var(--space-lg), 8vw, 9rem) var(--space-huge);
+  background: var(--night);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  color: var(--ivory-2);
+}
+
+.sources p,
+.sources ul {
+  max-width: 48rem;
+}
+
+.sources ul {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.sourcesTitle {
+  font-family: var(--serif-title);
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: var(--ivory);
+}
+
+/* Mobile : la place du bouton « Quitter » au-dessus de l'avertissement. */
+@media (max-width: 699px) {
+  .night {
+    padding-top: 96px;
+  }
+}
