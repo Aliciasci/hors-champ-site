@@ -12,9 +12,12 @@ import {
   WallFeature,
   WallTile,
 } from '@/features/portraits/web/Wall';
+import { COLLAGE_IDS, EllesCollage } from '@/features/portraits/web/EllesCollage';
 import { WallBrowser, type WallTheme } from '@/features/portraits/web/WallBrowser';
 import { pageMetadata } from '@/lib/seo';
 import type { CultureEntity, PortraitThemeId } from '@/types';
+
+import styles from './elles.module.css';
 
 export const metadata = pageMetadata({
   title: 'Elles',
@@ -25,6 +28,20 @@ export const metadata = pageMetadata({
 
 /** Premier portrait illustré d'une liste, sinon le premier tout court. */
 const pickFeatured = (people: CultureEntity[]) => people.find((p) => p.image) ?? people[0];
+
+/** La une : un grand portrait (Cartel, Revue), ou la première carte, marquée (Atlas). */
+function Featured({ person, theme }: { person: CultureEntity; theme: PortraitThemeId }) {
+  return (
+    <>
+      <div className="not-atlas">
+        <WallFeature person={person} theme={theme} />
+      </div>
+      <div className="only-atlas">
+        <WallTile person={person} theme={theme} featured />
+      </div>
+    </>
+  );
+}
 
 export default function EllesPage() {
   const { themes, culture } = getCatalog();
@@ -67,7 +84,7 @@ export default function EllesPage() {
   const features: Record<string, React.ReactNode> = {};
   if (featuredAll) {
     features[`all:${featuredAll.id}`] = (
-      <WallFeature
+      <Featured
         person={featuredAll}
         theme={oubliees ? 'oubliees' : firstTheme.get(featuredAll.id)!}
       />
@@ -75,7 +92,7 @@ export default function EllesPage() {
   }
   for (const theme of wallThemes) {
     const person = people.get(theme.featuredId)!;
-    features[`${theme.id}:${person.id}`] = <WallFeature person={person} theme={theme.id} />;
+    features[`${theme.id}:${person.id}`] = <Featured person={person} theme={theme.id} />;
   }
 
   // Ses œuvres, découvertes et combats présents dans le catalogue, pour la carte.
@@ -94,14 +111,30 @@ export default function EllesPage() {
     ]),
   );
 
+  // Thème Atlas : le titre et un collage de portraits côte à côte.
   const masthead = (
-    <PageMasthead
-      kicker="Elles"
-      tone="arts"
-      title="Ce qu’elles ont changé."
-      accent="Et ce qu’on a oublié."
-      dek={`${ordered.length} visages, du XVIᵉ siècle à aujourd’hui. Retenez-en un, la suite vient toute seule.`}
-    />
+    <div className={styles.hero}>
+      <PageMasthead
+        kicker={
+          <>
+            <span className="not-atlas">Elles</span>
+            <span className="only-atlas">Portraits de femmes</span>
+          </>
+        }
+        tone="arts"
+        title="Ce qu’elles ont changé."
+        accent="Et ce qu’on a oublié."
+        dek={`${ordered.length} visages, du XVIᵉ siècle à aujourd’hui. Retenez-en un, la suite vient toute seule.`}
+      />
+      <div className="only-atlas">
+        <EllesCollage
+          people={COLLAGE_IDS.flatMap((id) => {
+            const person = people.get(id);
+            return person ? [person] : [];
+          })}
+        />
+      </div>
+    </div>
   );
 
   const props = {

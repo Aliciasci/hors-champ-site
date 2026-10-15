@@ -56,3 +56,19 @@
 :global([data-theme='atlas']) .masthead > :first-child::before {
   display: none;
 }
+
+/* Atlas : la seconde ligne en italique orange, sans filet. */
+:global([data-theme='atlas']) .accent {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  padding-bottom: 0;
+}
+
+:global([data-theme='atlas']) .accent::after {
+  display: none;
+}
+
+:global([data-theme='atlas']) .accentLine {
+  margin-top: 0;
+}

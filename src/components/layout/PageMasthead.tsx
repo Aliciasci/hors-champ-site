@@ -18,7 +18,7 @@ export function PageMasthead({
   tone,
   children,
 }: {
-  kicker: string;
+  kicker: ReactNode;
   title: ReactNode;
   /** Seconde ligne du titre, en couleur et soulignée. */
   accent?: string;

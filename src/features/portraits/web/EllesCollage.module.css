@@ -1,0 +1,122 @@
+/* Le collage occupe la droite de l'en-tête ; sur mobile, une bande sous le titre. */
+.collage {
+  position: relative;
+  min-height: 280px;
+  isolation: isolate;
+}
+
+@media (min-width: 900px) {
+  .collage {
+    min-height: 400px;
+  }
+}
+
+.disc {
+  position: absolute;
+  z-index: -1;
+  left: 2%;
+  top: 6%;
+  width: 40%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.paperTall,
+.paperLow {
+  position: absolute;
+  z-index: -1;
+  background: var(--accent);
+}
+
+.paperTall {
+  top: 0;
+  right: 14%;
+  width: 26%;
+  height: 72%;
+  transform: rotate(2deg);
+}
+
+.paperLow {
+  right: 36%;
+  bottom: 0;
+  width: 18%;
+  height: 22%;
+  transform: rotate(-4deg);
+}
+
+.photo {
+  position: absolute;
+  display: block;
+  padding: 5px;
+  background: var(--surface);
+  box-shadow: 0 10px 24px rgb(20 22 31 / 0.2);
+}
+
+.img {
+  aspect-ratio: 4 / 5;
+  filter: grayscale(1) contrast(1.06);
+}
+
+.p0 {
+  left: 10%;
+  top: 22%;
+  width: 25%;
+  transform: rotate(-4deg);
+}
+
+.p1 {
+  left: 33%;
+  top: 2%;
+  width: 29%;
+  transform: rotate(1.5deg);
+  z-index: 1;
+}
+
+.p2 {
+  left: 27%;
+  top: 58%;
+  width: 19%;
+  transform: rotate(-2deg);
+  z-index: 2;
+}
+
+.p3 {
+  left: 58%;
+  top: 40%;
+  width: 24%;
+  transform: rotate(3deg);
+  z-index: 1;
+}
+
+.note {
+  position: absolute;
+  right: 0;
+  top: 4%;
+  width: 24%;
+  max-width: 180px;
+  padding: var(--space-md);
+  background: var(--surface);
+  box-shadow: 0 6px 16px rgb(20 22 31 / 0.14);
+  transform: rotate(5deg);
+  font-family: var(--font-hand);
+  font-weight: 500;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.3rem);
+  line-height: 1.15;
+  color: var(--text);
+}
+
+@media (max-width: 599px) {
+  .note {
+    display: none;
+  }
+
+  .paperTall {
+    right: 4%;
+  }
+
+  .p3 {
+    left: 66%;
+    width: 30%;
+  }
+}

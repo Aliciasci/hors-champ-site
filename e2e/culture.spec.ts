@@ -258,3 +258,25 @@ test('thème Atlas : la page du monde en récit illustré, puis la vraie carte �
   await expect(page.getByTestId('atlas-story-majorite')).toBeHidden();
   console.check();
 });
+
+test('thème Atlas : la page Elles en collage et en cartes', async ({ page }) => {
+  const console = watchConsole(page);
+  await seedState(page, { themeId: 'atlas' });
+  await open(page, '/elles/');
+  await expect(page.getByTestId('elles-collage')).toBeVisible();
+  await expect(page.getByText('Portraits de femmes', { exact: true })).toBeVisible();
+  // La une devient la première carte, marquée ; le grand portrait classique est masqué.
+  const feature = page.locator('[data-testid^="wall-atlas-feature-"]:visible');
+  await expect(feature).toHaveCount(1);
+  await expect(feature).toContainText('À la une');
+  await expect(page.locator('[data-testid^="wall-feature-"]:visible')).toHaveCount(0);
+  // Une thématique choisie : sa une, et ses cartes seules.
+  await page.getByTestId('elles-theme-oubliees').dispatchEvent('click');
+  await expect(page.locator('[data-testid="wall"] > li')).toHaveCount(4);
+
+  // Retour au thème Cartel : le grand portrait revient, sans collage.
+  await page.getByTestId('footer-theme-cartel').check({ force: true });
+  await expect(page.getByTestId('elles-collage')).toBeHidden();
+  await expect(page.locator('[data-testid^="wall-feature-"]:visible')).toHaveCount(1);
+  console.check();
+});

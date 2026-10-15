@@ -121,33 +121,38 @@ function WallView({
         }
       />
       <div className={styles.filters}>
-        <ChipGroup legend="Thématique" hideLegend>
-          <Chip
-            type="radio"
-            name="theme"
-            value=""
-            checked={active === null}
-            onChange={() => onTheme?.(null)}
-            count={personIds.length}
-            testId="elles-theme-all"
-          >
-            Toutes
-          </Chip>
-          {themes.map((t) => (
+        <div className={styles.themeRow}>
+          <p className={`only-atlas ${styles.themeLabel}`} aria-hidden="true">
+            Thématiques
+          </p>
+          <ChipGroup legend="Thématique" hideLegend>
             <Chip
-              key={t.id}
               type="radio"
               name="theme"
-              value={t.id}
-              checked={active?.id === t.id}
-              onChange={() => onTheme?.(t.id)}
-              count={t.personIds.length}
-              testId={`elles-theme-${t.id}`}
+              value=""
+              checked={active === null}
+              onChange={() => onTheme?.(null)}
+              count={personIds.length}
+              testId="elles-theme-all"
             >
-              {t.label}
+              Toutes
             </Chip>
-          ))}
-        </ChipGroup>
+            {themes.map((t) => (
+              <Chip
+                key={t.id}
+                type="radio"
+                name="theme"
+                value={t.id}
+                checked={active?.id === t.id}
+                onChange={() => onTheme?.(t.id)}
+                count={t.personIds.length}
+                testId={`elles-theme-${t.id}`}
+              >
+                {t.label}
+              </Chip>
+            ))}
+          </ChipGroup>
+        </div>
         {active ? (
           <div className={styles.about} data-tone="arts" data-testid="elles-theme-about">
             <p className="t-overline c-domain">{active.subtitle}</p>

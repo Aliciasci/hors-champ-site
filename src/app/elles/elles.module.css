@@ -1,0 +1,25 @@
+/* En-tête : le titre seul, ou (thème Atlas) le titre et son collage de portraits côte à côte. */
+.hero {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+
+@media (min-width: 900px) {
+  :global([data-theme='atlas']) .hero {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-xl);
+  }
+}
+
+:global([data-theme='atlas']) .hero > header {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  :global([data-theme='atlas']) .hero :global(.t-hero) {
+    font-size: clamp(2.5rem, 1rem + 3vw, 4.25rem);
+  }
+}

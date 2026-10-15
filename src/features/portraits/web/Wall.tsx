@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import { cultureHref } from '@/components/content/CultureCard';
 import { CoverArt } from '@/components/content/CoverArt';
+import { ArrowRight } from '@/components/icons';
+import { DOMAIN_LABELS } from '@/features/home/web/FeedItems';
 import type { CultureEntity, PortraitThemeId } from '@/types';
 
 import styles from './Wall.module.css';
@@ -49,24 +51,54 @@ function Face({
   );
 }
 
-/** Une femme sur le mur : visage, nom, dates, thématique. */
-export function WallTile({ person, theme }: { person: CultureEntity; theme?: PortraitThemeId }) {
+/**
+ * Une femme sur le mur : visage, nom, dates, thématique. En Atlas, une carte : domaine et
+ * dates, nom, accroche, début du résumé, flèche ; « À la une » sur la première.
+ */
+export function WallTile({
+  person,
+  theme,
+  featured = false,
+}: {
+  person: CultureEntity;
+  theme?: PortraitThemeId;
+  /** Portrait à la une (thème Atlas). */
+  featured?: boolean;
+}) {
+  const meta = [person.domain ? DOMAIN_LABELS[person.domain] : null, person.period?.label]
+    .filter(Boolean)
+    .join(' · ');
   return (
     <Link
       href={cultureHref(person.id)}
-      className={styles.tile}
+      className={`${styles.tile} ${featured ? styles.featuredCard : ''}`}
       data-domain={person.domain}
-      data-testid={`wall-${person.id}`}
+      data-testid={featured ? `wall-atlas-feature-${person.id}` : `wall-${person.id}`}
     >
       <span className={styles.faceWrap}>
-        <Face person={person} sizes="(min-width: 1200px) 180px, (min-width: 600px) 25vw, 50vw" />
+        <Face
+          person={person}
+          sizes="(min-width: 1200px) 340px, (min-width: 600px) 33vw, 50vw"
+          priority={featured}
+        />
         {person.hook ? <span className={styles.hook}>{person.hook}</span> : null}
+        {featured ? <span className={`t-overline ${styles.flag}`}>À la une</span> : null}
       </span>
-      <span className={`t-title3 ${styles.name}`}>{person.title}</span>
-      {person.period ? <span className="t-caption c-muted">{person.period.label}</span> : null}
-      {theme ? (
-        <span className={`t-overline c-domain ${styles.theme}`}>{THEME_SHORT_LABELS[theme]}</span>
-      ) : null}
+      <span className={styles.body}>
+        {meta ? <span className={`t-overline ${styles.meta}`}>{meta}</span> : null}
+        <span className={`t-title3 ${styles.name}`}>{person.title}</span>
+        {person.period ? (
+          <span className={`t-caption c-muted ${styles.period}`}>{person.period.label}</span>
+        ) : null}
+        {theme ? (
+          <span className={`t-overline c-domain ${styles.theme}`}>{THEME_SHORT_LABELS[theme]}</span>
+        ) : null}
+        {person.hook ? <span className={styles.lead}>{person.hook}</span> : null}
+        <span className={`t-body-sm c-2 ${styles.summary}`}>{person.summary}</span>
+        <span className={styles.go} aria-hidden="true">
+          <ArrowRight size={20} />
+        </span>
+      </span>
     </Link>
   );
 }

@@ -71,6 +71,8 @@ export const dmMono = DM_Mono({
 export const notoSerifDisplay = Noto_Serif_Display({
   subsets: ['latin'],
   axes: ['wdth'],
+  // L'italique sert à la seconde ligne des titres (« Et ce qu'on a oublié. »).
+  style: ['normal', 'italic'],
   display: 'swap',
   preload: false,
   variable: '--font-noto-serif-display',

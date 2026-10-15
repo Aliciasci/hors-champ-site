@@ -153,3 +153,24 @@
   font-weight: 700;
   border-bottom-color: var(--accent);
 }
+
+/* Atlas : des pastilles pleines, sans bordure ; la choisie en noir, sans coche. */
+:global([data-theme='atlas']) .chip {
+  border-color: transparent;
+  background: var(--surface-alt);
+  font-weight: 500;
+}
+
+:global([data-theme='atlas']) .chip:hover {
+  border-color: var(--border-strong);
+}
+
+:global([data-theme='atlas']) .checked,
+:global([data-theme='atlas']) .checked:hover {
+  background: var(--action);
+  border-color: var(--action);
+}
+
+:global([data-theme='atlas']) .check {
+  display: none;
+}
