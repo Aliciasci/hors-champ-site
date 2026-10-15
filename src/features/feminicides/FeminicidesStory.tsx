@@ -17,10 +17,12 @@ import {
   FIGURE_FRANCE,
   FIGURE_WORLD,
   FORMS,
+  FORMS_SOURCE,
   FRANCE_FACTS,
   HELP,
   HELP_SOURCE,
   ORGANISATIONS,
+  PROTECTION_FACT,
   PROTECTIONS,
   VIOLENCE_FORMS,
   type FemicideFigure,
@@ -28,8 +30,7 @@ import {
 } from '@/content/feminicides';
 
 import styles from './Feminicides.module.css';
-import { Fireflies, type StoryPosition } from './Fireflies';
-import { Grass } from './Grass';
+import { NightScene, type StoryPosition } from './NightScene';
 import { ACTS, StoryProgress } from './StoryProgress';
 
 const MOTION_KEY = 'hors-champ:feminicides-animations';
@@ -82,11 +83,11 @@ function Reveal({
   testId,
 }: {
   children: ReactNode;
-  testId?: string;
   as?: 'p' | 'div' | 'span' | 'h2' | 'h3' | 'li';
   className?: string;
   /** Décalage, en secondes, par rapport aux textes voisins. */
   wait?: number;
+  testId?: string;
 }) {
   return (
     <Tag
@@ -139,66 +140,78 @@ function SourceLink({ source }: { source: FemicideSource }) {
   );
 }
 
-/** Un chiffre, avec tout ce qu'il faut pour le lire : année, définition, périmètre, limites. */
-function Figure({
+/**
+ * Un chiffre composé comme un monument typographique, posé dans le paysage. Ce qu'il compte et
+ * sa source se déplient à la demande, sans interrompre le récit.
+ */
+function Monument({
   figure,
-  large = false,
+  lead,
+  side,
   testId,
 }: {
   figure: FemicideFigure;
-  large?: boolean;
-  testId?: string;
+  /** La phrase qui accompagne le nombre. */
+  lead: ReactNode;
+  side: 'left' | 'right';
+  testId: string;
 }) {
   return (
     <Reveal
       as="div"
-      className={`${styles.figure} ${large ? styles.figureLarge : ''}`}
+      className={`${styles.monument} ${side === 'right' ? styles.monumentRight : ''}`}
       testId={testId}
     >
-      <p className={styles.figureValue}>
+      <p className={styles.monumentValue}>
         {figure.value}
         <span className="sr-only"> {figure.label}</span>
       </p>
-      <p className={styles.figureLabel} aria-hidden="true">
-        {figure.label}
-      </p>
-      <dl className={styles.figureFacts}>
-        <div>
-          <dt>Année</dt>
-          <dd>{figure.year}</dd>
-        </div>
-        <div>
-          <dt>Périmètre</dt>
-          <dd>{figure.scope}</dd>
-        </div>
-        <div className={styles.wide}>
-          <dt>Ce que l’on compte</dt>
-          <dd>{figure.definition}</dd>
-        </div>
-        <div className={styles.wide}>
-          <dt>Ce que ce chiffre ne dit pas</dt>
-          <dd>{figure.caveat}</dd>
-        </div>
-        <div className={styles.wide}>
-          <dt>{figure.sources.length > 1 ? 'Sources' : 'Source'}</dt>
-          {figure.sources.map((source) => (
-            <dd key={source.url}>
-              <SourceLink source={source} />
-            </dd>
-          ))}
-        </div>
-      </dl>
+      <div className={styles.monumentText}>
+        <p className={styles.monumentLead}>{lead}</p>
+        <p className={styles.monumentMeta}>
+          {figure.scope} · {figure.year}
+        </p>
+        <details className={styles.details}>
+          <summary>Ce que l’on compte, et la source</summary>
+          <dl>
+            <dt>Ce que l’on compte</dt>
+            <dd>{figure.definition}</dd>
+            <dt>Ce que ce chiffre ne dit pas</dt>
+            <dd>{figure.caveat}</dd>
+            <dt>{figure.sources.length > 1 ? 'Sources' : 'Source'}</dt>
+            {figure.sources.map((source) => (
+              <dd key={source.url}>
+                <SourceLink source={source} />
+              </dd>
+            ))}
+          </dl>
+        </details>
+      </div>
     </Reveal>
   );
 }
 
+/** Une liste éditoriale : un titre et deux lignes par entrée, des filets, pas de cartes. */
+function Notes({ items }: { items: { title: ReactNode; text: string }[] }) {
+  return (
+    <ul className={styles.notes}>
+      {items.map((item, index) => (
+        <Reveal key={index} as="li" className={styles.noteItem} wait={(index % 4) * 0.15}>
+          <strong>{item.title}</strong>
+          <span>{item.text}</span>
+        </Reveal>
+      ))}
+    </ul>
+  );
+}
+
 /**
- * Féminicides : un récit en cinq actes, de la nuit au chemin de lumière. Le défilement fait
- * avancer le récit ; rien n'est imposé, tout se lit aussi sans animation et sans JavaScript.
+ * Féminicides : un récit en cinq mouvements dans une prairie de nuit. Le défilement est la caméra ;
+ * rien n'est imposé, tout se lit aussi sans animation et sans JavaScript.
  */
 export function FeminicidesStory() {
   const root = useRef<HTMLDivElement>(null);
-  const position = useRef<StoryPosition>({ act: 0, progress: 0 });
+  const position = useRef<StoryPosition>({ act: 0, progress: 0, page: 0 });
   const [act, setAct] = useState(0);
   const motion = useSyncExternalStore(subscribeMotion, readMotion, () => 'server' as const);
   const ready = motion !== 'server';
@@ -206,9 +219,10 @@ export function FeminicidesStory() {
 
   const toggleMotion = () => writeMotion(animate ? 'off' : 'on');
 
-  // L'acte en cours et l'avancée dans l'acte, recalculés au plus une fois par image.
+  // Le mouvement en cours, l'avancée dans ce mouvement et dans la page, au plus une fois par image.
   useEffect(() => {
     let frame = 0;
+    let lastAct = -1;
     const measure = () => {
       frame = 0;
       const line = window.innerHeight * 0.55;
@@ -223,8 +237,15 @@ export function FeminicidesStory() {
           progress = Math.min(1, Math.max(0, (line - rect.top) / rect.height));
         }
       });
-      position.current = { act: index, progress };
-      window.dispatchEvent(new Event('hc-story-move'));
+      const box = root.current?.getBoundingClientRect();
+      const page = box
+        ? Math.min(1, Math.max(0, -box.top / Math.max(1, box.height - window.innerHeight)))
+        : 0;
+      position.current = { act: index, progress, page };
+      if (index !== lastAct) {
+        lastAct = index;
+        window.dispatchEvent(new Event('hc-story-act'));
+      }
       setAct(index);
     };
     const schedule = () => {
@@ -251,7 +272,7 @@ export function FeminicidesStory() {
           observer.unobserve(entry.target);
         }
       },
-      { rootMargin: '0px 0px -12% 0px' },
+      { rootMargin: '0px 0px -14% 0px' },
     );
     items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
@@ -271,17 +292,15 @@ export function FeminicidesStory() {
     <div
       ref={root}
       className={styles.page}
+      data-feminicides=""
       data-act={act}
       data-ready={ready ? '' : undefined}
       data-motion={animate ? 'on' : 'off'}
       data-testid="feminicides"
     >
-      {/* La scène fixe, sous le texte : le ciel et les lucioles. */}
-      <div className={styles.stage}>
-        <div className={styles.sky} aria-hidden="true" />
-        <Fireflies position={position} animate={animate && ready} />
-      </div>
-      {/* Au-dessus du texte : quitter, arrêter les animations, se repérer. */}
+      <NightScene position={position} animate={animate && ready} />
+
+      {/* Au-dessus du paysage : quitter, arrêter les animations, se repérer. */}
       <div className={styles.chrome}>
         <div className={styles.controls}>
           <Link href="/" replace className={styles.exit} data-testid="fem-exit">
@@ -292,53 +311,27 @@ export function FeminicidesStory() {
         <StoryProgress active={act} onJump={jump} />
       </div>
 
-      {/* ACTE I — La nuit */}
-      <section
-        id={ACTS[0].id}
-        className={`${styles.act} ${styles.night}`}
-        aria-labelledby="fem-title"
-      >
-        <aside className={styles.warning} aria-label="Avertissement">
-          <p>
-            <strong>Avant d’entrer.</strong> Cette page parle de violences conjugales et de meurtres
-            de femmes. Elle ne montre aucune image de victime. Vous pouvez la quitter à tout moment.
-          </p>
-          <p>
-            Besoin de parler (France) : <a href="tel:3919">3919</a>, gratuit et anonyme, jour et
-            nuit. En danger immédiat : <a href="tel:17">17</a>, ou <a href="sms:114">114</a> par
-            SMS.
-          </p>
-          <p className={styles.inlineMotion}>
-            <MotionButton animate={animate} onToggle={toggleMotion} inline />
-          </p>
-        </aside>
-
+      {/* MOUVEMENT I — Les lumières */}
+      <section id={ACTS[0].id} className={styles.act} aria-labelledby="fem-title">
         <div className={styles.opening}>
-          <p className={styles.intro} style={delay(0.6)}>
-            Elles avaient des projets.
-          </p>
-          <p className={styles.intro} style={delay(1.8)}>
-            Des habitudes.
-          </p>
-          <p className={styles.intro} style={delay(3)}>
-            Des gens qui les attendaient.
-          </p>
-          <p className={`${styles.intro} ${styles.breath}`} style={delay(5)}>
-            Certaines n’ont jamais pu rentrer chez elles.
-          </p>
           <h1
             id="fem-title"
             className={`${styles.intro} ${styles.title}`}
-            style={delay(7)}
+            style={delay(4.6)}
             tabIndex={-1}
             data-act-title=""
           >
-            Derrière chaque chiffre, une histoire.
+            Derrière chaque chiffre, <br />
+            une histoire.
           </h1>
+          <p className={`${styles.intro} ${styles.subtitle}`} style={delay(7.2)}>
+            Des vies. Des rêves. Des avenirs. <br />
+            Des absences qui n’auraient jamais dû exister.
+          </p>
           <a
             href={`#${ACTS[1].id}`}
             className={`${styles.intro} ${styles.enter}`}
-            style={delay(8.4)}
+            style={delay(9.4)}
             onClick={(event) => {
               event.preventDefault();
               jump(1);
@@ -348,83 +341,123 @@ export function FeminicidesStory() {
             Entrer dans le récit <span aria-hidden="true">↓</span>
           </a>
         </div>
-        <Grass seed={3} />
+        <aside
+          className={`${styles.intro} ${styles.warning}`}
+          style={delay(1.2)}
+          aria-label="Avertissement"
+        >
+          <p>
+            Cette page évoque des violences conjugales et des meurtres de femmes. Aucune image de
+            victime. Vous pouvez la quitter à tout moment.
+          </p>
+          <p>
+            Besoin de parler, en France : <a href="tel:3919">3919</a>, gratuit, anonyme, jour et
+            nuit. En danger : <a href="tel:17">17</a>, ou <a href="sms:114">114</a> par SMS.
+          </p>
+          <p className={styles.inlineMotion}>
+            <MotionButton animate={animate} onToggle={toggleMotion} inline />
+          </p>
+        </aside>
+
+        <div className={styles.meaning}>
+          <Reveal className={`${styles.whisper} ${styles.atLeft}`}>
+            Chaque lumière, ici, évoque une vie.
+          </Reveal>
+          <Reveal className={`${styles.whisper} ${styles.atRight}`}>Une vie qui comptait.</Reveal>
+        </div>
       </section>
 
-      {/* ACTE II — Des vies, pas seulement des chiffres */}
+      {/* MOUVEMENT II — L'ampleur */}
       <section
         id={ACTS[1].id}
-        className={`${styles.act} ${styles.lives}`}
+        className={`${styles.act} ${styles.scale}`}
         aria-labelledby="fem-act-2"
       >
         <h2 id="fem-act-2" className="sr-only" tabIndex={-1} data-act-title="">
-          Acte II : {ACTS[1].title}
+          {ACTS[1].title}
         </h2>
-        <div className={styles.lines}>
-          <Reveal className={styles.line}>Une lumière.</Reveal>
-          <Reveal className={styles.line}>Puis une autre.</Reveal>
-          <Reveal className={`${styles.line} ${styles.lineBig}`}>Puis des milliers.</Reveal>
-        </div>
-        <Reveal className={styles.quiet}>
+        <Reveal className={`${styles.huge} ${styles.atLeft}`}>Puis des milliers.</Reveal>
+        <Reveal className={`${styles.aside} ${styles.atRight}`}>
           À force de compter, on risque d’oublier ce que l’on compte.
         </Reveal>
 
-        <Figure figure={FIGURE_FRANCE} large testId="fem-figure-france" />
-        <Reveal className={styles.metaphor}>
+        <Monument
+          figure={FIGURE_FRANCE}
+          side="left"
+          testId="fem-figure-france"
+          lead={
+            <>
+              femmes tuées par leur conjoint ou ex-conjoint en France, en {FIGURE_FRANCE.year}.
+              <span className={styles.leadSoft}>
+                {' '}
+                Hommes et femmes confondus, un décès au sein du couple tous les trois jours, en
+                moyenne.
+              </span>
+            </>
+          }
+        />
+
+        <Reveal className={`${styles.metaphor} ${styles.atRight}`}>
           <span className={styles.hand} aria-hidden="true">
             une image, pas un décompte
           </span>
-          Les lumières de cette page sont une image. Aucune ne représente une personne réelle, et
-          leur nombre n’est pas celui des victimes.
+          Les lumières de cette page ne représentent aucune personne réelle, et leur nombre n’est
+          pas celui des victimes.
         </Reveal>
-        <Figure figure={FIGURE_WORLD} />
+
+        <Monument
+          figure={FIGURE_WORLD}
+          side="right"
+          testId="fem-figure-world"
+          lead={
+            <>
+              femmes et filles tuées dans le monde en {FIGURE_WORLD.year} par un partenaire ou un
+              membre de leur famille, selon une estimation des Nations unies.
+              <span className={styles.leadSoft}>
+                {' '}
+                Toutes causes confondues, 83 000 femmes et filles ont été tuées intentionnellement
+                cette année-là.
+              </span>
+            </>
+          }
+        />
       </section>
 
-      {/* ACTE III — Derrière les lumières */}
+      {/* MOUVEMENT III — Les vies derrière les chiffres */}
       <section
         id={ACTS[2].id}
-        className={`${styles.act} ${styles.behind}`}
+        className={`${styles.act} ${styles.lives}`}
         aria-labelledby="fem-act-3"
       >
         <h2 id="fem-act-3" className="sr-only" tabIndex={-1} data-act-title="">
-          Acte III : {ACTS[2].title}
+          {ACTS[2].title}
         </h2>
         <ol className={styles.fragments}>
           {[
             'Elle avait un prénom.',
-            'Une histoire.',
-            'Des projets qui n’avaient pas encore commencé.',
-            'Des personnes qui l’aimaient.',
-            'Un avenir qui lui appartenait.',
-          ].map((text, index) => (
+            'Des choses qu’elle aimait.',
+            'Des projets qui lui appartenaient.',
+            'Un avenir qui n’aurait jamais dû lui être retiré.',
+          ].map((text) => (
             <Reveal key={text} as="li" className={styles.fragment}>
-              <span
-                className={styles.paper}
-                style={{ '--tilt': `${[-1.6, 1.2, -0.8, 1.8, -1.2][index]}deg` } as CSSProperties}
-              >
-                {text}
-              </span>
+              {text}
             </Reveal>
           ))}
         </ol>
-        <Reveal className={styles.after}>
-          Des filles, des sœurs, des amies, des collègues, des voisines. Des vies entières, que leur
-          mort ne résume pas.
-        </Reveal>
-        <Reveal className={styles.note}>
+        <Reveal className={`${styles.metaphor} ${styles.atLeft}`}>
           <span className={styles.hand} aria-hidden="true">
             aucune histoire inventée
           </span>
-          Ces phrases ont été écrites pour cette page : ce ne sont pas des témoignages, et elles ne
-          parlent d’aucune femme en particulier. Les histoires réelles ne seront racontées ici
-          qu’avec des sources, et dans le respect de la dignité et de la vie privée des personnes.
+          Ces phrases ont été écrites pour cette page. Ce ne sont pas des témoignages, et elles ne
+          parlent d’aucune femme en particulier. Les histoires réelles n’y seront racontées qu’avec
+          leurs sources, dans le respect de la dignité et de la vie privée des personnes.
         </Reveal>
       </section>
 
-      {/* ACTE IV — Ce n'est pas une fatalité */}
+      {/* MOUVEMENT IV — Comprendre */}
       <section
         id={ACTS[3].id}
-        className={`${styles.act} ${styles.dawn}`}
+        className={`${styles.act} ${styles.understand}`}
         aria-labelledby="fem-act-4"
       >
         <Reveal as="h2" className={styles.statement}>
@@ -437,51 +470,41 @@ export function FeminicidesStory() {
           prévention compte.
         </Reveal>
 
-        <div id="comprendre" className={styles.block}>
-          <Reveal as="h3" className={styles.blockTitle}>
+        <div id="comprendre" className={styles.chapter}>
+          <Reveal as="h3" className={styles.chapterTitle}>
             Ce que recouvre le mot
           </Reveal>
-          <Reveal className={styles.blockLead}>
-            « Féminicide » désigne le meurtre d’une femme ou d’une fille lié au fait qu’elle est une
-            femme. Les Nations unies ont adopté en 2022 un cadre pour les compter de la même façon
-            partout. Il distingue :
+          <Reveal className={styles.chapterLead}>
+            Le meurtre d’une femme ou d’une fille lié au fait qu’elle est une femme. Depuis 2022, un
+            cadre des Nations unies permet de le compter partout de la même façon. Il distingue :
           </Reveal>
-          <ul className={styles.cards}>
-            {FORMS.map((form) => (
-              <Reveal key={form.title} as="li" className={styles.card}>
-                <strong>{form.title}</strong>
-                <span>{form.text}</span>
-              </Reveal>
-            ))}
-          </ul>
+          <Notes items={FORMS} />
           <p className={styles.cite}>
-            Source : <SourceLink source={FEMICIDE_SOURCES[4]!} />
+            Source : <SourceLink source={FORMS_SOURCE} />
           </p>
         </div>
 
-        <div className={styles.block}>
-          <Reveal as="h3" className={styles.blockTitle}>
+        <div className={styles.chapter}>
+          <Reveal as="h3" className={styles.chapterTitle}>
             Avant, il y a souvent eu des violences
           </Reveal>
-          <Reveal className={styles.blockLead}>
-            Les violences au sein du couple prennent plusieurs formes, souvent mêlées. L’emprise
-            passe par le contrôle, les menaces, l’isolement, l’argent. Chaque histoire est
-            différente : aucun scénario unique ne les résume.
+          <Reveal className={styles.chapterLead}>
+            Physiques, psychologiques, sexuelles, économiques : elles se mêlent souvent. L’emprise
+            passe par le contrôle, les menaces, l’isolement, l’argent. Aucun scénario unique ne
+            résume ces histoires.
           </Reveal>
-          <ul className={styles.cards}>
-            {VIOLENCE_FORMS.map((form) => (
-              <Reveal key={form.title} as="li" className={styles.card}>
-                <strong>{form.title}</strong>
-                <span>{form.text}</span>
-              </Reveal>
-            ))}
-          </ul>
+          <Notes items={VIOLENCE_FORMS} />
           <p className={styles.cite}>
             Source : <SourceLink source={HELP_SOURCE} />
           </p>
+        </div>
 
+        <div className={styles.chapter}>
+          <Reveal as="h3" className={styles.chapterTitle}>
+            Des signaux, et des protections qui manquent
+          </Reveal>
           <ul className={styles.facts}>
-            {FRANCE_FACTS.map((fact) => (
+            {[...FRANCE_FACTS, PROTECTION_FACT].map((fact) => (
               <Reveal key={fact.text} as="li" className={styles.fact}>
                 <span className={styles.factYear}>France, {fact.year}</span>
                 <span>{fact.text}</span>
@@ -498,25 +521,18 @@ export function FeminicidesStory() {
           </Reveal>
         </div>
 
-        <div id="proteger" className={styles.block}>
-          <Reveal as="h3" className={styles.blockTitle}>
+        <div id="proteger" className={styles.chapter}>
+          <Reveal as="h3" className={styles.chapterTitle}>
             Ce que la loi prévoit pour protéger
           </Reveal>
-          <ul className={styles.cards}>
-            {PROTECTIONS.map((item) => (
-              <Reveal key={item.title} as="li" className={styles.card}>
-                <strong>{item.title}</strong>
-                <span>{item.text}</span>
-              </Reveal>
-            ))}
-          </ul>
+          <Notes items={PROTECTIONS} />
           <p className={styles.cite}>
             En France. Source : <SourceLink source={HELP_SOURCE} />
           </p>
         </div>
 
-        <div id="aide" className={`${styles.block} ${styles.help}`} data-testid="fem-help">
-          <h3 className={styles.blockTitle}>Ressources d’aide, en France</h3>
+        <div id="aide" className={`${styles.chapter} ${styles.help}`} data-testid="fem-help">
+          <h3 className={styles.chapterTitle}>Trouver de l’aide, en France</h3>
           <ul className={styles.helpList}>
             {HELP.map((item) => (
               <li key={item.contact}>
@@ -541,11 +557,11 @@ export function FeminicidesStory() {
           </p>
         </div>
 
-        <div id="associations" className={styles.block}>
-          <h3 className={styles.blockTitle}>Les associations qui agissent</h3>
-          <ul className={styles.cards}>
+        <div id="associations" className={styles.chapter}>
+          <h3 className={styles.chapterTitle}>Celles et ceux qui agissent</h3>
+          <ul className={styles.notes}>
             {ORGANISATIONS.map((org) => (
-              <li key={org.name} className={styles.card}>
+              <li key={org.name} className={styles.noteItem}>
                 <a
                   href={org.href}
                   target="_blank"
@@ -566,42 +582,40 @@ export function FeminicidesStory() {
         </div>
       </section>
 
-      {/* ACTE V — Ne pas laisser le silence gagner */}
+      {/* MOUVEMENT V — Ce qui reste */}
       <section
         id={ACTS[4].id}
-        className={`${styles.act} ${styles.path}`}
+        className={`${styles.act} ${styles.remains}`}
         aria-labelledby="fem-act-5"
       >
-        <h2 id="fem-act-5" className={styles.closing} tabIndex={-1} data-act-title="">
-          <Reveal as="span">Se souvenir ne suffit pas.</Reveal>{' '}
-          <Reveal as="span" wait={0.6}>
-            Comprendre est nécessaire.
-          </Reveal>{' '}
-          <Reveal as="span" wait={1.2}>
-            Agir l’est aussi.
-          </Reveal>
-        </h2>
+        <div className={styles.closingStage}>
+          <h2 id="fem-act-5" className={styles.closing} tabIndex={-1} data-act-title="">
+            <Reveal as="span">Se souvenir ne suffit pas.</Reveal>{' '}
+            <Reveal as="span" wait={0.9}>
+              Comprendre est nécessaire.
+            </Reveal>{' '}
+            <Reveal as="span" wait={1.8}>
+              Agir l’est aussi.
+            </Reveal>
+          </h2>
+        </div>
         <ul className={styles.exits}>
           <li>
-            <a href="#comprendre" className={styles.exitCard} data-testid="fem-out-comprendre">
-              <strong>Comprendre les féminicides</strong>
-              <span>Les faits, les formes, les mécanismes.</span>
+            <a href="#comprendre" className={styles.exitLink} data-testid="fem-out-comprendre">
+              Comprendre les féminicides <span aria-hidden="true">→</span>
             </a>
           </li>
           <li>
-            <a href="#aide" className={styles.exitCard} data-testid="fem-out-aide">
-              <strong>Découvrir les ressources d’aide</strong>
-              <span>Les numéros et les recours, vérifiés, en France.</span>
+            <a href="#aide" className={styles.exitLink} data-testid="fem-out-aide">
+              Trouver de l’aide <span aria-hidden="true">→</span>
             </a>
           </li>
           <li>
-            <a href="#associations" className={styles.exitCard} data-testid="fem-out-associations">
-              <strong>Les associations qui agissent</strong>
-              <span>Qui elles sont, comment les soutenir.</span>
+            <a href="#associations" className={styles.exitLink} data-testid="fem-out-associations">
+              Découvrir celles et ceux qui agissent <span aria-hidden="true">→</span>
             </a>
           </li>
         </ul>
-        <Grass seed={11} tall />
       </section>
 
       <section className={styles.sources} aria-labelledby="fem-sources">
@@ -610,8 +624,8 @@ export function FeminicidesStory() {
         </h2>
         <p>
           Chaque chiffre porte son année, sa définition et sa source. Les décomptes français sont
-          ceux des forces de l’ordre ; le chiffre mondial est une estimation. Les lumières sont une
-          image : elles ne correspondent à aucun dossier réel. Page vérifiée le{' '}
+          ceux des forces de l’ordre ; le chiffre mondial est une estimation des Nations unies. Les
+          lumières sont une image : elles ne correspondent à aucun dossier réel. Page vérifiée le{' '}
           {formatDate(FEMICIDES_CHECKED_AT)}.
         </p>
         <ul>
