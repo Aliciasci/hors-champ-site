@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight, ExternalLink, X } from '@/components/icons';
 import type { Artwork } from '@/types';
 
 import styles from './Gallery.module.css';
+import viewer from './GalleryViewer.module.css';
 
 const ratioOf = (work: Artwork) =>
   typeof work.image === 'string' ? 4 / 3 : work.image.width / work.image.height;
@@ -92,7 +93,7 @@ export function GalleryViewer({ works }: { works: Artwork[] }) {
 
       <dialog
         ref={dialog}
-        className={styles.viewer}
+        className={viewer.viewer}
         aria-label="Galerie en plein écran"
         onClose={() => opener.current?.focus()}
         onKeyDown={(event) => {
@@ -106,13 +107,13 @@ export function GalleryViewer({ works }: { works: Artwork[] }) {
         }}
         data-testid="gallery-viewer"
       >
-        <div className={styles.viewerBar}>
-          <p className={styles.counter} aria-live="polite">
+        <div className={viewer.viewerBar}>
+          <p className={viewer.counter} aria-live="polite">
             {current + 1} / {works.length}
           </p>
           <button
             type="button"
-            className={styles.viewerButton}
+            className={viewer.viewerButton}
             onClick={() => dialog.current?.close()}
             aria-label="Fermer la galerie"
           >
@@ -120,16 +121,16 @@ export function GalleryViewer({ works }: { works: Artwork[] }) {
           </button>
         </div>
 
-        <div ref={track} className={styles.track}>
+        <div ref={track} className={viewer.track}>
           {works.map((work) => (
-            <figure key={work.sourceUrl} className={styles.slide}>
-              <div className={styles.slideMedia}>
+            <figure key={work.sourceUrl} className={viewer.slide}>
+              <div className={viewer.slideMedia}>
                 <Image
                   src={work.image}
                   alt={work.alt}
                   fill
                   sizes="100vw"
-                  className={styles.slideImage}
+                  className={viewer.slideImage}
                 />
               </div>
               <Caption work={work} light />
@@ -139,7 +140,7 @@ export function GalleryViewer({ works }: { works: Artwork[] }) {
 
         <button
           type="button"
-          className={`${styles.viewerButton} ${styles.prev}`}
+          className={`${viewer.viewerButton} ${viewer.prev}`}
           onClick={() => step(-1)}
           disabled={current === 0}
           aria-label="Œuvre précédente"
@@ -148,7 +149,7 @@ export function GalleryViewer({ works }: { works: Artwork[] }) {
         </button>
         <button
           type="button"
-          className={`${styles.viewerButton} ${styles.next}`}
+          className={`${viewer.viewerButton} ${viewer.next}`}
           onClick={() => step(1)}
           disabled={current === works.length - 1}
           aria-label="Œuvre suivante"
@@ -162,7 +163,7 @@ export function GalleryViewer({ works }: { works: Artwork[] }) {
 
 function Caption({ work, light = false }: { work: Artwork; light?: boolean }) {
   return (
-    <figcaption className={`${styles.caption} ${light ? styles.captionLight : ''}`}>
+    <figcaption className={`${styles.caption} ${light ? viewer.captionLight : ''}`}>
       <span className={styles.title}>{work.title}</span>
       <span className="t-caption">{[work.date, work.holder].filter(Boolean).join(' · ')}</span>
       <a
