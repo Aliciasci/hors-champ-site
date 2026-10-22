@@ -15,6 +15,16 @@ export const Users: CollectionConfig = {
     read: ({ req }) => (req.user ? true : false),
     update: ({ req, id }) => (req.user?.role === 'admin' ? true : req.user?.id === id),
   },
+  hooks: {
+    beforeChange: [
+      // Le tout premier compte, créé depuis l'écran d'accueil de l'admin, administre l'équipe.
+      async ({ data, operation, req }) => {
+        if (operation !== 'create') return data;
+        const { totalDocs } = await req.payload.count({ collection: 'users', req });
+        return totalDocs === 0 ? { ...data, role: 'admin' } : data;
+      },
+    ],
+  },
   fields: [
     { name: 'name', label: 'Nom', type: 'text', required: true },
     {
