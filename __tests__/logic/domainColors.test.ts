@@ -26,7 +26,7 @@ const contrast = (a: string, b: string) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-const DOMAINS = ['arts', 'sciences', 'droits'];
+const DOMAINS = ['arts', 'sciences', 'droits', 'sport'];
 
 /**
  * Surtitres de rubrique ou de teinte sur le fond, les cartes et leur fond pâle ; pastille pleine

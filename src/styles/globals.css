@@ -230,6 +230,11 @@ a {
   --dom: var(--dom-droits);
   --dom-soft: var(--dom-droits-soft);
 }
+[data-domain='sport'],
+[data-tone='sport'] {
+  --dom: var(--dom-sport);
+  --dom-soft: var(--dom-sport-soft);
+}
 [data-tone='ocre'] {
   --dom: var(--day-ink);
   --dom-soft: var(--day-soft);

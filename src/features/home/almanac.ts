@@ -80,6 +80,10 @@ export interface AlmanacDay {
   events: AlmanacEvent[];
 }
 
+/** Numéro du jour (heure locale), pour changer de contenu chaque jour. */
+export const dayNumber = (date: Date) =>
+  Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000);
+
 const addDays = (date: Date, n: number) =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate() + n);
 
@@ -97,7 +101,7 @@ export function almanacFor(
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const found = events
-      .filter((e) => e.month === month && e.day === day && e.year <= date.getFullYear())
+      .filter((e) => e.month === month && e.day === day && e.year < date.getFullYear())
       .sort((a, b) => a.year - b.year);
     if (found.length) return { offset, month, day, events: found };
   }
@@ -180,3 +184,35 @@ export function nextObservance(
 }
 
 export const monthName = (month: number) => MONTHS[month - 1]!;
+
+const years = (n: number) => (n === 1 ? 'un an' : `${n} ans`);
+
+/**
+ * Les mots de l'ouverture : la grande accroche (« Il y a 58 ans », « Dans 5 jours ») et la
+ * phrase qui la suit. `offset` : jours avant la date ; `year` : l'année de cette date.
+ */
+export function almanacLead(
+  e: AlmanacEvent,
+  offset: number,
+  year: number,
+): { lead: string; accent: string; line: string } {
+  const n = year - e.year;
+  if (offset === 0) {
+    const line =
+      e.kind === 'born'
+        ? `naissait ${e.title}.`
+        : e.kind === 'died'
+          ? `mourait ${e.title}.`
+          : e.title;
+    return { lead: 'Il y a', accent: years(n), line };
+  }
+  const line =
+    e.kind === 'born'
+      ? `il y aura ${years(n)} que ${e.title} est née.`
+      : e.kind === 'died'
+        ? `il y aura ${years(n)} que ${e.title} est morte.`
+        : `${e.title} : il y aura ${years(n)}.`;
+  return offset === 1
+    ? { lead: '', accent: 'Demain', line }
+    : { lead: 'Dans', accent: `${offset} jours`, line };
+}

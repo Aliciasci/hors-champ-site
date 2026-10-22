@@ -6,6 +6,8 @@ import { ArrowRight } from '@/components/icons';
 import { DOMAIN_LABELS } from '@/features/home/web/FeedItems';
 import type { CultureEntity, PortraitThemeId } from '@/types';
 
+import { initials } from '@/lib/initials';
+
 import styles from './Wall.module.css';
 
 /** Libellés courts des thématiques, pour les filtres et les tuiles du mur. */
@@ -20,18 +22,8 @@ export const THEME_SHORT_LABELS: Record<PortraitThemeId, string> = {
   quotidien: 'Fait tourner le monde',
   histoire: 'Le cours de l’histoire',
   limites: 'Repoussé les limites',
+  sport: 'Fait bouger le sport',
 };
-
-/** Initiales du prénom et du nom (« Simone de Beauvoir » → « SB »), pour un portrait absent. */
-export function initials(name: string): string {
-  const all = name.split(/\s+/).filter(Boolean);
-  // Sans majuscule (« bell hooks »), on prend tous les mots.
-  const capitalized = all.filter((word) => /^\p{Lu}/u.test(word));
-  const words = capitalized.length > 0 ? capitalized : all;
-  const first = words[0]?.[0] ?? '';
-  const last = words.length > 1 ? (words[words.length - 1]?.[0] ?? '') : '';
-  return `${first}${last}`.toUpperCase();
-}
 
 function Face({
   person,

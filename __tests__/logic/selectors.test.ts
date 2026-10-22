@@ -9,7 +9,14 @@ import {
   matchesDuration,
   type ExperienceFilters,
 } from '@/features/experiences/filterExperiences';
-import { buildFeed, pickFeaturedExperience, recentlyStarted } from '@/features/home/homeSelectors';
+import {
+  buildFeed,
+  buildSideFeed,
+  feedPages,
+  FEED_PAGE_SIZE,
+  pickFeaturedExperience,
+  recentlyStarted,
+} from '@/features/home/homeSelectors';
 import {
   completeExperience,
   INITIAL_STATE,
@@ -160,16 +167,46 @@ describe('fil de l’accueil', () => {
   it('met la fiche choisie en tête et alterne les domaines dans « À la une »', () => {
     const feed = buildFeed(culture, 'all', 'person-rosa-bonheur');
     expect(feed[0]?.id).toBe('person-rosa-bonheur');
-    expect(new Set(feed.map((e) => e.id)).size).toBe(culture.length);
+    const side = buildSideFeed(culture, 'all');
+    // Chaque fiche est soit dans le fil, soit dans la colonne de côté, jamais les deux.
+    expect(new Set([...feed, ...side].map((e) => e.id)).size).toBe(culture.length);
+    expect(feed.length + side.length).toBe(culture.length);
     const domains = buildFeed(culture, 'all')
-      .slice(0, 4)
+      .slice(0, 3)
       .map((e) => e.domain);
-    expect(domains).toEqual(['sciences', 'arts', 'droits', undefined]);
+    expect(domains).toEqual(['sciences', 'arts', 'droits']);
   });
 
   it('ne garde que son domaine dans une rubrique, femmes d’abord', () => {
     const feed = buildFeed(culture, 'droits');
     expect(feed.every((e) => e.domain === 'droits')).toBe(true);
     expect(feed[0]?.kind).toBe('person');
+  });
+
+  it('sort les idées et les événements du fil, vers la colonne de côté', () => {
+    for (const section of ['all', 'arts', 'sciences', 'droits'] as const) {
+      expect(buildFeed(culture, section).some((e) => e.kind === 'event' || e.kind === 'idea')).toBe(
+        false,
+      );
+      const side = buildSideFeed(culture, section);
+      expect(side.every((e) => e.kind === 'event' || e.kind === 'idea')).toBe(true);
+      if (section !== 'all') expect(side.every((e) => e.domain === section)).toBe(true);
+    }
+    expect(buildSideFeed(culture, 'all').length).toBeGreaterThan(0);
+  });
+});
+
+describe('la Une du fil', () => {
+  it('compose chaque page : article principal, trois articles, cinq brèves, quatre titres', () => {
+    const ids = Array.from({ length: FEED_PAGE_SIZE + 4 }, (_, i) => i);
+    const [first, second] = feedPages(ids);
+    expect(first).toEqual({
+      lead: 0,
+      column: [1, 2, 3],
+      briefs: [4, 5, 6, 7, 8],
+      strip: [9, 10, 11, 12],
+    });
+    // La dernière page se remplit dans l'ordre.
+    expect(second).toEqual({ lead: 13, column: [14, 15, 16], briefs: [], strip: [] });
   });
 });

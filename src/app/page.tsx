@@ -11,9 +11,16 @@ import { relatedExperiences } from '@/features/culture/cultureGraph';
 import { CultureTile } from '@/features/culture/web/CultureTile';
 import { CultureThumb } from '@/components/content/CultureThumb';
 import { almanacEvents } from '@/features/home/almanac';
+import { dailyFigures } from '@/features/home/dailyFigures';
 import { buildFeed, type FeedSection } from '@/features/home/homeSelectors';
 import { Dateline, OnThisDay } from '@/features/home/web/Almanac';
-import { FeedLead, FeedRow } from '@/features/home/web/FeedItems';
+import {
+  FeedBrief,
+  FeedCard,
+  FeedFront,
+  FeedSideRow,
+  FeedText,
+} from '@/features/home/web/FeedItems';
 import { HomeFeed, type HomeData } from '@/features/home/web/HomeFeed';
 import { readingMinutes } from '@/lib/readingTime';
 import {
@@ -35,7 +42,7 @@ export const metadata = pageMetadata({
   path: '/',
 });
 
-const SECTIONS: FeedSection[] = ['all', 'arts', 'sciences', 'droits'];
+const SECTIONS: FeedSection[] = ['all', 'arts', 'sciences', 'droits', 'sport'];
 
 export default function Home() {
   const { culture, experiences, categories } = getCatalog();
@@ -47,27 +54,30 @@ export default function Home() {
     ...SECTIONS.map((s) => buildFeed(culture, s)[0]?.id).filter((id): id is string => !!id),
   ]);
   const firstLead = buildFeed(culture, 'all')[0]?.id;
+  // Fiches du fil principal (les idées et les événements vont dans la colonne de côté).
+  const main = culture.filter((e) => e.kind !== 'event' && e.kind !== 'idea');
 
   const data: HomeData = {
     entities: culture.map(slimEntity),
-    rows: Object.fromEntries(
-      culture.map((e) => [
+    fronts: Object.fromEntries(
+      main.map((e) => [
         e.id,
-        <FeedRow key={e.id} entity={e} minutes={readingMinutes(e, culture)} />,
+        <FeedFront
+          key={e.id}
+          entity={e}
+          minutes={readingMinutes(e, culture)}
+          priority={e.id === firstLead}
+        />,
       ]),
     ),
-    leads: Object.fromEntries(
+    cards: Object.fromEntries(main.map((e) => [e.id, <FeedCard key={e.id} entity={e} />])),
+    texts: Object.fromEntries(main.map((e) => [e.id, <FeedText key={e.id} entity={e} />])),
+    briefs: Object.fromEntries(main.map((e) => [e.id, <FeedBrief key={e.id} entity={e} />])),
+    figures: dailyFigures(),
+    sideRows: Object.fromEntries(
       culture
-        .filter((e) => leadIds.has(e.id))
-        .map((e) => [
-          e.id,
-          <FeedLead
-            key={e.id}
-            entity={e}
-            minutes={readingMinutes(e, culture)}
-            priority={e.id === firstLead}
-          />,
-        ]),
+        .filter((e) => e.kind === 'event' || e.kind === 'idea')
+        .map((e) => [e.id, <FeedSideRow key={e.id} entity={e} />]),
     ),
     experiences: experiences.map(slimExperience),
     experienceCards: Object.fromEntries(
@@ -93,6 +103,8 @@ export default function Home() {
 
   const woman = culture.find((e) => e.id === OPENING_PERSON_ID);
   const almanac = almanacEvents(culture);
+  const almanacIds = new Set(almanac.map((e) => e.entityId));
+  const almanacEntities = culture.filter((e) => almanacIds.has(e.id));
   const ofTheDay = culture.filter((e) => e.kind === 'person' && e.image && e.hook);
 
   return (
@@ -146,10 +158,7 @@ export default function Home() {
         <OnThisDay
           events={almanac}
           thumbs={Object.fromEntries(
-            [...new Set(almanac.map((e) => e.entityId))].map((id) => {
-              const entity = culture.find((e) => e.id === id)!;
-              return [id, <CultureThumb key={id} entity={entity} size={48} />];
-            }),
+            almanacEntities.map((e) => [e.id, <CultureThumb key={e.id} entity={e} size={64} />]),
           )}
         />
         <Suspense fallback={<HomeFeed data={data} />}>

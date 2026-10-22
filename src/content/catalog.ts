@@ -6,6 +6,8 @@ import { movements } from '@/data/culture/movements';
 import { people } from '@/data/culture/people';
 import { laws, organizations, rights, rightsEvents, rightsPeople } from '@/data/culture/rights';
 import { discoveries, matildaIdea, scienceEvents, scientists } from '@/data/culture/sciences';
+import { sportswomen } from '@/data/culture/sportives';
+import { twentyFirstCentury } from '@/data/culture/xxie-siecle';
 import { works } from '@/data/culture/works';
 import { localExperiences } from '@/data/experiences';
 import { localYouthItems, youthLives } from '@/data/youth';
@@ -34,6 +36,8 @@ const CULTURE_FILES: [file: string, items: readonly unknown[]][] = [
   ['src/data/culture/people.ts', people],
   ['src/data/culture/sciences.ts', [...scientists, ...discoveries, ...scienceEvents, matildaIdea]],
   ['src/data/culture/contemporaines.ts', contemporaries],
+  ['src/data/culture/sportives.ts', sportswomen],
+  ['src/data/culture/xxie-siecle.ts', twentyFirstCentury],
   ['src/data/culture/works.ts', works],
   ['src/data/culture/movements.ts', movements],
   ['src/data/culture/events.ts', events],

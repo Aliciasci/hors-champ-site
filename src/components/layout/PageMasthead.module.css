@@ -12,7 +12,7 @@
 
 @media (min-width: 1200px) {
   .masthead {
-    max-width: calc(var(--reading) + 320px + var(--space-xxl));
+    max-width: var(--container);
   }
 }
 

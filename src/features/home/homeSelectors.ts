@@ -79,7 +79,7 @@ export function pickCultureSuggestions(
  * Fiche à la une de l'écran Découvrir : une femme illustrée pas encore explorée,
  * en alternant sciences, arts et droits selon le nombre de fiches déjà ouvertes.
  */
-const FEATURED_DOMAINS = ['sciences', 'arts', 'droits'] as const;
+const FEATURED_DOMAINS = ['sciences', 'arts', 'droits', 'sport'] as const;
 
 export function pickFeaturedEntity(
   entities: readonly CultureEntity[],
@@ -97,7 +97,7 @@ export function pickFeaturedEntity(
 }
 
 /** Rubriques de l'accueil : « À la une » mélange les trois domaines. */
-export type FeedSection = 'all' | 'arts' | 'sciences' | 'droits';
+export type FeedSection = 'all' | 'arts' | 'sciences' | 'droits' | 'sport';
 
 /** Dans le fil, on lit d'abord des femmes et des conquêtes, puis ce qui les entoure. */
 const FEED_KIND_ORDER: CultureKind[] = [
@@ -105,12 +105,13 @@ const FEED_KIND_ORDER: CultureKind[] = [
   'right',
   'science',
   'work',
-  'event',
   'organization',
   'law',
   'movement',
-  'idea',
 ];
+
+/** Idées et événements : hors du fil principal, dans la colonne de côté. */
+const SIDE_KINDS: CultureKind[] = ['event', 'idea'];
 
 const byYear = (a: CultureEntity, b: CultureEntity) =>
   (a.period?.sortYear ?? 0) - (b.period?.sortYear ?? 0) || a.title.localeCompare(b.title, 'fr');
@@ -151,4 +152,47 @@ export function buildFeed(
       : mixKinds(entities.filter((e) => e.domain === section));
   const lead = feed.find((e) => e.id === leadId);
   return lead ? [lead, ...feed.filter((e) => e.id !== leadId)] : feed;
+}
+
+/**
+ * Colonne de côté de l'accueil : les événements et les idées, les plus anciens d'abord, en
+ * alternant les deux. Une rubrique ne garde que son domaine.
+ */
+export function buildSideFeed(
+  entities: readonly CultureEntity[],
+  section: FeedSection,
+): CultureEntity[] {
+  const pool = entities.filter(
+    (e) => SIDE_KINDS.includes(e.kind) && (section === 'all' || e.domain === section),
+  );
+  return interleave(SIDE_KINDS.map((kind) => pool.filter((e) => e.kind === kind).sort(byYear)));
+}
+
+/**
+ * Le fil en « Une » de journal : chaque page a un article principal, une colonne de trois
+ * articles (le premier avec image), cinq brèves « En bref », puis une rangée de quatre titres.
+ */
+export interface FeedPage<T> {
+  lead: T;
+  column: T[];
+  briefs: T[];
+  strip: T[];
+}
+
+const PAGE_PARTS = { column: 3, briefs: 5, strip: 4 } as const;
+
+/** Une page complète du fil. */
+export const FEED_PAGE_SIZE = 1 + PAGE_PARTS.column + PAGE_PARTS.briefs + PAGE_PARTS.strip;
+
+/** Découpe le fil en pages ; la dernière se remplit dans l'ordre (tête, colonne, brèves…). */
+export function feedPages<T>(items: readonly T[]): FeedPage<T>[] {
+  const pages: FeedPage<T>[] = [];
+  for (let i = 0; i < items.length; i += FEED_PAGE_SIZE) {
+    const [lead, ...rest] = items.slice(i, i + FEED_PAGE_SIZE);
+    const column = rest.slice(0, PAGE_PARTS.column);
+    const briefs = rest.slice(PAGE_PARTS.column, PAGE_PARTS.column + PAGE_PARTS.briefs);
+    const strip = rest.slice(PAGE_PARTS.column + PAGE_PARTS.briefs);
+    pages.push({ lead: lead!, column, briefs, strip });
+  }
+  return pages;
 }

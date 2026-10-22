@@ -47,8 +47,12 @@
   --dom-sciences-soft: #232a4c;
   --dom-droits: #6fcf9b;
   --dom-droits-soft: #15301f;
+  --dom-sport: #6cc9d6;
+  --dom-sport-soft: #11313a;
   --day-ink: #e0b450;
   --day-soft: #33280f;
+  --woman-ink: #f0a6c0;
+  --woman-soft: #3a1f2a;
   --possible-soft: #3a2416;
 }
 
@@ -93,8 +97,12 @@
   --dom-sciences-soft: #252a4a;
   --dom-droits: #74cf9c;
   --dom-droits-soft: #172f1e;
+  --dom-sport: #6cc9d6;
+  --dom-sport-soft: #11313a;
   --day-ink: #e6b955;
   --day-soft: #33290f;
+  --woman-ink: #f0a6c0;
+  --woman-soft: #3a1f2a;
   --possible-soft: #3d2018;
 }
 
@@ -148,8 +156,12 @@ body {
   --dom-sciences-soft: #232b4f;
   --dom-droits: #6fcf9b;
   --dom-droits-soft: #15301f;
+  --dom-sport: #6cc9d6;
+  --dom-sport-soft: #11313a;
   --day-ink: #e0b450;
   --day-soft: #33280f;
+  --woman-ink: #f0a6c0;
+  --woman-soft: #3a1f2a;
   --possible-soft: #3a2416;
 
   --map-full: #6f88ff;

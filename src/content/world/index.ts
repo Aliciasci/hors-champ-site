@@ -98,6 +98,7 @@ export interface WorldCountry {
 /** Pays présents dans les chronologies des autres droits, absents de celle du vote. */
 const EXTRA_COUNTRIES: WorldCountry[] = [
   { code: 'GTM', name: 'Guatemala', col: 2, row: 7 },
+  { code: 'BLZ', name: 'Belize', col: 4, row: 6 },
   { code: 'CRI', name: 'Costa Rica', col: 4, row: 9 },
   { code: 'MNE', name: 'Monténégro', col: 12, row: 6 },
   { code: 'SRB', name: 'Serbie', col: 14, row: 6 },

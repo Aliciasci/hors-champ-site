@@ -9,8 +9,7 @@ import type { PortraitTheme } from '@/types';
  * Pistes éditoriales proposées pour les compléter (fiches à rédiger et sourcer avant tout ajout) :
  * Nina Simone, pionnières du cinéma (culture) ; bell hooks,
  * Angela Davis, Judith Butler (idées) ; Alice Ball (oubliées) ; premières femmes médecins
- * (pionnières) ; Alice Milliat, aviatrices, exploratrices, alpinistes (limites) ; militantes
- * ouvrières (droits).
+ * (pionnières) ; aviatrices, exploratrices (limites) ; militantes ouvrières (droits).
  */
 export const portraitThemes: PortraitTheme[] = [
   {
@@ -156,6 +155,51 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-billie-jean-king',
         reason: 'Championne de tennis, fondatrice de la WTA, engagée pour l’égalité dans le sport.',
       },
+      {
+        personId: 'person-greta-thunberg',
+        reason: 'Lance en 2018 la grève scolaire pour le climat, devenue un mouvement mondial.',
+      },
+      {
+        personId: 'person-jennifer-doudna',
+        reason: 'Prix Nobel de chimie 2020 avec Emmanuelle Charpentier.',
+      },
+      {
+        personId: 'person-maryam-mirzakhani',
+        reason: 'Première femme lauréate de la médaille Fields, en 2014.',
+      },
+      {
+        personId: 'person-andrea-ghez',
+        reason: 'Prix Nobel de physique 2020 pour l’objet supermassif au centre de notre galaxie.',
+      },
+      {
+        personId: 'person-claudia-goldin',
+        reason:
+          'Prix dit Nobel d’économie 2023 pour ses recherches sur les femmes et le marché du travail.',
+      },
+      {
+        personId: 'person-fei-fei-li',
+        reason: 'Principale instigatrice d’ImageNet, cofondatrice d’AI4ALL.',
+      },
+      {
+        personId: 'person-chimamanda-ngozi-adichie',
+        reason: 'Romans et essais salués à partir de 2003, et un engagement féministe.',
+      },
+      {
+        personId: 'person-kathryn-bigelow',
+        reason: 'Première femme Oscar du meilleur réalisateur, en 2010.',
+      },
+      {
+        personId: 'person-beyonce',
+        reason: 'L’une des figures culturelles et musicales les plus influentes du XXIe siècle.',
+      },
+      {
+        personId: 'person-han-kang',
+        reason: 'Prix Nobel de littérature 2024.',
+      },
+      {
+        personId: 'person-ngozi-okonjo-iweala',
+        reason: 'Directrice générale de l’Organisation mondiale du commerce depuis 2021.',
+      },
     ],
   },
   {
@@ -209,6 +253,18 @@ export const portraitThemes: PortraitTheme[] = [
       {
         personId: 'person-emmanuelle-charpentier',
         reason: 'A inventé avec Jennifer Doudna la technique CRISPR-Cas9.',
+      },
+      {
+        personId: 'person-jennifer-doudna',
+        reason: 'Spécialiste de l’ARN, prix Nobel de chimie 2020 avec Emmanuelle Charpentier.',
+      },
+      {
+        personId: 'person-andrea-ghez',
+        reason: 'Ses travaux révèlent un objet compact supermassif au centre de notre galaxie.',
+      },
+      {
+        personId: 'person-fei-fei-li',
+        reason: 'Spécialiste de la vision artificielle, à l’origine de la base d’images ImageNet.',
       },
     ],
   },
@@ -288,6 +344,22 @@ export const portraitThemes: PortraitTheme[] = [
       {
         personId: 'person-annie-ernaux',
         reason: 'Prix Renaudot pour La Place, prix Nobel de littérature en 2022.',
+      },
+      {
+        personId: 'person-chimamanda-ngozi-adichie',
+        reason: 'Écrivaine nigériane, romancière et essayiste au succès critique international.',
+      },
+      {
+        personId: 'person-kathryn-bigelow',
+        reason: 'Réalisatrice de Démineurs et de Zero Dark Thirty.',
+      },
+      {
+        personId: 'person-beyonce',
+        reason: 'Reconnue pour sa voix, sa réinvention artistique et ses performances scéniques.',
+      },
+      {
+        personId: 'person-han-kang',
+        reason: 'Romancière de La Végétarienne, prix Nobel de littérature 2024.',
       },
     ],
   },
@@ -391,6 +463,15 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-bell-hooks',
         reason: 'Étudie les relations entre race, classe et genre.',
       },
+      {
+        personId: 'person-claudia-goldin',
+        reason:
+          'Une économiste qui a mis au jour l’inégalité de salaire entre les hommes et les femmes.',
+      },
+      {
+        personId: 'person-chimamanda-ngozi-adichie',
+        reason: 'Connue aussi comme militante féministe.',
+      },
     ],
   },
   {
@@ -464,6 +545,15 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-shirin-ebadi',
         reason: 'Première femme à présider un tribunal en Iran, en 1975.',
       },
+      {
+        personId: 'person-maryam-mirzakhani',
+        reason:
+          'Première femme, et première personne de nationalité iranienne, à recevoir la médaille Fields.',
+      },
+      {
+        personId: 'person-kathryn-bigelow',
+        reason: 'En 2010, la première femme cinéaste à recevoir l’Oscar du meilleur réalisateur.',
+      },
     ],
   },
   {
@@ -472,7 +562,13 @@ export const portraitThemes: PortraitTheme[] = [
     subtitle: 'Travail, économie, soin et vie quotidienne',
     description:
       'Les contributions collectives et souvent invisibles : travail domestique, agriculture, industrie, éducation, soin et organisation des sociétés.',
-    members: [],
+    members: [
+      {
+        personId: 'person-claudia-goldin',
+        reason:
+          'Ses travaux mesurent la place des femmes sur le marché du travail et l’écart de salaire.',
+      },
+    ],
   },
   {
     id: 'histoire',
@@ -522,12 +618,22 @@ export const portraitThemes: PortraitTheme[] = [
         personId: 'person-jacinda-ardern',
         reason: 'Fait interdire les armes semi-automatiques après le massacre de Christchurch.',
       },
+      {
+        personId: 'person-greta-thunberg',
+        reason:
+          'À quinze ans, elle manifeste devant le Parlement suédois contre l’inaction climatique.',
+      },
+      {
+        personId: 'person-ngozi-okonjo-iweala',
+        reason:
+          'Ministre des Finances du Nigeria, engagée contre la corruption et la dette publique.',
+      },
     ],
   },
   {
     id: 'limites',
     title: 'Elles ont repoussé les limites',
-    subtitle: 'Exploration, sport, aventure et exploits',
+    subtitle: 'Exploration, aventure et exploits',
     description:
       'Des femmes qui ont ouvert des voies dans des domaines où elles étaient exclues ou sous-représentées.',
     members: [
@@ -537,9 +643,63 @@ export const portraitThemes: PortraitTheme[] = [
           'Première femme afro-américaine à aller dans l’espace, à bord de la navette Endeavour.',
       },
       {
+        personId: 'person-junko-tabei',
+        reason: 'Première femme à atteindre le sommet de l’Everest, le 16 mai 1975.',
+      },
+    ],
+  },
+  {
+    id: 'sport',
+    title: 'Elles ont fait bouger le sport',
+    subtitle: 'Championnes, pionnières et combats pour le sport féminin',
+    description:
+      'Des sportives qui ont battu des records, et des femmes qui se sont battues pour que le sport féminin existe.',
+    members: [
+      {
+        personId: 'person-alice-milliat',
+        reason:
+          'Cofondatrice de la Fédération des sociétés féminines sportives de France, elle milite pour la reconnaissance internationale du sport féminin.',
+      },
+      {
+        personId: 'person-suzanne-lenglen',
+        reason: 'Première star internationale du tennis féminin, six fois victorieuse à Wimbledon.',
+      },
+      {
+        personId: 'person-wilma-rudolph',
+        reason:
+          'Trois médailles d’or à Rome en 1960, et une influence immense sur les athlètes noires américaines.',
+      },
+      {
         personId: 'person-billie-jean-king',
         reason:
-          'Douze titres du Grand Chelem en simple, l’une des plus grandes joueuses de tous les temps.',
+          'Douze titres du Grand Chelem en simple, puis la fondation de la WTA, pour l’égalité dans le tennis.',
+      },
+      {
+        personId: 'person-nawal-el-moutawakel',
+        reason:
+          'Championne du premier 400 mètres haies féminin de l’histoire olympique, à Los Angeles en 1984.',
+      },
+      {
+        personId: 'person-marie-jose-perec',
+        reason: 'La seule Française triple championne olympique d’athlétisme.',
+      },
+      {
+        personId: 'person-serena-williams',
+        reason:
+          'Trente-neuf titres du Grand Chelem : la première joueuse à avoir tout gagné, en simple comme en double.',
+      },
+      {
+        personId: 'person-megan-rapinoe',
+        reason: 'Championne du monde en 2015 et 2019, Ballon d’or de la Coupe du monde 2019.',
+      },
+      {
+        personId: 'person-simone-biles',
+        reason: 'La gymnaste la plus médaillée de l’histoire, avec 41 médailles mondiales.',
+      },
+      {
+        personId: 'person-marta',
+        reason:
+          'Six fois meilleure footballeuse de l’année, considérée comme la meilleure joueuse de tous les temps.',
       },
     ],
   },

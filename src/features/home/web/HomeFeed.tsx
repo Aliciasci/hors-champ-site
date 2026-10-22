@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 
 import { ArrowRight, Play } from '@/components/icons';
 import { Button, ButtonLink } from '@/components/ui/Button';
@@ -9,11 +9,17 @@ import { HandUnderline } from '@/components/ui/HandDrawn';
 import { RecentExplorations } from '@/features/culture/web/RecentExplorations';
 import {
   buildFeed,
+  buildSideFeed,
+  feedPages,
+  FEED_PAGE_SIZE,
   pickFeaturedEntity,
   pickFeaturedExperience,
   type FeedSection,
 } from '@/features/home/homeSelectors';
+import { dayNumber } from '@/features/home/almanac';
+import type { DailyFigure } from '@/features/home/dailyFigures';
 import { findLastInProgress, hasCompleted } from '@/features/progress/progressLogic';
+import { useMounted } from '@/lib/useMounted';
 import { readOne, useQueryState } from '@/lib/useQueryState';
 import { useAppStore } from '@/store/useAppStore';
 import type { CultureEntity, Experience } from '@/types';
@@ -25,17 +31,25 @@ const SECTIONS: { id: FeedSection; label: string; param: string | null }[] = [
   { id: 'arts', label: 'Arts', param: 'arts' },
   { id: 'sciences', label: 'Sciences', param: 'sciences' },
   { id: 'droits', label: 'Droits', param: 'droits' },
+  { id: 'sport', label: 'Sport', param: 'sport' },
 ];
 const SECTION_IDS = SECTIONS.map((s) => s.id);
-const PAGE_SIZE = 10;
+const SIDE_SIZE = 6;
+/** Écart (px) à partir duquel le fil s'allonge pour rattraper la colonne de côté. */
+const FILL_GAP = 120;
 
 export interface HomeData {
   /** Fiches allégées (type, domaine, période, titre, image) : composition du fil. */
   entities: CultureEntity[];
-  /** Lignes du fil, pré-rendues côté serveur. */
-  rows: Record<string, ReactNode>;
-  /** Articles de tête possibles, pré-rendus. */
-  leads: Record<string, ReactNode>;
+  /** Formats du fil, pré-rendus côté serveur : article principal, carte, texte seul, brève. */
+  fronts: Record<string, ReactNode>;
+  cards: Record<string, ReactNode>;
+  texts: Record<string, ReactNode>;
+  briefs: Record<string, ReactNode>;
+  /** Brèves de la colonne de côté (événements, idées), pré-rendues. */
+  sideRows: Record<string, ReactNode>;
+  /** Chiffres du jour possibles, un par jour à tour de rôle. */
+  figures: DailyFigure[];
   /** Contrechamps allégés (id, thème, niveau, titre). */
   experiences: Experience[];
   /** Cartes compactes de contrechamp, pré-rendues. */
@@ -103,6 +117,8 @@ function Feed({ data, section }: { data: HomeData; section: FeedSection }) {
     [data.entities, section, featuredId],
   );
 
+  const side = useMemo(() => buildSideFeed(data.entities, section), [data.entities, section]);
+
   const experienceIds = new Set(data.experiences.map((e) => e.id));
   const lastInProgress = findLastInProgress(progress, experienceIds);
   const resume = lastInProgress
@@ -158,7 +174,7 @@ function Feed({ data, section }: { data: HomeData; section: FeedSection }) {
 
   return (
     <div className={styles.layout}>
-      <div className={styles.main}>
+      <div className={styles.main} data-feed-main>
         <SectionTabs value={section} />
         {/* La clé remet la pagination à zéro à chaque changement de rubrique. */}
         <FeedList
@@ -169,11 +185,17 @@ function Feed({ data, section }: { data: HomeData; section: FeedSection }) {
           practice={practice}
           possible={possible}
         />
+        <div className={styles.inFeed}>
+          <FigureOfTheDay figures={data.figures} />
+          <SideFeed key={section} data={data} side={side} id="side-feed-main" />
+        </div>
       </div>
       <aside className={styles.aside} aria-label="À poursuivre">
         <div className={styles.asideInner}>
-          {practice}
           <RecentExplorations tiles={data.tiles} limit={6} />
+          <FigureOfTheDay figures={data.figures} />
+          {practice}
+          <SideFeed key={section} data={data} side={side} id="side-feed" />
           {possible}
         </div>
       </aside>
@@ -194,28 +216,47 @@ function FeedList({
   practice: ReactNode;
   possible: ReactNode;
 }) {
-  const [visible, setVisible] = useState(PAGE_SIZE);
-  const list = useRef<HTMLOListElement>(null);
-  const focusIndex = useRef<number | null>(null);
-  const [lead, ...rest] = feed;
-  const shown = rest.slice(0, visible);
+  const [visible, setVisible] = useState(FEED_PAGE_SIZE);
+  const list = useRef<HTMLDivElement>(null);
+  const focusPage = useRef<number | null>(null);
+  const pages = feedPages(feed.slice(0, visible));
 
-  // « Afficher plus » : le focus passe sur le premier nouvel article.
+  // Grand écran : tant que la colonne de côté dépasse nettement le fil, il s'allonge d'une page.
   useEffect(() => {
-    if (focusIndex.current === null) return;
-    const items = list.current?.querySelectorAll<HTMLAnchorElement>(':scope > li > a');
-    items?.[focusIndex.current]?.focus();
-    focusIndex.current = null;
+    const main = list.current?.closest<HTMLElement>('[data-feed-main]');
+    const aside = main?.parentElement?.querySelector<HTMLElement>('aside');
+    if (!main || !aside || typeof ResizeObserver === 'undefined') return;
+    const fill = () => {
+      // Colonne masquée (petit écran) : rien à rattraper.
+      if (!aside.offsetParent || aside.offsetHeight - main.offsetHeight < FILL_GAP) return;
+      setVisible((v) => (v < feed.length ? v + FEED_PAGE_SIZE : v));
+    };
+    const observer = new ResizeObserver(fill);
+    observer.observe(aside);
+    observer.observe(main);
+    return () => observer.disconnect();
+  }, [feed.length]);
+
+  // « Afficher plus » : le focus passe sur l'article principal de la nouvelle page.
+  useEffect(() => {
+    if (focusPage.current === null) return;
+    list.current
+      ?.querySelectorAll<HTMLElement>(':scope > [data-page]')
+      [focusPage.current]?.querySelector('a')
+      ?.focus();
+    focusPage.current = null;
   }, [visible]);
 
-  const inFeedPractice = practice ? <li className={styles.inFeed}>{practice}</li> : null;
+  const mobileExtras =
+    section === 'all' ? (
+      <>
+        {practice ? <div className={styles.inFeed}>{practice}</div> : null}
+        <div className={styles.inFeed}>{possible}</div>
+      </>
+    ) : null;
 
   return (
     <>
-      {lead ? (data.leads[lead.id] ?? data.rows[lead.id]) : null}
-
-      {section === 'all' ? <div className={styles.inFeed}>{possible}</div> : null}
-
       {section === 'droits' ? (
         <Link href="/droits" className={styles.inset} data-testid="discover-rights">
           <span className="t-overline c-accent">Derrière chaque droit</span>
@@ -228,26 +269,57 @@ function FeedList({
         </Link>
       ) : null}
 
-      <ol ref={list} className={styles.feed} data-testid="discover-feed">
-        {shown.map((entity, index) => (
-          <FeedEntry
-            key={entity.id}
-            before={section === 'all' && index === 3 ? inFeedPractice : null}
-          >
-            {data.rows[entity.id]}
-          </FeedEntry>
+      <div ref={list} className={styles.feed} data-testid="discover-feed">
+        {pages.map((page, index) => (
+          <Fragment key={page.lead.id}>
+            <section
+              className={styles.page}
+              data-page={index}
+              aria-label={`Page ${index + 1} du fil`}
+            >
+              <div className={styles.front}>
+                <div className={styles.frontLead}>{data.fronts[page.lead.id]}</div>
+                {page.column.length ? (
+                  <ol className={styles.frontColumn}>
+                    {page.column.map((entity, i) => (
+                      <li key={entity.id}>
+                        {i === 0 ? data.cards[entity.id] : data.texts[entity.id]}
+                      </li>
+                    ))}
+                  </ol>
+                ) : null}
+                {page.briefs.length ? (
+                  <div className={styles.briefs}>
+                    <h2 className={styles.briefsTitle}>En bref</h2>
+                    <ol>
+                      {page.briefs.map((entity) => (
+                        <li key={entity.id}>{data.briefs[entity.id]}</li>
+                      ))}
+                    </ol>
+                  </div>
+                ) : null}
+              </div>
+              {page.strip.length ? (
+                <ol className={styles.strip}>
+                  {page.strip.map((entity) => (
+                    <li key={entity.id}>{data.texts[entity.id]}</li>
+                  ))}
+                </ol>
+              ) : null}
+            </section>
+            {index === 0 ? mobileExtras : null}
+          </Fragment>
         ))}
-        {section === 'all' && shown.length <= 3 ? inFeedPractice : null}
-      </ol>
+      </div>
 
       <div className={styles.footer}>
-        {rest.length > visible ? (
+        {feed.length > visible ? (
           <Button
             variant="secondary"
             fullWidth
             onClick={() => {
-              focusIndex.current = visible;
-              setVisible((v) => v + PAGE_SIZE);
+              focusPage.current = pages.length;
+              setVisible((v) => v + FEED_PAGE_SIZE);
             }}
             data-testid="discover-more"
           >
@@ -268,11 +340,52 @@ function FeedList({
   );
 }
 
-function FeedEntry({ before, children }: { before: ReactNode; children: ReactNode }) {
+/** « Idées et événements » : la colonne de côté, six brèves puis « Afficher plus ». */
+function SideFeed({ data, side, id }: { data: HomeData; side: CultureEntity[]; id: string }) {
+  const [visible, setVisible] = useState(SIDE_SIZE);
+  if (!side.length) return null;
   return (
-    <>
-      {before}
-      <li>{children}</li>
-    </>
+    <section className={styles.side} aria-labelledby={id}>
+      <h2 id={id} className={styles.sideTitle}>
+        Idées et événements
+      </h2>
+      <ol className={styles.sideList} data-testid="discover-side">
+        {side.slice(0, visible).map((entity) => (
+          <li key={entity.id}>{data.sideRows[entity.id]}</li>
+        ))}
+      </ol>
+      {side.length > visible ? (
+        <Button variant="ghost" fullWidth onClick={() => setVisible((v) => v + SIDE_SIZE)}>
+          Afficher plus
+        </Button>
+      ) : null}
+    </section>
+  );
+}
+
+/** « Le chiffre du jour » : un grand chiffre sourcé, choisi selon la date du visiteur. */
+function FigureOfTheDay({ figures }: { figures: DailyFigure[] }) {
+  const mounted = useMounted();
+  const figure = mounted && figures.length ? figures[dayNumber(new Date()) % figures.length] : null;
+  return (
+    <div className={styles.figureSlot} data-testid="figure-of-the-day">
+      {figure ? (
+        <figure className={styles.figure}>
+          <p className={styles.figureKicker}>Le chiffre du jour · {figure.topic}</p>
+          <p className={styles.figureValue}>
+            {figure.value} <span className={styles.figureUnit}>{figure.unit}</span>
+          </p>
+          <p className={styles.figureText}>{figure.text}</p>
+          <figcaption className={styles.figureFoot}>
+            <Link href={figure.href} className={styles.figureLink}>
+              Voir la carte →
+            </Link>
+            <a href={figure.source.url} target="_blank" rel="noopener noreferrer">
+              Source : {figure.source.publisher}
+            </a>
+          </figcaption>
+        </figure>
+      ) : null}
+    </div>
   );
 }

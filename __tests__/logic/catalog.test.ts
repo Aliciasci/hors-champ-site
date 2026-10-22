@@ -13,11 +13,11 @@ const raw = {
 };
 
 describe('catalogue du site (validation au build)', () => {
-  it('reprend tous les contenus du mobile, plus les contemporaines propres au site', () => {
+  it('reprend tous les contenus du mobile, plus les contemporaines, sportives et femmes du XXIe siècle du site', () => {
     const catalog = buildCatalog(raw, { includeDevExamples: true });
-    expect(catalog.culture).toHaveLength(85 + 32);
+    expect(catalog.culture).toHaveLength(85 + 32 + 10 + 11);
     expect(catalog.experiences).toHaveLength(6);
-    expect(catalog.themes).toHaveLength(10);
+    expect(catalog.themes).toHaveLength(11);
     expect(catalog.youthItems.length).toBeGreaterThan(0);
   });
 

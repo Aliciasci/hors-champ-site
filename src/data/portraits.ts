@@ -13,6 +13,15 @@ import type { Artwork } from '@/types';
  * Emmanuelle Charpentier, Agnès Varda, Yayoi Kusama, Niki de Saint Phalle, Annie Ernaux,
  * Shirin Ebadi, Christiane Taubira, Rigoberta Menchú, bell hooks ; celui de Narges Mohammadi
  * (archives de VOA) est écarté, son auteur n'étant pas établi.
+ *
+ * Sportives (licence vérifiée le 2026-10-22) : deux photographies du domaine public (Gallica,
+ * Bibliothèque du Congrès). Les portraits libres de Wilma Rudolph, Nawal El Moutawakel,
+ * Marie-José Pérec, Serena Williams, Simone Biles, Megan Rapinoe et Junko Tabei sont sous
+ * licence CC BY ou CC BY-SA : écartés, comme les autres.
+ *
+ * Femmes du XXIe siècle (licence vérifiée le 2026-10-22) : seul le portrait de Ngozi
+ * Okonjo-Iweala, photographie du Fonds monétaire international, est dans le domaine public ; ceux
+ * des autres sont sous licence CC BY ou CC BY-SA.
  */
 export const portraits = {
   'ada-lovelace': {
@@ -267,5 +276,35 @@ export const portraits = {
     license: 'CC0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Billie_Jean_King_Cover_Photo.jpg',
     focus: { top: '15%' },
+  },
+  'alice-milliat': {
+    image: img('people/alice-milliat.jpg'),
+    alt: 'Photographie en noir et blanc : portrait d’Alice Milliat assise, de trois quarts, en robe sombre à grand col clair et médaillon.',
+    title: 'Portrait d’Alice Milliat',
+    artist: 'Agence Rol',
+    date: '1920',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Alice_Milliat_1920.jpg',
+    focus: { top: '25%' },
+  },
+  'suzanne-lenglen': {
+    image: img('people/suzanne-lenglen.jpg'),
+    alt: 'Photographie en noir et blanc : Suzanne Lenglen en gros plan, un bandeau noué dans les cheveux, en tenue blanche.',
+    title: 'Portrait de Suzanne Lenglen',
+    artist: 'Auteur inconnu (Bibliothèque du Congrès)',
+    date: 'date inconnue',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Suzanne_Lenglen_02.jpg',
+    focus: { top: '20%' },
+  },
+  'ngozi-okonjo-iweala': {
+    image: img('people/ngozi-okonjo-iweala.jpg'),
+    alt: 'Photographie en couleurs : Ngozi Okonjo-Iweala souriante, lunettes, foulard et robe à motifs rouges, collier de perles de verre.',
+    title: 'Portrait de Ngozi Okonjo-Iweala',
+    artist: 'Fonds monétaire international',
+    date: '2008',
+    license: 'Domaine public',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Okonjo-Iweala,_Ngozi_(2008_portrait).jpg',
+    focus: { top: '25%' },
   },
 } satisfies Record<string, Artwork>;

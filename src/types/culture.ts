@@ -9,7 +9,7 @@ export type CultureKind =
   'person' | 'work' | 'science' | 'movement' | 'event' | 'idea' | 'right' | 'organization' | 'law';
 
 /** Domaine d'une fiche, pour filtrer la vue d'ensemble. Les idées n'en ont pas : elles sont transversales. */
-export type CultureDomain = 'arts' | 'sciences' | 'droits';
+export type CultureDomain = 'arts' | 'sciences' | 'droits' | 'sport';
 /** Teinte d'un espace ou d'un élément : les trois rubriques, plus l'ocre (jeunesse, activités). */
 export type Tone = CultureDomain | 'ocre';
 
@@ -178,7 +178,8 @@ export type PortraitThemeId =
   | 'pionnieres'
   | 'quotidien'
   | 'histoire'
-  | 'limites';
+  | 'limites'
+  | 'sport';
 
 export interface PortraitThemeMember {
   /** Fiche `person`. */

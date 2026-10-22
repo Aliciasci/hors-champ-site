@@ -86,6 +86,13 @@ const CSS_VARS: Record<Exclude<keyof ThemeColors, 'feedback'>, string> = {
   overlay: '--overlay',
 };
 
+/** Écarts voulus du site : un fond plus clair que sur le mobile (demande du 2026-10-22). */
+const WEB_BACKGROUNDS: Record<string, string> = {
+  cartel: '#f9f6f0',
+  revue: '#faf2db',
+  atlas: '#f9f5ee',
+};
+
 function cssBlock(css: string, id: string): Record<string, string> {
   const start = css.indexOf(`[data-theme='${id}'] {`);
   const block = css.slice(start, css.indexOf('\n}', start));
@@ -97,15 +104,22 @@ function cssBlock(css: string, id: string): Record<string, string> {
 describe('variables CSS', () => {
   const css = readFileSync(path.resolve(__dirname, '../../src/styles/tokens.css'), 'utf8');
 
-  it.each(THEME_IDS.map((id) => [id]))('%s reprend exactement les couleurs du mobile', (id) => {
-    const vars = cssBlock(css, id);
-    const c = themes[id].colors;
-    for (const [key, name] of Object.entries(CSS_VARS)) {
-      expect([name, vars[name]]).toEqual([name, c[key as keyof typeof CSS_VARS].toLowerCase()]);
-    }
-    for (const [key, value] of Object.entries(c.feedback)) {
-      const name = `--fb-${key.replace('Soft', '-soft')}`;
-      expect([name, vars[name]]).toEqual([name, value.toLowerCase()]);
-    }
-  });
+  it.each(THEME_IDS.map((id) => [id]))(
+    '%s reprend les couleurs du mobile, fond du site à part',
+    (id) => {
+      const vars = cssBlock(css, id);
+      const c = themes[id].colors;
+      for (const [key, name] of Object.entries(CSS_VARS)) {
+        const expected =
+          name === '--bg' && WEB_BACKGROUNDS[id]
+            ? WEB_BACKGROUNDS[id]
+            : c[key as keyof typeof CSS_VARS].toLowerCase();
+        expect([name, vars[name]]).toEqual([name, expected]);
+      }
+      for (const [key, value] of Object.entries(c.feedback)) {
+        const name = `--fb-${key.replace('Soft', '-soft')}`;
+        expect([name, vars[name]]).toEqual([name, value.toLowerCase()]);
+      }
+    },
+  );
 });

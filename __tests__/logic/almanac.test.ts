@@ -3,10 +3,12 @@ import { WOMEN_DATES } from '@/content/world/womenDates';
 import {
   almanacEvents,
   almanacFor,
+  almanacLead,
   nextObservance,
   OBSERVANCES,
   parseFrenchDate,
 } from '@/features/home/almanac';
+import { dailyFigures } from '@/features/home/dailyFigures';
 
 const events = almanacEvents(localCultureEntities);
 
@@ -58,5 +60,52 @@ describe('Almanach de l’accueil', () => {
     expect(nextObservance(new Date(2026, 5, 20))).toBeNull();
     expect(nextObservance(new Date(2027, 2, 8))?.days).toBe(0);
     expect(OBSERVANCES.every((o) => o.href.startsWith('/'))).toBe(true);
+  });
+
+  it('écrit l’ouverture selon le jour et le type d’événement', () => {
+    const meitner = events.find((e) => e.entityId === 'person-lise-meitner' && e.kind === 'died')!;
+    expect(almanacLead(meitner, 5, 2026)).toEqual({
+      lead: 'Dans',
+      accent: '5 jours',
+      line: 'il y aura 58 ans que Lise Meitner est morte.',
+    });
+    expect(almanacLead(meitner, 0, 2026)).toMatchObject({ lead: 'Il y a', accent: '58 ans' });
+    expect(almanacLead(meitner, 1, 1969)).toMatchObject({
+      accent: 'Demain',
+      line: expect.stringContaining('un an'),
+    });
+  });
+
+  it('ne célèbre pas un événement de l’année en cours', () => {
+    const found = almanacFor(
+      [{ ...events[0]!, month: 1, day: 2, year: 2026 }],
+      new Date(2026, 0, 2),
+      0,
+    );
+    expect(found).toBeNull();
+  });
+});
+
+describe('Le chiffre du jour', () => {
+  const figures = dailyFigures();
+
+  it('propose des chiffres variés, chacun avec sa source et son lien', () => {
+    expect(figures.length).toBeGreaterThan(20);
+    expect(new Set(figures.map((f) => f.id)).size).toBe(figures.length);
+    for (const f of figures) {
+      expect(Number(f.value)).toBeGreaterThanOrEqual(10);
+      expect(f.source.url).toMatch(/^https:\/\//);
+      expect(f.href).toMatch(/^\/droits\/monde#chapitre-/);
+    }
+    expect(figures[0]).toMatchObject({ value: '123', text: expect.stringContaining('Suisse') });
+  });
+
+  it('alterne le vote et les autres droits', () => {
+    expect(figures.slice(0, 4).map((f) => f.topic === 'Droit de vote')).toEqual([
+      true,
+      false,
+      true,
+      false,
+    ]);
   });
 });

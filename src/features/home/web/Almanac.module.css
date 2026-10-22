@@ -1,45 +1,169 @@
-/* Bandeau daté, sous le titre : la date du jour, et la prochaine journée internationale. */
+/* Éphéméride, sous le titre : le jour en grand, et le compte à rebours de la prochaine journée. */
+.foldable {
+  position: relative;
+  max-width: var(--container);
+  min-height: 48px;
+  margin: 0 auto var(--space-lg);
+  border-top: 2px solid var(--border-strong);
+  border-bottom: var(--border-hairline) solid var(--border-strong);
+}
+
 .dateline {
+  display: grid;
+}
+
+/* Bouton « Réduire » / « Déplier », en haut à droite du bloc. */
+.fold {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xxs);
+  min-height: 44px;
+  padding: 0 var(--space-xs);
+  border: none;
+  background: none;
+  color: var(--text-2);
+  font: inherit;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.fold svg {
+  flex-shrink: 0;
+}
+
+.fold:hover {
+  color: var(--text);
+}
+
+.foldable > .fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* Version réduite : une seule ligne. */
+.datelineFolded {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-xs) var(--space-lg);
-  max-width: calc(var(--reading) + 320px + var(--space-xxl));
-  min-height: 2.5em;
-  margin: 0 auto var(--space-lg);
-  padding: var(--space-xs) 0;
-  border-block: var(--border-hairline) solid var(--border-strong);
+  align-items: center;
+  gap: var(--space-xxs) var(--space-lg);
+  min-height: 44px;
+  padding: var(--space-xs) 7rem var(--space-xs) 0;
+}
+
+.foldedLink {
+  color: var(--text);
+  font-size: var(--fs-caption);
+  font-weight: 500;
+}
+
+.foldedLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.foldedAccent {
+  color: var(--accent-ink);
+  font-weight: 700;
 }
 
 .date {
-  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin: 0;
+  padding: var(--space-md) 0;
+  animation: almanacIn 600ms ease-out both;
+}
+
+.day,
+.countNumber {
+  font-family: var(--font-display);
+  font-weight: var(--hero-weight, var(--display-weight));
+  font-stretch: var(--display-stretch, normal);
+  font-variant-numeric: lining-nums;
+  line-height: 0.82;
+}
+
+.day {
+  font-size: clamp(3rem, 2.2rem + 2vw, 4.5rem);
+  letter-spacing: -0.02em;
+}
+
+.dateText,
+.observanceText {
+  display: grid;
+  gap: var(--space-xxs);
+}
+
+.month {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch, normal);
+  font-size: var(--fs-title3);
+  line-height: 1;
+}
+
+.meta,
+.observanceDate {
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.edition {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
 }
 
 .observance {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-xxs) var(--space-sm);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md) 0;
+  border-top: var(--border-hairline) solid var(--border-strong);
   color: var(--text);
-  font-size: var(--fs-caption);
   animation: almanacIn 600ms ease-out both;
 }
 
 .countdown {
-  padding: 0 var(--space-xs);
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: var(--on-accent);
-  font-family: var(--font-mono);
-  font-weight: 600;
+  display: grid;
+  justify-items: start;
+  gap: var(--space-xxs);
+  flex-shrink: 0;
+}
+
+.countNumber {
+  font-size: clamp(2.75rem, 2rem + 2vw, 4rem);
+  font-style: italic;
+  color: var(--accent);
+}
+
+.countNumber:only-child {
+  font-size: var(--fs-title1);
+}
+
+.observanceDate {
+  color: var(--accent-ink);
 }
 
 .observanceName {
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch, normal);
+  font-size: 1.125rem;
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
 .pitch {
+  font-weight: 500;
   color: var(--accent-ink);
 }
 
@@ -48,33 +172,226 @@
   text-underline-offset: 3px;
 }
 
-/* « Ce jour-là » : place réservée avant le calcul de la date. */
-.slot {
-  min-height: 96px;
-  max-width: calc(var(--reading) + 320px + var(--space-xxl));
-  margin: 0 auto var(--space-xl);
+@media (min-width: 600px) {
+  .observance {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-lg);
+  }
 }
 
-.heading {
-  margin: 0 0 var(--space-sm);
-  color: var(--day-ink);
+@media (min-width: 900px) {
+  .dateline:has(.observance) {
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  }
+
+  .date {
+    padding-right: var(--space-xl);
+  }
+
+  .observance {
+    padding-left: var(--space-lg);
+    padding-right: 7rem;
+    border-top: none;
+    border-left: var(--border-hairline) solid var(--border-strong);
+  }
+}
+
+/* « Ce jour-là » : place réservée avant le calcul de la date. */
+.slot {
+  min-height: 160px;
+  max-width: var(--container);
+  margin: 0 auto var(--space-xl);
+  border-top: 2px solid var(--border-strong);
+}
+
+.slotFolded {
+  min-height: 0;
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border-hairline) solid var(--border-strong);
+}
+
+.almanacHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-height: 44px;
+}
+
+.withOthers {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.opening {
+  display: grid;
+  gap: var(--space-md);
+  padding-top: var(--space-xs);
+  color: var(--text);
+  animation: almanacIn 600ms ease-out both;
+}
+
+/* Page d'éphéméride détachable, légèrement penchée, posée sur une autre. */
+.calendar {
+  position: relative;
+  display: block;
+  width: 168px;
+  margin: var(--space-sm) var(--space-sm) var(--space-md);
+  transform: rotate(-3deg);
+}
+
+.calendar::before {
+  content: '';
+  position: absolute;
+  inset: 8px -8px -8px 8px;
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface-alt);
+}
+
+.calendarPage {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  overflow: hidden;
+  border: var(--border-hairline) solid var(--border-strong);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.calendarHead {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  justify-self: stretch;
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 2px dashed var(--border);
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.calendarDay {
+  padding-top: var(--space-xs);
+  font-family: var(--font-display);
+  font-weight: var(--hero-weight, var(--display-weight));
+  font-stretch: var(--display-stretch, normal);
+  font-variant-numeric: lining-nums;
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.calendarYear {
+  padding-bottom: var(--space-sm);
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--text-2);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: var(--space-xs);
+  padding: var(--space-xxs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+}
+
+.pillDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.name > :first-child:not(.nameText) {
+  border-radius: 50%;
+}
+
+.nameText {
+  font-family: var(--font-display);
+  font-weight: var(--hero-weight, var(--display-weight));
+  font-stretch: var(--display-stretch, normal);
+  font-size: clamp(2rem, 1.5rem + 1.6vw, 3rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.openingText {
+  display: grid;
+  align-content: center;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0;
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.detail {
+  max-width: 62ch;
+  color: var(--text-2);
+}
+
+.more {
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+.opening:hover .more {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.others {
+  min-width: 0;
+}
+
+.othersTitle {
+  margin: 0;
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--border-strong);
+  font-family: var(--font-body);
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-2);
 }
 
 .list {
   display: grid;
-  gap: var(--space-xs);
   margin: 0;
   padding: 0;
   list-style: none;
-  animation: almanacIn 600ms ease-out both;
 }
 
 .item {
   display: grid;
-  grid-template-columns: 3.2em 48px 1fr;
-  align-items: center;
+  grid-template-columns: 64px 1fr;
+  align-items: start;
   gap: var(--space-md);
-  padding: var(--space-xs) 0;
+  padding: var(--space-md) 0;
   border-bottom: var(--border-hairline) solid var(--border);
   color: var(--text);
 }
@@ -84,20 +401,40 @@
   text-underline-offset: 3px;
 }
 
-.year {
-  font-family: var(--font-display);
-  font-size: var(--fs-title3);
-  line-height: 1;
-}
-
-.noThumb {
-  width: 48px;
-}
-
 .body {
   display: grid;
   gap: 2px;
   min-width: 0;
+}
+
+.year {
+  font-family: var(--font-display);
+  font-weight: var(--hero-weight, var(--display-weight));
+  font-stretch: var(--display-stretch, normal);
+  font-variant-numeric: lining-nums;
+  font-style: italic;
+  font-size: var(--fs-title3);
+  line-height: 1;
+  color: var(--accent);
+}
+
+@media (min-width: 720px) {
+  .opening {
+    grid-template-columns: 200px minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-xxl);
+  }
+}
+
+@media (min-width: 1200px) {
+  .withOthers {
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+    gap: var(--space-xxl);
+  }
+
+  .others {
+    padding-top: var(--space-xs);
+  }
 }
 
 @keyframes almanacIn {
@@ -112,8 +449,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .date,
   .observance,
-  .list {
+  .opening {
     animation: none;
   }
 }

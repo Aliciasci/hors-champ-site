@@ -136,7 +136,7 @@ export function validateCultureEntity(
     errors.push('une idée doit référencer une catégorie');
   if (
     value.domain !== undefined &&
-    !isOneOf(value.domain, ['arts', 'sciences', 'droits'] as const)
+    !isOneOf(value.domain, ['arts', 'sciences', 'droits', 'sport'] as const)
   ) {
     errors.push('domain inconnu');
   }

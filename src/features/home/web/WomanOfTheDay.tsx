@@ -4,13 +4,9 @@ import type { ReactNode } from 'react';
 
 import { useMounted } from '@/lib/useMounted';
 
-import type { AlmanacEvent } from '../almanac';
+import { dayNumber, type AlmanacEvent } from '../almanac';
 
 import styles from './WomanOfTheDay.module.css';
-
-/** Numéro du jour (heure locale), pour changer de portrait chaque jour. */
-const dayNumber = (date: Date) =>
-  Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000);
 
 /**
  * « Femme du jour » : un portrait différent chaque jour, parmi des bandeaux rendus côté serveur.

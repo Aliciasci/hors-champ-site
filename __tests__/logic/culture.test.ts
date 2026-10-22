@@ -1,6 +1,8 @@
 import { CATEGORY_IDS } from '@/constants/enums';
 import { localCultureEntities } from '@/data/culture';
 import { contemporaries } from '@/data/culture/contemporaines';
+import { sportswomen } from '@/data/culture/sportives';
+import { twentyFirstCentury } from '@/data/culture/xxie-siecle';
 import { portraitThemes } from '@/data/portraitThemes';
 import { localExperiences } from '@/data/experiences';
 import {
@@ -23,7 +25,10 @@ import { TEST_SOURCE } from './fixtures';
 const issues: unknown[] = [];
 const catalog = prepareCultureEntities(localCultureEntities, (issue) => issues.push(issue));
 /** Les contemporaines n'ont pas encore de fiches d'œuvres ni de découvertes : tests dédiés. */
-const contemporaryIds = new Set(contemporaries.map((e) => e.id));
+// Contemporaines, sportives et femmes du XXIe siècle : des portraits sans œuvre au catalogue.
+const contemporaryIds = new Set(
+  [...contemporaries, ...sportswomen, ...twentyFirstCentury].map((e) => e.id),
+);
 
 describe('catalogue culturel', () => {
   it('est entièrement valide, sans lien cassé', () => {
@@ -57,10 +62,10 @@ describe('catalogue culturel', () => {
     for (const id of CATEGORY_IDS) expect(ideaCategories.has(id)).toBe(true);
   });
 
-  it('range chaque fiche (hors idées) dans un domaine : arts, sciences ou droits', () => {
+  it('range chaque fiche (hors idées) dans un domaine : arts, sciences, droits ou sport', () => {
     for (const entity of catalog) {
       if (entity.kind === 'idea') expect(entity.domain).toBeUndefined();
-      else expect(['arts', 'sciences', 'droits']).toContain(entity.domain);
+      else expect(['arts', 'sciences', 'droits', 'sport']).toContain(entity.domain);
     }
   });
 
@@ -120,10 +125,27 @@ describe('catalogue culturel', () => {
     expect(new Set(openings).size).toBe(openings.length);
   });
 
+  it('documente chaque sportive : citations, Wikidata, domaine et thématique', () => {
+    const sport = portraitThemes.find((t) => t.id === 'sport')!;
+    const limits = portraitThemes.find((t) => t.id === 'limites')!;
+    expect(sportswomen).toHaveLength(10);
+    for (const person of sportswomen) {
+      expect(person.domain).toBe('sport');
+      const quotes = person.sources.filter((s) => s.publisher === 'Wikipédia');
+      expect(quotes.length).toBeGreaterThan(0);
+      for (const quote of quotes) expect(quote.relevantExcerpt?.length).toBeGreaterThan(30);
+      expect(person.sources.some((s) => s.publisher === 'Wikidata')).toBe(true);
+      const themed = [...sport.members, ...limits.members].map((m) => m.personId);
+      expect(themed).toContain(person.id);
+      if (person.image) expect(['Domaine public', 'CC0']).toContain(person.image.license);
+    }
+  });
+
   it('documente chaque contemporaine : citations, Wikidata, « Notre époque » et une autre thématique', () => {
     const epoque = portraitThemes.find((t) => t.id === 'epoque')!;
     expect(contemporaries).toHaveLength(32);
-    for (const person of contemporaries) {
+    expect(twentyFirstCentury).toHaveLength(11);
+    for (const person of [...contemporaries, ...twentyFirstCentury]) {
       expect(person.kind).toBe('person');
       const quotes = person.sources.filter((s) => s.publisher === 'Wikipédia');
       expect(quotes.length).toBeGreaterThan(0);

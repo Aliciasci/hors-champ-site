@@ -9,7 +9,7 @@
 [data-theme='cartel'] {
   color-scheme: light;
 
-  --bg: #f3eee5;
+  --bg: #f9f6f0;
   --surface: #fbf8f2;
   --surface-alt: #e9e2d5;
   --surface-accent: #e4dccb;
@@ -50,8 +50,12 @@
   --dom-sciences-soft: #dfe3f3;
   --dom-droits: #1f6a4a;
   --dom-droits-soft: #d9eadf;
+  --dom-sport: #0e5f6b;
+  --dom-sport-soft: #d5e9ec;
   --day-ink: #7a5200;
   --day-soft: #f6e8c5;
+  --woman-ink: #8f2a52;
+  --woman-soft: #fcedf2;
   --possible-soft: #fbe3c8;
 
   /* Polices (variables posées par next/font sur <html>). */
@@ -117,7 +121,7 @@
   --space-xxxl: 48px;
   --space-huge: 64px;
   --gutter: 16px;
-  --container: 1200px;
+  --container: 1440px;
   --reading: 680px;
   --measure: 68ch;
   --touch: 44px;
@@ -129,7 +133,7 @@
 }
 
 [data-theme='revue'] {
-  --bg: #f6ebc8;
+  --bg: #faf2db;
   --surface: #fbf4dd;
   --surface-alt: #efe1b4;
   --surface-accent: #ff5a3c;
@@ -169,8 +173,12 @@
   --dom-sciences-soft: #dcddeb;
   --dom-droits: #1c6440;
   --dom-droits-soft: #dce6c8;
+  --dom-sport: #0e5f6b;
+  --dom-sport-soft: #d5e9ec;
   --day-ink: #7e5200;
   --day-soft: #f3dfa6;
+  --woman-ink: #8f2a52;
+  --woman-soft: #fcedf2;
   --possible-soft: #fbe3c2;
 
   --font-display: var(--font-young-serif), 'Young Serif', Georgia, serif;
@@ -214,7 +222,7 @@
 
 /* Atlas : propre au site (src/theme/themes/atlas.ts). */
 [data-theme='atlas'] {
-  --bg: #f3ede1;
+  --bg: #f9f5ee;
   --surface: #fbf8f1;
   --surface-alt: #e6dcc9;
   --surface-accent: #e4572e;
@@ -254,8 +262,12 @@
   --dom-sciences-soft: #dce1f3;
   --dom-droits: #1d6a45;
   --dom-droits-soft: #dae8dd;
+  --dom-sport: #0e5f6b;
+  --dom-sport-soft: #d5e9ec;
   --day-ink: #7a5200;
   --day-soft: #f2e4c6;
+  --woman-ink: #8f2a52;
+  --woman-soft: #fcedf2;
   --possible-soft: #f7dfd2;
 
   /* Couleurs des cartes : droit accordé, partiel, absent. */

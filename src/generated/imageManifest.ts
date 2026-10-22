@@ -28,6 +28,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 567,
     "height": 900
   },
+  "people/alice-milliat.jpg": {
+    "width": 900,
+    "height": 1221
+  },
   "people/angela-davis.jpg": {
     "width": 960,
     "height": 1348
@@ -104,6 +108,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 900,
     "height": 1125
   },
+  "people/ngozi-okonjo-iweala.jpg": {
+    "width": 900,
+    "height": 1260
+  },
   "people/nina-simone.jpg": {
     "width": 960,
     "height": 989
@@ -123,6 +131,10 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
   "people/suffragettes-1910.jpg": {
     "width": 1200,
     "height": 884
+  },
+  "people/suzanne-lenglen.jpg": {
+    "width": 900,
+    "height": 1200
   },
   "people/toni-morrison.jpg": {
     "width": 960,

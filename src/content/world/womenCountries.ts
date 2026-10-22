@@ -1,9 +1,9 @@
 /**
  * Pays de chaque femme du catalogue, pour la carte « Elles, pays par pays ».
- * Source : nationalité (propriété P27) de sa notice Wikidata, consultée le 2026-10-14 ; un code
- * ISO à trois lettres par pays, dans l'ordre de la notice. Une femme peut compter pour plusieurs
- * pays. Quand la notice ne donne qu'un État disparu, `historical` le nomme et le pays d'aujourd'hui
- * qui le recouvre est ajouté en tête.
+ * Source : nationalité (propriété P27) de sa notice Wikidata, consultée le 2026-10-14 (le
+ * 2026-10-22 pour les sportives et les femmes du XXIe siècle) ; un code ISO à trois lettres par pays, dans l'ordre de la
+ * notice. Une femme peut compter pour plusieurs pays. Quand la notice ne donne qu'un État disparu,
+ * `historical` le nomme et le pays d'aujourd'hui qui le recouvre est ajouté en tête.
  */
 export interface WomanCountries {
   /** Notice Wikidata de la femme. */
@@ -87,6 +87,27 @@ export const WOMEN_COUNTRIES: Record<string, WomanCountries> = {
   'person-yvette-roudy': { qid: 'Q3574055', countries: ['FRA'] },
   'person-brigitte-gros': { qid: 'Q2925431', countries: ['FRA'] },
   'person-julie-victoire-daubie': { qid: 'Q3189140', countries: ['FRA'] },
+  'person-alice-milliat': { qid: 'Q2836621', countries: ['FRA'] },
+  'person-suzanne-lenglen': { qid: 'Q232831', countries: ['FRA'] },
+  'person-wilma-rudolph': { qid: 'Q31083', countries: ['USA'] },
+  'person-nawal-el-moutawakel': { qid: 'Q239993', countries: ['MAR'] },
+  'person-marie-jose-perec': { qid: 'Q228808', countries: ['FRA'] },
+  'person-serena-williams': { qid: 'Q11459', countries: ['USA'] },
+  'person-simone-biles': { qid: 'Q7520267', countries: ['USA', 'BLZ'] },
+  'person-megan-rapinoe': { qid: 'Q260725', countries: ['USA'] },
+  'person-junko-tabei': { qid: 'Q234491', countries: ['JPN'] },
+  'person-greta-thunberg': { qid: 'Q56434717', countries: ['SWE'] },
+  'person-jennifer-doudna': { qid: 'Q56068', countries: ['USA'] },
+  'person-maryam-mirzakhani': { qid: 'Q1771279', countries: ['IRN', 'USA'] },
+  'person-andrea-ghez': { qid: 'Q493956', countries: ['USA'] },
+  'person-claudia-goldin': { qid: 'Q1097475', countries: ['USA'] },
+  'person-fei-fei-li': { qid: 'Q18686107', countries: ['USA'] },
+  'person-chimamanda-ngozi-adichie': { qid: 'Q230141', countries: ['NGA'] },
+  'person-kathryn-bigelow': { qid: 'Q34816', countries: ['USA'] },
+  'person-beyonce': { qid: 'Q36153', countries: ['USA'] },
+  'person-han-kang': { qid: 'Q5646626', countries: ['KOR'] },
+  'person-ngozi-okonjo-iweala': { qid: 'Q289350', countries: ['NGA'] },
+  'person-marta': { qid: 'Q228616', countries: ['BRA', 'SWE'] },
 };
 
 /** Les femmes de chaque pays, dans l'ordre du catalogue. */

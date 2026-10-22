@@ -17,6 +17,7 @@ const DOMAIN_OPTIONS: { id: DomainFilter; label: string }[] = [
   { id: 'arts', label: 'Arts' },
   { id: 'sciences', label: 'Sciences' },
   { id: 'droits', label: 'Droits' },
+  { id: 'sport', label: 'Sport' },
 ];
 
 export interface CollectionItem {
@@ -59,7 +60,7 @@ function WithUrl(props: Props) {
   const { params, set } = useQueryState();
   const domain = readOne<DomainFilter>(
     params.get('domaine'),
-    ['all', 'arts', 'sciences', 'droits'],
+    ['all', 'arts', 'sciences', 'droits', 'sport'],
     'all',
   );
   const kindParam = params.get('type');
