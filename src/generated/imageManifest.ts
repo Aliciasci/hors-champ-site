@@ -4,6 +4,114 @@ export const imageManifest: Record<string, { width: number; height: number }> = 
     "width": 897,
     "height": 900
   },
+  "artworks/gallery-artemisia-gentileschi-autoportrait-en-allegorie-de-la-peinture.jpg": {
+    "width": 900,
+    "height": 1189
+  },
+  "artworks/gallery-artemisia-gentileschi-danae.jpg": {
+    "width": 900,
+    "height": 702
+  },
+  "artworks/gallery-artemisia-gentileschi-esther-et-assuerus.jpg": {
+    "width": 900,
+    "height": 686
+  },
+  "artworks/gallery-artemisia-gentileschi-judith-decapitant-holopherne.jpg": {
+    "width": 900,
+    "height": 1146
+  },
+  "artworks/gallery-artemisia-gentileschi-judith-et-sa-servante.jpg": {
+    "width": 900,
+    "height": 1128
+  },
+  "artworks/gallery-artemisia-gentileschi-suzanne-et-les-vieillards.jpg": {
+    "width": 900,
+    "height": 1279
+  },
+  "artworks/gallery-emily-mary-osborn-barbara-bodichon.jpg": {
+    "width": 900,
+    "height": 1112
+  },
+  "artworks/gallery-emily-mary-osborn-nameless-and-friendless.jpg": {
+    "width": 900,
+    "height": 700
+  },
+  "artworks/gallery-emily-mary-osborn-the-bal-maidens.jpg": {
+    "width": 900,
+    "height": 700
+  },
+  "artworks/gallery-emily-mary-osborn-the-governess.jpg": {
+    "width": 900,
+    "height": 1089
+  },
+  "artworks/gallery-mary-cassatt-femme-dans-une-loge.jpg": {
+    "width": 900,
+    "height": 1240
+  },
+  "artworks/gallery-mary-cassatt-jeune-mere-cousant.jpg": {
+    "width": 900,
+    "height": 1126
+  },
+  "artworks/gallery-mary-cassatt-la-tasse-de-the.jpg": {
+    "width": 900,
+    "height": 1269
+  },
+  "artworks/gallery-mary-cassatt-le-bain.jpg": {
+    "width": 900,
+    "height": 1373
+  },
+  "artworks/gallery-mary-cassatt-petite-fille-dans-un-fauteuil-bleu.jpg": {
+    "width": 900,
+    "height": 603
+  },
+  "artworks/gallery-mary-cassatt-promenade-en-barque.jpg": {
+    "width": 900,
+    "height": 690
+  },
+  "artworks/gallery-rosa-bonheur-la-foulaison-du-ble-en-camargue.jpg": {
+    "width": 900,
+    "height": 439
+  },
+  "artworks/gallery-rosa-bonheur-labourage-nivernais.jpg": {
+    "width": 900,
+    "height": 460
+  },
+  "artworks/gallery-rosa-bonheur-le-marche-aux-chevaux.jpg": {
+    "width": 900,
+    "height": 427
+  },
+  "artworks/gallery-sofonisba-anguissola-autoportrait.jpg": {
+    "width": 900,
+    "height": 1180
+  },
+  "artworks/gallery-sofonisba-anguissola-partie-d-echecs.jpg": {
+    "width": 900,
+    "height": 711
+  },
+  "artworks/gallery-sofonisba-anguissola-portrait-d-amilcare-minerva-et-astrubale.jpg": {
+    "width": 900,
+    "height": 1166
+  },
+  "artworks/gallery-sofonisba-anguissola-portrait-de-massimiliano-stampa.jpg": {
+    "width": 900,
+    "height": 1721
+  },
+  "artworks/gallery-suzanne-valadon-la-chambre-bleue.jpg": {
+    "width": 900,
+    "height": 681
+  },
+  "artworks/gallery-suzanne-valadon-la-joie-de-vivre.jpg": {
+    "width": 900,
+    "height": 573
+  },
+  "artworks/gallery-suzanne-valadon-la-poupee-delaissee.jpg": {
+    "width": 900,
+    "height": 1279
+  },
+  "artworks/gallery-suzanne-valadon-portrait-d-erik-satie.jpg": {
+    "width": 900,
+    "height": 1639
+  },
   "artworks/histoire-culture.jpg": {
     "width": 634,
     "height": 900

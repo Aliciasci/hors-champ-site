@@ -18,6 +18,7 @@ import { readingLabel, readingMinutes } from '@/lib/readingTime';
 import { cultureJsonLd } from '@/lib/structuredData';
 import type { CultureEntity } from '@/types';
 
+import { Gallery } from './Gallery';
 import { groupByKind, KIND_LABELS, relatedEntities, relatedExperiences } from '../cultureGraph';
 import styles from './CultureEntityPage.module.css';
 import { ArticleBody } from './ArticleBody';
@@ -132,6 +133,7 @@ export function CultureEntityPage({ entity, crumbs }: { entity: CultureEntity; c
         </div>
 
         <ArticleBody entity={entity} />
+        <Gallery entity={entity} />
 
         {entity.kind === 'right' ? <RightDetails entity={entity} all={all} /> : null}
         {entity.kind === 'person' || entity.kind === 'organization' ? (

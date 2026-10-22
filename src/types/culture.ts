@@ -147,6 +147,8 @@ export interface CultureEntity {
   summary: string;
   /** Illustration : une œuvre du domaine public, créditée. */
   image?: Artwork;
+  /** Galerie d'une artiste : ses œuvres du domaine public (voir src/data/galleries.ts). */
+  gallery?: Artwork[];
   /** Pour une idée : la catégorie d'expériences correspondante. */
   categoryId?: CategoryId;
   domain?: CultureDomain;

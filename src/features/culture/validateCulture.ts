@@ -163,6 +163,25 @@ export function validateCultureEntity(
       }
     });
   }
+  if (value.gallery !== undefined) {
+    if (value.kind !== 'person') errors.push('seule une femme peut avoir une galerie');
+    if (
+      !Array.isArray(value.gallery) ||
+      !value.gallery.every(
+        (art) =>
+          isRecord(art) &&
+          art.image !== undefined &&
+          isNonEmptyString(art.alt) &&
+          isNonEmptyString(art.title) &&
+          isNonEmptyString(art.sourceUrl) &&
+          isOneOf(art.license, ['Domaine public', 'CC0', 'CC BY 2.0', 'CC BY 3.0'] as const),
+      )
+    ) {
+      errors.push(
+        'galerie : chaque œuvre doit avoir image, description, titre, licence libre et source',
+      );
+    }
+  }
   if (value.period !== undefined) {
     if (
       !isRecord(value.period) ||

@@ -1,0 +1,75 @@
+/* La galerie déborde de la colonne de lecture, centrée, jusqu'à 1 100 px. */
+.gallery {
+  --gallery-w: min(1100px, calc(100vw - 2 * var(--gutter)));
+  display: grid;
+  gap: var(--space-lg);
+  width: var(--gallery-w);
+  margin: var(--space-huge) 0 0 calc(50% - var(--gallery-w) / 2);
+}
+
+/* Colonnes à la manière d'un mur d'exposition : chaque œuvre garde ses proportions. */
+.grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 1;
+  column-gap: var(--space-lg);
+}
+
+.grid > li {
+  break-inside: avoid;
+  margin-bottom: var(--space-xl);
+}
+
+.item {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+}
+
+.frame {
+  width: 100%;
+  aspect-ratio: var(--ratio);
+}
+
+.caption {
+  display: grid;
+  gap: 2px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch, normal);
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    columns: 3;
+  }
+}
+
+@media print {
+  .gallery {
+    display: none;
+  }
+}
