@@ -10,3 +10,6 @@ test-results
 
 # Atelier de rédaction (cache des sources, propositions, relecture)
 .redaction
+
+# Images envoyées dans le backoffice (stockées à part en production)
+/media

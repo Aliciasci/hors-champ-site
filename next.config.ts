@@ -1,10 +1,11 @@
+import { withPayload } from '@payloadcms/next/withPayload';
 import type { NextConfig } from 'next';
 
 import { IMAGE_WIDTHS } from './src/lib/imageWidths.mjs';
 
 const nextConfig: NextConfig = {
-  // Site entièrement statique : servi tel quel par n'importe quel hébergeur (dossier `out/`).
-  output: 'export',
+  // Le site est servi par Next.js (et non plus exporté en statique) : le contenu vient du
+  // backoffice (Payload, sur /admin), et une publication se voit tout de suite.
   trailingSlash: true,
   reactStrictMode: true,
   images: {
@@ -17,4 +18,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);
