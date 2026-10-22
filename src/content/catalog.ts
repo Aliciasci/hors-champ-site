@@ -1,4 +1,5 @@
 import { categories } from '@/data/categories';
+import { galleries } from '@/data/galleries';
 import { contemporaries } from '@/data/culture/contemporaines';
 import { events } from '@/data/culture/events';
 import { ideas } from '@/data/culture/ideas';
@@ -138,6 +139,13 @@ export function buildCatalog(
 
 let cached: Catalog | null = null;
 
+/** La galerie d'une artiste (src/data/galleries.ts), rangée avec sa fiche. */
+function withGallery(item: unknown): unknown {
+  const id = (item as { id?: string }).id;
+  const gallery = id ? galleries[id] : undefined;
+  return gallery ? { ...(item as object), gallery } : item;
+}
+
 /** Fiches locales, avec les réécritures validées par la rédaction (src/content/redaction.json). */
 function cultureWithRedaction(): [string, readonly unknown[]][] {
   const problems: string[] = [];
@@ -147,7 +155,10 @@ function cultureWithRedaction(): [string, readonly unknown[]][] {
   );
   if (problems.length > 0) throw new ContentValidationError(problems);
   let index = 0;
-  return CULTURE_FILES.map(([file, items]) => [file, items.map(() => rewritten[index++])]);
+  return CULTURE_FILES.map(([file, items]) => [
+    file,
+    items.map(() => withGallery(rewritten[index++])),
+  ]);
 }
 
 /** Catalogue local, validé une fois. */

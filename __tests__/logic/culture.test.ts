@@ -1,6 +1,8 @@
 import { CATEGORY_IDS } from '@/constants/enums';
 import { localCultureEntities } from '@/data/culture';
 import { contemporaries } from '@/data/culture/contemporaines';
+import { galleries } from '@/data/galleries';
+import { getCatalog } from '@/content/catalog';
 import { sportswomen } from '@/data/culture/sportives';
 import { twentyFirstCentury } from '@/data/culture/xxie-siecle';
 import { portraitThemes } from '@/data/portraitThemes';
@@ -285,5 +287,33 @@ describe('suggestions de l’accueil', () => {
     const first = pickCultureSuggestions(catalog, [])[0];
     const next = pickCultureSuggestions(catalog, [first?.id ?? ''])[0];
     expect(next?.id).not.toBe(first?.id);
+  });
+});
+
+describe('galeries des artistes', () => {
+  // Les galeries sont rangées avec leur fiche par le catalogue du site.
+  const byId = new Map(getCatalog().culture.map((e) => [e.id, e]));
+
+  it('ne montre que des œuvres du domaine public, d’artistes mortes depuis plus de 70 ans', () => {
+    const entries = Object.entries(galleries);
+    expect(entries.length).toBeGreaterThanOrEqual(6);
+    for (const [id, works] of entries) {
+      const person = byId.get(id);
+      expect({ id, kind: person?.kind, domain: person?.domain }).toEqual({
+        id,
+        kind: 'person',
+        domain: 'arts',
+      });
+      const death =
+        person!.period!.endYear ?? Number(person!.period!.label.match(/(\d{4})\D*$/)?.[1]);
+      expect({ id, publicDomain: death <= 2026 - 71 }).toEqual({ id, publicDomain: true });
+      expect(person!.gallery).toBe(works);
+      for (const work of works) {
+        expect(['Domaine public', 'CC0']).toContain(work.license);
+        expect(work.sourceUrl).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+        expect(work.alt.length).toBeGreaterThan(20);
+        expect(work.artist).toBe(person!.title);
+      }
+    }
   });
 });

@@ -40,6 +40,7 @@ for (const entity of culture) {
   }
   const expected: Partial<typeof entity> = { ...entity };
   delete expected.image;
+  delete expected.gallery;
   const a = JSON.stringify(sortKeys(expected));
   const b = JSON.stringify(sortKeys(ficheToEntity(doc as unknown as FicheDoc)));
   if (a !== b) {
@@ -55,6 +56,10 @@ for (const entity of culture) {
       );
   }
   if (Boolean(entity.image) !== Boolean(doc.image)) console.log('image :', entity.id);
+  if ((entity.gallery?.length ?? 0) !== (doc.gallery?.length ?? 0)) {
+    console.log('galerie :', entity.id);
+    diffs++;
+  }
 }
 console.log(`${culture.length} fiches, ${docs.length} en base, ${diffs} différence(s)`);
 process.exit(diffs ? 1 : 0);

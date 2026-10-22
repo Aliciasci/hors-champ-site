@@ -92,7 +92,12 @@ for (const entity of culture) {
           died: dates?.died,
         }
       : undefined;
-  const doc = entityToFiche(entity, { image: await media(entity.image), person });
+  const gallery = [];
+  for (const work of entity.gallery ?? []) {
+    const id = await media(work);
+    if (id) gallery.push(id);
+  }
+  const doc = entityToFiche(entity, { image: await media(entity.image), gallery, person });
   await upsert(
     'fiches',
     entity.id,

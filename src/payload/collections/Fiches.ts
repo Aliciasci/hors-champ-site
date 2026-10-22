@@ -207,6 +207,18 @@ export const Fiches: CollectionConfig = {
             },
             { name: 'summary', label: 'Résumé', type: 'textarea', required: true },
             { name: 'image', label: 'Image', type: 'upload', relationTo: 'media' },
+            {
+              name: 'gallery',
+              label: 'Galerie (œuvres d’une artiste)',
+              type: 'upload',
+              relationTo: 'media',
+              hasMany: true,
+              admin: {
+                condition: when('person'),
+                description:
+                  'Seulement des œuvres du domaine public (artiste morte depuis plus de 70 ans), reproduction en domaine public ou CC0.',
+              },
+            },
           ],
         },
         {

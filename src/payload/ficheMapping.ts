@@ -31,6 +31,7 @@ export interface FicheDoc {
   period?: Maybe<{ label?: Maybe<string>; sortYear?: Maybe<number>; endYear?: Maybe<number> }>;
   summary: string;
   image?: Maybe<number | string | { id: number | string }>;
+  gallery?: Maybe<(number | string | { id: number | string })[]>;
   categoryId?: Maybe<CultureEntity['categoryId']>;
   right?: Maybe<{
     category?: Maybe<string>;
@@ -73,9 +74,9 @@ const refId = (ref: Ref) => (typeof ref === 'string' ? ref : ref.id);
 const opt = <T>(value: Maybe<T>): T | undefined =>
   value === null || value === undefined || value === '' ? undefined : value;
 
-/** Fiche du backoffice → modèle du site (sans l'image, résolue à part). */
-export function ficheToEntity(doc: FicheDoc): Omit<CultureEntity, 'image'> {
-  const entity: Omit<CultureEntity, 'image'> = {
+/** Fiche du backoffice → modèle du site (sans les images, résolues à part). */
+export function ficheToEntity(doc: FicheDoc): Omit<CultureEntity, 'image' | 'gallery'> {
+  const entity: Omit<CultureEntity, 'image' | 'gallery'> = {
     id: doc.id,
     kind: doc.kind,
     title: doc.title,
@@ -161,7 +162,7 @@ export interface PersonExtras {
 /** Modèle du site → fiche du backoffice (pour l'import ; l'image est passée par son identifiant). */
 export function entityToFiche(
   entity: CultureEntity,
-  extras: { image?: number | string; person?: PersonExtras } = {},
+  extras: { image?: number | string; gallery?: (number | string)[]; person?: PersonExtras } = {},
 ): FicheDoc {
   return {
     id: entity.id,
@@ -179,6 +180,7 @@ export function entityToFiche(
       : {},
     summary: entity.summary,
     image: extras.image ?? null,
+    gallery: extras.gallery ?? [],
     categoryId: entity.categoryId ?? null,
     right: entity.right
       ? {

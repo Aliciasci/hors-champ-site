@@ -165,6 +165,10 @@ export interface Fich {
   summary: string;
   image?: (number | null) | Media;
   /**
+   * Seulement des œuvres du domaine public (artiste morte depuis plus de 70 ans), reproduction en domaine public ou CC0.
+   */
+  gallery?: (number | Media)[] | null;
+  /**
    * Chaque fait du résumé doit venir d’une source : un extrait exact, ou une note qui explique ce qu’elle établit.
    */
   sources?:
@@ -532,6 +536,7 @@ export interface FichesSelect<T extends boolean = true> {
       };
   summary?: T;
   image?: T;
+  gallery?: T;
   sources?:
     | T
     | {
