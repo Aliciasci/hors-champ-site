@@ -9,7 +9,10 @@ import { getCatalog } from '@/content/catalog';
 import { slimEntity, slimExperience } from '@/content/slim';
 import { relatedExperiences } from '@/features/culture/cultureGraph';
 import { CultureTile } from '@/features/culture/web/CultureTile';
+import { CultureThumb } from '@/components/content/CultureThumb';
+import { almanacEvents } from '@/features/home/almanac';
 import { buildFeed, type FeedSection } from '@/features/home/homeSelectors';
+import { Dateline, OnThisDay } from '@/features/home/web/Almanac';
 import { FeedLead, FeedRow } from '@/features/home/web/FeedItems';
 import { HomeFeed, type HomeData } from '@/features/home/web/HomeFeed';
 import { readingMinutes } from '@/lib/readingTime';
@@ -89,6 +92,8 @@ export default function Home() {
   };
 
   const woman = culture.find((e) => e.id === OPENING_PERSON_ID);
+  const almanac = almanacEvents(culture);
+  const ofTheDay = culture.filter((e) => e.kind === 'person' && e.image && e.hook);
 
   return (
     <>
@@ -130,12 +135,22 @@ export default function Home() {
           accent="On les remet dans le cadre."
           centered
         />
+        <Dateline />
         <WomanOfTheDay
-          cards={culture
-            .filter((e) => e.kind === 'person' && e.image && e.hook)
-            .map((person) => (
-              <WomanOfTheDayCard key={person.id} person={person} />
-            ))}
+          ids={ofTheDay.map((person) => person.id)}
+          cards={ofTheDay.map((person) => (
+            <WomanOfTheDayCard key={person.id} person={person} />
+          ))}
+          birthdays={almanac.filter((e) => e.kind === 'born')}
+        />
+        <OnThisDay
+          events={almanac}
+          thumbs={Object.fromEntries(
+            [...new Set(almanac.map((e) => e.entityId))].map((id) => {
+              const entity = culture.find((e) => e.id === id)!;
+              return [id, <CultureThumb key={id} entity={entity} size={48} />];
+            }),
+          )}
         />
         <Suspense fallback={<HomeFeed data={data} />}>
           <HomeFeed data={data} withUrl />

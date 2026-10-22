@@ -1,0 +1,119 @@
+/* Bandeau daté, sous le titre : la date du jour, et la prochaine journée internationale. */
+.dateline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-lg);
+  max-width: calc(var(--reading) + 320px + var(--space-xxl));
+  min-height: 2.5em;
+  margin: 0 auto var(--space-lg);
+  padding: var(--space-xs) 0;
+  border-block: var(--border-hairline) solid var(--border-strong);
+}
+
+.date {
+  color: var(--text);
+}
+
+.observance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xxs) var(--space-sm);
+  color: var(--text);
+  font-size: var(--fs-caption);
+  animation: almanacIn 600ms ease-out both;
+}
+
+.countdown {
+  padding: 0 var(--space-xs);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.observanceName {
+  font-weight: 600;
+}
+
+.pitch {
+  color: var(--accent-ink);
+}
+
+.observance:hover .pitch {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* « Ce jour-là » : place réservée avant le calcul de la date. */
+.slot {
+  min-height: 96px;
+  max-width: calc(var(--reading) + 320px + var(--space-xxl));
+  margin: 0 auto var(--space-xl);
+}
+
+.heading {
+  margin: 0 0 var(--space-sm);
+  color: var(--day-ink);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: almanacIn 600ms ease-out both;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 3.2em 48px 1fr;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xs) 0;
+  border-bottom: var(--border-hairline) solid var(--border);
+  color: var(--text);
+}
+
+.item:hover .what {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.year {
+  font-family: var(--font-display);
+  font-size: var(--fs-title3);
+  line-height: 1;
+}
+
+.noThumb {
+  width: 48px;
+}
+
+.body {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+@keyframes almanacIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .observance,
+  .list {
+    animation: none;
+  }
+}

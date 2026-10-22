@@ -6,13 +6,13 @@ import type { CultureEntity } from '@/types';
 
 import styles from './WomanOfTheDay.module.css';
 
-/** Bandeau « Elle du jour » : portrait, accroche, nom et dates. */
+/** Bandeau « Femme du jour » : portrait, accroche, nom et dates. */
 export function WomanOfTheDayCard({ person }: { person: CultureEntity }) {
   return (
     <Link href={cultureHref(person.id)} className={styles.card}>
       <CultureThumb entity={person} size={88} />
       <span className={styles.text}>
-        <span className={`t-overline ${styles.kicker}`}>Elle du jour</span>
+        <span className={`t-overline ${styles.kicker}`}>Femme du jour</span>
         <span className={`t-title3 ${styles.hook}`}>{person.hook ?? person.title}</span>
         <span className="t-caption c-2">
           <strong className={styles.name}>{person.title}</strong>
